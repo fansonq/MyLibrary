@@ -218,6 +218,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 添加Fragment
+     * @param id_content
+     * @param fragment
+     * @param tag
+     */
+    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(id_content, fragment,tag);
+        transaction.commit();
+    }
+
+    /**
      * 切换Framgment（hide/show）
      * @param id_content
      * @param fromFragment

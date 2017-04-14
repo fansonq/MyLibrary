@@ -77,7 +77,7 @@ public class SharePreferenceHelper {
         return mSharedPreferences.getLong(key, defValue);
     }
 
-    public static void remove(String key) {
+    public static void removeKey(String key) {
         editor.remove(key);
     }
 

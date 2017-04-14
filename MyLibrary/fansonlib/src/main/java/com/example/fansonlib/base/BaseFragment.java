@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,6 +163,78 @@ public abstract class BaseFragment extends Fragment {
      * 初始化数据
      */
     protected abstract void initData();
+
+    /**
+     * 查找指定Tag的Fragment
+     *
+     * @param tag
+     * @return
+     */
+    public Fragment findFragmentByTag(String tag) {
+        if (getChildFragmentManager() != null) {
+            return getChildFragmentManager().findFragmentByTag(tag);
+        }
+        return null;
+    }
+
+    /**
+     * 查找指定Id的Fragment
+     *
+     * @param id
+     * @return
+     */
+    public Fragment findFragmentById(int id) {
+        if (getChildFragmentManager() != null) {
+            return getChildFragmentManager().findFragmentById(id);
+        }
+        return null;
+    }
+
+    /**
+     * 删除指定的Fragment
+     *
+     * @param fragment
+     */
+    protected void removeFragment(Fragment fragment) {
+        if (getChildFragmentManager() != null && fragment != null) {
+            getChildFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+    }
+
+    /**
+     * 删除指定tag的Fragment
+     *
+     * @param tag
+     */
+    protected void removeFragment(String tag) {
+        if (getChildFragmentManager() != null) {
+            removeFragment(getChildFragmentManager().findFragmentByTag(tag));
+            getChildFragmentManager().popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+    /**
+     * 添加Fragment（附带Tag）
+     * @param id_content
+     * @param fragment
+     * @param tag
+     */
+    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(id_content, fragment,tag);
+        transaction.commit();
+    }
+
+    /**
+     * 添加Fragment
+     * @param id_content
+     * @param fragment
+     */
+    protected  void addFragment(int id_content,Fragment fragment ){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(id_content, fragment);
+        transaction.commit();
+    }
 
     /**
      * 在此类注册了EventBus，如果此类中不实现四个方法中的其中一个不行，空参数也不行
