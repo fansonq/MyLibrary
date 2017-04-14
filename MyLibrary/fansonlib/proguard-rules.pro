@@ -100,7 +100,7 @@
 -keep class com.google.gson.examples.android.model.** { *; }
 -keep class com.google.gson.** { *;}
 #这句非常重要，主要是滤掉 com.bgb.scan.model包下的所有.class文件不进行混淆编译
--keep class com.yinghai.loopRider.bean.** {*;}
+-keep class com.example.fansonlib.bean.** {*;}
 
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule

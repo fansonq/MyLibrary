@@ -19,7 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.fansonlib.R;
-import com.example.fansonlib.eventBean.EventNetWork;
+import com.example.fansonlib.bean.EventNetWork;
 import com.example.fansonlib.utils.NetWorkUtil;
 
 import de.greenrobot.event.EventBus;
