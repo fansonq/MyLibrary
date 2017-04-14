@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="orange">#EE6633</color>
+    <color name="light_orange">#FF6600</color>
+    <color name="dark_orange">#DF3A01</color>
+    <color name="grey_light">#E0E0E0</color>
+    <color name="grey">#A0A0A0</color>
+    <color name="simple_player_stream_name_playing">#ff0043bd</color>
+
+</resources>

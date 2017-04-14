@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="library-1.0.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/bb3746ea65e0a48ab2dd2ae74612427185dda458/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/bb3746ea65e0a48ab2dd2ae74612427185dda458/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.lqr.imagepicker/library/1.0.0/5fcab916bb4a997509d15548f2dba35a5a7bfe/library-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

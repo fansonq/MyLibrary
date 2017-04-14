@@ -1,0 +1,69 @@
+apply plugin: 'com.android.library'
+
+//启用Jitpack 插件
+apply plugin: 'com.github.dcendents.android-maven'
+
+//设置Jitpack发布的Group
+group='com.github.fansonq'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+//    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'jp.wasabeef:glide-transformations:1.2.1'
+
+    compile 'de.greenrobot:eventbus:2.4.0'
+
+    compile 'io.reactivex:rxandroid:1.1.0'
+
+
+    /*----------retrofit+rxjava--------*/
+//    compile 'io.reactivex:rxjava:1.1.0'
+//    compile 'io.reactivex:rxandroid:1.1.0'
+//    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+//    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+//    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+//    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+//    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    /*----------retrofit+rxjava--------*/
+
+    //视频播放ijkplayer
+    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
+    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
+    //    根据需要支持去拓展
+    compile 'com.dou361.ijkplayer-armv7a:jjdxm-ijkplayer-armv7a:1.0.0'
+    compile 'com.dou361.ijkplayer-armv5:jjdxm-ijkplayer-armv5:1.0.0'
+    compile 'com.dou361.ijkplayer-arm64:jjdxm-ijkplayer-arm64:1.0.0'
+    compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
+    compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
+
+    compile 'com.lqr.emoji:library:1.0.2'  //emoji此库带有universal-image-loader
+    compile 'com.lqr.imagepicker:library:1.0.0' //图片选择
+    compile 'de.hdodenhof:circleimageview:1.3.0' //圆形图片
+
+}

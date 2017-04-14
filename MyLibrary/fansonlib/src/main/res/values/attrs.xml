@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MaterialCircleView">
+
+        <attr name="bGradient" format="boolean"></attr>
+        <attr name="circleColor" format="color"></attr>
+        <attr name="circleWidth" format="dimension"></attr>
+        <attr name="radius" format="dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="UniversalLoadingView">
+
+        <attr name="bg_transparent" format="boolean"></attr>
+        <attr name="bg_alpha" format="integer"></attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="MyLoadingView">
+        <!-- 默认提示文字 -->
+        <attr name="empty_warn_txt" format="string|reference"/>
+        <!-- 默认加载中文字 -->
+        <attr name="empty_loading_txt" format="string|reference"/>
+        <!-- 重新加载按钮文字 -->
+        <attr name="empty_button_txt" format="string|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="MyProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
+    </declare-styleable>
+
+</resources>

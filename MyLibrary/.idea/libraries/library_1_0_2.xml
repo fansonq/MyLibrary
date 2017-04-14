@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="library-1.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/daaeeca9e81bc55283dc7579e958a4851d05d7b9/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/daaeeca9e81bc55283dc7579e958a4851d05d7b9/output/jars/libs/universal-image-loader-1.9.5.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/daaeeca9e81bc55283dc7579e958a4851d05d7b9/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.lqr.emoji/library/1.0.2/fe87cf308ae18494eda91d3c0fe9d3113f9cf14/library-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
