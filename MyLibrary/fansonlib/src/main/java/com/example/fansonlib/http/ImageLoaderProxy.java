@@ -29,7 +29,6 @@ public class ImageLoaderProxy {
     private volatile static ImageLoader imageLoader;
 
     public static ImageLoader getImageLoader() {
-
         if (imageLoader == null) {
             synchronized (ImageLoaderProxy.class) {
                 imageLoader = ImageLoader.getInstance();
@@ -44,7 +43,6 @@ public class ImageLoaderProxy {
         build.diskCacheSize(MAX_DISK_CACHE);
         build.memoryCacheSize(MAX_MEMORY_CACHE);
         build.memoryCache(new LruMemoryCache(MAX_MEMORY_CACHE));
-
         getImageLoader().init(build.build());
     }
 

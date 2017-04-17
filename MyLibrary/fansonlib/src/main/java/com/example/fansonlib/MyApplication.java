@@ -18,7 +18,10 @@ public class MyApplication extends Application{
         super.onCreate();
 
         //图片框架使用方式，策略模式
-        ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder().client(new UniversalLoaderStrategy()).build();
+        ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder().client(new UniversalLoaderStrategy(getApplicationContext()))
+                .setMaxDiskCache(1024 * 1024 * 50)
+                .setMaxMemoryCache(1024 * 1024 * 10)
+                .build();
         ImageLoaderUtils.init(loaderConfig);
     }
 }

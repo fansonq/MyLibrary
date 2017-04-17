@@ -3,33 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\fanson\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.1.0\748f0546d5c3c27f1aef07270ffea0c45f0c42a4\rxjava-1.1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="748f0546d5c3c27f1aef07270ffea0c45f0c42a4">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\rxjava-1.1.0_4a3cc25cf363d1917e8081c0809e1fe791a94fff.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\fanson\.android\build-cache\fcb30086d26f74b1bf34d28dd9cf4a130e71628b\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ccf7ca40cefd9589343ccc59bba68923ed9b0ad6">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_1f2bc910fbe7944b265879a8819268f9328afa35.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\fanson\.android\build-cache\bb3746ea65e0a48ab2dd2ae74612427185dda458\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="113bc9ba82c6c3b679b612ede97e8d844b58e692">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_c021f28304a84229408ad2d903b975bd631079c7.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\fanson\.android\build-cache\9e6f1b5369dbb451928b7c07c41efac5192df3cd\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -57,6 +30,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\e894d4542bb52a29383b526b6c6287421316dc28\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_6101da04c33827103686814cdc548acb137758ac.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\fanson\.android\build-cache\daaeeca9e81bc55283dc7579e958a4851d05d7b9\output\jars\libs\universal-image-loader-1.9.5.jar"
         jumboMode="false"
         optimize="true"
@@ -66,21 +48,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="F:\Github\MyLibrary\MyLibrary\fansonlib\build\intermediates\bundles\default\classes.jar"
+        jar="C:\Users\fanson\.android\build-cache\ab7cb713dc6561ceb8df51e52161fccf031b24e5\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="166b70dbfdf590b3296509bc2e17dc38c3c62438">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_3ad88e902679a695078f6e925d0fe8d81d1149d6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\fanson\.android\build-cache\095b5f616b0b63cebb485bf2f15b667b60599523\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_c310aab1271463b1d546fa8f5ac26d66d8c37c51.jar" />
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_d8b1d2d7872c5cbf6f8d0f5245b59db645204cf8.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,12 +66,138 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\fanson\.android\build-cache\1372d0173c9d2b779ab011014402891386aa55e0\output\jars\classes.jar"
+        jar="C:\Users\fanson\.android\build-cache\4255ddb8c827fb0b493baad5ab52d89f330544d0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_4717668eb82ec933b5b254fac0718061617bce11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.1\19047bdb6a4fc00a44124f64ca98e88fc204e7e3\okhttp-3.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\okhttp-3.3.1_bc0386330281df31282f679d16701f2bba0ca568.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\24bb3e76feee0a73bb0aa992ed2d0d1e7d6ab656\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_7c073832437c1c029942938bab89b1894530f1a4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\7deee9f49a29cd297175aac99cafe9c2670de164\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d3a2ed7c02adc7ac46d4107f841c0b800064709f">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_bd19905628ac363d7e907bf59496b0058863dfc4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\f6d548b6e59be7fdf8758a512ee2339b9261bfdf\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_71624db77f407b9206c57d19d228359814aa754e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.1.0\748f0546d5c3c27f1aef07270ffea0c45f0c42a4\rxjava-1.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="748f0546d5c3c27f1aef07270ffea0c45f0c42a4">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\rxjava-1.1.0_4a3cc25cf363d1917e8081c0809e1fe791a94fff.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\fcb30086d26f74b1bf34d28dd9cf4a130e71628b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ccf7ca40cefd9589343ccc59bba68923ed9b0ad6">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_1f2bc910fbe7944b265879a8819268f9328afa35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\579af51e1bb129fb98567f65497192fa59bd2f38\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_3fb1de8d3401a8a752cba293afcdddb1725493b2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\bb3746ea65e0a48ab2dd2ae74612427185dda458\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="113bc9ba82c6c3b679b612ede97e8d844b58e692">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_c021f28304a84229408ad2d903b975bd631079c7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\82098a0b8ef261d32bef2b8c00072d9035cd4d87\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="787871951412550519b0222aba3c9df4cea49875">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_186c7789fa5abe2ea1760141467a5d16fd891a62.jar" />
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_4f480a836c3d7f051192359660037aa2cd3cba9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\Github\MyLibrary\MyLibrary\fansonlib\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf45a77ca64d7bdb8b871af752f8c2a8988fb5ad">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_3ad88e902679a695078f6e925d0fe8d81d1149d6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\14aa2495cd72908d2c8959c382a3c497a9f99449\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_4ae01d6f8d92872738f6acf7fb48027bf6c833ce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\e1aceadbed9157ad510cbc43835e857e1457953d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_23385f91a551bf69d5b7265d1c3db741d945ce2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\095b5f616b0b63cebb485bf2f15b667b60599523\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ac6948cce36f694f3eb3d73a135e298dc4b3527a">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_c310aab1271463b1d546fa8f5ac26d66d8c37c51.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\fanson\.android\build-cache\551e8dd4a130d465693028d8899eff46733229b1\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_5cf6f99f7ae057e5f07bdd4f15cf470b1517209a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -129,15 +228,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\fanson\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.1\19047bdb6a4fc00a44124f64ca98e88fc204e7e3\okhttp-3.3.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\okhttp-3.3.1_bc0386330281df31282f679d16701f2bba0ca568.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\fanson\.gradle\caches\modules-2\files-2.1\de.greenrobot\eventbus\2.4.0\ddd166d01b3158d1c00576d29f7ed15c030df719\eventbus-2.4.0.jar"
         jumboMode="false"
         optimize="true"
@@ -153,15 +243,6 @@
         revision="25.0.2"
         sha1="b0ae57757c2e50caa862eddbe8c2ae8f96b7289e">
         <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_2a58a07225ab387a2c5faa206d1214e7260f87bb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\fanson\.android\build-cache\7deee9f49a29cd297175aac99cafe9c2670de164\output\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d3a2ed7c02adc7ac46d4107f841c0b800064709f">
-        <dex dex="F:\Github\MyLibrary\MyLibrary\app\build\intermediates\pre-dexed\debug\classes_bd19905628ac363d7e907bf59496b0058863dfc4.jar" />
     </item>
 
 </items>
