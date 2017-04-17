@@ -2,7 +2,9 @@ package com.example.fansonlib;
 
 import android.app.Application;
 
-import com.example.fansonlib.http.ImageLoaderProxy;
+import com.example.fansonlib.image.ImageLoaderConfig;
+import com.example.fansonlib.image.ImageLoaderUtils;
+import com.example.fansonlib.image.UniversalLoaderStrategy;
 
 /**
  * Created by：fanson
@@ -11,12 +13,12 @@ import com.example.fansonlib.http.ImageLoaderProxy;
  */
 public class MyApplication extends Application{
 
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-
-
+        //图片框架使用方式，策略模式
+        ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder().client(new UniversalLoaderStrategy()).build();
+        ImageLoaderUtils.init(loaderConfig);
     }
 }

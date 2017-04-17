@@ -45,9 +45,6 @@ public class ImageLoaderProxy {
         build.memoryCacheSize(MAX_MEMORY_CACHE);
         build.memoryCache(new LruMemoryCache(MAX_MEMORY_CACHE));
 
-//        if (BuildConfig.DEBUG && isShowLog) {
-//            build.writeDebugLogs();
-//        }
         getImageLoader().init(build.build());
     }
 

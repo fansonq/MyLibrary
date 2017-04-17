@@ -63,6 +63,7 @@ public class MyPermissionHelper {
             for (String perm : permissions) {
                 shouldShowRationale = shouldShowRationale || shouldShowRequestPermissionRationale(mContext, perm);
             }
+
             executePermissionsRequest(mContext, permissions, REQUEST_PERMISSION_CODE);
 
             //弹自定义的提示框
@@ -101,11 +102,11 @@ public class MyPermissionHelper {
                     }
                 }
 
-                if (allGranted && mListener != null) {
+                if (allGranted && mListener != null && permissions.length != 0) {
 
                     mListener.doAfterGrand((String[]) mPermissionList.toArray());
 
-                } else if (!allGranted && mListener != null) {
+                } else if (mListener != null) {
                     mListener.doAfterDenied((String[]) mPermissionList.toArray());
                 }
                 break;
@@ -122,6 +123,10 @@ public class MyPermissionHelper {
     public static boolean hasPermissions(@NonNull Object object, @NonNull String... perms) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
+        }
+
+        if (object instanceof Fragment){
+            object = ((Fragment) object).getActivity();
         }
 
         for (String perm : perms) {
@@ -163,7 +168,7 @@ public class MyPermissionHelper {
      */
     @TargetApi(23)
     private void executePermissionsRequest(@NonNull Object object, @NonNull String[] perms, int requestCode) {
-        if (object instanceof android.app.Activity) {
+        if (object instanceof Activity) {
             ActivityCompat.requestPermissions((Activity) object, perms, requestCode);
         } else if (object instanceof android.support.v4.app.Fragment) {
             ((android.support.v4.app.Fragment) object).requestPermissions(perms, requestCode);
@@ -182,7 +187,7 @@ public class MyPermissionHelper {
             throw new NullPointerException("Activity or Fragment should not be null");
         }
 
-        boolean isActivity = object instanceof android.app.Activity;
+        boolean isActivity = object instanceof Activity;
         boolean isSupportFragment = object instanceof android.support.v4.app.Fragment;
         boolean isAppFragment = object instanceof android.app.Fragment;
         if (!(isSupportFragment || isActivity || (isAppFragment && isNeedRequest()))) {
