@@ -244,7 +244,7 @@ public abstract class BaseFragment extends Fragment {
     protected void replaceFragment(int id_content,Fragment fragment ){
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(id_content, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -256,7 +256,7 @@ public abstract class BaseFragment extends Fragment {
     protected void replaceFragmentWithTag(int id_content, Fragment fragment,String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(id_content, fragment,tag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
