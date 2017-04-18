@@ -237,6 +237,29 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
+     * 替换Fragment
+     * @param id_content
+     * @param fragment
+     */
+    protected void replaceFragment(int id_content,Fragment fragment ){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(id_content, fragment);
+        transaction.commit();
+    }
+
+    /**
+     * 替换Fragment（附带tag）
+     *
+     * @param id_content
+     * @param fragment
+     */
+    protected void replaceFragmentWithTag(int id_content, Fragment fragment,String tag) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(id_content, fragment,tag);
+        transaction.commit();
+    }
+
+    /**
      * 在此类注册了EventBus，如果此类中不实现四个方法中的其中一个不行，空参数也不行
      * @param event
      */
