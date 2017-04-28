@@ -211,5 +211,4 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
         }
     }
 
-
 }
