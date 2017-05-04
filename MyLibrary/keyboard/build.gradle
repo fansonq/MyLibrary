@@ -3,6 +3,8 @@ apply plugin: 'com.android.library'
 //启用Jitpack 插件
 apply plugin: 'com.github.dcendents.android-maven'
 
+//设置Jitpack发布的Group
+group='com.github.fansonq'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
