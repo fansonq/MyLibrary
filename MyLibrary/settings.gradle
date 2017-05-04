@@ -1,1 +1,1 @@
-include ':app', ':fansonlib', ':keyboard'
+include ':app', ':fansonlib'

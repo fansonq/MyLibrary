@@ -62,6 +62,7 @@ dependencies {
     compile 'com.dou361.ijkplayer-x86:jjdxm-ijkplayer-x86:1.0.0'
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
 
+    compile 'com.lqr.emoji:library:1.0.2'
     compile 'com.lqr.imagepicker:library:1.0.0' //图片选择
     compile 'de.hdodenhof:circleimageview:1.3.0' //圆形图片
 
