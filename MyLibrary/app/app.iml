@@ -105,7 +105,6 @@
     <orderEntry type="library" exported="" name="support-fragment-25.1.1" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-core-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-24.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="rules-0.5" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-solver-1.0.2" level="project" />
@@ -121,27 +120,18 @@
     <orderEntry type="library" exported="" name="support-media-compat-25.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.1.1" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-25.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.1.1" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-25.1.1" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-25.1.1" level="project" />
     <orderEntry type="module" module-name="keyboard" exported="" />
     <orderEntry type="module" module-name="fansonlib" exported="" />
     <orderEntry type="library" exported="" name="android-android-25" level="project" />
-    <orderEntry type="library" exported="" name="keyboard-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="universal-image-loader-1.9.5" level="project" />
     <orderEntry type="library" exported="" name="okio-1.8.0" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="eventbus-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="rxjava-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.0.1" level="project" />
     <orderEntry type="library" exported="" name="okhttp-3.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-25.0.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-25.0.1" level="project" />
   </component>
 </module>
