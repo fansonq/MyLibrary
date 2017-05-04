@@ -175,8 +175,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
+                dialogBuilder.show();
             }
-            dialogBuilder.show();
         }
     }
 
