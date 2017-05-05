@@ -1,9 +1,11 @@
 package com.example.fansonlib.widget;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
@@ -18,9 +20,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  */
 public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCallBack {
 
+    private static final String TAG = AutoLoadRecyclerView.class.getSimpleName();
     private LoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
+    private boolean move = false;
+    private int mIndex = 0;
+    private LayoutManager mLayoutManager;
 
     public AutoLoadRecyclerView(Context context) {
         this(context, null);
@@ -121,6 +127,32 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                 }
             }
         }
+    }
+
+    /**
+     * 滚动到指定位置（注意：对瀑布流无效果）
+     */
+    public void moveToPosition(int position) {
+        if (position < 0 || position >= getAdapter().getItemCount()) {
+            Log.e(TAG, "滚动的指定位置超出范围了");
+            return;
+        }
+        mIndex = position;
+        stopScroll();
+
+        GridLayoutManager glm = (GridLayoutManager) mLayoutManager;
+        int firstItem = glm.findFirstVisibleItemPosition();
+        int lastItem = glm.findLastVisibleItemPosition();
+        if (position <= firstItem) {
+            this.scrollToPosition(position);
+        } else if (position <= lastItem) {
+            int top = this.getChildAt(position - firstItem).getTop();
+            this.scrollBy(0, top);
+        } else {
+            this.scrollToPosition(position);
+            move = true;
+        }
+
     }
 
 }
