@@ -7,7 +7,8 @@ import android.util.AttributeSet;
 
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
-import com.example.fansonlib.utils.MyGlideUtils;
+import com.example.fansonlib.http.ImageLoaderProxy;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 /**
@@ -43,8 +44,8 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      * @param pauseOnFling
      */
     public void setOnPauseListenerParams(boolean pauseOnScroll, boolean pauseOnFling) {
-//        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
-        addOnScrollListener(new AutoLoadScrollListener(MyGlideUtils.getInstance(), pauseOnScroll, pauseOnFling));
+        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
+//        addOnScrollListener(new AutoLoadScrollListener(MyGlideUtils.getInstance(), pauseOnScroll, pauseOnFling));
     }
 
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
@@ -61,11 +62,11 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      */
     private class AutoLoadScrollListener extends OnScrollListener {
 
-        private MyGlideUtils imageLoader;
+        private ImageLoader imageLoader;
         private final boolean pauseOnScroll;
         private final boolean pauseOnFling;
 
-        public AutoLoadScrollListener(MyGlideUtils imageLoader, boolean pauseOnScroll, boolean pauseOnFling) {
+        public AutoLoadScrollListener(ImageLoader imageLoader, boolean pauseOnScroll, boolean pauseOnFling) {
             super();
             this.pauseOnScroll = pauseOnScroll;
             this.pauseOnFling = pauseOnFling;
@@ -96,20 +97,25 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
             if (imageLoader != null) {
                 switch (newState) {
                     case SCROLL_STATE_IDLE:
-                        imageLoader.resumeRequests(mContext);
+//                        imageLoader.resumeRequests(mContext);
+                        imageLoader.resume();
                         break;
                     case SCROLL_STATE_DRAGGING:
                         if (pauseOnScroll) {
-                            imageLoader.pauseRequests(mContext);
+//                            imageLoader.pauseRequests(mContext);
+                            imageLoader.pause();
                         } else {
-                            imageLoader.resumeRequests(mContext);
+//                            imageLoader.resumeRequests(mContext);
+                            imageLoader.resume();
                         }
                         break;
                     case SCROLL_STATE_SETTLING:
                         if (pauseOnFling) {
-                            imageLoader.pauseRequests(mContext);
+//                            imageLoader.pauseRequests(mContext);
+                            imageLoader.pause();
                         } else {
-                            imageLoader.resumeRequests(mContext);
+//                            imageLoader.resumeRequests(mContext);
+                            imageLoader.resume();
                         }
                         break;
                 }
