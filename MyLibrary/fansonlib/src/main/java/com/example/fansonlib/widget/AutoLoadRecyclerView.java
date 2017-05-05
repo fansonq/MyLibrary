@@ -178,6 +178,30 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
             this.scrollToPosition(position);
             move = true;
         }
+    }
+
+    /**
+     * 平滑滚动到指定位置（注意：对瀑布流无效果）
+     */
+    public void smoothMoveToPosition(int position) {
+        if (position < 0 || position >= getAdapter().getItemCount()) {
+            Log.e(TAG, "滚动的指定位置超出范围了");
+            return;
+        }
+        mIndex = position;
+        stopScroll();
+        GridLayoutManager glm = (GridLayoutManager) mLayoutManager;
+        int firstItem = glm.findFirstVisibleItemPosition();
+        int lastItem = glm.findLastVisibleItemPosition();
+        if (position <= firstItem) {
+            this.smoothScrollToPosition(position);
+        } else if (position <= lastItem) {
+            int top = this.getChildAt(position - firstItem).getTop();
+            this.smoothScrollBy(0, top);
+        } else {
+            this.smoothScrollToPosition(position);
+            move = true;
+        }
 
     }
 
