@@ -27,6 +27,15 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
     private boolean move = false;
     private int mIndex = 0;
     private LayoutManager mLayoutManager;
+    //类型、方向、列数
+    private int type = TYPE_GRID;
+    private int orientation = ORIENTATION_VERTICAL;
+    private int column = 1;
+    //类型
+    public static final int TYPE_GRID = 0;
+    //方向
+    public static final int ORIENTATION_VERTICAL = 0;
+    public static final int ORIENTATION_HORIZONTAL = 1;
 
     public AutoLoadRecyclerView(Context context) {
         this(context, null);
@@ -41,6 +50,23 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         isLoadingMore = false;
         mContext = context;
         addOnScrollListener(new AutoLoadScrollListener(null, true, true));
+
+        init();
+    }
+
+    /**
+     * 根据属性初始化RecyclerView
+     */
+    private void init() {
+        // RecyclerView的类型和方向
+        switch (orientation) {
+            case ORIENTATION_VERTICAL:
+                mLayoutManager = new GridLayoutManager(mContext, column);
+                break;
+            case ORIENTATION_HORIZONTAL:
+                mLayoutManager = new GridLayoutManager(mContext, column, GridLayoutManager.HORIZONTAL, false);
+                break;
+        }
     }
 
     /**
