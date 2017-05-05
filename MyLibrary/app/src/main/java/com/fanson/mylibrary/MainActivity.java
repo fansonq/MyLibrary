@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.OnUniversalListener;
 import com.example.fansonlib.image.OnUniversalProgress;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 //        iv_pic = (ImageView)findViewById(R.id.iv_pic);
 //        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
 ////        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
