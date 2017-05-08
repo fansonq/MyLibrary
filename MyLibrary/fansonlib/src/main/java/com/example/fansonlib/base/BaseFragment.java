@@ -242,8 +242,9 @@ public abstract class BaseFragment extends Fragment {
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragment(int id_content,Fragment fragment ){
+    protected void replaceFragment(int id_content,Fragment fragment,int enter,int exit ){
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(enter,exit);
         transaction.replace(id_content, fragment);
         transaction.commitAllowingStateLoss();
     }
