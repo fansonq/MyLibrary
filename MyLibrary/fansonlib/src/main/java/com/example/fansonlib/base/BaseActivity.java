@@ -221,10 +221,13 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 添加Fragment
      * @param id_content
      * @param fragment
+     * @param enter 进场动画
+     * @param exit 退场动画
      * @param tag
      */
-    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+    protected  void addFragmentWithTag(int id_content,Fragment fragment,int enter,int exit,String tag){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(enter,exit);
         transaction.add(id_content, fragment,tag);
         transaction.commit();
     }
