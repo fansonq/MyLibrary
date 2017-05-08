@@ -238,13 +238,35 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 替换Fragment
+     * 添加Fragment（带动画）
+     * @param id_content
+     * @param fragment
+     */
+    protected  void addFragment(int id_content,Fragment fragment ){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.add(id_content, fragment);
+        transaction.commit();
+    }
+
+    /**
+     * 替换Fragment（带动画）
      * @param id_content
      * @param fragment
      */
     protected void replaceFragment(int id_content,Fragment fragment,int enter,int exit ){
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enter,exit);
+        transaction.replace(id_content, fragment);
+        transaction.commitAllowingStateLoss();
+    }
+
+    /**
+     * 替换Fragment
+     * @param id_content
+     * @param fragment
+     */
+    protected void replaceFragment(int id_content,Fragment fragment ){
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(id_content, fragment);
         transaction.commitAllowingStateLoss();
     }

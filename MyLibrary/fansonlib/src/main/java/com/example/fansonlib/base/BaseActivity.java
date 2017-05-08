@@ -181,7 +181,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 加载Fragment
+     * 加载Fragment(带动画)
      *
      * @param id_content
      * @param fragment
@@ -189,6 +189,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void replaceFragment(int id_content, Fragment fragment,int enter,int exit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter,exit);
+        transaction.replace(id_content, fragment);
+        transaction.commit();
+    }
+
+    /**
+     * 加载Fragment
+     *
+     * @param id_content
+     * @param fragment
+     */
+    protected void replaceFragment(int id_content, Fragment fragment) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(id_content, fragment);
         transaction.commit();
     }
@@ -229,6 +241,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected  void addFragmentWithTag(int id_content,Fragment fragment,int enter,int exit,String tag){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter,exit);
+        transaction.add(id_content, fragment,tag);
+        transaction.commit();
+    }
+
+    /**
+     * 添加Fragment
+     * @param id_content
+     * @param fragment
+     * @param tag
+     */
+    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(id_content, fragment,tag);
         transaction.commit();
     }
