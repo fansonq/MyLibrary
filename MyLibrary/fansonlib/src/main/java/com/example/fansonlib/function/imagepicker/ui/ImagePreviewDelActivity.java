@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
-import com.lqr.imagepicker.R;
 
 public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements View.OnClickListener {
 

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.ImageDataSource;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
 import com.example.fansonlib.function.imagepicker.adapter.ImageFolderAdapter;
@@ -21,7 +22,6 @@ import com.example.fansonlib.function.imagepicker.adapter.ImageGridAdapter;
 import com.example.fansonlib.function.imagepicker.bean.ImageFolder;
 import com.example.fansonlib.function.imagepicker.bean.ImageItem;
 import com.example.fansonlib.function.imagepicker.view.FolderPopUpWindow;
-import com.lqr.imagepicker.R;
 
 import java.util.List;
 

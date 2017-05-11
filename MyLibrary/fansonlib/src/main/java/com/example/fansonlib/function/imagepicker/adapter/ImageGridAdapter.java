@@ -11,13 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
 import com.example.fansonlib.function.imagepicker.Utils;
 import com.example.fansonlib.function.imagepicker.bean.ImageItem;
 import com.example.fansonlib.function.imagepicker.ui.ImageBaseActivity;
 import com.example.fansonlib.function.imagepicker.ui.ImageGridActivity;
 import com.example.fansonlib.function.imagepicker.view.SuperCheckBox;
-import com.lqr.imagepicker.R;
 
 import java.util.ArrayList;
 

@@ -8,9 +8,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.bean.ImageFolder;
 import com.example.fansonlib.function.imagepicker.bean.ImageItem;
-import com.lqr.imagepicker.R;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#000">
 
-    <com.lqr.imagepicker.view.ViewPagerFixed
+    <com.example.fansonlib.function.imagepicker.view.ViewPagerFixed
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +23,7 @@
         android:background="#cc22292c"
         android:visibility="gone">
 
-        <com.lqr.imagepicker.view.SuperCheckBox
+        <com.example.fansonlib.function.imagepicker.view.SuperCheckBox
             android:id="@+id/cb_origin"
             style="@style/SuperCheckboxTheme"
             android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
             android:text="原图(3.07M)"
             android:textColor="#FFF"/>
 
-        <com.lqr.imagepicker.view.SuperCheckBox
+        <com.example.fansonlib.function.imagepicker.view.SuperCheckBox
             android:id="@+id/cb_check"
             style="@style/SuperCheckboxTheme"
             android:layout_width="wrap_content"

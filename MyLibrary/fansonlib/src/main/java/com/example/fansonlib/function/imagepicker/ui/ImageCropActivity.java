@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
 import com.example.fansonlib.function.imagepicker.bean.ImageItem;
 import com.example.fansonlib.function.imagepicker.view.CropImageView;
-import com.lqr.imagepicker.R;
 
 import java.io.File;
 import java.util.ArrayList;

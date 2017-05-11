@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
 import com.example.fansonlib.function.imagepicker.bean.ImageItem;
 import com.example.fansonlib.function.imagepicker.view.SuperCheckBox;
-import com.lqr.imagepicker.R;
 
 public class ImagePreviewActivity extends ImagePreviewBaseActivity implements ImagePicker.OnImageSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 

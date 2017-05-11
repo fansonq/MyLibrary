@@ -11,8 +11,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.function.imagepicker.view.SystemBarTintManager;
-import com.lqr.imagepicker.R;
 
 public class ImageBaseActivity extends AppCompatActivity {
 

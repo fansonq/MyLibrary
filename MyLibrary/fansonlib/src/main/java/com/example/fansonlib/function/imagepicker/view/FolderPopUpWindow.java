@@ -15,7 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import com.lqr.imagepicker.R;
+import com.example.fansonlib.R;
+
 
 public class FolderPopUpWindow extends PopupWindow implements View.OnClickListener {
 

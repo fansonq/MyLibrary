@@ -24,7 +24,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 
-import com.lqr.imagepicker.R;
+import com.example.fansonlib.R;
 
 import java.io.File;
 import java.io.IOException;
