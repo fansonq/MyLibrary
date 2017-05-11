@@ -3,6 +3,7 @@ package com.example.fansonlib.base;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -214,6 +215,15 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
+     * 添加Fragment
+     * @param id_content
+     * @param fragment
+     */
+    protected  void addFragment(int id_content,Fragment fragment ){
+        addFragmentWithTag(id_content,fragment,null);
+    }
+
+    /**
      * 添加Fragment（附带Tag）
      * @param id_content
      * @param fragment
@@ -226,24 +236,13 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 添加Fragment
+     * 添加Fragment（带动画）
      * @param id_content
      * @param fragment
      */
     protected  void addFragment(int id_content,Fragment fragment ,int enter,int exit){
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enter,exit);
-        transaction.add(id_content, fragment);
-        transaction.commit();
-    }
-
-    /**
-     * 添加Fragment（带动画）
-     * @param id_content
-     * @param fragment
-     */
-    protected  void addFragment(int id_content,Fragment fragment ){
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(id_content, fragment);
         transaction.commit();
     }
@@ -266,9 +265,7 @@ public abstract class BaseFragment extends Fragment {
      * @param fragment
      */
     protected void replaceFragment(int id_content,Fragment fragment ){
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(id_content, fragment);
-        transaction.commitAllowingStateLoss();
+        replaceFragmentWithTag(id_content,fragment,null);
     }
 
     /**
@@ -281,6 +278,24 @@ public abstract class BaseFragment extends Fragment {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(id_content, fragment,tag);
         transaction.commitAllowingStateLoss();
+    }
+
+    /**
+     * 通过Class跳转界面
+     **/
+    public void startMyActivity(Class<?> targetActivity) {
+        startActivity(targetActivity, null);
+    }
+
+    /**
+     * 含有Bundle通过Class跳转界面
+     **/
+    public void startActivity(Class<?> targetActivity, Bundle bundle) {
+        Intent intent = new Intent(hostActivity, targetActivity);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
     }
 
     /**

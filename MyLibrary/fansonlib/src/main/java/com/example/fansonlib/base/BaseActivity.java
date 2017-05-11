@@ -161,7 +161,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 dialogBuilder = new AlertDialog.Builder(this)
                         .setTitle(getResources().getString(R.string.no_net))
                         .setMessage(getResources().getString(R.string.go_open_net))
-                        .setPositiveButton("YES",new DialogInterface.OnClickListener(){
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -169,7 +169,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                                 startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                             }
                         })
-                        .setNegativeButton("NO" ,new DialogInterface.OnClickListener() {
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -186,9 +186,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragment(int id_content, Fragment fragment,int enter,int exit) {
+    protected void replaceFragment(int id_content, Fragment fragment, int enter, int exit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enter,exit);
+        transaction.setCustomAnimations(enter, exit);
         transaction.replace(id_content, fragment);
         transaction.commit();
     }
@@ -200,9 +200,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragment
      */
     protected void replaceFragment(int id_content, Fragment fragment) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment);
-        transaction.commit();
+        replaceFragmentWithTag(id_content,fragment,null);
     }
 
     /**
@@ -211,9 +209,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragmentWithTag(int id_content, Fragment fragment,String tag) {
+    protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment,tag);
+        transaction.replace(id_content, fragment, tag);
         transaction.commit();
     }
 
@@ -221,64 +219,68 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 加载Fragment,添加回退栈
      *
      * @param id_content
-     * @param fragment 目标Fragment
-     * @param tag 标志
+     * @param fragment   目标Fragment
+     * @param tag        标志
      */
-    protected void replaceFragmentToStack(int id_content, Fragment fragment,String tag) {
+    protected void replaceFragmentToStack(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment,tag).addToBackStack(null);
+        transaction.replace(id_content, fragment, tag).addToBackStack(null);
         transaction.commit();
     }
 
     /**
      * 添加Fragment
+     *
      * @param id_content
      * @param fragment
-     * @param enter 进场动画
-     * @param exit 退场动画
+     * @param enter      进场动画
+     * @param exit       退场动画
      * @param tag
      */
-    protected  void addFragmentWithTag(int id_content,Fragment fragment,int enter,int exit,String tag){
+    protected void addFragmentWithTag(int id_content, Fragment fragment, int enter, int exit, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enter,exit);
-        transaction.add(id_content, fragment,tag);
+        transaction.setCustomAnimations(enter, exit);
+        transaction.add(id_content, fragment, tag);
         transaction.commit();
     }
 
     /**
      * 添加Fragment
+     *
      * @param id_content
      * @param fragment
      * @param tag
      */
-    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+    protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(id_content, fragment,tag);
+        transaction.add(id_content, fragment, tag);
         transaction.commit();
     }
 
     /**
      * 切换Framgment（hide/show）
+     *
      * @param id_content
      * @param fromFragment
      * @param toFragment
      */
-    protected  void switchFragment(int id_content,Fragment fromFragment,Fragment toFragment){
+    protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (toFragment.isAdded()){
+        if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commit();
-        }else {
-            transaction.hide(fromFragment).add(id_content,toFragment).commit();
+        } else {
+            transaction.hide(fromFragment).add(id_content, toFragment).commit();
         }
     }
 
     /**
      * 显示存在的Fragment
+     *
      * @param fragment
      */
-    protected  void showFragment(Fragment fragment){
+    protected void showFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (fragment.isAdded()){
+        if (fragment.isAdded()) {
             transaction.show(fragment).commit();
         }
     }
@@ -339,6 +341,18 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void startMyActivity(@NonNull Class<?> targetActivity) {
         startActivity(new Intent(this, targetActivity));
+    }
+
+    /**
+     * 跳转Activity
+     *
+     * @param targetActivity 目标
+     * @param bundle         数据
+     */
+    protected void startMyActivityWithData(Class<?> targetActivity, Bundle bundle) {
+        if (bundle != null) {
+            startActivity(new Intent(this, targetActivity).putExtras(bundle));
+        }
     }
 
 //    @Override

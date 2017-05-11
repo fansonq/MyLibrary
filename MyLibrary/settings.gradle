@@ -1,1 +1,1 @@
-include ':app', ':fansonlib'
+include ':app', ':fansonlib', ':pickImagelibrary'
