@@ -1,11 +1,11 @@
 package com.example.fansonlib.function.imagepicker.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.view.SoundEffectConstants;
-import android.widget.CheckBox;
 
-public class SuperCheckBox extends CheckBox {
+public class SuperCheckBox extends AppCompatCheckBox {
 
     public SuperCheckBox(Context context) {
         super(context);
