@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 
 import com.lqr.imagepicker.bean.ImageFolder;
 import com.lqr.imagepicker.bean.ImageItem;
@@ -244,16 +242,7 @@ public class ImagePicker {
                 // 照相机有自己默认的存储路径，拍摄的照片将返回一个缩略图。如果想访问原始图片，
                 // 可以通过dat extra能够得到原始图片位置。即，如果指定了目标uri，data就没有数据，
                 // 如果没有指定uri，则data就返回有数据！
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://" + takeImageFile.getAbsolutePath()));
-                }else{
-                    /**
-                     * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
-                     * 并且这样可以解决MIUI系统上拍照返回size为0的情况
-                     */
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, getFileProviderName(activity), takeImageFile));
-                }
-
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse("file://" + takeImageFile.getAbsolutePath()));
             }
         }
         activity.startActivityForResult(takePictureIntent, requestCode);
@@ -307,14 +296,5 @@ public class ImagePicker {
         for (OnImageSelectedListener l : mImageSelectedListeners) {
             l.onImageSelected(position, item, isAdd);
         }
-    }
-
-    /**
-     * 用于解决provider冲突的util
-     * @param context
-     * @return
-     */
-    private   static String getFileProviderName(Context context){
-        return context.getPackageName()+".provider";
     }
 }

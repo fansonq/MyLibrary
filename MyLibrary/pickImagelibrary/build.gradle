@@ -13,6 +13,9 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -31,3 +34,4 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     testCompile 'junit:junit:4.12'
 }
+

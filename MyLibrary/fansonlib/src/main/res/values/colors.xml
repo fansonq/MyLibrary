@@ -14,4 +14,9 @@
     <color name="grey">#A0A0A0</color>
     <color name="simple_player_stream_name_playing">#ff0043bd</color>
 
+    <color name="theme_body">#cc22292c</color>
+    <color name="black">#000000</color>
+    <color name="status_bar">#303135</color>
+    <color name="top_bar">#9f556061</color>
+
 </resources>

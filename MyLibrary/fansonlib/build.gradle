@@ -57,7 +57,8 @@ dependencies {
     compile 'com.dou361.ijkplayer-x86_64:jjdxm-ijkplayer-x86_64:1.0.0'
     compile 'com.lqr.emoji:library:1.0.2'
     //    compile 'com.lqr.imagepicker:library:1.0.0' //图片选择
-//    compile 'com.lzy.widget:imagepicker:0.5.5'
+    //    compile 'com.lzy.widget:imagepicker:0.5.5'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'de.hdodenhof:circleimageview:1.3.0'
     //圆形图片
     compile project(':pickImagelibrary')
