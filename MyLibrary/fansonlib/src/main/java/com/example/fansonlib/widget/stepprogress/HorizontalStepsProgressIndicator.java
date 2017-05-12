@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * 描述：StepsViewIndicator 指示器
  */
-public class HorizontalStepsViewIndicator extends View
+public class HorizontalStepsProgressIndicator extends View
 {
     //定义默认的高度   definition default height
     private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
@@ -77,17 +77,17 @@ public class HorizontalStepsViewIndicator extends View
     }
 
 
-    public HorizontalStepsViewIndicator(Context context)
+    public HorizontalStepsProgressIndicator(Context context)
     {
         this(context, null);
     }
 
-    public HorizontalStepsViewIndicator(Context context, AttributeSet attrs)
+    public HorizontalStepsProgressIndicator(Context context, AttributeSet attrs)
     {
         this(context, attrs, 0);
     }
 
-    public HorizontalStepsViewIndicator(Context context, AttributeSet attrs, int defStyle)
+    public HorizontalStepsProgressIndicator(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
         init();
