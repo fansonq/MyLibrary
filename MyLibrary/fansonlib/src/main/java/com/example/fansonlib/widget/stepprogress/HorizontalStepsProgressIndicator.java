@@ -199,7 +199,7 @@ public class HorizontalStepsProgressIndicator extends View
             //后一个ComplectedXPosition
             final float afterComplectedXPosition = mCircleCenterPointPositionList.get(i + 1);
 
-            if(i <= mComplectingPosition&&mStepBeanList.get(0).getState()!=StepBean.STEP_UNDO)//判断在完成之前的所有点
+            if(i <= mComplectingPosition&&mStepBeanList.get(0).getState()!=StepBean.STEP_CURRENT)//判断在完成之前的所有点
             {
                 //判断在完成之前的所有点，画完成的线，这里是矩形,很细的矩形，类似线，为了做区分，好看些
                 canvas.drawRect(preComplectedXPosition + mCircleRadius - 10, mLeftY, afterComplectedXPosition - mCircleRadius + 10, mRightY, mCompletedPaint);
