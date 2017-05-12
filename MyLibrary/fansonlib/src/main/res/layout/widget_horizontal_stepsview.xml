@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.example.fansonlib.widget.stepprogress.HorizontalStepsViewIndicator
+    <com.example.fansonlib.widget.stepprogress.HorizontalStepsProgressIndicator
         android:id="@+id/steps_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
