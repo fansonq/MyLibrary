@@ -281,6 +281,38 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
+     * 切换Framgment（hide/show）
+     *
+     * @param id_content
+     * @param fromFragment
+     * @param toFragment
+     */
+    protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        if (toFragment.isAdded()) {
+            transaction.hide(fromFragment).show(toFragment).commit();
+        } else {
+            transaction.hide(fromFragment).add(id_content, toFragment).commit();
+        }
+    }
+
+    /**
+     * 切换Framgment（hide/show）（带动画）
+     *
+     * @param id_content
+     * @param fromFragment
+     * @param toFragment
+     */
+    protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        if (toFragment.isAdded()) {
+            transaction.hide(fromFragment).show(toFragment).setCustomAnimations(enter,eixt).commit();
+        } else {
+            transaction.hide(fromFragment).add(id_content, toFragment).setCustomAnimations(enter,eixt).commit();
+        }
+    }
+
+    /**
      * 通过Class跳转界面
      **/
     public void startMyActivity(Class<?> targetActivity) {

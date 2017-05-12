@@ -200,7 +200,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragment
      */
     protected void replaceFragment(int id_content, Fragment fragment) {
-        replaceFragmentWithTag(id_content,fragment,null);
+        replaceFragmentWithTag(id_content, fragment, null);
     }
 
     /**
@@ -270,6 +270,22 @@ public abstract class BaseActivity extends AppCompatActivity {
             transaction.hide(fromFragment).show(toFragment).commit();
         } else {
             transaction.hide(fromFragment).add(id_content, toFragment).commit();
+        }
+    }
+
+    /**
+     * 切换Framgment（hide/show）（带动画）
+     *
+     * @param id_content
+     * @param fromFragment
+     * @param toFragment
+     */
+    protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if (toFragment.isAdded()) {
+            transaction.hide(fromFragment).show(toFragment).setCustomAnimations(enter,eixt).commit();
+        } else {
+            transaction.hide(fromFragment).add(id_content, toFragment).setCustomAnimations(enter,eixt).commit();
         }
     }
 
