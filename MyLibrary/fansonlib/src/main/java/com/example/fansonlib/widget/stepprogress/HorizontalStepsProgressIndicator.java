@@ -122,9 +122,10 @@ public class HorizontalStepsProgressIndicator extends View
         //已经完成线的宽高 set mCompletedLineHeight
         mCompletedLineHeight = 0.05f * defaultStepIndicatorNum;
         //圆的半径  set mCircleRadius
-        mCircleRadius = 0.28f * defaultStepIndicatorNum;
+//        mCircleRadius = 0.28f * defaultStepIndicatorNum;
+        mCircleRadius = 0.32f * defaultStepIndicatorNum;
         //线与线之间的间距    set mLinePadding
-        mLinePadding = 0.85f * defaultStepIndicatorNum;
+//        mLinePadding = 0.85f * defaultStepIndicatorNum;
 
         mCompleteIcon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_complted);//已经完成的icon
         mAttentionIcon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_ing);//正在进行的icon
@@ -138,6 +139,7 @@ public class HorizontalStepsProgressIndicator extends View
         if(MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(widthMeasureSpec))
         {
             screenWidth = MeasureSpec.getSize(widthMeasureSpec);
+            mLinePadding = (screenWidth - (mCircleRadius * 2 * 3 )) / 2;   //线与线之间的间距
         }
         int height = defaultStepIndicatorNum;
         if(MeasureSpec.UNSPECIFIED != MeasureSpec.getMode(heightMeasureSpec))
@@ -163,7 +165,8 @@ public class HorizontalStepsProgressIndicator extends View
         for(int i = 0; i < mStepNum; i++)
         {
             //先计算全部最左边的padding值（getWidth()-（圆形直径+两圆之间距离）*2）
-            float paddingLeft = (screenWidth - mStepNum * mCircleRadius * 2 - (mStepNum - 1) * mLinePadding) / 2;
+//            float paddingLeft = (screenWidth - mStepNum * mCircleRadius * 2 - (mStepNum - 1) * mLinePadding) / 2;
+            float paddingLeft = 0;
             //add to list
             mCircleCenterPointPositionList.add(paddingLeft + mCircleRadius + i * mCircleRadius * 2 + i * mLinePadding);
         }
