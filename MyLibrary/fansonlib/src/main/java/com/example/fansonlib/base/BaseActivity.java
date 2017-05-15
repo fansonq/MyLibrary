@@ -283,9 +283,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).setCustomAnimations(enter,eixt).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).show(toFragment).commit();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).setCustomAnimations(enter,eixt).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).add(id_content, toFragment).commit();
         }
     }
 

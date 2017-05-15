@@ -216,56 +216,61 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 添加Fragment
+     *
      * @param id_content
      * @param fragment
      */
-    protected  void addFragment(int id_content,Fragment fragment ){
-        addFragmentWithTag(id_content,fragment,null);
+    protected void addFragment(int id_content, Fragment fragment) {
+        addFragmentWithTag(id_content, fragment, null);
     }
 
     /**
      * 添加Fragment（附带Tag）
+     *
      * @param id_content
      * @param fragment
      * @param tag
      */
-    protected  void addFragmentWithTag(int id_content,Fragment fragment,String tag){
+    protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(id_content, fragment,tag);
+        transaction.add(id_content, fragment, tag);
         transaction.commit();
     }
 
     /**
      * 添加Fragment（带动画）
+     *
      * @param id_content
      * @param fragment
      */
-    protected  void addFragment(int id_content,Fragment fragment ,int enter,int exit){
+    protected void addFragment(int id_content, Fragment fragment, int enter, int exit) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(enter,exit);
+        transaction.setCustomAnimations(enter, exit);
         transaction.add(id_content, fragment);
         transaction.commit();
     }
 
     /**
      * 替换Fragment（带动画）
+     *
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragment(int id_content,Fragment fragment,int enter,int exit ){
+    protected void replaceFragment(int id_content, Fragment fragment, int enter, int exit) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(enter,exit);
+        transaction.setCustomAnimations(enter, exit);
         transaction.replace(id_content, fragment);
         transaction.commitAllowingStateLoss();
     }
 
     /**
      * 替换Fragment
+     *
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragment(int id_content,Fragment fragment ){
-        replaceFragmentWithTag(id_content,fragment,null);
+    protected void replaceFragment(int id_content, Fragment fragment) {
+        replaceFragmentWithTag(id_content, fragment, null);
     }
 
     /**
@@ -274,9 +279,9 @@ public abstract class BaseFragment extends Fragment {
      * @param id_content
      * @param fragment
      */
-    protected void replaceFragmentWithTag(int id_content, Fragment fragment,String tag) {
+    protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(id_content, fragment,tag);
+        transaction.replace(id_content, fragment, tag);
         transaction.commitAllowingStateLoss();
     }
 
@@ -306,9 +311,9 @@ public abstract class BaseFragment extends Fragment {
     protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).setCustomAnimations(enter,eixt).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commit();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).setCustomAnimations(enter,eixt).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commit();
         }
     }
 
@@ -332,9 +337,10 @@ public abstract class BaseFragment extends Fragment {
 
     /**
      * 在此类注册了EventBus，如果此类中不实现四个方法中的其中一个不行，空参数也不行
+     *
      * @param event
      */
-    public void onEvent(EventNetWork event){
+    public void onEvent(EventNetWork event) {
 
     }
 
