@@ -150,8 +150,9 @@ public abstract class BaseFragment extends Fragment {
     protected void listenEvent() {
     }
 
-        /**
+    /**
      * 用来区别是不是被显示到前台
+     *
      * @param hidden
      */
     @Override
@@ -224,6 +225,17 @@ public abstract class BaseFragment extends Fragment {
         if (getChildFragmentManager() != null) {
             removeFragment(getChildFragmentManager().findFragmentByTag(tag));
             getChildFragmentManager().popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+    /**
+     * show Fragment
+     *
+     * @param fragment
+     */
+    protected void showFragment(Fragment fragment) {
+        if (getChildFragmentManager() != null &&fragment.isAdded()) {
+            getChildFragmentManager().beginTransaction().show(fragment).commit();
         }
     }
 
@@ -321,14 +333,14 @@ public abstract class BaseFragment extends Fragment {
      * @param id_content
      * @param fromFragment
      * @param toFragment
-     * @param tagOfTo 标识
+     * @param tagOfTo      标识
      */
-    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment,String tagOfTo) {
+    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commit();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment,tagOfTo).commit();
+            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commit();
         }
     }
 
