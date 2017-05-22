@@ -32,6 +32,12 @@ public abstract class BaseFragment extends Fragment {
      */
     private boolean isInited = false;
 
+    /**
+     * 是否可见的标识
+     * 默认false
+     */
+    private boolean mIsVisible = false;
+
 //    private OnFragmentInteractionListener mListener;
 
     /**
@@ -79,6 +85,12 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mIsVisible = false;
     }
 
     @Override
@@ -138,19 +150,20 @@ public abstract class BaseFragment extends Fragment {
     protected void listenEvent() {
     }
 
-    //    /**
-//     * 用来区别是不是被显示到前台
-//     * @param hidden
-//     */
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
+        /**
+     * 用来区别是不是被显示到前台
+     * @param hidden
+     */
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        mIsVisible = !hidden;
 //        if (!isInited && !hidden) {
 //            isInited = true;
 //            initData();
 //            listenEvent();
 //        }
-//    }
+    }
 
     /**
      * onCreateView中初始化View
