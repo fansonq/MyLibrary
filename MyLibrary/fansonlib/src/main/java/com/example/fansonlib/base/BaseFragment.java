@@ -36,7 +36,7 @@ public abstract class BaseFragment extends Fragment {
      * 是否可见的标识
      * 默认false
      */
-    private boolean mIsVisible = false;
+    protected boolean mIsVisible = true;
 
 //    private OnFragmentInteractionListener mListener;
 
