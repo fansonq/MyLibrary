@@ -274,6 +274,24 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 切换Framgment（hide/show）
+     * 带TAG
+     *
+     * @param id_content
+     * @param fromFragment
+     * @param toFragment
+     * @param tagOfTo 标识
+     */
+    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment,String tagOfTo) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (toFragment.isAdded()) {
+            transaction.hide(fromFragment).show(toFragment).commit();
+        } else {
+            transaction.hide(fromFragment).add(id_content, toFragment,tagOfTo).commit();
+        }
+    }
+
+    /**
      * 切换Framgment（hide/show）（带动画）
      *
      * @param id_content
