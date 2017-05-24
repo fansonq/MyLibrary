@@ -27,6 +27,14 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
     }
 
     /**
+     * 清空所有数据
+     */
+    public void clearList(){
+        dataList.clear();
+        notifyDataSetChanged();
+    }
+
+    /**
      * 填充数据,此操作会清除原来的数据
      *
      * @param list 要填充的数据
