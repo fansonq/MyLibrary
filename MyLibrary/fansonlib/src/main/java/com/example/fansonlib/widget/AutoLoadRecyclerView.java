@@ -202,7 +202,9 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
             this.smoothScrollToPosition(position);
             move = true;
         }
-
     }
+
+
+
 
 }
