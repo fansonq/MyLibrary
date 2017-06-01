@@ -22,7 +22,7 @@ public class RecyclerViewListener implements AutoLoadRecyclerView.OnItemTouchLis
     /**
      * RecyclerView内部接口
      */
-    private interface OnItemClickListener{
+    public interface OnItemClickListener{
 
         /**
          * 长按Item

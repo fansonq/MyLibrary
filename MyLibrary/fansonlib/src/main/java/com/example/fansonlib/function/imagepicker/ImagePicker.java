@@ -253,7 +253,6 @@ public class ImagePicker {
                      */
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, getFileProviderName(activity), takeImageFile));
                 }
-
             }
         }
         activity.startActivityForResult(takePictureIntent, requestCode);
