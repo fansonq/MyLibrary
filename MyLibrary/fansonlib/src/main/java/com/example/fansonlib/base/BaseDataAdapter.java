@@ -112,7 +112,8 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      */
     public void proposeList(List<M> list) {
         dataList.addAll(0, list);
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
+        notifyItemRangeInserted(0,list.size());
     }
 
     @Override
