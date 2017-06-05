@@ -184,8 +184,17 @@ public class HorizontalStepProgress extends LinearLayout implements HorizontalSt
                     mTextView.measure(spec, spec);
                     // getMeasuredWidth
                     int measuredWidth = mTextView.getMeasuredWidth();
-                    mTextView.setX(complectedXPosition.get(i) - measuredWidth / 2);
+                    // 设置文字的位置
+                    if (i == 0) {
+                        mTextView.setX(complectedXPosition.get(i) - mStepsViewIndicator.getCircleRadius());
+                    } else if (i == mStepBeanList.size() - 1) {
+                        mTextView.setX(complectedXPosition.get(i)+mStepsViewIndicator.getCircleRadius() - measuredWidth);
+                    } else {
+                        mTextView.setX(complectedXPosition.get(i) - measuredWidth / 2);
+                    }
                     mTextView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+
 
                     if(i <= mComplectingPosition)
                     {
