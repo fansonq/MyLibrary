@@ -4,12 +4,6 @@
         name="external_files"
         path="." />
     <root-path
-        name="camera_photos"
-        path="." />
-    <root-path
         name="root_path"
         path="." />
-    <external-files-path
-        name="name"
-        path="path" />
 </paths>
