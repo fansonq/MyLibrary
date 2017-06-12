@@ -1,20 +1,17 @@
 package com.fanson.mylibrary;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ImageView;
+import android.Manifest;
+import android.support.annotation.NonNull;
 
 import com.example.fansonlib.base.BaseActivity;
-import com.example.fansonlib.image.ImageLoaderUtils;
-import com.example.fansonlib.image.OnUniversalListener;
-import com.example.fansonlib.image.OnUniversalProgress;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.example.fansonlib.function.imagepicker.ImagePicker;
+import com.example.fansonlib.utils.MyPermissionHelper;
 
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 //    private ImageView iv_pic;
+//    private MyPermissionHelper myPermissionHelper;
 
 
     @Override
@@ -49,9 +46,28 @@ public class MainActivity extends BaseActivity {
 //            }
 //        });
 
-        addFragmentWithTag(R.id.fl_main,new TestFragment(),R.anim.slide_from_top,R.anim.slide_to_bottom,null);
+//        addFragmentWithTag(R.id.fl_main,new TestFragment(),R.anim.slide_from_top,R.anim.slide_to_bottom,null);
 
+//        myPermissionHelper = new MyPermissionHelper(this);
+//        myPermissionHelper.requestPermissions("paizhao", new MyPermissionHelper.PermissionListener() {
+//            @Override
+//            public void doAfterGrand(String... permission) {
+//                ImagePicker.getInstance().takePicture(MainActivity.this,100);
+//            }
+//
+//            @Override
+//            public void doAfterDenied(String... permission) {
+//
+//            }
+//        }, Manifest.permission.CAMERA);
     }
+
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        if (myPermissionHelper != null) {
+//            myPermissionHelper.handleRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
 
     @Override
     protected void initData() {
