@@ -11,7 +11,7 @@ public class MainActivity extends BaseActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 //    private ImageView iv_pic;
-//    private MyPermissionHelper myPermissionHelper;
+    private MyPermissionHelper myPermissionHelper;
 
 
     @Override
@@ -48,26 +48,26 @@ public class MainActivity extends BaseActivity {
 
 //        addFragmentWithTag(R.id.fl_main,new TestFragment(),R.anim.slide_from_top,R.anim.slide_to_bottom,null);
 
-//        myPermissionHelper = new MyPermissionHelper(this);
-//        myPermissionHelper.requestPermissions("paizhao", new MyPermissionHelper.PermissionListener() {
-//            @Override
-//            public void doAfterGrand(String... permission) {
-//                ImagePicker.getInstance().takePicture(MainActivity.this,100);
-//            }
-//
-//            @Override
-//            public void doAfterDenied(String... permission) {
-//
-//            }
-//        }, Manifest.permission.CAMERA);
+        myPermissionHelper = new MyPermissionHelper(this);
+        myPermissionHelper.requestPermissions("paizhao", new MyPermissionHelper.PermissionListener() {
+            @Override
+            public void doAfterGrand(String... permission) {
+                ImagePicker.getInstance().takePicture(MainActivity.this,100);
+            }
+
+            @Override
+            public void doAfterDenied(String... permission) {
+
+            }
+        }, Manifest.permission.CAMERA);
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (myPermissionHelper != null) {
-//            myPermissionHelper.handleRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (myPermissionHelper != null) {
+            myPermissionHelper.handleRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
     @Override
     protected void initData() {
