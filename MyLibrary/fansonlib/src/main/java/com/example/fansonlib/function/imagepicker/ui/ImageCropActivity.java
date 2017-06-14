@@ -122,5 +122,8 @@ public class ImageCropActivity extends ImageBaseActivity implements View.OnClick
             mBitmap.recycle();
             mBitmap = null;
         }
+        if (mCropImageView!=null){
+            mCropImageView.removeListener();
+        }
     }
 }

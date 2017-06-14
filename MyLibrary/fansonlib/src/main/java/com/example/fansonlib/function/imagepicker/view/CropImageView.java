@@ -593,6 +593,7 @@ public class CropImageView extends AppCompatImageView {
     private static OnBitmapSaveCompleteListener mListener;
 
     public interface OnBitmapSaveCompleteListener {
+
         void onBitmapSaveSuccess(File file);
 
         void onBitmapSaveError(File file);
@@ -600,6 +601,15 @@ public class CropImageView extends AppCompatImageView {
 
     public void setOnBitmapSaveCompleteListener(OnBitmapSaveCompleteListener listener) {
         mListener = listener;
+    }
+
+    /**
+     * 移除监听，避免内存泄漏
+     */
+    public void removeListener(){
+        if (mListener!=null){
+            mListener = null;
+        }
     }
 
     /** 返回焦点框宽度 */
