@@ -153,7 +153,9 @@ public class MyNotificationUtils {
     public static PendingIntent buildIntentWithBundle(Class clazz, Bundle bundle) {
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
         Intent intent = new Intent(MyNotificationUtils.mContext, clazz);
-        intent.putExtras(bundle);
+        if (bundle!=null){
+            intent.putExtras(bundle);
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(MyNotificationUtils.mContext, 0, intent, flags);
     }
