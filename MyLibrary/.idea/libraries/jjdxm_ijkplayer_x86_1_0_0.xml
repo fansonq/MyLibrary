@@ -1,11 +1,12 @@
 <component name="libraryTable">
   <library name="jjdxm-ijkplayer-x86-1.0.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/7deee9f49a29cd297175aac99cafe9c2670de164/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/7deee9f49a29cd297175aac99cafe9c2670de164/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/78d9fd347364c8ed813d22e556f7e572990d998a/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/78d9fd347364c8ed813d22e556f7e572990d998a/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.dou361.ijkplayer-x86/jjdxm-ijkplayer-x86/1.0.0/438759c6e367f1502dd0471dd90e7444c7153fe4/jjdxm-ijkplayer-x86-1.0.0-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.dou361.ijkplayer-x86/jjdxm-ijkplayer-x86/1.0.0/438759c6e367f1502dd0471dd90e7444c7153fe4/jjdxm-ijkplayer-x86-1.0.0-sources.jar!/" />
     </SOURCES>
   </library>

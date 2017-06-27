@@ -1,11 +1,16 @@
 <component name="libraryTable">
   <library name="circleimageview-1.3.0">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.android/build-cache/667d643a094a589040801fcf7b008b60128dc438/output/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/667d643a094a589040801fcf7b008b60128dc438/output/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/095b5f616b0b63cebb485bf2f15b667b60599523/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/095b5f616b0b63cebb485bf2f15b667b60599523/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/667d643a094a589040801fcf7b008b60128dc438/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/667d643a094a589040801fcf7b008b60128dc438/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/1.3.0/6639a4f5789cb40cd59e7fc9e291867a6a0e6fb/circleimageview-1.3.0-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.hdodenhof/circleimageview/1.3.0/6639a4f5789cb40cd59e7fc9e291867a6a0e6fb/circleimageview-1.3.0-sources.jar!/" />
     </SOURCES>
   </library>

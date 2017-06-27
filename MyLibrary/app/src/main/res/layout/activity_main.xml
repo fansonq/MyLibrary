@@ -8,8 +8,20 @@
 
     <ImageView
         android:id="@+id/iv_pic"
+        android:background="@mipmap/app_driver_icon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+    
+    <com.example.fansonlib.widget.lableview.LabelView
+        xmlns:lv="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        lv:lv_background_color="#3F9FE0"
+        lv:lv_gravity="TOP_LEFT"
+        lv:lv_fill_triangle="true"
+        lv:lv_text="等待中"
+        lv:lv_text_size="12sp" />
 
 </FrameLayout>
