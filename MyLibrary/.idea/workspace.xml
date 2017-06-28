@@ -122,8 +122,8 @@
       <file leaf-file-name="AutoLoadRecyclerView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/AutoLoadRecyclerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
+            <state relative-caret-position="1863">
+              <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
               <folding>
                 <element signature="e#1320#1321#0" expanded="true" />
                 <element signature="e#1355#1356#0" expanded="true" />
@@ -3886,10 +3886,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/25.3.1/recyclerview-v7-25.3.1-sources.jar!/android/support/v7/widget/RecyclerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="1503" column="39" selection-start-line="1503" selection-start-column="39" selection-end-line="1503" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/AutoLoadRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
+        <state relative-caret-position="1863">
+          <caret line="129" column="35" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
           <folding>
             <element signature="e#1320#1321#0" expanded="true" />
             <element signature="e#1355#1356#0" expanded="true" />

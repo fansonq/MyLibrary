@@ -49,7 +49,8 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         super(context, attrs, defStyle);
         isLoadingMore = false;
         mContext = context;
-        addOnScrollListener(new AutoLoadScrollListener(ImageLoader.getInstance(), true, true));
+        addOnScrollListener(new AutoLoadScrollListener(null, true, true));
+
         init();
     }
 
