@@ -4,10 +4,11 @@ import android.Manifest;
 import android.support.annotation.NonNull;
 
 import com.example.fansonlib.base.BaseActivity;
+import com.example.fansonlib.base.SwipeBackActivity;
 import com.example.fansonlib.function.imagepicker.ImagePicker;
 import com.example.fansonlib.utils.MyPermissionHelper;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends SwipeBackActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 //    private ImageView iv_pic;
