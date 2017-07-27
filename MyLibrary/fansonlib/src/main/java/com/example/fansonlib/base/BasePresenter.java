@@ -1,10 +1,8 @@
 package com.example.fansonlib.base;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by：fanson
@@ -14,7 +12,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BasePresenter<T extends BaseView> {
 
     private T mBaseView;
-    private CompositeSubscription mCompositeSubscription;
+    private CompositeDisposable mCompositeDisposable;
 
     public void attachView(T _baseView) {
         this.mBaseView = _baseView;
@@ -56,18 +54,25 @@ public abstract class BasePresenter<T extends BaseView> {
      * RXjava取消注册，以避免内存泄露
      */
     protected void unSubscribe() {
-        if (mCompositeSubscription != null) {
-            mCompositeSubscription.unsubscribe();
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.dispose();
         }
     }
 
-    protected void addSubscrebe(Observable observable, Subscriber subscriber) {
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = new CompositeSubscription();
+    protected void addSubscrebe(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
         }
-        mCompositeSubscription.add(observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber));
+        mCompositeDisposable.add(disposable);
     }
+
+//    protected void addSubscrebe(Observable observable, Subscriber subscriber) {
+//        if (mCompositeDisposable == null) {
+//            mCompositeDisposable = new CompositeDisposable();
+//        }
+//        mCompositeDisposable.add(observable
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(observable);
+//    }
 }
