@@ -212,7 +212,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void removeFragment(Fragment fragment) {
         if (getChildFragmentManager() != null && fragment != null) {
-            getChildFragmentManager().beginTransaction().remove(fragment).commit();
+            getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
         }
     }
 
@@ -235,7 +235,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void showFragment(Fragment fragment) {
         if (getChildFragmentManager() != null &&fragment.isAdded()) {
-            getChildFragmentManager().beginTransaction().show(fragment).commit();
+            getChildFragmentManager().beginTransaction().show(fragment).commitAllowingStateLoss();
         }
     }
 
@@ -259,7 +259,7 @@ public abstract class BaseFragment extends Fragment {
     protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(id_content, fragment, tag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -272,7 +272,7 @@ public abstract class BaseFragment extends Fragment {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enter, exit);
         transaction.add(id_content, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -320,9 +320,9 @@ public abstract class BaseFragment extends Fragment {
     protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commit();
+            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).commit();
+            transaction.hide(fromFragment).add(id_content, toFragment).commitAllowingStateLoss();
         }
     }
 
@@ -338,9 +338,9 @@ public abstract class BaseFragment extends Fragment {
     protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commit();
+            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commit();
+            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commitAllowingStateLoss();
         }
     }
 
@@ -354,9 +354,9 @@ public abstract class BaseFragment extends Fragment {
     protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commitAllowingStateLoss();
         }
     }
 

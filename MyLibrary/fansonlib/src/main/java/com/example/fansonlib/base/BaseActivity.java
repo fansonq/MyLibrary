@@ -190,7 +190,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter, exit);
         transaction.replace(id_content, fragment);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -212,7 +212,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(id_content, fragment, tag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -225,7 +225,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void replaceFragmentToStack(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(id_content, fragment, tag).addToBackStack(null);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -241,7 +241,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter, exit);
         transaction.add(id_content, fragment, tag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -254,7 +254,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(id_content, fragment, tag);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     /**
@@ -267,9 +267,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commit();
+            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).commit();
+            transaction.hide(fromFragment).add(id_content, toFragment).commitAllowingStateLoss();
         }
     }
 
@@ -285,9 +285,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment,String tagOfTo) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commit();
+            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment,tagOfTo).commit();
+            transaction.hide(fromFragment).add(id_content, toFragment,tagOfTo).commitAllowingStateLoss();
         }
     }
 
@@ -301,9 +301,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).show(toFragment).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).add(id_content, toFragment).commit();
+            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).add(id_content, toFragment).commitAllowingStateLoss();
         }
     }
 
@@ -315,7 +315,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void showFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (fragment.isAdded()) {
-            transaction.show(fragment).commit();
+            transaction.show(fragment).commitAllowingStateLoss();
         }
     }
 
@@ -326,7 +326,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void removeFragment(Fragment fragment) {
         if (fragmentManager != null && fragment != null) {
-            fragmentManager.beginTransaction().remove(fragment).commit();
+            fragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss();
         }
     }
 
