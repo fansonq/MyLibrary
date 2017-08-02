@@ -52,13 +52,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BasePresenter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BasePresenter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="68" column="81" selection-start-line="68" selection-start-column="81" selection-end-line="68" selection-end-column="81" />
+            <state relative-caret-position="195">
+              <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2368#2369#0" expanded="true" />
+                <element signature="e#2371#2575#0" expanded="true" />
+                <element signature="e#2574#2575#0" expanded="true" />
+                <element signature="e#2577#2765#0" expanded="true" />
+                <element signature="e#2764#2765#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,21 +72,18 @@
       <file leaf-file-name="BaseActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1636">
-              <caret line="328" column="87" selection-start-line="328" selection-start-column="87" selection-end-line="328" selection-end-column="87" />
-              <folding>
-                <element signature="e#3458#4026#0" expanded="true" />
-                <element signature="e#4025#4026#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BaseFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="376" column="9" selection-start-line="376" selection-start-column="9" selection-end-line="376" selection-end-column="9" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,7 +92,7 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
+            <state relative-caret-position="-279">
               <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
               <folding />
             </state>
@@ -100,8 +102,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="874">
-              <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+            <state relative-caret-position="411">
+              <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -142,9 +144,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="92">
               <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2660,7 +2660,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="F:\Github\MyLibrary\MyLibrary" value="5988216450758" />
+        <entry key="F:\Github\MyLibrary\MyLibrary" value="5988649795010" />
         <entry key="I:\Git Space\MyLibrary\MyLibrary" value="5994481486345" />
       </map>
     </option>
@@ -3055,10 +3055,10 @@
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/SwipeBackActivity.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/common_loading.xml" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/DateFormatUtil.java" />
-        <option value="$PROJECT_DIR$/fansonlib/build.gradle" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseActivity.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseFragment.java" />
+        <option value="$PROJECT_DIR$/fansonlib/build.gradle" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java" />
       </list>
     </option>
   </component>
@@ -3093,6 +3093,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3110,77 +3112,11 @@
               <option name="myItemId" value="MyLibrary" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyLibrary" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyLibrary" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyLibrary" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fansonlib" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyLibrary" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3573,7 +3509,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24626866" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24466951" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Freeline" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3694,13 +3630,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/lableview/LabelView.java">
@@ -3725,13 +3661,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/countupview/CountupView.java">
@@ -3749,25 +3685,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="19" column="33" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="33" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
           <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/25.3.1/recyclerview-v7-25.3.1-sources.jar!/android/support/v7/widget/RecyclerView.java" />
@@ -3817,13 +3753,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/common_loading.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/MyProgressWheel.java">
@@ -3834,13 +3770,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/my_loading_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
@@ -3875,7 +3811,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3883,7 +3818,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3818">
           <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3926,58 +3860,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseMulMvpActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="874">
-          <caret line="38" column="50" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+        <state relative-caret-position="92">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
+        <state relative-caret-position="-279">
           <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseMulMvpActivity.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="68" column="81" selection-start-line="68" selection-start-column="81" selection-end-line="68" selection-end-column="81" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="411">
+          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1636">
-          <caret line="328" column="87" selection-start-line="328" selection-start-column="87" selection-end-line="328" selection-end-column="87" />
-          <folding>
-            <element signature="e#3458#4026#0" expanded="true" />
-            <element signature="e#4025#4026#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="368">
+          <caret line="41" column="56" selection-start-line="41" selection-start-column="56" selection-end-line="41" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="376" column="9" selection-start-line="376" selection-start-column="9" selection-end-line="376" selection-end-column="9" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2368#2369#0" expanded="true" />
+            <element signature="e#2371#2575#0" expanded="true" />
+            <element signature="e#2574#2575#0" expanded="true" />
+            <element signature="e#2577#2765#0" expanded="true" />
+            <element signature="e#2764#2765#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
