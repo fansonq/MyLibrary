@@ -7,6 +7,9 @@ package com.example.fansonlib.callback;
  */
 public interface OnDialogConfirmListener {
 
-    void onConfirmClick();
+    /**
+     * 点击Positive按钮
+     */
+    void onConfirm();
 
 }

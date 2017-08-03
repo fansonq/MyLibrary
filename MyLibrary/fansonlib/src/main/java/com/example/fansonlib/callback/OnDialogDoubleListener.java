@@ -13,9 +13,4 @@ public interface OnDialogDoubleListener extends OnDialogConfirmListener{
      */
     void onCancel();
 
-    /**
-     * 点击Positive按钮
-     */
-    void onConfrim();
-
 }

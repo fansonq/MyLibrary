@@ -90,8 +90,8 @@
       <file leaf-file-name="SwipeBackActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/SwipeBackActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+            <state relative-caret-position="230">
+              <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -2994,7 +2994,6 @@
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/DateFormatUtil.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/SoftInputUtils.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/InputMethodUtils.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogDoubleListener.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/res/drawable/custom_dialog_card.xml" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/res/drawable/bg_button_normal.xml" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/res/values/colors.xml" />
@@ -3007,6 +3006,8 @@
         <option value="$PROJECT_DIR$/fansonlib/build.gradle" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/res/drawable/custom_dialog_window.xml" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/SwipeBackActivity.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogDoubleListener.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogConfirmListener.java" />
       </list>
     </option>
   </component>
@@ -3116,7 +3117,7 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
+              <option name="myItemId" value="callback" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3567,7 +3568,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/recyclerview-v7/25.3.1/recyclerview-v7-25.3.1-sources.jar!/android/support/v7/widget/RecyclerView.java" />
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/MyActivityManager.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -3782,14 +3782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogDoubleListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-25/android.jar!/android/app/Dialog.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -3981,10 +3973,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/SwipeBackActivity.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogDoubleListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnDialogConfirmListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/SwipeBackActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
           <folding />
         </state>
       </provider>
