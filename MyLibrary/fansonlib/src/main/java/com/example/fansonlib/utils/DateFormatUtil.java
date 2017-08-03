@@ -41,7 +41,7 @@ public class DateFormatUtil {
 
 
     /**
-     * 获取当前日期
+     * 获取当前日期yyyy-MM-dd
      * @return
      */
     public static String getCurrentDate() {

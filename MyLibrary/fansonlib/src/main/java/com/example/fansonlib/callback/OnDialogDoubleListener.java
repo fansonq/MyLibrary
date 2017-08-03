@@ -8,6 +8,14 @@ package com.example.fansonlib.callback;
 
 public interface OnDialogDoubleListener extends OnDialogConfirmListener{
 
-    void onCancelClick();
+    /**
+     * 点击Negative按钮
+     */
+    void onCancel();
+
+    /**
+     * 点击Positive按钮
+     */
+    void onConfrim();
 
 }
