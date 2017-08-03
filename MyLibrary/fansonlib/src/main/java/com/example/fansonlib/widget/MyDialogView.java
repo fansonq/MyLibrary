@@ -108,7 +108,7 @@ public class MyDialogView {
         btn_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDialogDoubleListener.onCancelClick();
+                onDialogDoubleListener.onCancel();
                 dialog.dismiss();
             }
         });
