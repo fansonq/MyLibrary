@@ -70,7 +70,7 @@ public class MyDialogView {
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDialogClickListener.onConfirmClick();
+                onDialogClickListener.onConfirm();
                 dialog.dismiss();
             }
         });
@@ -100,7 +100,7 @@ public class MyDialogView {
         btn_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDialogDoubleListener.onConfirmClick();
+                onDialogDoubleListener.onConfirm();
                 dialog.dismiss();
             }
         });
