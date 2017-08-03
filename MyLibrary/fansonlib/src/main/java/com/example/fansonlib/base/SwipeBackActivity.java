@@ -2,7 +2,6 @@ package com.example.fansonlib.base;
 
 import android.os.Bundle;
 
-import com.jude.swipbackhelper.SwipeBackHelper;
 
 /**
  * Created by fansonq on 2017/6/29.
@@ -14,7 +13,7 @@ public abstract class SwipeBackActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SwipeBackHelper.onCreate(this);
+//        SwipeBackHelper.onCreate(this);
 //        SwipeBackHelper.getCurrentPage(this)//获取当前页面
 //                .setSwipeBackEnable(true)//设置是否可滑动
 //                .setSwipeEdge(200)//可滑动的范围。px。200表示为左边200px的屏幕
@@ -36,25 +35,25 @@ public abstract class SwipeBackActivity extends BaseActivity{
 //                    public void onScrollToClose() {//当滑动关闭
 //                    }
 //                });
-
-        SwipeBackHelper.getCurrentPage(this)
-                .setSwipeBackEnable(true)
-                .setSwipeSensitivity(0.5f)
-                .setSwipeRelateEnable(true)
-                .setSwipeRelateOffset(300);
+//
+//        SwipeBackHelper.getCurrentPage(this)
+//                .setSwipeBackEnable(true)
+//                .setSwipeSensitivity(0.5f)
+//                .setSwipeRelateEnable(true)
+//                .setSwipeRelateOffset(300);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        SwipeBackHelper.onPostCreate(this);
+//        SwipeBackHelper.onPostCreate(this);
     }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SwipeBackHelper.onDestroy(this);
+//        SwipeBackHelper.onDestroy(this);
     }
 
 
