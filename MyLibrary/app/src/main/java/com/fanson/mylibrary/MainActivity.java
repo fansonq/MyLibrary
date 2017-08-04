@@ -1,14 +1,9 @@
 package com.fanson.mylibrary;
 
-import android.Manifest;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.base.SwipeBackActivity;
-import com.example.fansonlib.function.imagepicker.ImagePicker;
-import com.example.fansonlib.utils.MyPermissionHelper;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 
 public class MainActivity extends SwipeBackActivity {
@@ -26,13 +21,9 @@ public class MainActivity extends SwipeBackActivity {
     @Override
     protected void initView() {
 
-        View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
-        MyLoadingView myLoadingView = (MyLoadingView) this.findViewById(R.id.loadingView);
-        myLoadingView.setLoadingTextColor(R.color.colorAccent);
-        myLoadingView.setProgressWheelColor(R.color.colorAccent);
-//        myLoadingView.setCustomLoadingView(view);
-        myLoadingView.setLoadingModel(MyLoadingView.MODEL_ALERT);
-        myLoadingView.loading();
+//        testLoadingView();
+
+
 //        iv_pic = (ImageView)findViewById(R.id.iv_pic);
 //        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
 ////        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
@@ -72,6 +63,30 @@ public class MainActivity extends SwipeBackActivity {
 //
 //            }
 //        }, Manifest.permission.CAMERA);
+    }
+
+    private void testLoadingView() {
+                View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
+        final MyLoadingView myLoadingView = (MyLoadingView) this.findViewById(R.id.loadingView);
+//        myLoadingView.setLoadingTextColor(R.color.colorPrimary);
+//        myLoadingView.setProgressWheelColor(ContextCompat.getColor(this,R.color.colorAccent));
+//        myLoadingView.setLoadingText("登录中");
+        myLoadingView.setCustomLoadingView(view);
+        myLoadingView.setLoadingModel(MyLoadingView.MODEL_DEFAULT);
+        myLoadingView.setOnBtnClickListener(new MyLoadingView.OnRetryClickListener() {
+            @Override
+            public void onRetry() {
+                myLoadingView.loading();
+            }
+        });
+        myLoadingView.loading();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        myLoadingView.failRetry("失败");
     }
 
     @Override

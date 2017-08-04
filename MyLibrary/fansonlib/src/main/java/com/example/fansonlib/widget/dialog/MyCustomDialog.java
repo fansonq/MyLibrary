@@ -62,7 +62,6 @@ public class MyCustomDialog {
         this.mContext = context;
     }
 
-
     public void show() {
         if (!mHasShow) {
             mBuilder = new Builder();

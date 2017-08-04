@@ -305,11 +305,6 @@ public class MyGlideUtils {
      * 这里默认支持Context，Glide支持Context,Activity,Fragment，FragmentActivity
      */
 
-    //默认加载
-    public static void loadImageView(Context mContext, String path, ImageView mImageView) {
-        Glide.with(mContext).load(path).into(mImageView);
-    }
-
     //加载指定大小
     public static void loadImageViewSize(Context mContext, String path, int width, int height, ImageView mImageView) {
         Glide.with(mContext).load(path).override(width, height).into(mImageView);
@@ -401,18 +396,6 @@ public class MyGlideUtils {
     //设置要加载的内容
     public static void loadImageViewContent(Context mContext, String path, SimpleTarget<GlideDrawable> simpleTarget) {
         Glide.with(mContext).load(path).centerCrop().into(simpleTarget);
-    }
-
-    //清理磁盘缓存
-    public static void GuideClearDiskCache(Context mContext) {
-        //理磁盘缓存 需要在子线程中执行
-        Glide.get(mContext).clearDiskCache();
-    }
-
-    //清理内存缓存
-    public static void GuideClearMemory(Context mContext) {
-        //清理内存缓存  可以在UI主线程中进行
-        Glide.get(mContext).clearMemory();
     }
 
 }

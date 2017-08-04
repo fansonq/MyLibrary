@@ -20,7 +20,7 @@ public class ShowToast {
      * @param duration
      * @return
      */
-    public static Toast getSingleToast(String text, int duration) {
+    private static Toast getSingleToast(String text, int duration) {
         if (mToast == null) {
             mToast = Toast.makeText(AppUtils.getAppContext(), text, duration);
         } else {
@@ -35,7 +35,7 @@ public class ShowToast {
      * @param duration
      * @return
      */
-    public static Toast getToast(String text, int duration) {
+    private static Toast getToast(String text, int duration) {
         return Toast.makeText(AppUtils.getAppContext(), text, duration);
     }
 
@@ -43,7 +43,7 @@ public class ShowToast {
      * 非连续弹出的Toast（短）
      * @param message 内容
      */
-    public static void showSingleShort(String message) {
+    public static void singleShort(String message) {
         getSingleToast(message, Toast.LENGTH_SHORT).show();
     }
 
@@ -51,7 +51,7 @@ public class ShowToast {
      * 非连续弹出的Toast（长）
      * @param text 内容
      */
-    public static void showSingleLong(String text) {
+    public static void singleLong(String text) {
         getSingleToast(text, Toast.LENGTH_LONG).show();
     }
 

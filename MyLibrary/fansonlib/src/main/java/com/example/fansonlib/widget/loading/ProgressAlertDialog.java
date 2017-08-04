@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.fansonlib.R;
 
-import java.util.zip.Inflater;
-
 /**
  * Created by：fanson
  * Created on：2016/12/17 10:41
@@ -32,6 +30,7 @@ public class ProgressAlertDialog extends Dialog {
     public ProgressAlertDialog(Context context) {
         super(context, R.style.alert_dialog);
         mContext = context;
+        mCurrentView = LayoutInflater.from(mContext).inflate(R.layout.my_loading_view,null);
         //默认返回键可以取消
         setCancelable(true);
         //其他区域不可取消
@@ -68,7 +67,6 @@ public class ProgressAlertDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCurrentView = LayoutInflater.from(mContext).inflate(R.layout.my_loading_view,null);
         setContentView(mCurrentView);
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
     }
@@ -109,7 +107,7 @@ public class ProgressAlertDialog extends Dialog {
      */
     public void setLoadingTextColor(int colorId) {
         if (mLoadingTv == null) {
-//            mLoadingTv = (TextView) mCurrentView.findViewById(R.id.loading_text);
+            mLoadingTv = (TextView) mCurrentView.findViewById(R.id.loading_text);
         }
         mLoadingTv.setTextColor(colorId);
     }

@@ -6,7 +6,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +15,7 @@ import com.example.fansonlib.R;
 /**
  * Created by：fanson
  * Created on：2016/12/17 10:34
- * Describe：
+ * Describe：LoadingView
  */
 public class MyLoadingView extends RelativeLayout implements View.OnClickListener {
 
@@ -33,9 +33,9 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
      */
     private TextView mWarnView;
     /**
-     * 默认重新加载btn
+     * 默认重新加载的ImageView
      */
-    private Button mLoadDataBtn;
+    private ImageView mRetryBtn;
     /**
      * 需要绑定的View
      */
@@ -48,7 +48,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
 
     private View mCustomLoadingView;
 
-    private OnBtnClickListener onBtnClickListener;
+    private OnRetryClickListener onRetryListener;
 
     private ProgressAlertDialog mProgressDialog;
 
@@ -92,28 +92,28 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
             mLoadingText = "加载中...";
         }
 
-        mLoadDataBtn = new Button(getContext());
-        mLoadDataBtn.setText(buttonText);
-//        mLoadDataBtn.setBackgroundColor(getResources().getColor(R.color.transparent));
-        mLoadDataBtn.setTextSize(15);
-        LayoutParams mLoadingDataLp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mRetryBtn = new ImageView(getContext());
+//        mRetryBtn.setText(buttonText);
+        mRetryBtn.setImageResource(R.mipmap.ic_retry);
+//        mRetryBtn.setTextSize(15);
+        LayoutParams mLoadingDataLp = new LayoutParams(120, 120);
         mLoadingDataLp.addRule(RelativeLayout.CENTER_IN_PARENT);
 //        mLoadingDataLp.addRule(RelativeLayout.BELOW, R.id.id_hh_empty_tv_view);
-        mLoadDataBtn.setId(R.id.id_empty_btn_view);
-        addView(mLoadDataBtn, mLoadingDataLp);
+        mRetryBtn.setId(R.id.id_empty_btn_view);
+        addView(mRetryBtn, mLoadingDataLp);
 
         mWarnView = new TextView(getContext());
         mWarnView.setText(mWarnText);
         mWarnView.setTextSize(15);
         LayoutParams mWarnLp = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mWarnLp.addRule(RelativeLayout.CENTER_IN_PARENT);
-        mWarnLp.addRule(RelativeLayout.ABOVE, R.id.id_empty_btn_view);
+        mWarnLp.addRule(RelativeLayout.BELOW, R.id.id_empty_btn_view);
         mWarnView.setId(R.id.id_empty_tv_view);
         addView(mWarnView, mWarnLp);
 
         mProgressDialog = new ProgressAlertDialog(getContext());
 
-        mLoadDataBtn.setOnClickListener(this);
+        mRetryBtn.setOnClickListener(this);
 
         setVisibility(GONE);
     }
@@ -127,7 +127,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
         }
         if (mLoadingModel == MODEL_DEFAULT) {
             setVisibility(VISIBLE);
-            mLoadDataBtn.setVisibility(INVISIBLE);
+            mRetryBtn.setVisibility(INVISIBLE);
             if (!hasCustomLoadingView) {
                 mWarnView.setText(mLoadingText);
             } else {
@@ -145,44 +145,24 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
     }
 
     /**
-     * 加载成功
+     * 加载成功（消失加载框）
      */
     public void success() {
         if (mBindView != null) {
             mBindView.setVisibility(VISIBLE);
         }
         if (mLoadingModel == MODEL_ALERT) {
-            mProgressDialog.cancel();
+            mProgressDialog.cancel(); //如果你在创建AlertDialog的时候调用了setOnCancelListener 这个mCancelMessage变量有作用，否则dismiss和cancel等同
         }
         setVisibility(GONE);
     }
 
     /**
-     * dismiss dialog
-     */
-    public void dismiss() {
-        if (mBindView != null) {
-            mBindView.setVisibility(VISIBLE);
-        }
-        if (mLoadingModel == MODEL_ALERT && mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
-        setVisibility(GONE);
-    }
-
-    /**
-     * 加载失败
-     */
-    public void empty() {
-        empty("");
-    }
-
-    /**
-     * 加载失败
+     * 加载失败,并显示重新加载的图标
      *
      * @param msg 加载失败提示语
      */
-    public void empty(String msg) {
+    public void failRetry(String msg) {
 
         if (!TextUtils.isEmpty(msg)) {
             mWarnText = msg;
@@ -196,7 +176,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
             mBindView.setVisibility(GONE);
         }
         setVisibility(VISIBLE);
-        mLoadDataBtn.setVisibility(VISIBLE);
+        mRetryBtn.setVisibility(VISIBLE); //显示Retry图标
 
         if (!hasCustomLoadingView) {
             mWarnView.setText(mWarnText);
@@ -219,19 +199,6 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
         this.mBindView = view;
     }
 
-    public void setOnBtnClickListener(OnBtnClickListener onBtnClickListener) {
-        this.onBtnClickListener = onBtnClickListener;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (onBtnClickListener != null) {
-            onBtnClickListener.onBtnClick();
-        } else {
-            throw new IllegalArgumentException("must be set click");
-        }
-    }
-
     /**
      * 设置自定义加载view
      *
@@ -241,14 +208,29 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
         if (view != null) {
             mCustomLoadingView = view;
             hasCustomLoadingView = true;
-
             mWarnView.setVisibility(GONE);
-
             LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.CENTER_IN_PARENT);
             params.addRule(RelativeLayout.ABOVE, R.id.id_empty_btn_view);
             addView(view, params);
             invalidate();
+        }
+    }
+
+    /**
+     * 注册监听接口（点击重载）
+     * @param listener
+     */
+    public void setOnBtnClickListener(OnRetryClickListener listener) {
+        this.onRetryListener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (onRetryListener != null) {
+            onRetryListener.onRetry();
+        } else {
+            throw new IllegalArgumentException("must be set click");
         }
     }
 
@@ -287,14 +269,18 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
         }
     }
 
+    /**
+     * 设置LoadingView是Dialog模式，还是普通View模式
+     * @param model 模式
+     */
     public void setLoadingModel(int model) {
         this.mLoadingModel = model;
     }
 
-    public interface OnBtnClickListener {
+    public interface OnRetryClickListener {
         /**
          * 重新加载回调接口
          */
-        void onBtnClick();
+        void onRetry();
     }
 }
