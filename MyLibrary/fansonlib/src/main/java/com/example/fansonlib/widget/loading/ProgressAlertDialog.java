@@ -3,6 +3,8 @@ package com.example.fansonlib.widget.loading;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -10,22 +12,26 @@ import android.widget.TextView;
 
 import com.example.fansonlib.R;
 
+import java.util.zip.Inflater;
+
 /**
  * Created by：fanson
  * Created on：2016/12/17 10:41
- * Describe：
+ * Describe：圆形进度条Dialog
  */
-public class ProgressAlertDialog extends Dialog{
+public class ProgressAlertDialog extends Dialog {
 
     private View mDialogView;
     private AnimationSet mModalInAnim;
     private AnimationSet mModalOutAnim;
     private boolean mCloseFromCancel;
     private TextView mLoadingTv;
-    private String mLoadingText = "加载中...";
+    private View mCurrentView; //当前这个Dialog的View
+    private Context mContext;
 
     public ProgressAlertDialog(Context context) {
         super(context, R.style.alert_dialog);
+        mContext = context;
         //默认返回键可以取消
         setCancelable(true);
         //其他区域不可取消
@@ -62,10 +68,9 @@ public class ProgressAlertDialog extends Dialog{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_loading_view);
+        mCurrentView = LayoutInflater.from(mContext).inflate(R.layout.my_loading_view,null);
+        setContentView(mCurrentView);
         mDialogView = getWindow().getDecorView().findViewById(android.R.id.content);
-//        mLoadingTv = (TextView) findViewById(R.id.loading_text);
-//        setLoadingText(mLoadingText);
     }
 
     @Override
@@ -84,12 +89,38 @@ public class ProgressAlertDialog extends Dialog{
     }
 
     /**
-     * 设置加载中文字
-     * @param loadingText
+     * 设置加载中显示的文字
+     *
+     * @param loadingText 内容
      */
-//    public void setLoadingText(String loadingText) {
-//        if(!TextUtils.isEmpty(loadingText)){
-//            mLoadingTv.setText(loadingText);
-//        }
-//    }
+    public void setLoadingText(String loadingText) {
+        if (!TextUtils.isEmpty(loadingText)) {
+            if (mLoadingTv == null) {
+                mLoadingTv = (TextView) mCurrentView.findViewById(R.id.loading_text);
+            }
+            mLoadingTv.setText(loadingText);
+        }
+    }
+
+    /**
+     * 设置加载中显示的文字颜色
+     *
+     * @param colorId 颜色资源ID
+     */
+    public void setLoadingTextColor(int colorId) {
+        if (mLoadingTv == null) {
+//            mLoadingTv = (TextView) mCurrentView.findViewById(R.id.loading_text);
+        }
+        mLoadingTv.setTextColor(colorId);
+    }
+
+    /**
+     * 设置Progress的颜色
+     *
+     * @param colorId 颜色资源ID
+     */
+    public void setProgressWheelColor(int colorId) {
+        MyProgressWheel mProgressWheel = (MyProgressWheel) mCurrentView.findViewById(R.id.progressWheel);
+        mProgressWheel.setBarColor(colorId);
+    }
 }

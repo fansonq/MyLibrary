@@ -138,9 +138,6 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
             }
         } else if (mLoadingModel == MODEL_ALERT) {
             setVisibility(GONE);
-            if (hasCustomLoadingView && mCustomLoadingView != null) {
-                mCustomLoadingView.setVisibility(VISIBLE);
-            }
             mProgressDialog.setCancelable(true);
             mProgressDialog.show();
         }
@@ -263,8 +260,30 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
     public void setLoadingText(String loadingText) {
         if (!TextUtils.isEmpty(loadingText)) {
             if (mProgressDialog != null) {
-//                mProgressDialog.setLoadingText(loadingText);
+                mProgressDialog.setLoadingText(loadingText);
             }
+        }
+    }
+
+    /**
+     * 设置弹出框模式加载中文字颜色
+     *
+     * @param colorId 颜色资源ID
+     */
+    public void setLoadingTextColor(int colorId) {
+        if (mProgressDialog != null) {
+            mProgressDialog.setLoadingTextColor(colorId);
+        }
+    }
+
+    /**
+     * 设置Progress的颜色
+     *
+     * @param colorId 颜色资源ID
+     */
+    public void setProgressWheelColor(int colorId) {
+        if (mProgressDialog != null) {
+            mProgressDialog.setProgressWheelColor(colorId);
         }
     }
 
