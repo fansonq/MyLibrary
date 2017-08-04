@@ -59,7 +59,7 @@ public class ShowToast {
      * 连续弹出的Toast（短）
      * @param text 内容
      */
-    public static void showShort(String text) {
+    public static void Short(String text) {
         getToast(text, Toast.LENGTH_SHORT).show();
     }
 
@@ -67,7 +67,7 @@ public class ShowToast {
      * 连续弹出的Toast（长）
      * @param text 内容
      */
-    public static void showLong(String text) {
+    public static void Long(String text) {
         getToast(text, Toast.LENGTH_LONG).show();
     }
 
