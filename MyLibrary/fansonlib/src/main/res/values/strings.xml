@@ -11,6 +11,8 @@
     <string name="can_not_play">不能播放此视频</string>
     <string name="not_support">播放器不支持此设备</string>
 
+    <string name="downloading">Downloading</string>
+
     <!--PickImage-->
     <string name="all_images">全部图片</string>
     <string name="folder_image_count">共%1$d张</string>

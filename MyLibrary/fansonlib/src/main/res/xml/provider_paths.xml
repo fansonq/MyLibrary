@@ -14,4 +14,9 @@
     <external-files-path
         name="my_images"
         path="Pictures" />
+
+    <external-path
+        name="lib_update_app_files"
+        path="."/>
+
 </paths>

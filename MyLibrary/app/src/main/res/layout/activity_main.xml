@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.fanson.mylibrary.MainActivity">
 
+    <Button
+        android:id="@+id/btn"
+        android:text="button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <include layout="@layout/common_loading"/>
 
 </FrameLayout>
