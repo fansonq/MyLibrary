@@ -6,6 +6,7 @@ import android.util.Log;
 import org.reactivestreams.Subscription;
 
 import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
@@ -78,7 +79,7 @@ public abstract class BasePresenter<T extends BaseView> {
 
     protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
         return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnLifecycle(new Consumer<Subscription>() {
                     @Override
                     public void accept(Subscription subscription) throws Exception {
