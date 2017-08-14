@@ -1,5 +1,6 @@
 package com.example.fansonlib.function.update;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -24,7 +25,6 @@ import com.example.fansonlib.function.download.RxDownload;
 import com.example.fansonlib.function.download.entity.DownloadStatus;
 import com.example.fansonlib.function.update.utils.ColorUtil;
 import com.example.fansonlib.function.update.utils.DrawableUtil;
-import com.example.fansonlib.function.update.utils.Md5Util;
 import com.example.fansonlib.function.update.utils.Utils;
 import com.example.fansonlib.function.update.view.NumberProgressBar;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
@@ -42,7 +42,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DialogActivity extends FragmentActivity implements View.OnClickListener {
 
-
+private static final String TAG = DialogActivity.class.getSimpleName();
     public static boolean isShow = false;
     private TextView mContentTextView;
     private Button mUpdateOkButton;
@@ -50,7 +50,7 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
     private NumberProgressBar mNumberProgressBar;
     private ImageView mIvClose;
     private TextView mTitleTextView;
-
+    private File mAppFile; // 更新下载到的Apk文件
 
     private LinearLayout mLlClose;
     //默认色
@@ -193,26 +193,15 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
     private void installApp() {
         String apkUrl = mUpdateApp.getApkFileUrl();
         final String appName = apkUrl.substring(apkUrl.lastIndexOf("/") + 1, apkUrl.length());
-        File appFile = new File(mUpdateApp.getTargetPath()
-                .concat(File.separator + mUpdateApp.getNewVersion())
+        mAppFile = new File(mUpdateApp.getTargetPath()
+//                .concat(File.separator + mUpdateApp.getNewVersion())
                 .concat(File.separator + appName));
         //md5不为空
         //文件存在
-        //md5只一样
         if (!TextUtils.isEmpty(mUpdateApp.getNewMd5())
-                && appFile.exists()
-                && Md5Util.getFileMD5(appFile).equalsIgnoreCase(mUpdateApp.getNewMd5())) {
-            Uri fileUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".fileProvider", appFile);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
-            } else {
-                intent.setDataAndType(Uri.fromFile(appFile), "application/vnd.android.package-archive");
-            }
-            if (getPackageManager().queryIntentActivities(intent, 0).size() > 0) {
-                startActivity(intent);
+                && mAppFile.exists()) {
+            if (getPackageManager().queryIntentActivities(getInstallIntent(mAppFile), 0).size() > 0) {
+                startActivity(getInstallIntent(mAppFile));
             }
             //安装完自杀
             onBackPressed();
@@ -221,8 +210,20 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
             if (mUpdateApp.isHideDialog()) {
                 onBackPressed();
             }
-
         }
+    }
+
+    private Intent getInstallIntent(File appFile){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri fileUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".fileProvider", appFile);
+            intent.setDataAndType(fileUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(appFile), "application/vnd.android.package-archive");
+        }
+        return intent;
     }
 
 
@@ -237,7 +238,8 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
 //        startService(intent);
 
         Disposable disposable = RxDownload.getInstance(getApplicationContext())
-                .download("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk")//只传url即可
+                .download(mUpdateApp.getApkFileUrl())
+//                .download("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk")//只传url即可
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<DownloadStatus>() {
@@ -245,7 +247,7 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
                     public void accept(DownloadStatus status) throws Exception {
                         mNumberProgressBar.setVisibility(View.VISIBLE);
                         mNumberProgressBar.setProgress((int)status.getPercentNumber());
-                        Log.d("TAG","下载进度:"+(int)status.getPercentNumber());
+                        Log.d(TAG,"下载进度:"+(int)status.getPercentNumber());
                         MyNotificationUtils.init(getApplicationContext());
                         MyNotificationUtils.buildProgress(LibNotificationID.UPDATE_PROGRESS,R.mipmap.app_driver_icon,getString(R.string.downloading),
                                 (int)status.getPercentNumber(),100).show();
@@ -253,18 +255,19 @@ public class DialogActivity extends FragmentActivity implements View.OnClickList
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        //下载失败
-                        Log.d("TAG","下载失败");
+                        Log.d(TAG,"下载失败");
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
-                        //下载成功
-                        Log.d("TAG","下载成功");
+                       Log.d(TAG,"下载成功");
+                        PendingIntent intent = PendingIntent.getActivity(DialogActivity.this, 0, getInstallIntent(mAppFile), PendingIntent.FLAG_UPDATE_CURRENT);
+                        MyNotificationUtils.buildSimple(LibNotificationID.UPDATE_PROGRESS,R.mipmap.app_driver_icon,getString(R.string.tip),
+                                getString(R.string.download_complete) ,intent).show();
+                        installApp();
                     }
                 });
     }
-
 
     @Override
     public void onBackPressed() {

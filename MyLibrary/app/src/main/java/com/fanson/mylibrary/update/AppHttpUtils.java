@@ -7,14 +7,11 @@ import com.fanson.retrofit.ApiStores;
 import com.fanson.retrofit.RetrofitClient;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.subscribers.ResourceSubscriber;
 import okhttp3.ResponseBody;
-
-import static android.R.attr.name;
 
 /**
  * Created by：fanson
@@ -26,8 +23,8 @@ public class AppHttpUtils implements HttpManager{
 
     @Override
     public void asyncPost(@NonNull String url, @NonNull Map<String, String> params, @NonNull final Callback callBack) {
-        Map<String, Object> maps = new HashMap<>();
-        maps.put("tel",name);
+//        Map<String, Object> maps = new HashMap<>();
+//        maps.put("tel",name);
 
        Flowable<ResponseBody> flowable = RetrofitClient.getRetrofit().create(ApiStores.class).update(url);
         ResourceSubscriber subscriber = new ResourceSubscriber() {

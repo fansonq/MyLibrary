@@ -19,7 +19,7 @@ public abstract class UpdateCallback {
             JSONObject jsonObject = new JSONObject(json);
             updateAppBean.setUpdate(jsonObject.optString("update"))
                     .setNewVersion(jsonObject.optString("new_version"))
-                    .setApkFileUrl(jsonObject.optString("apk_file_url"))
+                    .setApkFileUrl("https://qd.myapp.com/myapp/qqteam/AndroidQQ/mobileqq_android.apk")
                     .setAppSize(jsonObject.optString("target_size"))
                     .setUpdateLog(jsonObject.optString("update_log"))
                     .setConstraint(jsonObject.optBoolean("constraint"))

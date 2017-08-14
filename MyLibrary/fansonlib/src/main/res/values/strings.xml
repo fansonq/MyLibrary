@@ -11,7 +11,9 @@
     <string name="can_not_play">不能播放此视频</string>
     <string name="not_support">播放器不支持此设备</string>
 
+    <string name="tip">提示</string>
     <string name="downloading">Downloading</string>
+    <string name="download_complete">完成下载，点击安装</string>
 
     <!--PickImage-->
     <string name="all_images">全部图片</string>
