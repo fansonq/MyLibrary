@@ -1,13 +1,11 @@
 package com.fanson.mylibrary;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.fansonlib.base.SwipeBackActivity;
 import com.example.fansonlib.widget.loading.MyLoadingView;
-import com.fanson.mylibrary.update.MyUpdateService;
 
 public class MainActivity extends SwipeBackActivity {
 
@@ -76,10 +74,10 @@ public class MainActivity extends SwipeBackActivity {
     }
 
     private void testUpdate() {
-        String updateUrl = "WVector/AppUpdateDemo/master/json/json.txt";
-        Intent intent = new Intent(this,MyUpdateService.class);
-        intent.putExtra("url",updateUrl);
-        startService(intent);
+//        String updateUrl = "WVector/AppUpdateDemo/master/json/json.txt";
+//        Intent intent = new Intent(this,MyUpdateService.class);
+//        intent.putExtra("url",updateUrl);
+//        startService(intent);
     }
 
     private void testLoadingView() {

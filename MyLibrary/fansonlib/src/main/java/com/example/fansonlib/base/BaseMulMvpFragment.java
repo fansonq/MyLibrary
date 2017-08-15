@@ -25,10 +25,10 @@ public abstract class BaseMulMvpFragment <P1 extends BasePresenter,P2 extends Ba
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter1 != null)
-            mPresenter1.detachView();
-        if (mPresenter2 != null)
-            mPresenter2.detachView();
+//        if (mPresenter1 != null)
+//            mPresenter1.detachView();
+//        if (mPresenter2 != null)
+//            mPresenter2.detachView();
     }
 
     /**
