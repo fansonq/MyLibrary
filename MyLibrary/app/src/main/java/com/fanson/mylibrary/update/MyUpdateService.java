@@ -8,6 +8,9 @@ import com.example.fansonlib.function.update.UpdateAppBean;
 import com.example.fansonlib.function.update.UpdateAppManager;
 import com.example.fansonlib.function.update.UpdateCallback;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by：fanson
  * Created on：2017/7/18 10:30
@@ -24,6 +27,9 @@ public class MyUpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("key1", "value1");
+
         if (intent != null) {
             String updateUrl = intent.getStringExtra("url"); //WVector/AppUpdateDemo/master/json/json.txt"
             new UpdateAppManager
@@ -34,6 +40,7 @@ public class MyUpdateService extends IntentService {
                     .setHttpManager(new AppHttpUtils())
                     //更新地址
                     .setUpdateUrl(updateUrl)
+//                    .setParams(params)//添加自定义参数
                     .build()
                     //检测是否有新版本
                     .checkNewApp(new UpdateCallback() {
@@ -47,7 +54,6 @@ public class MyUpdateService extends IntentService {
                         public void hasNewApp(UpdateAppBean updateApp, UpdateAppManager updateAppManager) {
                             //show dialog prompts a  new version
                             updateAppManager.showDialog();
-//                        ShowToast.singleLong("have a new version");
                         }
 
                         /**
@@ -69,7 +75,6 @@ public class MyUpdateService extends IntentService {
                         /**
                          * 没有新版本
                          */
-
                         @Override
                         public void noNewApp() {
                             //没有新版本
