@@ -16,10 +16,10 @@ public abstract class BasePresenter<T extends BaseView> {
         this.mBaseView = _baseView;
     }
 
-//    public void detachView() {
-//        mBaseView = null;
+    public void detachView() {
+        mBaseView = null;
 //        unSubscribe();
-//    }
+    }
 
 
     public boolean isViewAttached() {
