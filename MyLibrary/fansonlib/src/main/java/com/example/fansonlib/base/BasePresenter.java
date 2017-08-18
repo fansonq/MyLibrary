@@ -24,6 +24,15 @@ public abstract class BasePresenter<T extends BaseView> {
     private static  final String TAG=BasePresenter.class.getSimpleName();
     private T mBaseView;
     private Disposable mDisposable;
+    /**
+     * 生命周期是否是Resume
+     */
+    private boolean isResume;
+
+    /**
+     * Data是否已回调到View
+     */
+    private boolean isCallback;
 
     public void attachView(T _baseView) {
         this.mBaseView = _baseView;
@@ -97,5 +106,13 @@ public abstract class BasePresenter<T extends BaseView> {
                     }
                 })
                 .subscribeWith(subscriber);
+    }
+
+    protected void onResume(){
+        isResume = true;
+    }
+
+    protected void onStop(){
+        isResume = false;
     }
 }

@@ -19,6 +19,18 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
+    }
+
     /**
      * 实例化Presenter
      */

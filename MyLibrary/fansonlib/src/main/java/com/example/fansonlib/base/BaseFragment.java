@@ -68,13 +68,13 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState == null) {
-            if (!isHidden()) {
-                isInited = true;
+//        if (savedInstanceState == null) {
+//            if (!isHidden()) {
+//                isInited = true;
                 initData();
                 listenEvent();
-            }
-        }
+//            }
+//        }
     }
 
     @Override

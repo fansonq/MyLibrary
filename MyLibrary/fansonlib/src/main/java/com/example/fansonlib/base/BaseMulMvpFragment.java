@@ -23,6 +23,20 @@ public abstract class BaseMulMvpFragment <P1 extends BasePresenter,P2 extends Ba
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter1.onResume();
+        mPresenter2.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mPresenter1.onStop();
+        mPresenter2.onStop();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mPresenter1 != null)
