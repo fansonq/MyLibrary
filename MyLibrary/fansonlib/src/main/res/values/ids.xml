@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="id_empty_tv_view" type="id"/>
-    <item name="id_empty_btn_view" type="id"/>
+    <item name="id_empty_tv_view" type="id" />
+    <item name="id_empty_btn_view" type="id" />
+
+    <item name="scrollview" type="id" />
 
 </resources>
