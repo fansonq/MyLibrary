@@ -181,6 +181,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 此方法的目的是子类使用此方法findViewById不再需要强转，注意：接受类型一定不要写错
+     *
+     * @param id
+     * @param <T>
+     * @return
+     */
+    public <T> T findMyViewId(int id) {
+        T view = (T) findViewById(id);
+        return view;
+    }
+
+
+    /**
      * 加载Fragment(带动画)
      *
      * @param id_content

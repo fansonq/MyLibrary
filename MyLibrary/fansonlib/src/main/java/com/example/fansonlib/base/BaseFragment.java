@@ -150,6 +150,19 @@ public abstract class BaseFragment extends Fragment {
     protected void listenEvent() {
     }
 
+
+    /**
+     * 此方法的目的是子类使用此方法findViewById不再需要强转，注意：接受类型一定不要写错
+     *
+     * @param id
+     * @param <T>
+     * @return
+     */
+    public <T> T findMyViewId(int id) {
+        T view = (T) rootView.findViewById(id);
+        return view;
+    }
+
     /**
      * 用来区别是不是被显示到前台
      *

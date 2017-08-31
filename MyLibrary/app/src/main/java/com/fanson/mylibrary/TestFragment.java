@@ -12,6 +12,8 @@ import com.example.fansonlib.base.BaseFragment;
  */
 
 public class TestFragment extends BaseFragment{
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_test;
@@ -19,7 +21,7 @@ public class TestFragment extends BaseFragment{
 
     @Override
     protected View initView(View rootView, Bundle savedInstanceState) {
-        return null;
+        return rootView;
     }
 
     @Override

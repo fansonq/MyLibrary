@@ -1,6 +1,9 @@
 package com.example.fansonlib.base;
 
+import android.app.ActivityManager;
 import android.content.Context;
+
+import java.util.List;
 
 /**
  * Created by fansonq on 2017/6/29.
@@ -22,6 +25,26 @@ public class AppUtils {
      */
     public static Context getAppContext(){
         return mApplication;
+    }
+
+    /**
+     * 获取进程名
+     * @param cxt 上下文
+     * @param pid android.os.Process.myPid()
+     * @return 进程名
+     */
+    public static String getProcessName(Context cxt, int pid) {
+        ActivityManager am = (ActivityManager) cxt.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+        if (runningApps == null) {
+            return null;
+        }
+        for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
+            if (procInfo.pid == pid) {
+                return procInfo.processName;
+            }
+        }
+        return null;
     }
 
 }

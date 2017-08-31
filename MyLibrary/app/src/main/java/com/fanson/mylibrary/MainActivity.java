@@ -23,7 +23,7 @@ public class MainActivity extends SwipeBackActivity {
 
     @Override
     protected void initView() {
-        Button button = (Button)this.findViewById(R.id.btn) ;
+        Button button = findMyViewId(R.id.btn) ;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
