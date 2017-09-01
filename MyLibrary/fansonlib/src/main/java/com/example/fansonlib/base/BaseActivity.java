@@ -142,42 +142,33 @@ public abstract class BaseActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-                    if (NetWorkUtil.isNetWordConnected(mContext)) {
-                        EventBus.getDefault().postSticky(new EventNetWork(EventNetWork.AVAILABLE));
-                    } else {
-                        EventBus.getDefault().postSticky(new EventNetWork(EventNetWork.UNAVAILABLE));
+                    if (!NetWorkUtil.isNetWordConnected(mContext)) {
+                        if (dialogBuilder == null) {
+                            dialogBuilder = new AlertDialog.Builder(mContext)
+                                    .setTitle(getResources().getString(R.string.no_net))
+                                    .setMessage(getResources().getString(R.string.go_open_net))
+                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                            startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                        }
+                                    })
+                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            dialogBuilder.show();
+                        }
                     }
                 }
             }
         };
         //注册广播
         registerReceiver(netStateBroadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-    }
-
-    //被动调用
-    public void onEvent(EventNetWork event) {
-        if (event.getResult() == EventNetWork.UNAVAILABLE) {
-            if (dialogBuilder == null) {
-                dialogBuilder = new AlertDialog.Builder(this)
-                        .setTitle(getResources().getString(R.string.no_net))
-                        .setMessage(getResources().getString(R.string.go_open_net))
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                            }
-                        })
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                dialogBuilder.show();
-            }
-        }
     }
 
     /**
@@ -293,14 +284,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param id_content
      * @param fromFragment
      * @param toFragment
-     * @param tagOfTo 标识
+     * @param tagOfTo      标识
      */
-    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment,String tagOfTo) {
+    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment,tagOfTo).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commitAllowingStateLoss();
         }
     }
 
@@ -314,9 +305,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).show(toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter,eixt).add(id_content, toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commitAllowingStateLoss();
         }
     }
 
