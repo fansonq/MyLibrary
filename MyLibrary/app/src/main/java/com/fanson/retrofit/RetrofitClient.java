@@ -1,5 +1,6 @@
 package com.fanson.retrofit;
 
+import android.support.annotation.MainThread;
 import android.util.Log;
 
 import org.reactivestreams.Subscription;
@@ -8,6 +9,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.LongConsumer;
@@ -142,7 +145,8 @@ public class RetrofitClient {
      */
     public static ResourceSubscriber startObservable(Flowable observable, ResourceSubscriber subscriber) {
         return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+//                .observeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnLifecycle(new Consumer<Subscription>() {
                     @Override
                     public void accept(Subscription subscription) throws Exception {

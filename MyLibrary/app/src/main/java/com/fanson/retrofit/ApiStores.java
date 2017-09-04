@@ -13,6 +13,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
@@ -28,10 +29,13 @@ import retrofit2.http.Url;
 public interface ApiStores {
 
     //baseUrl
-    String API_SERVER_URL = "https://raw.githubusercontent.com/";
+    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
 
     @GET
     Flowable<ResponseBody> update(@Url String url);
+
+    @POST
+    Flowable<BaseBean> getName(@Url String url,@QueryMap Map<String, Object> maps);
 
     /**
      * 下载文件

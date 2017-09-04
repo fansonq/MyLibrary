@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.fansonlib.base.BaseFragment;
+import com.fanson.mylibrary.R;
 
 /**
  * Created by：fanson

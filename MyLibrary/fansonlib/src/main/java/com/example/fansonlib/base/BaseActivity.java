@@ -56,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getContentView());
         initNetStateBroadCastReceiver();
         //注册EventBus
-        EventBus.getDefault().registerSticky(this);
+//        EventBus.getDefault().registerSticky(this);
         initView();
         initData();
         listenEvent();
@@ -91,8 +91,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //注销EventBus
-        EventBus.getDefault().unregister(this);
+//        //注销EventBus
+//        EventBus.getDefault().unregister(this);
 
         //注销广播
         if (netStateBroadcastReceiver != null) {

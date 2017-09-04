@@ -2,11 +2,15 @@ package com.fanson.mylibrary;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.SwipeBackActivity;
 import com.example.fansonlib.widget.loading.MyLoadingView;
+import com.fanson.mylibrary.mvp.Test2Prensenter;
+import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
 
 public class MainActivity extends SwipeBackActivity {
@@ -14,6 +18,8 @@ public class MainActivity extends SwipeBackActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 //    private ImageView iv_pic;
 //    private MyPermissionHelper myPermissionHelper;
+    private TestPresenter mTestPresenter;
+    private Test2Prensenter mTestPresenter2;
 
 
     @Override
@@ -23,11 +29,23 @@ public class MainActivity extends SwipeBackActivity {
 
     @Override
     protected void initView() {
+        AppUtils.init(getApplicationContext());
         Button button = findMyViewId(R.id.btn) ;
+        Log.d("TTT","initView");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                testUpdate();
+//                testUpdate();
+                mTestPresenter = new TestPresenter();
+                mTestPresenter.attachView(null);
+                Log.d("TTT","1");
+
+
+//                mTestPresenter2 = new Test2Prensenter();
+//                mTestPresenter2.attachView(null);
+//                Log.d("TTT","2");
+//                mTestPresenter2.methodTest2();
+                mTestPresenter.testMethod();
             }
         });
 //        testLoadingView();
