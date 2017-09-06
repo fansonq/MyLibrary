@@ -22,16 +22,17 @@ import io.reactivex.subscribers.ResourceSubscriber;
  * Created on：2016/10/15 17:32
  * Describe：基于Rx的Presenter封装,控制订阅的生命周期
  */
-public abstract class BasePresenter<T extends BaseView> implements Observer{
+public abstract class BasePresenter<T extends BaseView> implements Observer {
 
-    private static  final String TAG=BasePresenter.class.getSimpleName();
+    private static final String TAG = BasePresenter.class.getSimpleName();
     private T mBaseView;
     private Disposable mDisposable;
     private BaseModel mBaseModel;
 
 
     private BasePresenter presenter;
-    public BasePresenter(){
+
+    public BasePresenter() {
         presenter = this;
     }
 
@@ -46,21 +47,26 @@ public abstract class BasePresenter<T extends BaseView> implements Observer{
     private boolean isCallback;
 
     /**
-     * 绑定View，是否需要创建Model
+     * 绑定View
+     *
      * @param _baseView
-     * @param isNeedModel true：需要创建Model；反则之
+     * @param
      */
-    public void attachView(T _baseView,boolean isNeedModel) {
+    public void attachView(T _baseView) {
         this.mBaseView = _baseView;
-        if (isNeedModel){
-            mBaseModel = new BaseModel(presenter);
-        }
+    }
+
+    /**
+     * 创建Model
+     */
+    public void isNeedModel() {
+        mBaseModel = new BaseModel(presenter);
     }
 
     public void detachView() {
         mBaseView = null;
         unSubscribe();
-        if (mBaseModel!=null){
+        if (mBaseModel != null) {
             mBaseModel.deleteObserver(this);
         }
     }
@@ -73,20 +79,21 @@ public abstract class BasePresenter<T extends BaseView> implements Observer{
     /**
      * 可不用此方法
      * 直接调用mBaseView
+     *
      * @return
      */
 
-    public T getBaseView(){
+    public T getBaseView() {
         return this.mBaseView;
     }
 
-    public void checkViewAttached(){
-        if(!isViewAttached())
+    public void checkViewAttached() {
+        if (!isViewAttached())
             throw new BaseViewNotAttachedException();
     }
 
     private static class BaseViewNotAttachedException extends RuntimeException {
-        public BaseViewNotAttachedException(){
+        public BaseViewNotAttachedException() {
             super("Please call Presenter attachView(BaseView) before" +
                     " requesting data to the Presenter");
         }
@@ -109,49 +116,51 @@ public abstract class BasePresenter<T extends BaseView> implements Observer{
 //    }
 
     protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
-        return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
+        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnLifecycle(new Consumer<Subscription>() {
                     @Override
                     public void accept(Subscription subscription) throws Exception {
-                        Log.d(TAG,"OnSubscribe");
+                        Log.d(TAG, "OnSubscribe");
                     }
                 }, new LongConsumer() {
                     @Override
                     public void accept(long t) throws Exception {
-                        Log.d(TAG,"OnRequest");
+                        Log.d(TAG, "OnRequest");
                     }
                 }, new Action() {
                     @Override
                     public void run() throws Exception {
-                        Log.d(TAG,"OnCancel");
+                        Log.d(TAG, "OnCancel");
                     }
                 })
                 .subscribeWith(subscriber);
     }
 
-    protected void onResume(){
+    protected void onResume() {
         isResume = true;
     }
 
-    protected void onStop(){
+    protected void onStop() {
         isResume = false;
     }
 
     /**
      * 收到被观察者发布过来的通知
+     *
      * @param observable 被观察者对象
-     * @param object 数据
+     * @param object     数据
      */
     @Override
     public void update(Observable observable, Object object) {
-        receiveObservable(observable,object);
+        receiveObservable(observable, object);
     }
 
     /**
      * 收到被观察者发布过来的通知，该抽象方法在P层实现处理
+     *
      * @param observable 被观察者对象
-     * @param object 数据
+     * @param object     数据
      */
     protected abstract void receiveObservable(Observable observable, Object object);
 }

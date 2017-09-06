@@ -95,12 +95,12 @@ public class MainActivity extends SwipeBackActivity implements Observer{
     private void testBaseModel() {
         mTestPresenter = new TestPresenter();
         mTestPresenter.attachView(null);
+        mTestPresenter.testMethod();
         Log.d("TTT", "1");
         mTestPresenter2 = new Test2Prensenter();
         mTestPresenter2.attachView(null);
-        Log.d("TTT", "2");
         mTestPresenter2.methodTest2();
-        mTestPresenter.testMethod();
+        Log.d("TTT", "2");
     }
 
     private void testUpdate() {
