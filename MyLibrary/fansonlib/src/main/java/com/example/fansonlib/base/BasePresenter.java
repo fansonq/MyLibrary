@@ -45,15 +45,24 @@ public abstract class BasePresenter<T extends BaseView> implements Observer{
      */
     private boolean isCallback;
 
-    public void attachView(T _baseView) {
+    /**
+     * 绑定View，是否需要创建Model
+     * @param _baseView
+     * @param isNeedModel true：需要创建Model；反则之
+     */
+    public void attachView(T _baseView,boolean isNeedModel) {
         this.mBaseView = _baseView;
-//        mBaseModel = new BaseModel(presenter);
+        if (isNeedModel){
+            mBaseModel = new BaseModel(presenter);
+        }
     }
 
     public void detachView() {
         mBaseView = null;
-        mBaseModel.deleteObserver(this);
         unSubscribe();
+        if (mBaseModel!=null){
+            mBaseModel.deleteObserver(this);
+        }
     }
 
 
