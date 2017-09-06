@@ -182,9 +182,9 @@ public class ImageLoaderProxy {
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 .bitmapConfig(Bitmap.Config.RGB_565)
-                .showImageForEmptyUri(R.mipmap.ic_person_photo)
-                .showImageOnFail(R.mipmap.ic_person_photo)
-                .showImageOnLoading(R.mipmap.ic_person_photo)
+                .showImageForEmptyUri(R.mipmap.ic_person)
+                .showImageOnFail(R.mipmap.ic_person)
+                .showImageOnLoading(R.mipmap.ic_person)
                 .build();
     }
 

@@ -59,7 +59,7 @@ public class MyGlideUtils {
         if (isFade) {
             Glide.with(context)
                     .load(imgUrl)
-                    .error(R.mipmap.ic_person_photo)
+                    .error(R.mipmap.ic_person)
                     .crossFade()
                     .priority(Priority.NORMAL) //下载的优先级
                     //all:缓存源资源和转换后的资源 none:不作任何磁盘缓存
@@ -69,7 +69,7 @@ public class MyGlideUtils {
         } else {
             Glide.with(context)
                     .load(imgUrl)
-                    .error(R.mipmap.ic_person_photo)
+                    .error(R.mipmap.ic_person)
                     .into(imageView);
         }
     }
@@ -84,7 +84,7 @@ public class MyGlideUtils {
     public void loadThumbnailImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -104,7 +104,7 @@ public class MyGlideUtils {
                                   String imgUrl, int withSize, int heightSize) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -121,7 +121,7 @@ public class MyGlideUtils {
     public void loadBlurImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -138,7 +138,7 @@ public class MyGlideUtils {
     public void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -155,7 +155,7 @@ public class MyGlideUtils {
     public void loadBlurCircleImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -174,7 +174,7 @@ public class MyGlideUtils {
     public void loadCornerImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -193,7 +193,7 @@ public class MyGlideUtils {
     public void loadBlurCornerImage(Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -232,7 +232,7 @@ public class MyGlideUtils {
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .into(imageView);
     }
 
@@ -249,7 +249,7 @@ public class MyGlideUtils {
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
-                .error(R.mipmap.ic_person_photo)
+                .error(R.mipmap.ic_person)
                 .thumbnail(Contants.THUMB_SIZE)
                 .into(imageView);
     }
