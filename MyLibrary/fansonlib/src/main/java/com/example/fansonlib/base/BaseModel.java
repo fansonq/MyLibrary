@@ -13,8 +13,10 @@ public class BaseModel extends Observable {
     private static final String TAG = BaseModel.class.getSimpleName();
 
     public BaseModel(BasePresenter presenter) {
-        addObserver(presenter);
-        Log.d(TAG, "Add Observer：" + presenter);
+        if (presenter!=null){
+            addObserver(presenter);
+            Log.d(TAG, "Add Observer：" + presenter);
+        }
     }
 
     /**
@@ -33,8 +35,10 @@ public class BaseModel extends Observable {
      * @param presenter 观察者对象
      */
     public void removeObserver(BasePresenter presenter) {
-        deleteObserver(presenter);
-        Log.d(TAG, "Delete Observer：" + presenter);
+        if (presenter!=null){
+            deleteObserver(presenter);
+            Log.d(TAG, "Delete Observer：" + presenter);
+        }
     }
 
     /**
