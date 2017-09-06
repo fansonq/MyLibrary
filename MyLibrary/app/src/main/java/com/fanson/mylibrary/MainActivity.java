@@ -12,11 +12,15 @@ import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
+import com.fanson.mylibrary.update.TestWindow;
 
-public class MainActivity extends SwipeBackActivity {
+import java.util.Observable;
+import java.util.Observer;
+
+public class MainActivity extends SwipeBackActivity implements Observer{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-//    private ImageView iv_pic;
+    //    private ImageView iv_pic;
 //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Test2Prensenter mTestPresenter2;
@@ -30,26 +34,16 @@ public class MainActivity extends SwipeBackActivity {
     @Override
     protected void initView() {
         AppUtils.init(getApplicationContext());
-        Button button = findMyViewId(R.id.btn) ;
-        Log.d("TTT","initView");
+        Button button = findMyViewId(R.id.btn);
+        Log.d("TTT", "initView");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                testUpdate();
-                mTestPresenter = new TestPresenter();
-                mTestPresenter.attachView(null);
-                Log.d("TTT","1");
-
-
-//                mTestPresenter2 = new Test2Prensenter();
-//                mTestPresenter2.attachView(null);
-//                Log.d("TTT","2");
-//                mTestPresenter2.methodTest2();
-                mTestPresenter.testMethod();
+                testPopuWindow();
             }
         });
 //        testLoadingView();
-
 
 
 //        iv_pic = (ImageView)findViewById(R.id.iv_pic);
@@ -93,15 +87,31 @@ public class MainActivity extends SwipeBackActivity {
 //        }, Manifest.permission.CAMERA);
     }
 
+    private void testPopuWindow(){
+        TestWindow window = new TestWindow(this);
+        window.showPopupWindow();
+    }
+
+    private void testBaseModel() {
+        mTestPresenter = new TestPresenter();
+        mTestPresenter.attachView(null);
+        Log.d("TTT", "1");
+        mTestPresenter2 = new Test2Prensenter();
+        mTestPresenter2.attachView(null);
+        Log.d("TTT", "2");
+        mTestPresenter2.methodTest2();
+        mTestPresenter.testMethod();
+    }
+
     private void testUpdate() {
         String updateUrl = "WVector/AppUpdateDemo/master/json/json.txt";
-        Intent intent = new Intent(this,MyUpdateService.class);
-        intent.putExtra("url",updateUrl);
+        Intent intent = new Intent(this, MyUpdateService.class);
+        intent.putExtra("url", updateUrl);
         startService(intent);
     }
 
     private void testLoadingView() {
-                View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
+        View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
         final MyLoadingView myLoadingView = (MyLoadingView) this.findViewById(R.id.loadingView);
 //        myLoadingView.setLoadingTextColor(R.color.colorPrimary);
 //        myLoadingView.setProgressWheelColor(ContextCompat.getColor(this,R.color.colorAccent));
@@ -139,5 +149,10 @@ public class MainActivity extends SwipeBackActivity {
     @Override
     protected void listenEvent() {
 
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        Log.d("TTT",o.toString());
     }
 }

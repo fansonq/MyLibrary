@@ -22,6 +22,8 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.utils.InputMethodUtils;
 
 import java.lang.reflect.Field;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by：fanson
@@ -29,7 +31,7 @@ import java.lang.reflect.Field;
  * Describe：
  */
 
-public abstract class BasePopup implements IBasePopup, PopupWindow.OnDismissListener, IPopupController {
+public abstract class BasePopup extends Observable implements IBasePopup, PopupWindow.OnDismissListener, IPopupController {
     private static final String TAG = "BasePopupWindow";
     //元素定义
     private PopupWindowProxy mPopupWindow;
@@ -80,7 +82,7 @@ public abstract class BasePopup implements IBasePopup, PopupWindow.OnDismissList
 
     private void initView(Activity context, int w, int h) {
         mContext = context;
-
+        addObserver((Observer) mContext); // 添加观察者
         mPopupView = onCreatePopupView();
         mAnimaView = initAnimaView();
         checkPopupAnimaView();
@@ -120,6 +122,16 @@ public abstract class BasePopup implements IBasePopup, PopupWindow.OnDismissList
         mExitAnimator = initExitAnimator();
 
         mAnchorViewLocation = new int[2];
+    }
+
+    /**
+     * 发布通知给观察者
+     *
+     * @param object
+     */
+    public void notifyToObservers(Object object) {
+        setChanged();
+        notifyObservers(object);
     }
 
     private void checkPopupAnimaView() {
@@ -817,6 +829,10 @@ public abstract class BasePopup implements IBasePopup, PopupWindow.OnDismissList
             mOnDismissListener.onDismiss();
         }
         isExitAnimaPlaying = false;
+        //注销观察者
+        if (mContext!=null){
+            deleteObserver((Observer) mContext);
+        }
     }
 
 
