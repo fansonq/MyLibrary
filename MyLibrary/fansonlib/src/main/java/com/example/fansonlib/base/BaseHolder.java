@@ -14,8 +14,9 @@ import android.view.ViewGroup;
  * Created on：2016/10/4 10:34
  * Describe：Recyclerview的ViewHolder封装
  */
-public class BaseHolder extends RecyclerView.ViewHolder {
+public abstract class BaseHolder<T> extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
+    private BaseHolder mBaseHolder;
 
     /**
      * 构造ViewHolder
@@ -36,6 +37,7 @@ public class BaseHolder extends RecyclerView.ViewHolder {
     public BaseHolder(View view) {
         super(view);
         viewArray = new SparseArray<>();
+        mBaseHolder = this;
     }
 
     /**
@@ -63,17 +65,18 @@ public class BaseHolder extends RecyclerView.ViewHolder {
         return itemView.getContext();
     }
 
+    /**
+     * 获取Holder
+     * @return
+     */
+    public BaseHolder getViewHolder( ){
+        return   mBaseHolder;
+    }
 
-
-
-//    private ViewHolder viewHolder;
-//
-//    public BaseHolder(View itemView) {
-//        super(itemView);
-//        viewHolder = ViewHolder.getViewHolder(itemView);
-//    }
-//
-//    public ViewHolder getViewHolder(){
-//        return viewHolder;
-//    }
+    /**
+     * 为Hodler绑定数据
+     * @param data 数据
+     * @param position 位置
+     */
+    public abstract void bindViewData(T data,int position);
 }
