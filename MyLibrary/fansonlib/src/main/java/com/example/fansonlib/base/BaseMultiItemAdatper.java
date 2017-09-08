@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.callback.MultiItemTypeSupport;
+import com.example.fansonlib.callback.MultiItemTypeDelegate;
 
 import java.util.List;
 
@@ -16,15 +16,15 @@ import java.util.List;
 
 public abstract class BaseMultiItemAdatper<M, VH extends BaseHolder> extends BaseDataAdapter<M, VH > {
 
-    protected MultiItemTypeSupport<M> mMultiItemTypeSupport;
+    protected MultiItemTypeDelegate<M> mItemViewDelegateManager;
 
     public BaseMultiItemAdatper(Context context) {
         super(context);
     }
 
-    public BaseMultiItemAdatper(Context context, List<M> list,MultiItemTypeSupport<M> multiItemTypeSupport){
+    public BaseMultiItemAdatper(Context context, List<M> list,MultiItemTypeDelegate<M> itemViewDelegateManager){
         super(context,list);
-        mMultiItemTypeSupport =multiItemTypeSupport;
+        mItemViewDelegateManager = itemViewDelegateManager;
     }
 
     @Override
@@ -47,6 +47,6 @@ public abstract class BaseMultiItemAdatper<M, VH extends BaseHolder> extends Bas
 
     @Override
     public int getCustomViewType(int position) {
-        return mMultiItemTypeSupport.getItemViewType(position,mDataList.get(position));
+        return mItemViewDelegateManager.getItemViewType(mDataList.get(position),position);
     }
 }

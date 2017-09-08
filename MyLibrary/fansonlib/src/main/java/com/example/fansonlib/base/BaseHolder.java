@@ -8,16 +8,21 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 /**
  * Created by：fanson
  * Created on：2016/10/4 10:34
  * Describe：Recyclerview的ViewHolder封装
  */
-public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
+public abstract    class BaseHolder<M> extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
-    private BaseHolder mBaseHolder;
+    private View mConvertView;
+    private Context mContext;
+
+    public  BaseHolder(View itemView){
+        super(itemView);
+        viewArray = new SparseArray<>();
+    }
 
     /**
      * 构造ViewHolder
@@ -33,12 +38,13 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
     /**
      * 构建ViewHolder
      *
-     * @param view 布局View
+     * @param itemView 布局View
      */
-    public BaseHolder(View view) {
-        super(view);
+    public BaseHolder(Context context,View itemView) {
+        super(itemView);
         viewArray = new SparseArray<>();
-        mBaseHolder = this;
+        mConvertView =itemView;
+        mContext =context;
     }
 
     /**
@@ -63,21 +69,31 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
      * @return context
      */
     protected Context getContext() {
-        return itemView.getContext();
+        return mContext;
     }
 
-    /**
-     * 获取Holder
-     * @return
-     */
-    public BaseHolder getViewHolder( ){
-        return   mBaseHolder;
-    }
+//    /**
+//     * 创建ViewHolder
+//     * @param context
+//     * @param itemView
+//     * @return
+//     */
+//    public static BaseHolder createViewHolder(Context context, View itemView) {
+//        return new BaseHolder(context, itemView);
+//    }
+//
+//    /**
+//     * 创建ViewHolder
+//     * @param context
+//     * @param parent
+//     * @param layoutId
+//     * @return
+//     */
+//    public static BaseHolder createViewHolder(Context context,  ViewGroup parent, int layoutId)   {
+//        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,false);
+//        return new BaseHolder(context, itemView);
+//    }
 
-    /**
-     * 为Hodler绑定数据
-     * @param data 数据
-     * @param position 位置
-     */
-    public abstract   void bindViewData(M data, int position, BaseAdapter adapter);
+    public abstract void bindData(M bean,int position );
+
 }
