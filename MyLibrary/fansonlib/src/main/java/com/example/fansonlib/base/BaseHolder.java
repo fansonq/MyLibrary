@@ -9,15 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.fansonlib.callback.OnHolderAndAdapterListenner;
+
 /**
  * Created by：fanson
  * Created on：2016/10/4 10:34
  * Describe：Recyclerview的ViewHolder封装
  */
-public abstract    class BaseHolder<M> extends RecyclerView.ViewHolder {
+public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
     private View mConvertView;
     private Context mContext;
+    private OnHolderAndAdapterListenner mOnHolderAndAdapterListenner;
+    public void setOnHolderAndAdapterListenner(OnHolderAndAdapterListenner listenner){
+        mOnHolderAndAdapterListenner = listenner;
+    }
 
     public  BaseHolder(View itemView){
         super(itemView);

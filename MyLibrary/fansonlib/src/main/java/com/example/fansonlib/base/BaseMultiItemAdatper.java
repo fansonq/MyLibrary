@@ -41,9 +41,7 @@ public abstract class BaseMultiItemAdatper<M, VH extends BaseHolder> extends Bas
     public abstract  VH createCustomViewHolder(ViewGroup parent, int viewType);
 
     @Override
-    public void bindCustomViewHolder(VH holder, int position) {
-
-    }
+    public abstract  void bindCustomViewHolder(VH holder, int position);
 
     @Override
     public int getCustomViewType(int position) {
