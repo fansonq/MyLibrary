@@ -34,7 +34,12 @@ public abstract class BaseMultiItemAdatper<M, VH extends BaseHolder> extends Bas
 
     @Override
     public void topEnterAnim(RecyclerView.ViewHolder viewHolder) {
+    }
 
+    @Override
+    public int getItemViewType(int position)
+    {
+        return mItemViewDelegateManager.getItemViewType(mDataList.get(position),position);
     }
 
     @Override
@@ -44,7 +49,6 @@ public abstract class BaseMultiItemAdatper<M, VH extends BaseHolder> extends Bas
     public abstract  void bindCustomViewHolder(VH holder, int position);
 
     @Override
-    public int getCustomViewType(int position) {
-        return mItemViewDelegateManager.getItemViewType(mDataList.get(position),position);
-    }
+    public abstract int getCustomViewType(int position);
+
 }

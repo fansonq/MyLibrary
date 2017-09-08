@@ -119,6 +119,11 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
 //        return new BaseHolder(context, itemView);
 //    }
 
+    /**
+     * 绑定数据
+     * @param bean
+     * @param position
+     */
     public abstract void bindData(M bean,int position );
 
 }
