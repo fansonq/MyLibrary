@@ -13,24 +13,24 @@ import java.util.List;
  */
 public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseViewAdapter<M, VH> {
 
-    private List<M> dataList;
+    protected List<M> mDataList;
 
     public BaseDataAdapter(Context context) {
         super(context);
-        this.dataList = new ArrayList<>();
+        this.mDataList = new ArrayList<>();
     }
 
     public BaseDataAdapter(Context context, List<M> list) {
         super(context);
-        this.dataList = new ArrayList<>();
-        this.dataList.addAll(list);
+        this.mDataList = new ArrayList<>();
+        this.mDataList.addAll(list);
     }
 
     /**
      * 清空所有数据
      */
     public void clearList(){
-        dataList.clear();
+        mDataList.clear();
         notifyDataSetChanged();
     }
 
@@ -41,8 +41,8 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @return true:填充成功并调用刷新数据
      */
     public boolean fillList(List<M> list) {
-        dataList.clear();
-        boolean result = dataList.addAll(list);
+        mDataList.clear();
+        boolean result = mDataList.addAll(list);
         if (result) {
             notifyDataSetChanged();
         }
@@ -56,12 +56,12 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @return true:追加成功并刷新界面
      */
     public boolean appendItem(M data) {
-        boolean result = dataList.add(data);
+        boolean result = mDataList.add(data);
         if (result) {
             if (getHeaderExtraViewCount() == 0) {
-                notifyItemInserted(dataList.size() - 1);
+                notifyItemInserted(mDataList.size() - 1);
             } else {
-                notifyItemInserted(dataList.size());
+                notifyItemInserted(mDataList.size());
             }
         }
         return result;
@@ -74,7 +74,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @return 追加成功并刷新
      */
     public boolean appendList(List<M> list) {
-        boolean result = dataList.addAll(list);
+        boolean result = mDataList.addAll(list);
         if (result) {
             notifyItemRangeInserted(getItemCount()-list.size(),list.size());
         }
@@ -87,7 +87,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @param data
      */
     public void insertByPos(int index,M data) {
-        dataList.add(index,data);
+        mDataList.add(index,data);
         notifyDataSetChanged();
     }
 
@@ -97,7 +97,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @param data 要前置的数据
      */
     public void proposeItem(M data) {
-        dataList.add(0, data);
+        mDataList.add(0, data);
         if (getHeaderExtraViewCount() == 0) {
             notifyItemInserted(0);
         } else {
@@ -111,7 +111,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @param list 要前置的数据集合
      */
     public void proposeList(List<M> list) {
-        dataList.addAll(0, list);
+        mDataList.addAll(0, list);
 //        notifyDataSetChanged();
         notifyItemRangeInserted(0,list.size());
     }
@@ -125,7 +125,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
     public int getItemViewType(int position) {
         if (headerView != null && position == 0) {
             return VIEW_TYPE_HEADER;
-        } else if (footerView != null && position == dataList.size() + getHeaderExtraViewCount()) {
+        } else if (footerView != null && position == mDataList.size() + getHeaderExtraViewCount()) {
             return VIEW_TYPE_FOOTER;
         } else {
             return getCustomViewType(position);
@@ -142,7 +142,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
 
     @Override
     public int getItemCount() {
-        return dataList.size() + getExtraViewCount();
+        return mDataList.size() + getExtraViewCount();
     }
 
     /**
@@ -153,10 +153,10 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      */
     public M getItem(int position) {
         if (headerView != null && position == 0
-                || position >= dataList.size() + getHeaderExtraViewCount()) {
+                || position >= mDataList.size() + getHeaderExtraViewCount()) {
             return null;
         }
-        return headerView == null ? dataList.get(position) : dataList.get(position - 1);
+        return headerView == null ? mDataList.get(position) : mDataList.get(position - 1);
     }
 
     /**
@@ -170,11 +170,11 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
     }
 
     public void updateItem(M data) {
-        int index = dataList.indexOf(data);
+        int index = mDataList.indexOf(data);
         if (index < 0) {
             return;
         }
-        dataList.set(index, data);
+        mDataList.set(index, data);
         if (headerView == null) {
             notifyItemChanged(index);
         } else {
@@ -189,13 +189,13 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      */
     public void removeItem(int position) {
         if (headerView == null) {
-            dataList.remove(position);
+            mDataList.remove(position);
             notifyItemRemoved(position);
-            notifyItemRangeChanged(position,dataList.size()-position);
+            notifyItemRangeChanged(position,mDataList.size()-position);
         } else {
-            dataList.remove(position - 1);
+            mDataList.remove(position - 1);
             notifyItemRemoved(position- 1);
-            notifyItemRangeChanged(position,dataList.size()-(position - 1));
+            notifyItemRangeChanged(position,mDataList.size()-(position - 1));
         }
 
     }
@@ -206,17 +206,17 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @param data 要移除的数据
      */
     public void removeItem(M data) {
-        int index = dataList.indexOf(data);
+        int index = mDataList.indexOf(data);
         if (index < 0) {
             return;
         }
-        dataList.remove(index);
+        mDataList.remove(index);
         if (headerView == null) {
             notifyItemRemoved(index);// 显示动画效果
-            notifyItemRangeChanged(index,dataList.size()-index); // 对于被删掉的位置及其后range大小范围内的view进行重新onBindViewHolder
+            notifyItemRangeChanged(index,mDataList.size()-index); // 对于被删掉的位置及其后range大小范围内的view进行重新onBindViewHolder
         } else {
             notifyItemRemoved(index + 1);
-            notifyItemRangeChanged(index,dataList.size()-(index+1));
+            notifyItemRangeChanged(index,mDataList.size()-(index+1));
         }
     }
 

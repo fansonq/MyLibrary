@@ -59,13 +59,13 @@ public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends Recycler
     public final BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         parent.setOnTouchListener(this);
 
-        if (viewType == VIEW_TYPE_HEADER) {
-            return new BaseHolder(headerView);
-        } else if (viewType == VIEW_TYPE_FOOTER) {
-            return new BaseHolder(footerView);
-        } else {
+//        if (viewType == VIEW_TYPE_HEADER) {
+//            return new BaseHolder(headerView);
+//        } else if (viewType == VIEW_TYPE_FOOTER) {
+//            return new BaseHolder(footerView);
+//        } else {
             return createCustomViewHolder(parent, viewType);
-        }
+//        }
     }
 
     /**

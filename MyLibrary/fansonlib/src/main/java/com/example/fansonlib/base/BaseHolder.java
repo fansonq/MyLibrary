@@ -8,13 +8,14 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 /**
  * Created by：fanson
  * Created on：2016/10/4 10:34
  * Describe：Recyclerview的ViewHolder封装
  */
-public  class BaseHolder extends RecyclerView.ViewHolder {
+public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
     private BaseHolder mBaseHolder;
 
@@ -78,7 +79,5 @@ public  class BaseHolder extends RecyclerView.ViewHolder {
      * @param data 数据
      * @param position 位置
      */
-    public  void bindViewData(Object data,int position){
-
-    }
+    public abstract   void bindViewData(M data, int position, BaseAdapter adapter);
 }
