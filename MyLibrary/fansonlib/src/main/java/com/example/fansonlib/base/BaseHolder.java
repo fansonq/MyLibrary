@@ -72,6 +72,14 @@ public abstract    class BaseHolder<M> extends RecyclerView.ViewHolder {
         return mContext;
     }
 
+    /**
+     * 获取Holder实例
+     * @return
+     */
+    protected BaseHolder getHolder(){
+        return this;
+    }
+
 //    /**
 //     * 创建ViewHolder
 //     * @param context
