@@ -25,6 +25,17 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
         mOnHolderAndAdapterListenner = listenner;
     }
 
+    /**
+     * 获取Holder和Adapter监听接口
+     * @return
+     */
+    protected OnHolderAndAdapterListenner getOnHolderAndAdapterListenner(){
+        if (mOnHolderAndAdapterListenner!=null){
+            return mOnHolderAndAdapterListenner;
+        }
+        return null;
+    }
+
     public  BaseHolder(View itemView){
         super(itemView);
         viewArray = new SparseArray<>();
