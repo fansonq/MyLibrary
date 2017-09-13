@@ -24,7 +24,7 @@ public class MainActivity extends SwipeBackActivity implements Observer{
 //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Test2Prensenter mTestPresenter2;
-
+    private Button button,button2;
 
     @Override
     protected int getContentView() {
@@ -34,17 +34,26 @@ public class MainActivity extends SwipeBackActivity implements Observer{
     @Override
     protected void initView() {
         AppUtils.init(getApplicationContext());
-        Button button = findMyViewId(R.id.btn);
+        button = findMyViewId(R.id.btn);
+        button2 = findMyViewId(R.id.btn2);
         Log.d("TTT", "initView");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                testUpdate();
-                testPopuWindow();
+//                testPopuWindow();
+                testBaseModel();
             }
         });
-//        testLoadingView();
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mTestPresenter.detachView();
+            }
+        });
+
+//        testLoadingView();
 
 //        iv_pic = (ImageView)findViewById(R.id.iv_pic);
 //        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
@@ -97,10 +106,10 @@ public class MainActivity extends SwipeBackActivity implements Observer{
         mTestPresenter.attachView(null);
         mTestPresenter.testMethod();
         Log.d("TTT", "1");
-        mTestPresenter2 = new Test2Prensenter();
-        mTestPresenter2.attachView(null);
-        mTestPresenter2.methodTest2();
-        Log.d("TTT", "2");
+//        mTestPresenter2 = new Test2Prensenter();
+//        mTestPresenter2.attachView(null);
+//        mTestPresenter2.methodTest2();
+//        Log.d("TTT", "2");
     }
 
     private void testUpdate() {

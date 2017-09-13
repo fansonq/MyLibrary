@@ -2,51 +2,68 @@ package com.example.fansonlib.base;
 
 import android.util.Log;
 
-import java.util.Observable;
+import org.reactivestreams.Subscription;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.LongConsumer;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 /**
  * Created by fansonq on 2017/9/2.
- * 作为被观察者使用，完成操作后调用notifyObservers发送通知到P层
+ * 数据层操作的BaseModel
  */
 
-public class BaseModel extends Observable {
+public class BaseModel implements IBaseModel{
     private static final String TAG = BaseModel.class.getSimpleName();
+    private Disposable mDisposable;
 
-    public BaseModel(BasePresenter presenter) {
-        if (presenter!=null){
-            addObserver(presenter);
-            Log.d(TAG, "Add Observer：" + presenter);
+    /**
+     * RXjava取消注册，以避免内存泄露
+     */
+    protected void unSubscribe() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
         }
     }
 
-    /**
-     * 发布通知给观察者
-     *
-     * @param object
-     */
-    public void notifyToObservers(Object object) {
-        setChanged();
-        notifyObservers(object);
+    //
+//    protected void addSubscrebe(Disposable disposable) {
+//        if (mCompositeDisposable == null) {
+//            mCompositeDisposable = new CompositeDisposable();
+//        }
+//        mCompositeDisposable.add(disposable);
+//    }
+
+    protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
+        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnLifecycle(new Consumer<Subscription>() {
+                    @Override
+                    public void accept(Subscription subscription) throws Exception {
+                        Log.d(TAG, "OnSubscribe");
+                    }
+                }, new LongConsumer() {
+                    @Override
+                    public void accept(long t) throws Exception {
+                        Log.d(TAG, "OnRequest");
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.d(TAG, "OnCancel");
+                    }
+                })
+                .subscribeWith(subscriber);
     }
 
-    /**
-     * 移除指定的观察者
-     *
-     * @param presenter 观察者对象
-     */
-    public void removeObserver(BasePresenter presenter) {
-        if (presenter!=null){
-            deleteObserver(presenter);
-            Log.d(TAG, "Delete Observer：" + presenter);
-        }
-    }
 
-    /**
-     * 移除所有的观察者
-     */
-    public void removeAllObservers() {
-        deleteObservers();
-        Log.d(TAG, "Delete All Observers");
+    public void onDestroy() {
+        unSubscribe();
     }
 
 }

@@ -75,7 +75,7 @@ public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends Recycler
      * @param viewType view类型
      * @return ViewHolder
      */
-    public abstract VH createCustomViewHolder(ViewGroup parent, int viewType);
+    public abstract BaseHolder createCustomViewHolder(ViewGroup parent, int viewType);
 
     @Override
     public final void onBindViewHolder(BaseHolder holder, int position) {

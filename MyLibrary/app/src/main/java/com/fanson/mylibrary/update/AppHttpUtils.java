@@ -3,8 +3,8 @@ package com.fanson.mylibrary.update;
 import android.support.annotation.NonNull;
 
 import com.example.fansonlib.function.update.HttpManager;
-import com.fanson.retrofit.ApiStores;
-import com.fanson.retrofit.RetrofitClient;
+import com.fanson.mylibrary.ApiStores;
+import com.example.fansonlib.http.retrofit.RetrofitClient;
 
 import java.io.IOException;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class AppHttpUtils implements HttpManager{
 //        Map<String, Object> maps = new HashMap<>();
 //        maps.put("tel",name);
 
-       Flowable<ResponseBody> flowable = RetrofitClient.getRetrofit().create(ApiStores.class).update(url);
+       Flowable<ResponseBody> flowable = RetrofitClient.getRetrofit(ApiStores.class).update(url);
         ResourceSubscriber subscriber = new ResourceSubscriber() {
             @Override
             public void onNext(Object response) {

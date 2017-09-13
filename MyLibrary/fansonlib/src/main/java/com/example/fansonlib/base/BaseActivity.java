@@ -19,10 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.fansonlib.R;
-import com.example.fansonlib.bean.EventNetWork;
 import com.example.fansonlib.utils.NetWorkUtil;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by fanson on 2016/8/23.
@@ -91,9 +88,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        //注销EventBus
-//        EventBus.getDefault().unregister(this);
-
         //注销广播
         if (netStateBroadcastReceiver != null) {
             try {
