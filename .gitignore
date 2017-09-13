@@ -46,3 +46,11 @@ captures/
 
 # Keystore files
 *.jks
+MyLibrary/.gradle/3.3/taskArtifacts/fileSnapshots.bin
+MyLibrary/.gradle/3.3/taskArtifacts/fileHashes.bin
+MyLibrary/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock
+MyLibrary/.gradle/3.3/tasks/_fansonlib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin
+MyLibrary/.gradle/3.3/tasks/_fansonlib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock
+MyLibrary/.gradle/3.3/taskArtifacts/fileHashes.bin
+MyLibrary/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin
+MyLibrary/.gradle/3.3/tasks/_fansonlib_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock
