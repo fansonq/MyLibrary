@@ -3,7 +3,8 @@ package com.example.fansonlib.image;
 /**
  * Created by：fanson
  * Created on：2017/4/14 17:31
- * Describe：用到了Builder模式，一步一步的创建一个复杂对象的创建者模式，
+ * Describe：加载图片框架的一些参数的配置；
+ * 用到了Builder模式，一步一步的创建一个复杂对象的创建者模式，
  * 它允许用户在不知道内部构建细节的情况下，可以更精细的控制对象的构建流程
  */
 

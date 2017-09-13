@@ -7,7 +7,7 @@ import android.widget.ImageView;
 /**
  * Created by：fanson
  * Created on：2017/4/14 17:29
- * Describe：加载图片的方式抽象出来
+ * Describe：加载图片框架的策略接口
  */
 
 public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends OnProgressListener> {

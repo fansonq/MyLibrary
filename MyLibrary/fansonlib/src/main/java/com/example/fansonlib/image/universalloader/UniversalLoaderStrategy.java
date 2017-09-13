@@ -1,10 +1,15 @@
-package com.example.fansonlib.image;
+package com.example.fansonlib.image.universalloader;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.fansonlib.image.BaseImageLoaderStrategy;
+import com.example.fansonlib.image.ImageLoaderConfig;
+import com.example.fansonlib.utils.ImageLoaderProxy;
+import com.example.fansonlib.image.OnLoadingListener;
+import com.example.fansonlib.image.OnProgressListener;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,7 +26,7 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListe
 /**
  * Created by：fanson
  * Created on：2017/4/14 18:09
- * Describe：
+ * Describe：UniversalLoader的策略实现类
  */
 
 public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
@@ -134,7 +139,7 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImage(ImageLoaderConfig config,Context context, ImageView view, Object imgUrl) {
+    public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
         imageLoader.displayImage((String) imgUrl, view, getOptions4Header(config.getErrorPicRes(),config.getPlacePicRes()));
     }
 

@@ -1,4 +1,4 @@
-package com.example.fansonlib.image;
+package com.example.fansonlib.image.glide;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -6,6 +6,10 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.fansonlib.image.BaseImageLoaderStrategy;
+import com.example.fansonlib.image.ImageLoaderConfig;
+import com.example.fansonlib.image.OnLoadingListener;
+import com.example.fansonlib.image.OnProgressListener;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -13,7 +17,7 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 /**
  * Created by：fanson
  * Created on：2017/4/17 13:32
- * Describe：
+ * Describe：Glide的策略实现类
  */
 
 public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
@@ -30,7 +34,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImage(ImageLoaderConfig config,Context context, ImageView view, Object imgUrl) {
+    public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
                 .error(config.getErrorPicRes())

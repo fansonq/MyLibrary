@@ -5,9 +5,13 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.SwipeBackActivity;
+import com.example.fansonlib.image.ImageLoaderUtils;
+import com.example.fansonlib.image.universalloader.OnUniversalListener;
+import com.example.fansonlib.image.universalloader.OnUniversalProgress;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
@@ -17,14 +21,14 @@ import com.fanson.mylibrary.update.TestWindow;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends SwipeBackActivity implements Observer{
+public class MainActivity extends SwipeBackActivity implements Observer {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    //    private ImageView iv_pic;
-//    private MyPermissionHelper myPermissionHelper;
+    private ImageView iv_pic;
+    //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Test2Prensenter mTestPresenter2;
-    private Button button,button2;
+    private Button button, button2;
 
     @Override
     protected int getContentView() {
@@ -42,7 +46,8 @@ public class MainActivity extends SwipeBackActivity implements Observer{
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-                testBaseModel();
+//                testBaseModel();
+                testImageLoader();
             }
         });
 
@@ -54,31 +59,6 @@ public class MainActivity extends SwipeBackActivity implements Observer{
         });
 
 //        testLoadingView();
-
-//        iv_pic = (ImageView)findViewById(R.id.iv_pic);
-//        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
-////        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
-//        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
-//            @Override
-//            public void loadStart() {
-//                Log.d(TAG, "loadStart");
-//            }
-//
-//            @Override
-//            public void loadSuccess() {
-//                Log.d(TAG, "loadSuccess");
-//            }
-//
-//            @Override
-//            public void loadFailed() {
-//                Log.d(TAG, "loadFailed");
-//            }
-//        }, new OnUniversalProgress() {
-//            @Override
-//            public void onProgressUpdate(int current, int total) {
-//                Log.d(TAG,"onProgress :　"+current%total);
-//            }
-//        });
 
 //        addFragmentWithTag(R.id.fl_main,new TestFragment(),R.anim.slide_from_top,R.anim.slide_to_bottom,null);
 
@@ -96,7 +76,35 @@ public class MainActivity extends SwipeBackActivity implements Observer{
 //        }, Manifest.permission.CAMERA);
     }
 
-    private void testPopuWindow(){
+
+    private void testImageLoader() {
+        iv_pic = (ImageView) findViewById(R.id.iv_pic);
+        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
+//        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
+        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
+            @Override
+            public void loadStart() {
+                Log.d(TAG, "loadStart");
+            }
+
+            @Override
+            public void loadSuccess() {
+                Log.d(TAG, "loadSuccess");
+            }
+
+            @Override
+            public void loadFailed() {
+                Log.d(TAG, "loadFailed");
+            }
+        }, new OnUniversalProgress() {
+            @Override
+            public void onProgressUpdate(int current, int total) {
+                Log.d(TAG, "onProgress :　" + ((double) current / total * 100));
+            }
+        });
+    }
+
+    private void testPopuWindow() {
         TestWindow window = new TestWindow(this);
         window.showPopupWindow();
     }
@@ -162,6 +170,6 @@ public class MainActivity extends SwipeBackActivity implements Observer{
 
     @Override
     public void update(Observable observable, Object o) {
-        Log.d("TTT",o.toString());
+        Log.d("TTT", o.toString());
     }
 }

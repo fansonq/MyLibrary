@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.ImageLoaderUtils;
-import com.example.fansonlib.image.UniversalLoaderStrategy;
+import com.example.fansonlib.image.universalloader.UniversalLoaderStrategy;
 
 /**
  * Created by：fanson

@@ -6,7 +6,13 @@ import android.widget.ImageView;
 /**
  * Created by：fanson
  * Created on：2017/4/14 17:24
- * Describe：
+ * Describe：图片加载框架的代理类
+ * 用法：在Application声明
+ * ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder().client(new UniversalLoaderStrategy(getApplicationContext()))
+ .setMaxDiskCache(1024 * 1024 * 50)
+ .setMaxMemoryCache(1024 * 1024 * 10)
+ .build();
+ ImageLoaderUtils.init(loaderConfig);
  */
 
 public class ImageLoaderUtils {

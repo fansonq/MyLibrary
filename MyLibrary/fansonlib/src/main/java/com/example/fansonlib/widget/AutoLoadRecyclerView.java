@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
-import com.example.fansonlib.image.ImageLoaderProxy;
+import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
