@@ -19,6 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/btn_fragment"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:text="Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_marginTop="150dp"

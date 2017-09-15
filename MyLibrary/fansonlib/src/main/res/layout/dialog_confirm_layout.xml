@@ -18,7 +18,9 @@
         android:id="@+id/message"
         style="@style/TextStyle"
         android:layout_marginTop="15dp"
-        tools:text="---" />
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        tools:text="你预约成功" />
 
     <View
         android:layout_width="match_parent"

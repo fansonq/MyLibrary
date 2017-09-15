@@ -29,7 +29,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Test2Prensenter mTestPresenter2;
-    private Button button, button2;
+    private Button button, button2,btn_fragment;
 
     @Override
     protected int getContentView() {
@@ -41,6 +41,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
         AppUtils.init(getApplicationContext());
         button = findMyViewId(R.id.btn);
         button2 = findMyViewId(R.id.btn2);
+        btn_fragment = findMyViewId(R.id.btn_fragment);
         Log.d("TTT", "initView");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,13 @@ public class MainActivity extends SwipeBackActivity implements Observer {
             @Override
             public void onClick(View view) {
                 mTestPresenter.detachView();
+            }
+        });
+
+        btn_fragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(R.id.fl_main,new TestFragment());
             }
         });
 
@@ -79,11 +87,9 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     private void testDialogFragment() {
-        ConfirmDialog.newInstance("提示","你预约成功！")
-                .setMargin(60)
+        ConfirmDialog.newInstance("提示","你预约成功你预你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功约成功你预约成功！")
                 .setOutCancel(false)
                 .show(getSupportFragmentManager());
-
     }
 
 

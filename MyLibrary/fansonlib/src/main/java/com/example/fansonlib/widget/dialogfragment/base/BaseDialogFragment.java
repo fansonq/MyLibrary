@@ -32,12 +32,12 @@ public  abstract class BaseDialogFragment extends DialogFragment {
     private static final String ANIM = "anim_style";
     private static final String LAYOUT = "layout_id";
 
-    private int margin;//左右边距
+    private int margin = 60;//左右边距,默认60dp
     private int width;//宽度
     private int height;//高度
     private float dimAmount = 0.5f;//灰度深浅
     private boolean showBottom;//是否底部显示
-    private boolean outCancel = true;//是否点击外部取消
+    private boolean outCancel = false;//是否点击外部取消
     protected IConfirmListener mIConfirmListener; // 确认的按钮监听
     protected ICancelListener mICancelListener;   // 取消的按钮监听
     @StyleRes
@@ -188,7 +188,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
     }
 
     /**
-     * 点击dialog外是否可取消，默认true
+     * 点击dialog外是否可取消，false
      * @param outCancel
      * @return
      */
