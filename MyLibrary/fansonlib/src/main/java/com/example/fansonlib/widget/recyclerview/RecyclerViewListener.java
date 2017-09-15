@@ -6,8 +6,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.fansonlib.widget.AutoLoadRecyclerView;
-
 /**
  * Created by：fanson
  * Created on：2017/5/24 15:48

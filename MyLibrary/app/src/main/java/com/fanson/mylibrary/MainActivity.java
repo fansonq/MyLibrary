@@ -12,6 +12,7 @@ import com.example.fansonlib.base.SwipeBackActivity;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.universalloader.OnUniversalListener;
 import com.example.fansonlib.image.universalloader.OnUniversalProgress;
+import com.example.fansonlib.widget.dialogfragment.ConfirmDialog;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
@@ -47,7 +48,8 @@ public class MainActivity extends SwipeBackActivity implements Observer {
 //                testUpdate();
 //                testPopuWindow();
 //                testBaseModel();
-                testImageLoader();
+//                testImageLoader();
+                testDialogFragment();
             }
         });
 
@@ -74,6 +76,14 @@ public class MainActivity extends SwipeBackActivity implements Observer {
 //
 //            }
 //        }, Manifest.permission.CAMERA);
+    }
+
+    private void testDialogFragment() {
+        ConfirmDialog.newInstance("提示","你预约成功！")
+                .setMargin(60)
+                .setOutCancel(false)
+                .show(getSupportFragmentManager());
+
     }
 
 

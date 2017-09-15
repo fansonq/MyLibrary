@@ -1,4 +1,4 @@
-package com.example.fansonlib.widget;
+package com.example.fansonlib.widget.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
