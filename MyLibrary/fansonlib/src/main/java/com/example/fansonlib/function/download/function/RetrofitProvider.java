@@ -2,7 +2,6 @@ package com.example.fansonlib.function.download.function;
 
 
 import com.example.fansonlib.BuildConfig;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +52,7 @@ public class RetrofitProvider {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
             builder.readTimeout(10, TimeUnit.SECONDS);
             builder.connectTimeout(9, TimeUnit.SECONDS);
-            builder.addNetworkInterceptor(new StethoInterceptor());
+//            builder.addNetworkInterceptor(new StethoInterceptor());
 
             if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

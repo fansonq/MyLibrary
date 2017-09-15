@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.widget.dialogfragment.base.BaseDialogFragment;
 import com.example.fansonlib.widget.dialogfragment.base.ViewHolder;
 
@@ -21,6 +22,15 @@ public class DoubleDialog extends BaseDialogFragment {
     @Override
     public int intLayoutId() {
         return R.layout.dialog_double_layout;
+    }
+
+    /**
+     * 传值
+     * @param content 内容
+     * @return
+     */
+    public static ConfirmDialog newInstance( String content) {
+       return newInstance(AppUtils.mApplication.getString(R.string.tip),content);
     }
 
     /**
