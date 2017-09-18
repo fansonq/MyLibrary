@@ -2,6 +2,8 @@ package com.example.fansonlib.base;
 
 import android.util.Log;
 
+import com.example.fansonlib.http.HttpUtils;
+
 import org.reactivestreams.Subscription;
 
 import io.reactivex.Flowable;
@@ -29,6 +31,7 @@ public class BaseModel implements IBaseModel{
         if (mDisposable != null) {
             mDisposable.dispose();
         }
+        HttpUtils.getHttpUtils().cancelCurrent();
     }
 
     //
@@ -60,7 +63,6 @@ public class BaseModel implements IBaseModel{
                 })
                 .subscribeWith(subscriber);
     }
-
 
     public void onDestroy() {
         unSubscribe();

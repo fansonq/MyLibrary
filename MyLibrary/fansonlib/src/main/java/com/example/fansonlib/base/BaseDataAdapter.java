@@ -1,6 +1,9 @@
 package com.example.fansonlib.base;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.support.v7.widget.RecyclerView;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ import java.util.List;
  * Created on：2016/12/19 13:22
  * Describe：Adapter数据相关的封装
  */
-public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseViewAdapter<M, VH> {
+public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
 
     protected List<M> mDataList;
 
@@ -19,6 +22,32 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
         super(context);
         this.mDataList = new ArrayList<>();
     }
+
+    @Override
+    public void bottomEnterAnim(RecyclerView.ViewHolder viewHolder) {
+
+    }
+
+    @Override
+    public void topEnterAnim(RecyclerView.ViewHolder viewHolder) {
+
+    }
+
+    @Override
+    public abstract BaseHolder bindHolder(ViewGroup parent, int viewType);
+
+    @Override
+    public void bindCustomViewHolder(BaseHolder holder, int position){
+        bindData(holder,mDataList.get(position),position);
+    }
+
+    /**
+     * 显示数据，处理数据
+     * @param holder
+     * @param bean
+     * @param position
+     */
+    protected abstract void bindData(BaseHolder holder,M bean, int position);
 
     public BaseDataAdapter(Context context, List<M> list) {
         super(context);
@@ -128,17 +157,18 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
         } else if (footerView != null && position == mDataList.size() + getHeaderExtraViewCount()) {
             return VIEW_TYPE_FOOTER;
         } else {
-            return getCustomViewType(position);
+            return getLayoutRes(position);
         }
     }
 
     /**
-     * 获取自定义View的类型
-     *
-     * @param position 位置
-     * @return View的类型
+     * 返回布局layout
+     * @param position 列表位置
+     * @return
+     *  布局Layout ID
      */
-    public abstract int getCustomViewType(int position);
+    @LayoutRes
+    public abstract int getLayoutRes(int position);
 
     @Override
     public int getItemCount() {
@@ -165,7 +195,7 @@ public abstract class BaseDataAdapter<M, VH extends BaseHolder> extends BaseView
      * @param holder ViewHolder
      * @return 数据
      */
-    public M getItem(VH holder) {
+    public M getItem(BaseHolder holder) {
         return getItem(holder.getAdapterPosition());
     }
 

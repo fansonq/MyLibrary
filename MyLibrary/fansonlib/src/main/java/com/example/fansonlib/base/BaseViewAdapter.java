@@ -3,6 +3,7 @@ package com.example.fansonlib.base;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
  * Created on：2016/12/19 15:14
  * Describe：RecyclerView.Adapter的扩展,View相关的封装
  */
-public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends RecyclerView.Adapter<BaseHolder> implements View.OnTouchListener{
+public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder> implements View.OnTouchListener{
 
     private static final String TAG = BaseViewAdapter.class.getSimpleName();
 
@@ -56,26 +57,26 @@ public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends Recycler
 
 
     @Override
-    public final BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public  BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         parent.setOnTouchListener(this);
-
-//        if (viewType == VIEW_TYPE_HEADER) {
-//            return new BaseHolder(headerView);
-//        } else if (viewType == VIEW_TYPE_FOOTER) {
-//            return new BaseHolder(footerView);
-//        } else {
-            return createCustomViewHolder(parent, viewType);
-//        }
+        BaseHolder baseHolder = new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
+        if (viewType == VIEW_TYPE_HEADER) {
+            return new BaseHolder(headerView);
+        } else if (viewType == VIEW_TYPE_FOOTER) {
+            return new BaseHolder(footerView);
+        } else {
+            return bindHolder(parent, viewType);
+        }
     }
 
     /**
      * 创建自定义的ViewHolder
      *
-     * @param parent   父类容器
-     * @param viewType view类型
+     * @param holder   默认的ViewHolder
+     * @param viewType 对应的布局Layout ID，也代表为ViewType
      * @return ViewHolder
      */
-    public abstract BaseHolder createCustomViewHolder(ViewGroup parent, int viewType);
+    public abstract BaseHolder bindHolder(ViewGroup holder, int viewType);
 
     @Override
     public final void onBindViewHolder(BaseHolder holder, int position) {
@@ -95,7 +96,7 @@ public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends Recycler
             case VIEW_TYPE_FOOTER:
                 break;
             default:
-                bindCustomViewHolder((VH) holder, position);
+                bindCustomViewHolder( holder, position);
                 break;
         }
     }
@@ -106,7 +107,7 @@ public abstract class BaseViewAdapter<M, VH extends BaseHolder> extends Recycler
      * @param holder   ViewHolder
      * @param position 位置
      */
-    public abstract void bindCustomViewHolder(VH holder, int position);
+    public abstract void bindCustomViewHolder(BaseHolder holder, int position);
 
     /**
      * 添加HeaderView

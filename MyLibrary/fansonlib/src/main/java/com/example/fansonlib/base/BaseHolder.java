@@ -8,6 +8,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.fansonlib.callback.OnHolderAndAdapterListenner;
 
@@ -16,7 +17,7 @@ import com.example.fansonlib.callback.OnHolderAndAdapterListenner;
  * Created on：2016/10/4 10:34
  * Describe：Recyclerview的ViewHolder封装
  */
-public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
+public  class BaseHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
     private View mConvertView;
     private Context mContext;
@@ -97,6 +98,32 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public View getConvertView()
+    {
+        return mConvertView;
+    }
+
+    public static BaseHolder createViewHolder(Context context,  ViewGroup parent, int layoutId)
+    {
+        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,false);
+        BaseHolder holder = new BaseHolder(context, itemView);
+        return holder;
+    }
+
+    /**
+     * 设置TextView的值
+     *
+     * @param viewId
+     * @param text
+     * @return
+     */
+    public BaseHolder setText(int viewId, String text)
+    {
+        TextView tv = getView(viewId);
+        tv.setText(text);
+        return this;
+    }
+
 //    /**
 //     * 创建ViewHolder
 //     * @param context
@@ -118,12 +145,5 @@ public abstract  class BaseHolder<M> extends RecyclerView.ViewHolder {
 //        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,false);
 //        return new BaseHolder(context, itemView);
 //    }
-
-    /**
-     * 绑定数据
-     * @param bean
-     * @param position
-     */
-    public abstract void bindData(M bean,int position );
 
 }

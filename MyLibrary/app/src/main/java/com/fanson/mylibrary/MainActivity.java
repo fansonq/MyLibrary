@@ -48,9 +48,9 @@ public class MainActivity extends SwipeBackActivity implements Observer {
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-//                testBaseModel();
+                testBaseModel();
 //                testImageLoader();
-                testDialogFragment();
+//                testDialogFragment();
             }
         });
 

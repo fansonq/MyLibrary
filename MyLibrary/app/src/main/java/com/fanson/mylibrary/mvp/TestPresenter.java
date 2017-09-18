@@ -2,24 +2,17 @@ package com.fanson.mylibrary.mvp;
 
 import android.util.Log;
 
-import com.example.fansonlib.base.BasePresenterWithM;
+import com.example.fansonlib.base.BasePresenterM;
 import com.example.fansonlib.utils.ShowToast;
 
 /**
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implements TestCallback{
-
-    private TestModel mTestModel;
-
-    public TestPresenter(){
-        mTestModel = new TestModel();
-        initModel(mTestModel);
-    }
+public class TestPresenter extends BasePresenterM<TestModel,TestView> implements TestCallback{
 
     public void testMethod(){
-        mBaseModel.method(this);
+        mModel.method(this);
         Log.d("TTT","testMethod");
     }
 
@@ -31,5 +24,10 @@ public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implem
     @Override
     public void failure(String errorMsg) {
 
+    }
+
+    @Override
+    protected TestModel createModel() {
+        return new TestModel();
     }
 }
