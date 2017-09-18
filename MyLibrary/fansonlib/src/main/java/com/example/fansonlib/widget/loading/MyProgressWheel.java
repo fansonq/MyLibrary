@@ -11,10 +11,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.fansonlib.R;
 
@@ -29,6 +35,19 @@ public class MyProgressWheel extends View{
     private final int barLength = 16;
     private final int barMaxLength = 270;
     private final long pauseGrowingTime = 200;
+
+    /**
+     * 默认提示文本
+     */
+    private TextView mWarnText;
+    /**
+     * 默认重新加载的ImageView
+     */
+    private ImageView mRetryBtn;
+    /**
+     * 默认提示View
+     */
+    private TextView mWarnView;
     /**
      * *********
      * DEFAULTS *
@@ -752,6 +771,7 @@ public class MyProgressWheel extends View{
             out.writeByte((byte) (fillRadius ? 1 : 0));
         }
     }
+
 
 
 }
