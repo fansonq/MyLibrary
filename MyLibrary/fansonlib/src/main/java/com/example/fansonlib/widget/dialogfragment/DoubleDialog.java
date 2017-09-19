@@ -29,7 +29,7 @@ public class DoubleDialog extends BaseDialogFragment {
      * @param content 内容
      * @return
      */
-    public static ConfirmDialog newInstance( String content) {
+    public static DoubleDialog newInstance( String content) {
        return newInstance(AppUtils.mApplication.getString(R.string.tip),content);
     }
 
@@ -39,11 +39,11 @@ public class DoubleDialog extends BaseDialogFragment {
      * @param content 内容
      * @return
      */
-    public static ConfirmDialog newInstance(String title, String content) {
+    public static DoubleDialog newInstance(String title, String content) {
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("content", content);
-        ConfirmDialog dialog = new ConfirmDialog();
+        DoubleDialog dialog = new DoubleDialog();
         dialog.setArguments(bundle);
         return dialog;
     }

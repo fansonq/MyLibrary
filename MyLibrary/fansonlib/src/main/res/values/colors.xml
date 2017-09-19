@@ -12,6 +12,7 @@
     <color name="dark_orange">#DF3A01</color>
     <color name="grey_light">#E0E0E0</color>
     <color name="grey">#A0A0A0</color>
+    <color name="grey_dark">#8a8a8a</color>
     <color name="simple_player_stream_name_playing">#ff0043bd</color>
 
     <color name="card_shadow">#10000000</color>

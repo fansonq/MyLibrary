@@ -8,21 +8,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.fansonlib.base.AppUtils;
-import com.example.fansonlib.base.SwipeBackActivity;
+import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.universalloader.OnUniversalListener;
 import com.example.fansonlib.image.universalloader.OnUniversalProgress;
+import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.ConfirmDialog;
 import com.example.fansonlib.widget.loading.MyLoadingView;
+import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
 import com.fanson.mylibrary.update.TestWindow;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class MainActivity extends SwipeBackActivity implements Observer {
+public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ImageView iv_pic;
@@ -48,17 +47,17 @@ public class MainActivity extends SwipeBackActivity implements Observer {
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-//                testBaseModel();
+                testBaseModel();
 //                testImageLoader();
 //                testDialogFragment();
-                testLoadingView();
+//                testLoadingView();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTestPresenter.detachView();
+                mPresenter.detachView();
             }
         });
 
@@ -85,8 +84,8 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     private void testDialogFragment() {
+//        DoubleDialog.newInstance("你预约成功").show(getSupportFragmentManager());
         ConfirmDialog.newInstance("提示","你预约成功你预你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功约成功你预约成功！")
-                .setOutCancel(false)
                 .show(getSupportFragmentManager());
     }
 
@@ -124,14 +123,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     private void testBaseModel() {
-        mTestPresenter = new TestPresenter();
-        mTestPresenter.attachView(null);
-        mTestPresenter.testMethod();
-        Log.d("TTT", "1");
-//        mTestPresenter2 = new Test2Prensenter();
-//        mTestPresenter2.attachView(null);
-//        mTestPresenter2.methodTest2();
-//        Log.d("TTT", "2");
+        mPresenter.testPresenterMethod();
     }
 
     private void testUpdate() {
@@ -148,7 +140,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
 //        myLoadingView.setProgressWheelColor(ContextCompat.getColor(this,R.color.colorAccent));
 //        myLoadingView.setLoadingText("登录中");
 //        myLoadingView.setCustomLoadingView(view);
-        myLoadingView.setLoadingModel(MyLoadingView.MODEL_DEFAULT);
+        myLoadingView.setLoadingModel(MyLoadingView.MODEL_ALERT);
         myLoadingView.setOnBtnClickListener(new MyLoadingView.OnRetryClickListener() {
             @Override
             public void onRetry() {
@@ -157,12 +149,12 @@ public class MainActivity extends SwipeBackActivity implements Observer {
         });
         myLoadingView.loading();
 
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        myLoadingView.failRetry("失败");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        myLoadingView.failRetry(null);
     }
 
     @Override
@@ -183,7 +175,22 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     @Override
-    public void update(Observable observable, Object o) {
-        Log.d("TTT", o.toString());
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    protected TestPresenter createPresenter() {
+        return new TestPresenter(this);
+    }
+
+    @Override
+    public void testSuccess(String message) {
+        ShowToast.singleLong(message);
     }
 }
