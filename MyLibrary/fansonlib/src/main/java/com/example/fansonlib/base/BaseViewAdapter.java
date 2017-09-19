@@ -3,7 +3,6 @@ package com.example.fansonlib.base;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder
     @Override
     public  BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         parent.setOnTouchListener(this);
-        BaseHolder baseHolder = new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
+//        BaseHolder baseHolder = new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
         if (viewType == VIEW_TYPE_HEADER) {
             return new BaseHolder(headerView);
         } else if (viewType == VIEW_TYPE_FOOTER) {

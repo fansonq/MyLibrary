@@ -20,4 +20,5 @@ public class TestMultiAdapter<IBean> extends BaseMultiAdapter{
         addItemViewDelegate(new DogDelegate());
         addItemViewDelegate(new CatDelegate());
     }
+
 }

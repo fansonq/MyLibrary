@@ -6,9 +6,8 @@ import android.view.View;
 
 import com.example.fansonlib.base.BaseFragment;
 import com.example.fansonlib.widget.recyclerview.AutoLoadRecyclerView;
-import com.fanson.mylibrary.adapter.Cat;
 import com.fanson.mylibrary.adapter.Dog;
-import com.fanson.mylibrary.adapter.IBean;
+import com.fanson.mylibrary.adapter.TestAdapter;
 import com.fanson.mylibrary.adapter.TestMultiAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +21,8 @@ import java.util.List;
 
 public class TestFragment extends BaseFragment {
 
-    private TestMultiAdapter adapter;
+    private TestAdapter adapter;
+    private TestMultiAdapter multiAdapter;
     private AutoLoadRecyclerView mRecyclerview;
 
     @Override
@@ -35,14 +35,15 @@ public class TestFragment extends BaseFragment {
         mRecyclerview = findMyViewId(R.id.recyclerview);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(hostActivity));
 
-        List<IBean> list = new ArrayList<>();
+        List<Dog> list = new ArrayList<>();
         Dog dog = new Dog();
         dog.setName("dog");
         list.add(dog);
-        Cat cat = new Cat();
-        cat.setAge(18);
-        list.add(cat);
-        adapter = new TestMultiAdapter(hostActivity, list);
+//        Cat cat = new Cat();
+//        cat.setAge(18);
+//        list.add(cat);
+        adapter = new TestAdapter(hostActivity);
+        adapter.appendList(list);
         mRecyclerview.setAdapter(adapter);
 
         return rootView;

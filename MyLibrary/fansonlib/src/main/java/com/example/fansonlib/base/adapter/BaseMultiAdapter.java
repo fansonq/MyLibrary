@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.fansonlib.base.BaseDataAdapter;
 import com.example.fansonlib.base.BaseHolder;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * Describe：处理多布局的适配器
  */
 
-public abstract class BaseMultiAdapter<M> extends RecyclerView.Adapter<BaseHolder> {
+public abstract class BaseMultiAdapter<M> extends BaseDataAdapter<M> {
     protected Context mContext;
     protected List<M> mDatas;
 
@@ -24,19 +25,20 @@ public abstract class BaseMultiAdapter<M> extends RecyclerView.Adapter<BaseHolde
 
 
     public BaseMultiAdapter(Context context, List<M> datas) {
+        super(context,datas);
         mContext = context;
         mDatas = datas;
         mItemViewDelegateManager = new ItemViewDelegateManager();
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getLayoutRes(int position) {
         if (!useItemViewDelegateManager()) return super.getItemViewType(position);
         return mItemViewDelegateManager.getItemViewType(mDatas.get(position), position);
     }
 
     @Override
-    public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseHolder bindHolder(ViewGroup parent, int viewType) {
         ItemViewDelegate itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(viewType);
         int layoutId = itemViewDelegate.getItemViewLayoutId();
         BaseHolder holder = BaseHolder.createViewHolder(mContext, parent, layoutId);
@@ -45,7 +47,7 @@ public abstract class BaseMultiAdapter<M> extends RecyclerView.Adapter<BaseHolde
         return holder;
     }
 
-    public void onViewHolderCreated(BaseHolder holder,View itemView){
+    public void onViewHolderCreated(BaseHolder holder, View itemView){
 
     }
 
@@ -82,9 +84,10 @@ public abstract class BaseMultiAdapter<M> extends RecyclerView.Adapter<BaseHolde
         });
     }
 
+
     @Override
-    public void onBindViewHolder(BaseHolder holder, int position) {
-        convert(holder, mDatas.get(position));
+    protected void bindData(BaseHolder holder, M bean, int position) {
+        convert(holder, bean);
     }
 
     @Override
