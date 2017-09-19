@@ -2,11 +2,14 @@ package com.example.fansonlib.widget.loading;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -47,7 +50,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
     private boolean hasCustomLoadingView = false;
 
     private View mCustomLoadingView;
-
+    private Context mContext;
     private OnRetryClickListener onRetryListener;
 
     private ProgressAlertDialog mProgressDialog;
@@ -74,6 +77,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
     }
 
     private void init(Context context, AttributeSet attrs) {
+        mContext = context;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MyLoadingView, 0, 0);
         mWarnText = typedArray.getString(R.styleable.MyLoadingView_empty_warn_txt);
         String buttonText = typedArray.getString(R.styleable.MyLoadingView_empty_button_txt);
@@ -129,7 +133,15 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
             setVisibility(VISIBLE);
             mRetryBtn.setVisibility(INVISIBLE);
             if (!hasCustomLoadingView) {
-                mWarnView.setText(mLoadingText);
+//                mWarnView.setText(mLoadingText);
+                mWarnView.setVisibility(GONE);
+                View view= LayoutInflater.from(mContext).inflate(R.layout.progressbar,null);
+                view.setVisibility(VISIBLE);
+                LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+                params.addRule(RelativeLayout.ABOVE, R.id.id_empty_btn_view);
+                addView(view, params);
+                invalidate();
             } else {
                 if (mCustomLoadingView != null) {
                     mWarnView.setVisibility(GONE);

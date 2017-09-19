@@ -48,9 +48,10 @@ public class MainActivity extends SwipeBackActivity implements Observer {
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-                testBaseModel();
+//                testBaseModel();
 //                testImageLoader();
 //                testDialogFragment();
+                testLoadingView();
             }
         });
 
@@ -68,10 +69,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
             }
         });
 
-//        testLoadingView();
-
 //        addFragmentWithTag(R.id.fl_main,new TestFragment(),R.anim.slide_from_top,R.anim.slide_to_bottom,null);
-
 //        myPermissionHelper = new MyPermissionHelper(this);
 //        myPermissionHelper.requestPermissions("paizhao", new MyPermissionHelper.PermissionListener() {
 //            @Override
@@ -144,12 +142,12 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     private void testLoadingView() {
-        View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
+//        View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
         final MyLoadingView myLoadingView = (MyLoadingView) this.findViewById(R.id.loadingView);
 //        myLoadingView.setLoadingTextColor(R.color.colorPrimary);
 //        myLoadingView.setProgressWheelColor(ContextCompat.getColor(this,R.color.colorAccent));
 //        myLoadingView.setLoadingText("登录中");
-        myLoadingView.setCustomLoadingView(view);
+//        myLoadingView.setCustomLoadingView(view);
         myLoadingView.setLoadingModel(MyLoadingView.MODEL_DEFAULT);
         myLoadingView.setOnBtnClickListener(new MyLoadingView.OnRetryClickListener() {
             @Override
@@ -159,12 +157,12 @@ public class MainActivity extends SwipeBackActivity implements Observer {
         });
         myLoadingView.loading();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        myLoadingView.failRetry("失败");
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        myLoadingView.failRetry("失败");
     }
 
     @Override
