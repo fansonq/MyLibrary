@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
@@ -16,7 +17,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * Created by：fanson
  * Created on：2016/12/17 17:58
- * Describe：
+ * Describe：自定义的RecyclerView
  */
 public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCallBack {
 
@@ -24,6 +25,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
     private LoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
+    private View emptyView; // 数据为空的时显示的View
     private boolean move = false;
     private int mIndex = 0;
     private LayoutManager mLayoutManager;
@@ -204,7 +206,52 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         }
     }
 
+    /**
+     * 重写设置适配器
+     *
+     * @param adapter 适配器
+     */
+    public void setAdapter(Adapter adapter) {
+        Adapter oldAdapter = getAdapter();
+        if (oldAdapter != null && emptyObserver != null) {
+            oldAdapter.unregisterAdapterDataObserver(emptyObserver);
+        }
+        super.setAdapter(adapter);
+        if (adapter != null) {
+            adapter.registerAdapterDataObserver(emptyObserver);
+        }
+        emptyObserver.onChanged();
+    }
 
+    /**
+     * 观察者模式，当设置适配器后，检测到EmptyView不为空，则显示EmptyView
+     */
+    private AdapterDataObserver emptyObserver = new AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            Adapter adapter = getAdapter();
+            if (adapter != null && emptyView != null) {
+                if (adapter.getItemCount() == 0) {
+                    //TODO EmptyView should be viewstub
+                    emptyView.setVisibility(VISIBLE);
+                    AutoLoadRecyclerView.this.setVisibility(GONE);
+                } else {
+                    emptyView.setVisibility(GONE);
+                    AutoLoadRecyclerView.this.setVisibility(VISIBLE);
+                }
+            }
+        }
+    };
+
+    /**
+     * set view when no content item
+     *
+     * @param emptyView visiable view when items is empty
+     */
+    public void setEmptyView(View emptyView) {
+        this.emptyView = emptyView;
+    }
 
 
 }
