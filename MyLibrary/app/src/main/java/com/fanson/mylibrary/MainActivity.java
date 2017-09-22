@@ -12,9 +12,10 @@ import com.example.fansonlib.base.SwipeBackActivity;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.universalloader.OnUniversalListener;
 import com.example.fansonlib.image.universalloader.OnUniversalProgress;
+import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.ConfirmDialog;
+import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
-import com.example.fansonlib.widget.loading.MyProgressWheel;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
@@ -51,8 +52,8 @@ public class MainActivity extends SwipeBackActivity implements Observer {
 //                testPopuWindow();
 //                testBaseModel();
 //                testImageLoader();
-//                testDialogFragment();
-                testLoadingView();
+                testDialogFragment();
+//                testLoadingView();
             }
         });
 
@@ -87,7 +88,12 @@ public class MainActivity extends SwipeBackActivity implements Observer {
 
     private void testDialogFragment() {
         ConfirmDialog.newInstance("提示","你预约成功你预你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功约成功你预约成功！")
-                .setOutCancel(false)
+                .setConfirmListener(new IConfirmListener() {
+                    @Override
+                    public void onConfirm() {
+                        ShowToast.singleLong("onConfirm");
+                    }
+                })
                 .show(getSupportFragmentManager());
     }
 

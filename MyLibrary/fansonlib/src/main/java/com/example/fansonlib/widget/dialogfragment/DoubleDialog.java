@@ -66,6 +66,7 @@ public class DoubleDialog extends BaseDialogFragment {
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mICancelListener.onCancel();
                 dialog.dismiss();
             }
         });
@@ -73,6 +74,7 @@ public class DoubleDialog extends BaseDialogFragment {
         holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mIConfirmListener.onConfirm();
                 dialog.dismiss();
             }
         });
