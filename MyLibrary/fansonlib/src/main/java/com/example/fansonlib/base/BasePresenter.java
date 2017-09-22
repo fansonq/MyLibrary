@@ -47,7 +47,7 @@ public abstract class BasePresenter< T extends BaseView> {
 
 
     public boolean isViewAttached() {
-        return mBaseView.get() != null;
+        return (mBaseView != null ? mBaseView.get() : null) != null;
     }
 
     /**
