@@ -56,7 +56,7 @@ public abstract class BasePresenter<T extends BaseView> {
      * @return
      */
     public T getBaseView() {
-        if (isViewAttached()) {
+        if (mBaseView!=null) {
             return this.mBaseView.get();
         } else {
             throw new BaseViewNotAttachedException();
