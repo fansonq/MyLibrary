@@ -67,7 +67,9 @@ public class ConfirmDialog extends BaseDialogFragment {
         holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIConfirmListener.onConfirm();
+                if (mIConfirmListener != null) {
+                    mIConfirmListener.onConfirm();
+                }
                 dialog.dismiss();
             }
         });
