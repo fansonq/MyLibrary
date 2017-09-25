@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference;
  * Created on：2016/10/15 17:32
  * Describe：基于Rx的Presenter封装,控制订阅的生命周期
  */
-public abstract class BasePresenter< T extends BaseView> {
+public abstract class BasePresenter<T extends BaseView> {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
     protected WeakReference<T> mBaseView;
@@ -51,13 +51,16 @@ public abstract class BasePresenter< T extends BaseView> {
     }
 
     /**
-     * 可不用此方法
-     * 直接调用mBaseView
+     * 获取BaseView
      *
      * @return
      */
     public T getBaseView() {
-        return this.mBaseView.get();
+        if (mBaseView!=null) {
+            return this.mBaseView.get();
+        } else {
+            throw new BaseViewNotAttachedException();
+        }
     }
 
     public void checkViewAttached() {
