@@ -1,8 +1,6 @@
 package com.example.fansonlib.base;
 
 
-import java.lang.ref.WeakReference;
-
 /**
  * Created by：fanson
  * Created on：2016/10/15 17:32
@@ -11,7 +9,7 @@ import java.lang.ref.WeakReference;
 public abstract class BasePresenter<T extends BaseView> {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
-    protected WeakReference<T> mBaseView;
+    protected T mBaseView;
     protected BasePresenter presenter;
 
     public BasePresenter() {
@@ -35,19 +33,18 @@ public abstract class BasePresenter<T extends BaseView> {
      * @param
      */
     public void attachView(T _baseView) {
-        this.mBaseView = new WeakReference<>(_baseView);
+        this.mBaseView = _baseView;
     }
 
     public void detachView() {
         if (mBaseView != null) {
-            mBaseView.clear();
             mBaseView = null;
         }
     }
 
 
     public boolean isViewAttached() {
-        return (mBaseView != null ? mBaseView.get() : null) != null;
+        return (mBaseView != null ? mBaseView : null) != null;
     }
 
     /**
@@ -57,7 +54,7 @@ public abstract class BasePresenter<T extends BaseView> {
      */
     public T getBaseView() {
         if (mBaseView!=null) {
-            return this.mBaseView.get();
+            return this.mBaseView;
         } else {
             throw new BaseViewNotAttachedException();
         }
