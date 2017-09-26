@@ -24,7 +24,7 @@ import com.fanson.mylibrary.update.TestWindow;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainActivity extends SwipeBackActivity implements Observer {
+public class MainActivity extends SwipeBackActivity implements Observer, View.OnFocusChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ImageView iv_pic;
@@ -192,5 +192,10 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         Log.d("TTT", o.toString());
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+
     }
 }
