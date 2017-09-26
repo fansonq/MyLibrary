@@ -87,7 +87,7 @@ public class MainActivity extends SwipeBackActivity implements Observer {
     }
 
     private void testDialogFragment() {
-        DoubleDialog.newInstance("提示","你预约成功你预你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功约成功你预约成功！")
+        DoubleDialog.newInstance("提示","抱歉！暂时没有在线客服人员，请稍后再试")
                 .setConfirmListener(new IConfirmListener() {
                     @Override
                     public void onConfirm() {

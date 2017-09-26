@@ -88,7 +88,7 @@
             android:id="@+id/iv_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/lib_update_app_close" />
+            android:src="@mipmap/ic_clear" />
 
 
     </LinearLayout>
