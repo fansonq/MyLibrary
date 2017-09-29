@@ -11,9 +11,11 @@ public abstract class BasePresenterWithM<M extends IBaseModel,T extends BaseView
     private static final String TAG = BasePresenterWithM.class.getSimpleName();
     protected M mBaseModel;
 
-    public void initModel(M  model){
-        mBaseModel = model;
+    public BasePresenterWithM(){
+        mBaseModel=  createModel();
     }
+
+    protected abstract M createModel();
 
     public void detachView() {
         super.detachView();
