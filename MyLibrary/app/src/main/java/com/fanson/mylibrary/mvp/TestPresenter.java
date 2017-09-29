@@ -11,13 +11,6 @@ import com.example.fansonlib.utils.ShowToast;
 
 public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implements TestCallback{
 
-    private TestModel mTestModel;
-
-    public TestPresenter(){
-        mTestModel = new TestModel();
-        initModel(mTestModel);
-    }
-
     public void testMethod(){
         mBaseModel.method(this);
         Log.d("TTT","testMethod");
@@ -31,5 +24,10 @@ public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implem
     @Override
     public void failure(String errorMsg) {
 
+    }
+
+    @Override
+    protected TestModel createModel() {
+        return new TestModel();
     }
 }
