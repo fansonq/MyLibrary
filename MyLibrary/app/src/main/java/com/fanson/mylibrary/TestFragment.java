@@ -6,7 +6,9 @@ import android.view.View;
 
 import com.example.fansonlib.base.BaseFragment;
 import com.example.fansonlib.widget.recyclerview.AutoLoadRecyclerView;
+import com.fanson.mylibrary.adapter.Cat;
 import com.fanson.mylibrary.adapter.Dog;
+import com.fanson.mylibrary.adapter.IBean;
 import com.fanson.mylibrary.adapter.TestAdapter;
 import com.fanson.mylibrary.adapter.TestMultiAdapter;
 
@@ -35,16 +37,21 @@ public class TestFragment extends BaseFragment {
         mRecyclerview = findMyViewId(R.id.recyclerview);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(hostActivity));
 
-        List<Dog> list = new ArrayList<>();
+        List<IBean> list = new ArrayList<>();
         Dog dog = new Dog();
         dog.setName("dog");
         list.add(dog);
-//        Cat cat = new Cat();
-//        cat.setAge(18);
-//        list.add(cat);
-        adapter = new TestAdapter(hostActivity);
-        adapter.appendList(list);
-        mRecyclerview.setAdapter(adapter);
+        Cat cat = new Cat();
+        cat.setAge(18);
+        list.add(cat);
+//        adapter = new TestAdapter<>(hostActivity);
+//        adapter.appendList(list);
+//        mRecyclerview.setAdapter(adapter);
+
+        multiAdapter = new TestMultiAdapter(hostActivity);
+        mRecyclerview.setAdapter(multiAdapter);
+
+        multiAdapter.appendList(list);
 
         return rootView;
     }

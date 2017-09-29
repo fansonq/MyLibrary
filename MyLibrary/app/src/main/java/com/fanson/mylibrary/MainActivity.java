@@ -13,15 +13,16 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.universalloader.OnUniversalListener;
 import com.example.fansonlib.image.universalloader.OnUniversalProgress;
 import com.example.fansonlib.utils.ShowToast;
-import com.example.fansonlib.widget.dialogfragment.ConfirmDialog;
+import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
+import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
 import com.fanson.mylibrary.update.TestWindow;
-
 public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
+
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ImageView iv_pic;
@@ -50,6 +51,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
                 testBaseModel();
 //                testImageLoader();
 //                testDialogFragment();
+                testDialogFragment();
 //                testLoadingView();
             }
         });
@@ -85,7 +87,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     private void testDialogFragment() {
 //        DoubleDialog.newInstance("你预约成功").show(getSupportFragmentManager());
-        ConfirmDialog.newInstance("提示","你预约成功你预你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功你预约成功约成功你预约成功！")
+        DoubleDialog.newInstance("提示","抱歉！暂时没有在线客服人员，请稍后再试")
+                .setConfirmListener(new IConfirmListener() {
+                    @Override
+                    public void onConfirm() {
+                        ShowToast.singleLong("onConfirm");
+                    }
+                })
                 .show(getSupportFragmentManager());
     }
 
@@ -193,4 +201,5 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     public void testSuccess(String message) {
         ShowToast.singleLong(message);
     }
+
 }

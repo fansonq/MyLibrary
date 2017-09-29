@@ -26,16 +26,18 @@ public class DoubleDialog extends BaseDialogFragment {
 
     /**
      * 传值
+     *
      * @param content 内容
      * @return
      */
-    public static DoubleDialog newInstance( String content) {
-       return newInstance(AppUtils.mApplication.getString(R.string.tip),content);
+    public static DoubleDialog newInstance(String content) {
+        return newInstance(AppUtils.mApplication.getString(R.string.tip), content);
     }
 
     /**
      * 传值
-     * @param title 标题
+     *
+     * @param title   标题
      * @param content 内容
      * @return
      */
@@ -66,6 +68,9 @@ public class DoubleDialog extends BaseDialogFragment {
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mICancelListener != null) {
+                    mICancelListener.onCancel();
+                }
                 dialog.dismiss();
             }
         });
@@ -73,6 +78,9 @@ public class DoubleDialog extends BaseDialogFragment {
         holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (mIConfirmListener != null) {
+                    mIConfirmListener.onConfirm();
+                }
                 dialog.dismiss();
             }
         });

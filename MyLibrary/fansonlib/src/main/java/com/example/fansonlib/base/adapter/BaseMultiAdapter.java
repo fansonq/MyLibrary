@@ -18,23 +18,23 @@ import java.util.List;
 
 public abstract class BaseMultiAdapter<M> extends BaseDataAdapter<M> {
     protected Context mContext;
-    protected List<M> mDatas;
+//    protected List<M> mDatas;
 
     protected ItemViewDelegateManager mItemViewDelegateManager;
     protected OnItemClickListener mOnItemClickListener;
 
 
-    public BaseMultiAdapter(Context context, List<M> datas) {
-        super(context,datas);
+    public BaseMultiAdapter(Context context) {
+        super(context);
         mContext = context;
-        mDatas = datas;
+//        mDatas = datas;
         mItemViewDelegateManager = new ItemViewDelegateManager();
     }
 
     @Override
     public int getLayoutRes(int position) {
         if (!useItemViewDelegateManager()) return super.getItemViewType(position);
-        return mItemViewDelegateManager.getItemViewType(mDatas.get(position), position);
+        return mItemViewDelegateManager.getItemViewType(mDataList.get(position), position);
     }
 
     @Override
@@ -92,13 +92,13 @@ public abstract class BaseMultiAdapter<M> extends BaseDataAdapter<M> {
 
     @Override
     public int getItemCount() {
-        int itemCount = mDatas.size();
+        int itemCount = mDataList.size();
         return itemCount;
     }
 
 
     public List<M> getDatas() {
-        return mDatas;
+        return mDataList;
     }
 
     public BaseMultiAdapter addItemViewDelegate(ItemViewDelegate<M> itemViewDelegate) {
