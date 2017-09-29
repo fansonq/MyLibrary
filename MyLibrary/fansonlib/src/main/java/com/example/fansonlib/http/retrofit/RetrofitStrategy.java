@@ -72,7 +72,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
     @Override
     public void cancelCurrent() {
-        if (mCompositeDisposable != null) {
+        if (mCompositeDisposable != null&&mCurrentDisposable!=null) {
             mCompositeDisposable.delete(mCurrentDisposable);
         }
     }
