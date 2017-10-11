@@ -271,7 +271,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(id_content, fragment, tag);
+        transaction.add(id_content, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
     }
 
@@ -284,7 +284,7 @@ public abstract class BaseFragment extends Fragment {
     protected void addFragment(int id_content, Fragment fragment, int enter, int exit) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enter, exit);
-        transaction.add(id_content, fragment);
+        transaction.add(id_content, fragment).addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
 
@@ -297,7 +297,7 @@ public abstract class BaseFragment extends Fragment {
     protected void replaceFragment(int id_content, Fragment fragment, int enter, int exit) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.setCustomAnimations(enter, exit);
-        transaction.replace(id_content, fragment);
+        transaction.replace(id_content, fragment).addToBackStack(null);
         transaction.commitAllowingStateLoss();
     }
 
@@ -319,7 +319,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(id_content, fragment, tag);
+        transaction.replace(id_content, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
     }
 
@@ -335,7 +335,7 @@ public abstract class BaseFragment extends Fragment {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
         }
     }
 
@@ -353,7 +353,7 @@ public abstract class BaseFragment extends Fragment {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
         }
     }
 
@@ -369,7 +369,7 @@ public abstract class BaseFragment extends Fragment {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
         }
     }
 
