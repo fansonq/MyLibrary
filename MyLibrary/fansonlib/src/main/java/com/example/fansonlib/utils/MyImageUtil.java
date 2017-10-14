@@ -1,24 +1,36 @@
 package com.example.fansonlib.utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+
+import com.example.fansonlib.utils.io.FileUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * Created by：fanson
  * Created on：2017/5/5 13:29
- * Describe：图片转换工具类（Drawable,Bitmap,InputStream,byte）
+ * Describe：图片工具类
  */
 
 public class MyImageUtil {
+
+    private static String saveDir ; // 图片保存地址
 
     private volatile static MyImageUtil mImageUtil;
 
@@ -179,6 +191,63 @@ public class MyImageUtil {
     public Drawable InputStream2Drawable(InputStream is) {
         Bitmap bitmap = this.InputStream2Bitmap(is);
         return this.bitmap2Drawable(bitmap);
+    }
+
+    /**
+     * 设置图片保存的位置
+     * @param dir 路径
+     */
+    public static void setSaveDir(String dir){
+        saveDir = Environment.getExternalStorageDirectory() + dir;
+    }
+
+    /**
+     * 保存图片并插入图库
+     * @param context
+     * @param bmp
+     * @return
+     */
+    public static boolean saveImageToGalley(Context context, Bitmap bmp){
+        String fileName =System.currentTimeMillis()+".jpg";
+        File file = new File(saveDir,fileName);
+        if (!file.exists()){
+            FileUtils.createFile(file);
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return insertImage(context, file.getAbsolutePath(), fileName, null);
+    }
+
+    /**
+     * 图片文件插入系统图库
+     *
+     * @param context
+     * @param imagePath
+     * @param name
+     * @param description
+     * @return
+     */
+    public static boolean insertImage(Context context, String imagePath, String name, String description) {
+        // 把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), imagePath, name, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+        // 通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
+        return true;
     }
 
 }

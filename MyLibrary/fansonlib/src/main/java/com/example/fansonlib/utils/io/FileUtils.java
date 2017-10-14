@@ -1,9 +1,11 @@
-package com.example.fansonlib.utils;
+package com.example.fansonlib.utils.io;
 
 import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.fansonlib.base.AppUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,6 +23,23 @@ import java.nio.channels.FileChannel;
 public class FileUtils {
 
     private static final String TAG = FileUtils.class.getSimpleName();
+
+    /**
+     * 创建根缓存目录
+     *
+     * @return
+     */
+    public static String createRootPath() {
+        String cacheRootPath = "";
+        if (StorageUtils.isSdCardAvailable()) {
+            // /sdcard/Android/data/<application package>/cache
+            cacheRootPath = AppUtils.getAppContext().getExternalCacheDir().getPath();
+        } else {
+            // /data/data/<application package>/cache
+            cacheRootPath = AppUtils.getAppContext().getCacheDir().getPath();
+        }
+        return cacheRootPath;
+    }
 
     /**
      * 获取程序外部的缓存目录
@@ -52,6 +71,54 @@ public class FileUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 递归创建文件夹
+     *
+     * @param file
+     * @return 创建失败返回""
+     */
+    public static String createFile(File file) {
+        try {
+            if (file.getParentFile().exists()) {
+                Log.i(TAG,"----- 创建文件"+file.getAbsolutePath());
+                file.createNewFile();
+                return file.getAbsolutePath();
+            } else {
+                createDir(file.getParentFile().getAbsolutePath());
+                file.createNewFile();
+                Log.i(TAG,"----- 创建文件"+file.getAbsolutePath());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    /**
+     * 递归创建文件夹
+     *
+     * @param dirPath
+     * @return 创建失败返回""
+     */
+    public static String createDir(String dirPath) {
+        try {
+            File file = new File(dirPath);
+            if (file.getParentFile().exists()) {
+                Log.i(TAG,"----- 创建文件夹"+file.getAbsolutePath());
+                file.mkdir();
+                return file.getAbsolutePath();
+            } else {
+                createDir(file.getParentFile().getAbsolutePath());
+                Log.i(TAG,"----- 创建文件夹"+file.getAbsolutePath());
+                file.mkdir();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dirPath;
     }
 
     /**
