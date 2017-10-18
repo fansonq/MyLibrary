@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,10 @@ import android.widget.ImageView;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseMvpActivity;
+import com.example.fansonlib.http.HttpResponseCallback;
+import com.example.fansonlib.http.HttpUtils;
+import com.example.fansonlib.http.retrofit.RetrofitClient;
+import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.image.universalloader.OnUniversalListener;
 import com.example.fansonlib.image.universalloader.OnUniversalProgress;
@@ -16,11 +21,21 @@ import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
+import com.fanson.mylibrary.bean.TestBean;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
 import com.fanson.mylibrary.update.TestWindow;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+
 public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
 
 
@@ -29,7 +44,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Test2Prensenter mTestPresenter2;
-    private Button button, button2,btn_fragment;
+    private Button button, button2,btn_fragment,btn_upload;
 
     @Override
     protected int getContentView() {
@@ -41,6 +56,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         AppUtils.init(getApplicationContext());
         button = findMyViewId(R.id.btn);
         button2 = findMyViewId(R.id.btn2);
+        btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
         Log.d("TTT", "initView");
         button.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +83,41 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             @Override
             public void onClick(View view) {
                 replaceFragment(R.id.fl_main,new TestFragment());
+            }
+        });
+
+        btn_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //上传图文(多图)
+                String path1 = Environment.getExternalStorageDirectory() + File.separator + "TaxiGo/1_302443_258ACCB4495E5A9A5EB25D9D700F1B1C.jpg";
+                String path2 = Environment.getExternalStorageDirectory() + File.separator + "TaxiGo/1_302443_258ACCB4495E5A9A5EB25D9D700F1B1C.jpg";
+                ArrayList<String> pathList = new ArrayList<>();
+                pathList.add(path1);
+                pathList.add(path2);
+                Map<String , Object> bodyMap = new HashMap<>();
+                if(pathList.size() > 0) {
+                    for (int i=0;i<pathList.size();i++ ){
+                        File file = new File(pathList.get(i));
+                        bodyMap.put("file"+i+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/png"),file));
+                    }
+                }
+                bodyMap.put("text","测试文字");
+                RetrofitClient.init(ApiStores.API_SERVER_URL);
+                RetrofitStrategy strategy = new RetrofitStrategy();
+                strategy.setApi(new ApiFactoryImpl());
+                HttpUtils.init(strategy);
+                HttpUtils.getHttpUtils().post("post.php", bodyMap, new HttpResponseCallback<TestBean>() {
+                    @Override
+                    public void onSuccess(TestBean bean) {
+                        Log.d("TAG",bean.getData());
+                    }
+
+                    @Override
+                    public void onFailure(String errorMsg) {
+                        Log.d("TAG",errorMsg);
+                    }
+                });
             }
         });
 

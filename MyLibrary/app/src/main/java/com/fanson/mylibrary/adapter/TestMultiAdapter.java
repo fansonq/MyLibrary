@@ -10,7 +10,7 @@ import com.example.fansonlib.base.adapter.BaseMultiAdapter;
  * Describe：
  */
 
-public class TestMultiAdapter<IBean> extends BaseMultiAdapter{
+public class TestMultiAdapter extends BaseMultiAdapter{
 
     public TestMultiAdapter(Context context) {
         super(context);

@@ -2,6 +2,7 @@ package com.fanson.mylibrary;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.fansonlib.base.BaseFragment;
@@ -50,8 +51,9 @@ public class TestFragment extends BaseFragment {
 
         multiAdapter = new TestMultiAdapter(hostActivity);
         mRecyclerview.setAdapter(multiAdapter);
-
-        multiAdapter.appendList(list);
+        View view = LayoutInflater.from(hostActivity).inflate(R.layout.include_top_bar,null);
+        multiAdapter.addHeaderView(view);
+//        multiAdapter.appendList(list);
 
         return rootView;
     }
