@@ -241,7 +241,7 @@ public class CalendarCardView extends View implements View.OnClickListener {
                         onDrawSelected(canvas, mItemWidth, x, y, cx, cy, radius, true);
                         mSchemeTextPaint.setColor(mTextSelectedColor);
                     } else {
-                        mSchemePaint.setColor(calendar.getSchemeColor() != 0 ? calendar.getSchemeColor() : mSchemeColor);
+                        mSchemePaint.setColor(scheme.getSchemeColor() != 0 ? scheme.getSchemeColor() : mSchemeColor);
                         mSchemeTextPaint.setColor(mTextSchemeColor);
                         mLunarTextPaint.setColor(calendar.isCurrentMonth() ? mLunarTextColor : mOtherMonthTextPaint.getColor());
                         mLunarTextPaint.setColor(mTextSchemeColor);
