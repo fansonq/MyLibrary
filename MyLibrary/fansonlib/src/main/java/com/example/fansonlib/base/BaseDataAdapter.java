@@ -3,6 +3,7 @@ package com.example.fansonlib.base;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -34,20 +35,22 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
     }
 
     @Override
-    public abstract BaseHolder bindHolder(ViewGroup parent, int viewType);
-
-    @Override
-    public void bindCustomViewHolder(BaseHolder holder, int position){
-        bindData(holder,mDataList.get(position),position);
+    public  BaseHolder bindHolder(ViewGroup parent, int viewType){
+        return  new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
     }
 
-    /**
-     * 显示数据，处理数据
-     * @param holder
-     * @param bean
-     * @param position
-     */
-    protected abstract void bindData(BaseHolder holder,M bean, int position);
+//    @Override
+//    public void bindCustomViewHolder(BaseHolder holder, int position){
+//        bindData(holder,mDataList.get(position),position);
+//    }
+
+//    /**
+//     * 显示数据，处理数据
+//     * @param holder
+//     * @param bean
+//     * @param position
+//     */
+//    protected abstract void bindData(BaseHolder holder,M bean, int position);
 
     public BaseDataAdapter(Context context, List<M> list) {
         super(context);

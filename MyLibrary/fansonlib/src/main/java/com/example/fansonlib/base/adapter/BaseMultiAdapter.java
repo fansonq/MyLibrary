@@ -84,10 +84,9 @@ public abstract class BaseMultiAdapter<M> extends BaseDataAdapter<M> {
         });
     }
 
-
     @Override
-    protected void bindData(BaseHolder holder, M bean, int position) {
-        convert(holder, bean);
+    public void bindCustomViewHolder(BaseHolder holder, int position) {
+        convert(holder, mDataList.get(position));
     }
 
     @Override
