@@ -187,5 +187,22 @@
     </declare-styleable>
     <!--CalendarView-->
 
+    <!--标签选项按钮-->
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <attr name="selectedBackgroundColors" format="color|reference" />
+        <attr name="selectedTextColors" format="color|reference" />
+        <attr name="texts" format="string|reference" />
+        <attr name="android:textSize" />
+        <attr name="direction" format="enum">
+            <enum name="horizon" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="gaps" format="dimension|reference" />
+        <attr name="horizonGap" format="dimension|reference" />
+        <attr name="verticalGap" format="dimension|reference" />
+        <attr name="selectedIndex" format="integer" />
+    </declare-styleable>
+    <!--标签选项按钮-->
 
 </resources>

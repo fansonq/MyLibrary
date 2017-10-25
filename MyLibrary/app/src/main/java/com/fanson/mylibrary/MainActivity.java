@@ -67,12 +67,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 //                testPopuWindow();
 //                testBaseModel();
 //                testImageLoader();
-//                testDialogFragment();
-//                testDialogFragment();
+                testDialogFragment();
 //                testLoadingView();
 //                ShowToast.singleLong("ttt");
                 ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
-                ShowToast.Long("QQQQ");
+//                ShowToast.Long("QQQQ");
             }
         });
 
@@ -80,7 +79,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             @Override
             public void onClick(View view) {
 //                mPresenter.detachView();
-                ShowToast.singleLong("WWWW");
+//                ShowToast.singleLong("WWWW");
             }
         });
 
@@ -150,6 +149,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
                         ShowToast.singleLong("onConfirm");
                     }
                 })
+                .setOutCancel(true)
                 .show(getSupportFragmentManager());
     }
 
