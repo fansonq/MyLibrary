@@ -5,7 +5,9 @@ import android.util.Log;
 import com.example.fansonlib.base.BaseModel;
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.HttpUtils;
-import com.example.fansonlib.http.asynchttp.AsyncHttpStrategy;
+import com.example.fansonlib.http.retrofit.RetrofitClient;
+import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.fanson.mylibrary.ApiFactoryImpl;
 import com.fanson.mylibrary.ApiStores;
 import com.fanson.mylibrary.SimpleBean;
 
@@ -31,13 +33,16 @@ public class TestModel extends BaseModel{
         Log.d("TTT","Test1Model发送的数据");
         Map<String,Object> maps = new HashMap<>();
         maps.put("key","fanson");
-//        RetrofitClient.init(ApiStores.API_SERVER_URL);
-//        RetrofitStrategy strategy = new RetrofitStrategy();
-//        strategy.setApi(new ApiFactoryImpl());
-//        HttpUtils.init(strategy);
 
-        AsyncHttpStrategy.init(ApiStores.API_SERVER_URL);
-        HttpUtils.init(new AsyncHttpStrategy());
+        /*---Retrofit策略---*/
+        RetrofitClient.init(ApiStores.API_SERVER_URL);
+        RetrofitStrategy strategy = new RetrofitStrategy();
+        strategy.setApi(new ApiFactoryImpl());
+        HttpUtils.init(strategy);
+
+        /*---AsyncHttp策略---*/
+//        AsyncHttpStrategy.init(ApiStores.API_SERVER_URL);
+//        HttpUtils.init(new AsyncHttpStrategy());
 
         HttpUtils.getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override

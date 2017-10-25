@@ -21,6 +21,7 @@ public class MyApplication extends Application{
         ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder().client(new UniversalLoaderStrategy(getApplicationContext()))
                 .setMaxDiskCache(1024 * 1024 * 50)
                 .setMaxMemoryCache(1024 * 1024 * 10)
+                .placePicRes(R.mipmap.default_image)
                 .build();
         ImageLoaderUtils.init(loaderConfig);
     }

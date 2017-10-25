@@ -3,13 +3,16 @@ package com.fanson.mylibrary.mvp;
 import android.util.Log;
 
 import com.example.fansonlib.base.BasePresenterWithM;
-import com.example.fansonlib.utils.ShowToast;
 
 /**
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implements TestCallback{
+public class TestPresenter extends BasePresenterWithM<TestModel,ContractTest.TestView> implements ContractTest.ITestPresenter,TestCallback{
+
+    public TestPresenter(ContractTest.TestView view){
+        attachView(view);
+    }
 
     public void testMethod(){
         mBaseModel.method(this);
@@ -18,7 +21,7 @@ public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implem
 
     @Override
     public void successful(String message) {
-        ShowToast.singleLong(message);
+        getBaseView().testSuccess(message);
     }
 
     @Override
@@ -29,5 +32,11 @@ public class TestPresenter extends BasePresenterWithM<TestModel,TestView> implem
     @Override
     protected TestModel createModel() {
         return new TestModel();
+    }
+
+    @Override
+    public void testPresenterMethod() {
+        mBaseModel.method(this);
+        Log.d("TTT","testMethod");
     }
 }

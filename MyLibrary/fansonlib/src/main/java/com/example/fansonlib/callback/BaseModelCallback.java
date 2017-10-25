@@ -7,4 +7,7 @@ package com.example.fansonlib.callback;
  */
 
 public interface BaseModelCallback {
+
+
+
 }

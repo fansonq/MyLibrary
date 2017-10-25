@@ -222,12 +222,12 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void replaceFragmentToStack(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment, tag).addToBackStack(null);
+        transaction.replace(id_content, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
     }
 
     /**
-     * 添加Fragment
+     * 添加Fragment(带动画)
      *
      * @param id_content
      * @param fragment
@@ -238,7 +238,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void addFragmentWithTag(int id_content, Fragment fragment, int enter, int exit, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setCustomAnimations(enter, exit);
-        transaction.add(id_content, fragment, tag);
+        transaction.add(id_content, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
     }
 
@@ -251,7 +251,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(id_content, fragment, tag);
+        transaction.add(id_content, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
     }
 
@@ -267,7 +267,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
         }
     }
 
@@ -285,7 +285,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
         }
     }
 
@@ -301,7 +301,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).commitAllowingStateLoss();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
         }
     }
 

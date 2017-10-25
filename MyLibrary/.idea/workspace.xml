@@ -10,6 +10,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TAG" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -49,111 +50,113 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HttpUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java">
+      <file leaf-file-name="cv_layout_calendar_view.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/cv_layout_calendar_view.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+            <state relative-caret-position="138">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
               <folding>
-                <element signature="e#695#696#0" expanded="true" />
-                <element signature="e#731#732#0" expanded="true" />
-                <element signature="e#1048#1049#0" expanded="true" />
-                <element signature="e#1089#1090#0" expanded="true" />
-                <element signature="e#1134#1135#0" expanded="true" />
-                <element signature="e#1171#1172#0" expanded="true" />
+                <element signature="e#1906#1907#0" expanded="true" />
+                <element signature="e#1951#1952#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpResponseCallback.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpResponseCallback.java">
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Util.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+            <state relative-caret-position="115">
+              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IHttpStrategy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/IHttpStrategy.java">
+      <file leaf-file-name="MonthView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+            <state relative-caret-position="207">
+              <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProgressResponseBody.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressResponseBody.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RetrofitCallback.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitCallback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProgressRequestBody.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressRequestBody.java">
+      <file leaf-file-name="Calendar.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Calendar.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="230">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GsonResponseBodyConverter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/GsonResponseBodyConverter.java">
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
+            <state relative-caret-position="484">
+              <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HttpResultException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultException.java">
+      <file leaf-file-name="CalendarView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+            <state relative-caret-position="743">
+              <caret line="90" column="82" selection-start-line="90" selection-start-column="82" selection-end-line="90" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProgressListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressListener.java">
+      <file leaf-file-name="CalendarLayout.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state relative-caret-position="191">
+              <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IApiFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/IApiFactory.java">
+      <file leaf-file-name="MonthAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+            <state relative-caret-position="319">
+              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CalendarCardView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarCardView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="299">
+              <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -163,11 +166,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile_vertical" />
         <option value="valueResourceFile" />
         <option value="ASClass" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
       </list>
     </option>
   </component>
@@ -878,11 +881,6 @@
                 <option name="name" value="javaPreCompileReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho-okhttp3:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComFacebookStethoStethoOkhttp3150Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:recyclerview-v7:25.3.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportRecyclerviewV72531Library" />
@@ -929,11 +927,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateDebugSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComFacebookStethoStetho150Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1441,11 +1434,6 @@
                 <option name="name" value="javaPreCompileReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho-okhttp3:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComFacebookStethoStethoOkhttp3150Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:recyclerview-v7:25.3.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareComAndroidSupportRecyclerviewV72531Library" />
@@ -1547,11 +1535,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="mergeDebugAndroidTestJniLibFolders" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="prepareComFacebookStethoStetho150Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -2246,11 +2229,6 @@
                 <option name="name" value="javaPreCompileReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho-okhttp3:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/fansonlib" />
-                <option name="name" value="prepareComFacebookStethoStethoOkhttp3150Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:recyclerview-v7:25.3.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/fansonlib" />
                 <option name="name" value="prepareComAndroidSupportRecyclerviewV72531Library" />
@@ -2349,11 +2327,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/fansonlib" />
                 <option name="name" value="mergeDebugAndroidTestJniLibFolders" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.facebook.stetho:stetho:1.5.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/fansonlib" />
-                <option name="name" value="prepareComFacebookStethoStetho150Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/fansonlib" />
@@ -2612,7 +2585,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="F:\Github\MyLibrary\MyLibrary" value="5992279950536" />
+        <entry key="F:\Github\MyLibrary\MyLibrary" value="6002064988762" />
         <entry key="I:\Git Space\MyLibrary\MyLibrary" value="6000013813202" />
       </map>
     </option>
@@ -2992,57 +2965,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/MyGlideUtils.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseDataAdapter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/MultiItemTypeSupport.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/MultiItemTypeDelegate.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/manager/ItemViewDelegateManager.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/OnHolderAndAdapterListenner.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseHolder.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/IBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/DogDelegate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/Cat.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/CatDelegate.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/item_cat.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/item_dog.xml" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseViewAdapter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseMultiItemAdatper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/Test2Model.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/Test2Prensenter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/IBaseModel.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseDataAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MyApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/progressbar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/view_loading.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/ProgressAlertDialog.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/MyLoadingView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenterWithM.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressRequestBody.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/BaseHttpStrategy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/RetrofitStrategy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/DownLoadManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/update/AppHttpUtils.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestCallback.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/ImageLoaderProxy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/ThreadPool/ThreadPoolManager.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpClient.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpUtils.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/SimpleBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiStores.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/ContractTest.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/callback/BaseModelCallback.java" />
+        <option value="$PROJECT_DIR$/fansonlib/build/intermediates/bundles/default/res/layout/fragment_test.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenterM.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/fragment_test.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitClient.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultError.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/HttpResultException.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/BaseBean.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/IApiFactory.java" />
+        <option value="$PROJECT_DIR$/fansonlib/build/intermediates/res/merged/release/layout/fragment_test.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/DoubleDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/TestAdapter.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/BaseMultiAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiFactoryImpl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/bean/TestBean.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiStores.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/TestMultiAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/TestFragment.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/fansonlib/build.gradle" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/MyJsonHttpResponse.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/MyAsyncClient.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/IHttpStrategy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpStrategy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/CustomResponseConverter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/GsonResponseBodyConverter.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultException.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpResponseCallback.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_iv.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_tx.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/SDCardUtil.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/IvTextView.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/CustomEditor.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/DeletableEditText.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/ImageEditor.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Util.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/values/attrs.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/cv_item_list_month.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/cv_layout_calendar_view.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthView.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarView.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarLayout.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       </list>
     </option>
   </component>
@@ -3077,10 +3050,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -3102,6 +3071,46 @@
               <option name="myItemId" value="fansonlib" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyLibrary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fansonlib" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyLibrary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fansonlib" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3169,7 +3178,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="http" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3199,12 +3208,22 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="http" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="retrofit" />
+              <option name="myItemId" value="calendar" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MyLibrary" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fansonlib" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -3259,6 +3278,10 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -3268,8 +3291,8 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Demo/RecyclerAnimations-master/RecyclerAnimations-master" />
-    <property name="device.picker.selection" value="LGUS99273973b72" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/CalendarView-master/CalendarView-master" />
+    <property name="device.picker.selection" value="7682fa8b" />
     <property name="DEBUGGABLE_DEVICE" value="lge-lgus992-LGUS99273973b72" />
     <property name="DEBUGGABLE_PROCESS" value="com.fanson.mylibrary" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
@@ -3280,17 +3303,18 @@
       <recent name="com.fanson.mylibrary" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.fansonlib.utils" />
+      <recent name="com.example.fansonlib.widget.dialogfragment" />
       <recent name="com.example.fansonlib.http.retrofit.customConverter" />
       <recent name="com.example.fansonlib.bean" />
       <recent name="com.example.fansonlib" />
-      <recent name="com.fanson.mylibrary" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\http\retrofit\customConverter" />
-      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\http" />
-      <recent name="F:\Github\MyLibrary\MyLibrary\app\src\main\res\values" />
-      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\function\download" />
-      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\res\mipmap-xxhdpi" />
+      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\res\layout" />
+      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\widget\calendar" />
+      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\base\adapter" />
+      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\java\com\example\fansonlib\widget\dialogfragment\base" />
+      <recent name="F:\Github\MyLibrary\MyLibrary\fansonlib\src\main\res\drawable" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.app">
@@ -3661,23 +3685,23 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32664436" sideWeight="0.49784714" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32163742" sideWeight="0.5032189" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7502787" sideWeight="0.4967811" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.64994425" sideWeight="0.4967811" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32675907" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23134328" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22974414" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Freeline" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32552955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17435622" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3694,8 +3718,45 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3272921" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32552955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32163742" sideWeight="0.5032189" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.64994425" sideWeight="0.4967811" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2664437" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32664436" sideWeight="0.49784714" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3272921" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23134328" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Freeline" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32552955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17435622" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -3712,21 +3773,10 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/MyLoadingView.java</url>
-          <line>124</line>
-          <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/ProgressAlertDialog.java</url>
           <line>109</line>
           <properties />
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/ProgressAlertDialog.java</url>
-          <line>69</line>
-          <properties />
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/ProgressAlertDialog.java</url>
@@ -3760,19 +3810,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java</url>
-          <line>164</line>
+          <line>204</line>
           <properties />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java</url>
-          <line>51</line>
-          <properties />
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java</url>
-          <line>58</line>
+          <line>63</line>
           <properties />
           <option name="timeStamp" value="50" />
         </line-breakpoint>
@@ -3789,482 +3833,598 @@
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiFactoryImpl.java</url>
-          <line>21</line>
-          <properties />
-          <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java</url>
-          <line>44</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java</url>
-          <line>32</line>
-          <properties />
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpStrategy.java</url>
           <line>58</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/TestMultiAdapter.java</url>
+          <line>17</line>
+          <properties />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/CatDelegate.java</url>
+          <line>29</line>
+          <properties />
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/TestMultiAdapter.java</url>
+          <line>18</line>
+          <properties />
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/DogDelegate.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/DogDelegate.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/CatDelegate.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/BaseMultiAdapter.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="87" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/ItemViewDelegateManager.java</url>
+          <line>62</line>
+          <properties />
+          <option name="timeStamp" value="89" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/ItemViewDelegateManager.java</url>
+          <line>63</line>
+          <properties />
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/ItemViewDelegateManager.java</url>
+          <line>65</line>
+          <properties />
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/ItemViewDelegateManager.java</url>
+          <line>66</line>
+          <properties />
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/MyLoadingView.java</url>
+          <line>132</line>
+          <properties />
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/MyLoadingView.java</url>
+          <line>222</line>
+          <properties />
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/loading/ProgressAlertDialog.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java</url>
+          <line>220</line>
+          <properties />
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java</url>
+          <line>157</line>
+          <properties />
+          <option name="timeStamp" value="103" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java</url>
           <line>32</line>
           <properties />
-          <option name="timeStamp" value="70" />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java</url>
+          <line>49</line>
+          <properties />
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java</url>
+          <line>18</line>
+          <properties />
+          <option name="timeStamp" value="107" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="71" />
+      <option name="time" value="109" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/popupwindow/BasePopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/UploadProgressListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/BaseImageLoaderStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/function/update/HttpManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="53" column="11" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1558#1722#0" expanded="false" />
-            <element signature="e#1721#1722#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.2.0/2ee0decdbfcfd5d76aa5e43377c077e9301df72d/retrofit-2.2.0-sources.jar!/retrofit2/Retrofit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/ImageLoaderUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/CrashRestartHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-515">
-          <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
-          <folding>
-            <element signature="e#623#624#0" expanded="false" />
-            <element signature="e#654#655#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/MyGlideUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/UniversalLoaderStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1676">
-          <caret line="143" column="21" selection-start-line="143" selection-start-column="21" selection-end-line="143" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="314" column="24" selection-start-line="314" selection-start-column="24" selection-end-line="314" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/update/AppHttpUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/DownLoadManager.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
-          <caret line="60" column="2" selection-start-line="60" selection-start-column="2" selection-end-line="60" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/ThreadPool/ThreadPoolManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/ImageLoaderProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/BaseSubscriber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/SimpleBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.2.0/2ee0decdbfcfd5d76aa5e43377c077e9301df72d/retrofit-2.2.0-sources.jar!/retrofit2/Converter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="583">
-          <caret line="73" column="28" selection-start-line="73" selection-start-column="28" selection-end-line="73" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="8" column="49" selection-start-line="8" selection-start-column="49" selection-end-line="8" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/5d171c3cd5343e5997f974561abed21442273fd1/android-async-http-1.4.9-sources.jar!/com/loopj/android/http/AsyncHttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2123">
-          <caret line="1137" column="29" selection-start-line="1137" selection-start-column="25" selection-end-line="1137" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpStrategy.java" />
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/BaseBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-          <folding>
-            <element signature="e#1105#1106#0" expanded="false" />
-            <element signature="e#1148#1149#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.7/cb9b3491633d4018e4e38bb9ca4449434560b47/rxjava-2.0.7-sources.jar!/io/reactivex/disposables/CompositeDisposable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="139" column="24" selection-start-line="139" selection-start-column="24" selection-end-line="139" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenterWithM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="36" selection-start-line="13" selection-start-column="36" selection-end-line="13" selection-end-column="36" />
-          <folding>
-            <element signature="e#428#429#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiStores.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="56" column="63" selection-start-line="56" selection-start-column="63" selection-end-line="56" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-          <folding>
-            <element signature="e#1347#1583#0" expanded="true" />
-            <element signature="e#1582#1583#0" expanded="true" />
-            <element signature="e#1585#1790#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-            <element signature="e#1792#1981#0" expanded="true" />
-            <element signature="e#1980#1981#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2990">
-          <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/5d171c3cd5343e5997f974561abed21442273fd1/android-async-http-1.4.9-sources.jar!/com/loopj/android/http/JsonHttpResponseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="246" column="24" selection-start-line="246" selection-start-column="24" selection-end-line="246" selection-end-column="24" />
-          <folding>
-            <element signature="e#1824#1825#0" expanded="false" />
-            <element signature="e#1862#1863#0" expanded="false" />
-            <element signature="e#2083#2084#0" expanded="false" />
-            <element signature="e#2114#2115#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.0.7/cb9b3491633d4018e4e38bb9ca4449434560b47/rxjava-2.0.7-sources.jar!/io/reactivex/subscribers/ResourceSubscriber.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/MyJsonHttpResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1426#1427#0" expanded="true" />
-            <element signature="e#1484#1485#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1092#1093#0" expanded="true" />
-            <element signature="e#1122#1123#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/CustomResponseConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/GsonRequestBodyConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/GsonResponseBodyConverter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="33" column="7" selection-start-line="33" selection-start-column="7" selection-end-line="33" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/bean/HttpResultException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/IApiFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/IHttpStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
-          <folding />
+          <caret line="6" column="39" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressRequestBody.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="227">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressResponseBody.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/constant/LibNotificationID.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
-          <caret line="20" column="44" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding />
+          <caret line="12" column="7" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitCallback.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/IApiFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="307">
+          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/ProgressListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        <state relative-caret-position="276">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="40" selection-end-column="33" />
           <folding>
-            <element signature="e#695#696#0" expanded="true" />
-            <element signature="e#731#732#0" expanded="true" />
-            <element signature="e#1048#1049#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1134#1135#0" expanded="true" />
-            <element signature="e#1171#1172#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1583#1584#0" expanded="false" />
+            <element signature="e#1641#1642#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpResponseCallback.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/customConverter/GsonResponseBodyConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="36" column="38" selection-start-line="36" selection-start-column="32" selection-end-line="36" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/DogDelegate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+          <folding>
+            <element signature="e#506#507#0" expanded="false" />
+            <element signature="e#548#549#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseDataAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3005">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseViewAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/include_top_bar.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/adapter/TestMultiAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/bean/TestBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="29" column="25" selection-start-line="29" selection-start-column="25" selection-end-line="29" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiStores.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="60" column="64" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseMulMvpActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="162" column="45" selection-start-line="162" selection-start-column="45" selection-end-line="162" selection-end-column="45" />
+          <folding>
+            <element signature="e#5567#5814#0" expanded="false" />
+            <element signature="e#5813#5814#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="36" column="28" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.android/build-cache/ffb091ed27bd38b5973003e41588fa6fd92eea00/output/res/drawable-xxhdpi-v4/icon_close.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_tx.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/SDCardUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_iv.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/TestFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="575">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#867#868#0" expanded="false" />
+            <element signature="e#912#913#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/CustomEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="28" column="27" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding>
+            <element signature="e#1641#1642#0" expanded="false" />
+            <element signature="e#1676#1677#0" expanded="false" />
+            <element signature="e#1740#1741#0" expanded="false" />
+            <element signature="e#1779#1780#0" expanded="false" />
+            <element signature="e#7015#7016#0" expanded="false" />
+            <element signature="e#7057#7058#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/DeletableEditText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding>
+            <element signature="e#719#720#0" expanded="false" />
+            <element signature="e#756#757#0" expanded="false" />
+            <element signature="e#805#806#0" expanded="false" />
+            <element signature="e#835#836#0" expanded="false" />
+            <element signature="e#1309#1310#0" expanded="false" />
+            <element signature="e#1365#1366#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/ImageEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#443#444#0" expanded="false" />
+            <element signature="e#478#479#0" expanded="false" />
+            <element signature="e#541#542#0" expanded="false" />
+            <element signature="e#580#581#0" expanded="false" />
+            <element signature="e#743#744#0" expanded="false" />
+            <element signature="e#778#779#0" expanded="false" />
+            <element signature="e#834#835#0" expanded="false" />
+            <element signature="e#882#883#0" expanded="false" />
+            <element signature="e#915#916#0" expanded="false" />
+            <element signature="e#944#945#0" expanded="false" />
+            <element signature="e#988#989#0" expanded="false" />
+            <element signature="e#1024#1025#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/IvTextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthSelectLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Month.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/LunarCalendar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/WrapViewPager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/LunarCalendarCardView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/values/attrs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3412">
+          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/BaseRecyclerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/cv_item_list_month.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/cv_layout_calendar_view.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/Calendar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarCardView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="39" column="36" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+          <folding>
+            <element signature="e#1906#1907#0" expanded="true" />
+            <element signature="e#1951#1952#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="743">
+          <caret line="90" column="82" selection-start-line="90" selection-start-column="82" selection-end-line="90" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/CalendarLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/calendar/MonthAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
           <folding />
         </state>
       </provider>

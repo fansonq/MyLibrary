@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.fansonlib.R;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
@@ -38,6 +39,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         Glide.with(context)
                 .load(imgUrl)
                 .error(config.getErrorPicRes())
+                .placeholder(config.getPlacePicRes())
+                .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
                 .into(view);
     }
 
@@ -59,6 +62,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
         Glide.with(context)
                 .load(imgUrl)
+                .placeholder(config.getPlacePicRes())
                 .error(config.getErrorPicRes())
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
@@ -76,6 +80,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
                 .error(config.getErrorPicRes())
+                .placeholder(config.getPlacePicRes())
                 .into(imageView);
     }
 
@@ -84,6 +89,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         Glide.with(context)
                 .load(imgUrl)
                 .error(config.getErrorPicRes())
+                .placeholder(config.getPlacePicRes())
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略

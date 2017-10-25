@@ -19,7 +19,7 @@ import com.example.fansonlib.R;
 /**
  * Created by：fanson
  * Created on：2017/9/14 18:04
- * Describe：
+ * Describe：DialogFragment的基类
  */
 
 public  abstract class BaseDialogFragment extends DialogFragment {

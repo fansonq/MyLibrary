@@ -41,7 +41,7 @@ public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends Bas
         if (mPresenter1 != null)
             mPresenter1.detachView();
         if (mPresenter2!=null){
-            mPresenter2 = null;
+            mPresenter2.detachView();
         }
     }
 

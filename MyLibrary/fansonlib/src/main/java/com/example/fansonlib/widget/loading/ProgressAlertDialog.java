@@ -30,7 +30,7 @@ public class ProgressAlertDialog extends Dialog {
     public ProgressAlertDialog(Context context) {
         super(context, R.style.alert_dialog);
         mContext = context;
-        mCurrentView = LayoutInflater.from(mContext).inflate(R.layout.my_loading_view,null);
+        mCurrentView = LayoutInflater.from(mContext).inflate(R.layout.my_loading_view, null);
         //默认返回键可以取消
         setCancelable(true);
         //其他区域不可取消

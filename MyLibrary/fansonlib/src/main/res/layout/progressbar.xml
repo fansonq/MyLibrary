@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:wheel="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/ll_progress"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <com.example.fansonlib.widget.loading.MyProgressWheel
         android:id="@+id/progressWheel"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         wheel:matProg_barWidth="2dp"
-        wheel:matProg_barColor="@android:color/holo_blue_bright"
+        wheel:matProg_barColor="@color/grey_dark"
         wheel:matProg_progressIndeterminate="true"
         wheel:matProg_linearProgress="true"
         android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading..."
+        android:layout_margin="5dp"
+        android:textColor="@color/grey_dark"
+        android:textSize="15sp"
+        />
 
 </LinearLayout>
