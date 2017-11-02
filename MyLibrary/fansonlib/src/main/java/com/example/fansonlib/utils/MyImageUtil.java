@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
@@ -24,14 +25,14 @@ public class MyImageUtil {
 
     private Context mContext;
 
-    public MyImageUtil(Context context){
+    public MyImageUtil(Context context) {
         mContext = context;
     }
 
-    public static  MyImageUtil getImageUtil(Context context ){
-        if (mImageUtil == null){
-            synchronized (MyImageUtil.class){
-                if (mImageUtil == null){
+    public static MyImageUtil getImageUtil(Context context) {
+        if (mImageUtil == null) {
+            synchronized (MyImageUtil.class) {
+                if (mImageUtil == null) {
                     mImageUtil = new MyImageUtil(context);
                 }
             }
@@ -40,8 +41,27 @@ public class MyImageUtil {
     }
 
     /**
+     * 文件转化为而二进制流byte[]
+     * @param filePath
+     * @return
+     * @throws Exception
+     */
+    public byte[] filePath2Bytes(String filePath) throws Exception {
+        FileInputStream fs = new FileInputStream(filePath);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while (-1 != (len = fs.read(buffer))) {
+            outputStream.write(buffer, 0, len);
+        }
+        outputStream.close();
+        fs.close();
+        return outputStream.toByteArray();
+    }
+
+    /**
      * Drawable转换成byte[]
-      */
+     */
     public byte[] Drawable2Bytes(Drawable d) {
         Bitmap bitmap = this.drawable2Bitmap(d);
         return this.Bitmap2Bytes(bitmap);
@@ -49,9 +69,11 @@ public class MyImageUtil {
 
     /**
      * Drawable转换成Bitmap
+     *
      * @param drawable
      * @return
      */
+
     public Bitmap drawable2Bitmap(Drawable drawable) {
         Bitmap bitmap = Bitmap
                 .createBitmap(
@@ -68,6 +90,7 @@ public class MyImageUtil {
 
     /**
      * Bitmap转换成byte[]
+     *
      * @param bm
      * @return
      */
@@ -79,6 +102,7 @@ public class MyImageUtil {
 
     /**
      * byte[]转换成Drawable
+     *
      * @param b
      * @return
      */
@@ -89,7 +113,8 @@ public class MyImageUtil {
 
     /**
      * byte[]转换成Bitmap
-      * @param b
+     *
+     * @param b
      * @return
      */
     public Bitmap Bytes2Bitmap(byte[] b) {
@@ -101,17 +126,19 @@ public class MyImageUtil {
 
     /**
      * Bitmap转换成Drawable
-      * @param bitmap
+     *
+     * @param bitmap
      * @return
      */
     public Drawable bitmap2Drawable(Bitmap bitmap) {
-        BitmapDrawable bd = new BitmapDrawable(mContext.getResources(),bitmap);
+        BitmapDrawable bd = new BitmapDrawable(mContext.getResources(), bitmap);
         Drawable d = (Drawable) bd;
         return d;
     }
 
     /**
      * 将byte[]转换成InputStream
+     *
      * @param b
      * @return
      */
@@ -122,7 +149,8 @@ public class MyImageUtil {
 
     /**
      * 将InputStream转换成byte[]
-      * @param is
+     *
+     * @param is
      * @return
      */
     public byte[] InputStream2Bytes(InputStream is) {
@@ -142,6 +170,7 @@ public class MyImageUtil {
 
     /**
      * 将Bitmap转换成InputStream
+     *
      * @param bm
      * @return
      */
@@ -154,6 +183,7 @@ public class MyImageUtil {
 
     /**
      * 将InputStream转换成Bitmap
+     *
      * @param is
      * @return
      */
@@ -163,6 +193,7 @@ public class MyImageUtil {
 
     /**
      * Drawable转换成InputStream
+     *
      * @param d
      * @return
      */
@@ -173,7 +204,8 @@ public class MyImageUtil {
 
     /**
      * InputStream转换成Drawable
-      * @param is
+     *
+     * @param is
      * @return
      */
     public Drawable InputStream2Drawable(InputStream is) {
