@@ -123,4 +123,9 @@ public class DateFormatUtil {
         Calendar cal=Calendar.getInstance();
         return cal.get(Calendar.DATE);
     }
+
+    public static int getDayOfWeek(){
+        Calendar cal=Calendar.getInstance();
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
 }

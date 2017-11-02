@@ -2,7 +2,7 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <rotate
-        android:duration="1000"
+        android:duration="500"
         android:fromDegrees="-360"
         android:interpolator="@android:anim/accelerate_interpolator"
         android:pivotX="10%"
@@ -10,7 +10,7 @@
         android:toDegrees="360" />
 
     <scale
-        android:duration="1000"
+        android:duration="500"
         android:fromXScale="0.1"
         android:fromYScale="0.1"
         android:pivotX="50%"
