@@ -3,6 +3,8 @@ package com.example.fansonlib.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.example.fansonlib.utils.InputMethodUtils;
+
 /**
  * Created by：fanson
  * Created on：2017/3/30 18:28
@@ -38,11 +40,13 @@ public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends Bas
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter1 != null)
+        if (mPresenter1 != null){
             mPresenter1.detachView();
+        }
         if (mPresenter2!=null){
             mPresenter2.detachView();
         }
+        InputMethodUtils.fixInputMethodManagerLeak(this);
     }
 
     /**

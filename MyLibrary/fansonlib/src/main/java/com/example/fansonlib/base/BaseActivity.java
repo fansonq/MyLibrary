@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.utils.InputMethodUtils;
 import com.example.fansonlib.utils.NetWorkUtil;
 
 /**
@@ -100,7 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             }
         }
-//        SampleApplicationLike.getRefWatcher(this).watch(this);
+        InputMethodUtils.fixInputMethodManagerLeak(this);
     }
 
     public BaseActivity() {
