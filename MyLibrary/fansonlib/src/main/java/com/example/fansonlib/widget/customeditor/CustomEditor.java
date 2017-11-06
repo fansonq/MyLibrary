@@ -43,6 +43,7 @@ public class CustomEditor extends ScrollView {
     private LayoutTransition mTransitioner; // 只在图片View添加或remove时，触发transition动画
     private int editNormalPadding = 0; //
     private int disappearingImageIndex = 0;
+    private OnDeleteImageListener mOnDeleteImageListener; //删除编辑器的图片监听接口
 
     public CustomEditor(Context context) {
         this(context, null);
@@ -188,6 +189,9 @@ public class CustomEditor extends ScrollView {
         //Log.i("", "editData: "+editData);
         if (editData.imagePath != null) {
             SDCardUtil.deleteFile(editData.imagePath);
+            if (mOnDeleteImageListener!=null){
+                mOnDeleteImageListener.onDeleteImg(editData.imagePath);
+            }
         }
         allLayout.removeView(view);
     }
@@ -358,5 +362,13 @@ public class CustomEditor extends ScrollView {
     public class EditData {
         public String inputStr;
         public String imagePath;
+    }
+
+    /**
+     * 注册删除图片的监听接口
+     * @param listener
+     */
+    public void setOnDeleteImageListener(OnDeleteImageListener listener){
+        mOnDeleteImageListener = listener;
     }
 }

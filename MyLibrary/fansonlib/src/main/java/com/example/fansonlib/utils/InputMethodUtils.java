@@ -21,7 +21,7 @@ public class InputMethodUtils {
      * @param context
      */
     public static void toggleSoftInput(Context context) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) context.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
@@ -32,14 +32,14 @@ public class InputMethodUtils {
      * @return
      */
     public static boolean showInputMethod(View view) {
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         return imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
     public static boolean showInputMethod(Activity activity) {
         View view = activity.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(
+            InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
             return imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
         }
@@ -67,7 +67,7 @@ public class InputMethodUtils {
      * @return
      */
     public static boolean hideSoftInput(View view) {
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         return imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
@@ -78,7 +78,7 @@ public class InputMethodUtils {
      */
     public static boolean hideSoftInput(Activity activity) {
         if (activity.getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) activity.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             return imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
         return false;
@@ -91,7 +91,7 @@ public class InputMethodUtils {
      * @return
      */
     public static boolean isActive(Context context) {
-        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) context.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         return imm.isActive();
     }
 
