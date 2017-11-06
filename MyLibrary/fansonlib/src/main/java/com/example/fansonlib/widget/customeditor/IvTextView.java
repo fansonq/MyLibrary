@@ -11,13 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
 import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
 
-import java.util.concurrent.ExecutionException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by：fanson
@@ -122,16 +124,27 @@ public class IvTextView extends ScrollView {
     /**
      * 在特定位置添加ImageView
      */
-    public void addImageViewAtIndex(final int index, String imagePath) throws ExecutionException, InterruptedException {
-        Bitmap bmp;
-        if (imagePath.startsWith("http")){
-            bmp = Glide.with(getContext()).load(imagePath).asBitmap().centerCrop().into(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL).get();
-        }else {
+    public void addImageViewAtIndex(final int index, String imagePath) {
+        Bitmap bmp = null;
+        if (imagePath.startsWith("http")) {
+            try {
+                URL url = new URL(imagePath);
+                URLConnection connection = url.openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                bmp = BitmapFactory.decodeStream(stream);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
             bmp = BitmapFactory.decodeFile(imagePath);
         }
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
-        ImageLoaderUtils.loadImage(getContext(),imageView,imagePath);
+        ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         //imageView.setImageBitmap(bmp);//这里改用Glide加载图片
         //imageView.setBitmap(bmp);//这句去掉，保留下面的图片地址即可，优化图片占用
         imageView.setAbsolutePath(imagePath);
