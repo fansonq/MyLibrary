@@ -201,4 +201,10 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
         imageLoader.displayImage(imgUrl,imageView,getCircleOption(mRoundedBitmapDisplayer));
     }
 
+    @Override
+    public Bitmap getBitmap(ImageLoaderConfig config, Context context, Object imgUrl) {
+        //TODO
+        return null;
+    }
+
 }

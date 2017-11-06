@@ -1,12 +1,14 @@
 package com.example.fansonlib.image.glide;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.fansonlib.R;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
@@ -14,6 +16,8 @@ import com.example.fansonlib.image.OnProgressListener;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
+import static com.bumptech.glide.Glide.with;
 
 /**
  * Created by：fanson
@@ -36,7 +40,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
-        Glide.with(context)
+        with(context)
                 .load(imgUrl)
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
@@ -50,17 +54,17 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void displayFromDrawable(ImageLoaderConfig config,Context context,int imageId, ImageView imageView) {
+    public void displayFromDrawable(ImageLoaderConfig config, Context context, int imageId, ImageView imageView) {
     }
 
     @Override
-    public void displayFromSDCard(ImageLoaderConfig config,String uri, ImageView imageView) {
+    public void displayFromSDCard(ImageLoaderConfig config, String uri, ImageView imageView) {
 
     }
 
     @Override
-    public void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
-        Glide.with(context)
+    public void loadCircleImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+        with(context)
                 .load(imgUrl)
                 .placeholder(config.getPlacePicRes())
                 .error(config.getErrorPicRes())
@@ -72,8 +76,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
-        Glide.with(context)
+    public void loadGifImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+        with(context)
                 .load(imgUrl)
                 .asGif()
                 .crossFade()
@@ -85,8 +89,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
-        Glide.with(context)
+    public void loadCornerImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+        with(context)
                 .load(imgUrl)
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
@@ -97,5 +101,21 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                         new RoundedCornersTransformation(
                                 context, Contants.CORNER_RADIUS, Contants.CORNER_RADIUS))
                 .into(imageView);
+    }
+
+    @Override
+    public Bitmap getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl) {
+        final Bitmap[] bmp = {null};
+        Glide.with(context)
+                .load(imgUrl)
+                .asBitmap()//强制Glide返回一个Bitmap对象
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                        bmp[0] = bitmap;
+                    }
+                });
+
+        return bmp[0];
     }
 }

@@ -1,6 +1,7 @@
 package com.example.fansonlib.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 
@@ -60,5 +61,10 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imgUrl
      */
     void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+
+    /**
+     * 获取Bitmap对象
+     */
+    Bitmap getBitmap(ImageLoaderConfig config, Context context, Object imgUrl);
 
 }

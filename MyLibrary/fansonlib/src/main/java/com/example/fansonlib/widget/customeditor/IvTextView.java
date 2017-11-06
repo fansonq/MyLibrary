@@ -15,12 +15,6 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
 /**
  * Created by：fanson
  * Created on：2017/10/18 12:45
@@ -127,18 +121,7 @@ public class IvTextView extends ScrollView {
     public void addImageViewAtIndex(final int index, String imagePath) {
         Bitmap bmp = null;
         if (imagePath.startsWith("http")) {
-            try {
-                URL url = new URL(imagePath);
-                URLConnection connection = url.openConnection();
-                connection.connect();
-                InputStream stream = connection.getInputStream();
-                bmp = BitmapFactory.decodeStream(stream);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            bmp = ImageLoaderUtils.getBitmap(getContext(),imagePath);
         } else {
             bmp = BitmapFactory.decodeFile(imagePath);
         }
