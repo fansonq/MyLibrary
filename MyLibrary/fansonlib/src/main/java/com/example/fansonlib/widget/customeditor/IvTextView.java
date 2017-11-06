@@ -11,9 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by：fanson
@@ -118,9 +122,13 @@ public class IvTextView extends ScrollView {
     /**
      * 在特定位置添加ImageView
      */
-    public void addImageViewAtIndex(final int index, String imagePath) {
-        Bitmap bmp = BitmapFactory.decodeFile(imagePath);
-
+    public void addImageViewAtIndex(final int index, String imagePath) throws ExecutionException, InterruptedException {
+        Bitmap bmp;
+        if (imagePath.startsWith("http")){
+            bmp = Glide.with(getContext()).load(imagePath).asBitmap().centerCrop().into(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL).get();
+        }else {
+            bmp = BitmapFactory.decodeFile(imagePath);
+        }
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(),imageView,imagePath);
