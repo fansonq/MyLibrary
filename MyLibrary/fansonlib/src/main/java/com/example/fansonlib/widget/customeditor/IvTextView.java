@@ -6,13 +6,13 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
 
 /**
@@ -45,15 +45,15 @@ public class IvTextView extends ScrollView {
         allLayout = new LinearLayout(context);
         allLayout.setOrientation(LinearLayout.VERTICAL);
         //allLayout.setBackgroundColor(Color.WHITE);//去掉背景
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT);
         allLayout.setPadding(50, 15, 50, 15);//设置间距，防止生成图片时文字太靠边
         addView(allLayout, layoutParams);
 
         LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         //editNormalPadding = dip2px(EDIT_PADDING);
-        TextView firstText = createTextView(context.getString(R.string.no_content), dip2px(context, EDIT_PADDING));
+        TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
         allLayout.addView(firstText, firstEditParam);
     }
 
@@ -136,7 +136,7 @@ public class IvTextView extends ScrollView {
             bmp.recycle();
         }
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, imageHeight);
+                LayoutParams.MATCH_PARENT, imageHeight);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
 
