@@ -12,8 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.fansonlib.R;
+import com.example.fansonlib.image.ImageLoaderUtils;
 
 /**
  * Created by：fanson
@@ -123,7 +123,7 @@ public class IvTextView extends ScrollView {
 
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
-        Glide.with(getContext()).load(imagePath).crossFade().centerCrop().into(imageView);
+        ImageLoaderUtils.loadImage(getContext(),imageView,imagePath);
         //imageView.setImageBitmap(bmp);//这里改用Glide加载图片
         //imageView.setBitmap(bmp);//这句去掉，保留下面的图片地址即可，优化图片占用
         imageView.setAbsolutePath(imagePath);
