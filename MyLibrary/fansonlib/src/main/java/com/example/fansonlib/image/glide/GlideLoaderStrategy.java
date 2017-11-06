@@ -13,6 +13,7 @@ import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
+import com.example.fansonlib.image.OnWaitBitmapListener;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -28,6 +29,8 @@ import static com.bumptech.glide.Glide.with;
 public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
+
+    private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
     /**
      * 常量
@@ -104,18 +107,16 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public Bitmap getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl) {
-        final Bitmap[] bmp = {null};
+    public void getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl, final OnWaitBitmapListener listener,final int index) {
         Glide.with(context)
                 .load(imgUrl)
                 .asBitmap()//强制Glide返回一个Bitmap对象
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
                     public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                        bmp[0] = bitmap;
+                      listener.getBitmap(bitmap,index,imgUrl);
                     }
                 });
-
-        return bmp[0];
     }
+
 }

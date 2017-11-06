@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
+import com.example.fansonlib.image.OnWaitBitmapListener;
 
 /**
  * Created by：fanson
@@ -21,7 +22,7 @@ import com.example.fansonlib.image.ImageLoaderUtils;
  * Describe：图文混排View
  */
 
-public class IvTextView extends ScrollView {
+public class IvTextView extends ScrollView implements OnWaitBitmapListener {
     private static final int EDIT_PADDING = 10; // edittext常规padding是10dp
 
     private int viewTagIndex = 1; // 新生的view都会打一个tag，对每个view来说，这个tag是唯一的。
@@ -119,31 +120,27 @@ public class IvTextView extends ScrollView {
      * 在特定位置添加ImageView
      */
     public void addImageViewAtIndex(final int index, String imagePath) {
-        Bitmap bmp = null;
         if (imagePath.startsWith("http")) {
-            bmp = ImageLoaderUtils.getBitmap(getContext(),imagePath);
+            ImageLoaderUtils.getBitmap(getContext(),imagePath,this,index);
         } else {
-            bmp = BitmapFactory.decodeFile(imagePath);
+            setImageLayout(BitmapFactory.decodeFile(imagePath),imagePath,index);
         }
+    }
+
+    private void setImageLayout(Bitmap bmp,String imagePath,int index){
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
-        //imageView.setImageBitmap(bmp);//这里改用Glide加载图片
-        //imageView.setBitmap(bmp);//这句去掉，保留下面的图片地址即可，优化图片占用
         imageView.setAbsolutePath(imagePath);
-
-        // 调整imageView的高度
-        int imageHeight = 500;
+        int imageHeight = 500; // 调整imageView的高度
         if (bmp != null) {
             imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
-            // 使用之后，还是回收掉吧
-            bmp.recycle();
+            bmp.recycle(); // 使用之后，还是回收掉吧
         }
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, imageHeight);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
-
         allLayout.addView(imageLayout, index);
     }
 
@@ -163,4 +160,8 @@ public class IvTextView extends ScrollView {
         return BitmapFactory.decodeFile(filePath, options);
     }
 
+    @Override
+    public void getBitmap(Bitmap bitmap,int index,Object imgUrl) {
+        setImageLayout(bitmap, (String) imgUrl,index);
+    }
 }

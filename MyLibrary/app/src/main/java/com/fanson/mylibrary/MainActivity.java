@@ -1,7 +1,6 @@
 package com.fanson.mylibrary;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,7 +14,6 @@ import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -154,8 +152,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        String picUrl = "http://img02.tooopen.com/images/20140504/sy_60294738471.jpg";
-        Bitmap bitmap = ImageLoaderUtils.getBitmap(this,picUrl);
+        String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
 //        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override

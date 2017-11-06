@@ -1,7 +1,6 @@
 package com.example.fansonlib.image;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 
@@ -65,6 +64,6 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     /**
      * 获取Bitmap对象
      */
-    Bitmap getBitmap(ImageLoaderConfig config, Context context, Object imgUrl);
+    void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl,OnWaitBitmapListener listener,int index);
 
 }

@@ -7,9 +7,10 @@ import android.widget.ImageView;
 
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
-import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
+import com.example.fansonlib.image.OnWaitBitmapListener;
+import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -202,9 +203,8 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public Bitmap getBitmap(ImageLoaderConfig config, Context context, Object imgUrl) {
+    public void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl, OnWaitBitmapListener listener,int index) {
         //TODO
-        return null;
     }
 
 }

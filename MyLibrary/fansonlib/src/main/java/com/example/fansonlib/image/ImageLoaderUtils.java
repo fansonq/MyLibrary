@@ -1,7 +1,6 @@
 package com.example.fansonlib.image;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 /**
@@ -101,8 +100,8 @@ public class ImageLoaderUtils {
      * @param imgUrl
      * @return
      */
-    public static Bitmap getBitmap(Context context,  String imgUrl){
-        return loaderConfig.getClient().getBitmap(loaderConfig,context,imgUrl);
+    public static void getBitmap(Context context,  String imgUrl,OnWaitBitmapListener listener,int index){
+         loaderConfig.getClient().getBitmap(loaderConfig,context,imgUrl,listener,index);
     }
 
 
