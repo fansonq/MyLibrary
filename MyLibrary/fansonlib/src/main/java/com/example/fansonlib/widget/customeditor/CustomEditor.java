@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.bumptech.glide.Glide;
 import com.example.fansonlib.R;
+import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.utils.SDCardUtil;
 
 import java.util.ArrayList;
@@ -301,7 +301,7 @@ public class CustomEditor extends ScrollView {
     public void addImageViewAtIndex(final int index, String imagePath) {
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
-        Glide.with(getContext()).load(imagePath).crossFade().centerCrop().into(imageView);
+        ImageLoaderUtils.loadImage(getContext(),imageView,imagePath);
         imageView.setAbsolutePath(imagePath);//保留这句，后面保存数据会用
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);//裁剪剧中
 
