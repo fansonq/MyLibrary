@@ -7,13 +7,18 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.example.fansonlib.http.ThreadPool.ThreadPoolManager;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
+
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -29,6 +34,9 @@ import static com.bumptech.glide.Glide.with;
 public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
+    private ArrayList<String> mBitmapIndexList;
+    private ArrayList<Object> mBitmapUrlList;
+    private Object mNextUrl;
 
     private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
@@ -107,16 +115,65 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl, final OnWaitBitmapListener listener,final int index) {
-        Glide.with(context)
-                .load(imgUrl)
-                .asBitmap()//强制Glide返回一个Bitmap对象
-                .into(new SimpleTarget<Bitmap>() {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                      listener.getBitmap(bitmap,index,imgUrl);
-                    }
-                });
+    public void getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl, final OnWaitBitmapListener listener, final int index) {
+//        Glide.with(context)
+//                .load(imgUrl)
+//                .asBitmap()//强制Glide返回一个Bitmap对象
+//                .into(new SimpleTarget<Bitmap>() {
+//                    @Override
+//                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        if (index == 1) {
+//                            listener.getBitmap(bitmap, index, imgUrl);
+//                            int nextIndex = askIndexIsOk(index);
+//                            if (nextIndex!= 0) {
+//                                listener.getBitmap(bitmap, nextIndex, mNextUrl);
+//                            }
+//                        } else {
+//                            if (mBitmapIndexList == null) {
+//                                mBitmapIndexList = new ArrayList<>();
+//                                mBitmapUrlList = new ArrayList<>();
+//                            }
+//                            mBitmapIndexList.add(String.valueOf(index));
+//                            mBitmapUrlList.add(imgUrl);
+//                        }
+//                    }
+//                });
+        Future future = ThreadPoolManager.getThreadPoolProxy().submit(new Callable() {
+            @Override
+            public Object call() throws Exception {
+                return Glide.with(context)
+                        .load(imgUrl)
+                        .asBitmap()//强制Glide返回一个Bitmap对象
+                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                        .get();
+            }
+        });
+        try {
+            listener.getBitmap((Bitmap) future.get(), index, imgUrl);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * 访问下一个应该回调的数据是否已在集合里，若是，则执行回调
+     *
+     * @param currentIndex 当前回调返回的index
+     * @return 下一个应该回调的数据
+     */
+    private int askIndexIsOk(int currentIndex) {
+        String nextIndex;
+        for (int i = 0; i < mBitmapIndexList.size(); i++) {
+            if ((currentIndex + 1) == Integer.parseInt(mBitmapIndexList.get(i))) {
+                nextIndex = mBitmapIndexList.get(i);
+                mNextUrl = mBitmapUrlList.get(i);
+                mBitmapIndexList.remove(nextIndex);
+                mBitmapUrlList.remove(i);
+                return Integer.parseInt(nextIndex);
+            }
+        }
+        return 0;
+    }
 }

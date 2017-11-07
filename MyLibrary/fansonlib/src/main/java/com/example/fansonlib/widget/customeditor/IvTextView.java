@@ -121,13 +121,13 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
      */
     public void addImageViewAtIndex(final int index, String imagePath) {
         if (imagePath.startsWith("http")) {
-            ImageLoaderUtils.getBitmap(getContext(),imagePath,this,index);
+            ImageLoaderUtils.getBitmap(getContext(), imagePath, this, index);
         } else {
-            setImageLayout(BitmapFactory.decodeFile(imagePath),imagePath,index);
+            setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
         }
     }
 
-    private void setImageLayout(Bitmap bmp,String imagePath,int index){
+    private void setImageLayout(Bitmap bmp, String imagePath, int index) {
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
@@ -161,7 +161,7 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
     }
 
     @Override
-    public void getBitmap(Bitmap bitmap,int index,Object imgUrl) {
-        setImageLayout(bitmap, (String) imgUrl,index);
+    public void getBitmap(Bitmap bitmap, int index, Object imgUrl) {
+        setImageLayout(bitmap, (String) imgUrl, index);
     }
 }
