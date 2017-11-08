@@ -58,8 +58,6 @@ public class IvTextView extends ScrollView {
         //editNormalPadding = dip2px(EDIT_PADDING);
         TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
         allLayout.addView(firstText, firstEditParam);
-
-        onClickImageView();
     }
 
     public int dip2px(Context context, float dipValue) {
@@ -102,12 +100,6 @@ public class IvTextView extends ScrollView {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(
                 R.layout.custom_editor_iv, null);
         layout.setTag(viewTagIndex++);
-        layout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickImageView(view);
-            }
-        });
         View closeView = layout.findViewById(R.id.image_close);
         closeView.setVisibility(GONE);
         return layout;
@@ -144,6 +136,7 @@ public class IvTextView extends ScrollView {
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         imageView.setAbsolutePath(imagePath);
+        onClickImageView(imageLayout,imagePath);
         int imageHeight = 1000; // 调整imageView的高度
         if (bmp != null) {
             imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
@@ -173,8 +166,15 @@ public class IvTextView extends ScrollView {
         return BitmapFactory.decodeFile(filePath, options);
     }
 
-    private void onClickImageView(View view) {
-        Log.d("TTT", "view : " + allLayout.indexOfChild(view));
+    private void onClickImageView(View clickView,final String imgPath) {
+        clickView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TTT", "view : " + allLayout.indexOfChild((RelativeLayout) view.getParent()));
+                Log.d("TTT", "imgPath : " + imgPath);
+            }
+        });
+
     }
 
 }
