@@ -1,7 +1,6 @@
 package com.fanson.mylibrary;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,8 +14,6 @@ import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.image.ImageLoaderUtils;
-import com.example.fansonlib.image.OnWaitBitmapListener;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -36,7 +33,7 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView, OnWaitBitmapListener {
+public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -156,7 +153,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
         String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
-        ImageLoaderUtils.getBitmap(this,picUrl,this,1);
 //        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override
@@ -258,8 +254,4 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         ShowToast.singleLong(message);
     }
 
-    @Override
-    public void getBitmap(Bitmap bitmap, int index, Object imgUrl) {
-        Bitmap bitmap1 = bitmap;
-    }
 }

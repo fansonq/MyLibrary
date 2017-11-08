@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
-import com.example.fansonlib.image.OnWaitBitmapListener;
 
 /**
  * Created by：fanson
@@ -22,13 +22,14 @@ import com.example.fansonlib.image.OnWaitBitmapListener;
  * Describe：图文混排View
  */
 
-public class IvTextView extends ScrollView implements OnWaitBitmapListener {
+public class IvTextView extends ScrollView   {
     private static final int EDIT_PADDING = 10; // edittext常规padding是10dp
 
     private int viewTagIndex = 1; // 新生的view都会打一个tag，对每个view来说，这个tag是唯一的。
     private LinearLayout allLayout; // 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
     private LayoutInflater inflater;
     private int editNormalPadding = 0; //
+    private boolean mWaitingAddView = true;//标记是否正在添加View，因为有文字和图片的添加，有时图片比较耗时，导致文字插队添加.ture表示可以添加
 
     public IvTextView(Context context) {
         this(context, null);
@@ -110,21 +111,23 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
      * @param editStr EditText显示的文字
      */
     public void addTextViewAtIndex(final int index, CharSequence editStr) {
-        TextView textView = createTextView("", EDIT_PADDING);
-        textView.setText(editStr);
-
-        allLayout.addView(textView, index);
+        if (mWaitingAddView){
+            mWaitingAddView = false;
+            TextView textView = createTextView("", EDIT_PADDING);
+            textView.setText(editStr);
+            allLayout.addView(textView, index);
+        }
     }
 
     /**
      * 在特定位置添加ImageView
      */
     public void addImageViewAtIndex(final int index, String imagePath) {
-        if (imagePath.startsWith("http")) {
-            ImageLoaderUtils.getBitmap(getContext(), imagePath, this, index);
-        } else {
+//        if (imagePath.startsWith("http")) {
+//            ImageLoaderUtils.getBitmap(getContext(), imagePath, this, index);
+//        } else {
             setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
-        }
+//        }
     }
 
     private void setImageLayout(Bitmap bmp, String imagePath, int index) {
@@ -132,7 +135,7 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         imageView.setAbsolutePath(imagePath);
-        int imageHeight = 500; // 调整imageView的高度
+        int imageHeight = 1000; // 调整imageView的高度
         if (bmp != null) {
             imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
             bmp.recycle(); // 使用之后，还是回收掉吧
@@ -141,6 +144,7 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
                 LayoutParams.MATCH_PARENT, imageHeight);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
         allLayout.addView(imageLayout, index);
     }
 
@@ -160,8 +164,4 @@ public class IvTextView extends ScrollView implements OnWaitBitmapListener {
         return BitmapFactory.decodeFile(filePath, options);
     }
 
-    @Override
-    public void getBitmap(Bitmap bitmap, int index, Object imgUrl) {
-        setImageLayout(bitmap, (String) imgUrl, index);
-    }
 }

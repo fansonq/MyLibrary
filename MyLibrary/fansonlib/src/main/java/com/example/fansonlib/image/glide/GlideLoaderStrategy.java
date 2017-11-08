@@ -15,8 +15,6 @@ import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
 
-import java.util.ArrayList;
-
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -31,10 +29,6 @@ import static com.bumptech.glide.Glide.with;
 public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
-    private ArrayList<String> mBitmapIndexList;
-    private ArrayList<Object> mBitmapUrlList;
-    private Object mNextUrl;
-
     private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
     /**
@@ -135,25 +129,5 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 //                        }
                     }
                 });
-    }
-
-    /**
-     * 访问下一个应该回调的数据是否已在集合里，若是，则执行回调
-     *
-     * @param currentIndex 当前回调返回的index
-     * @return 下一个应该回调的数据
-     */
-    private int askIndexIsOk(int currentIndex) {
-        String nextIndex;
-        for (int i = 0; i < mBitmapIndexList.size(); i++) {
-            if ((currentIndex + 1) == Integer.parseInt(mBitmapIndexList.get(i))) {
-                nextIndex = mBitmapIndexList.get(i);
-                mNextUrl = mBitmapUrlList.get(i);
-                mBitmapIndexList.remove(nextIndex);
-                mBitmapUrlList.remove(i);
-                return Integer.parseInt(nextIndex);
-            }
-        }
-        return 0;
     }
 }
