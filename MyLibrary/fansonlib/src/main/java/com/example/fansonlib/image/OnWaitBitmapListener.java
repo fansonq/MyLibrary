@@ -14,5 +14,5 @@ public interface OnWaitBitmapListener {
      * 得到Bitmap对象
      * @param bitmap Bitmap对象
      */
-    void getBitmap(Bitmap bitmap,int index,Object imgUrl);
+    void getBitmap(Bitmap bitmap, int index, Object imgUrl);
 }

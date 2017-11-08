@@ -7,8 +7,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.target.Target;
-import com.example.fansonlib.http.ThreadPool.ThreadPoolManager;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
@@ -16,9 +16,6 @@ import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
 
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -116,14 +113,14 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl, final OnWaitBitmapListener listener, final int index) {
-//        Glide.with(context)
-//                .load(imgUrl)
-//                .asBitmap()//强制Glide返回一个Bitmap对象
-//                .into(new SimpleTarget<Bitmap>() {
-//                    @Override
-//                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-//                        if (index == 1) {
-//                            listener.getBitmap(bitmap, index, imgUrl);
+        Glide.with(context)
+                .load(imgUrl)
+                .asBitmap()//强制Glide返回一个Bitmap对象
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+//                        if (index != 0) {
+                            listener.getBitmap(bitmap, index, imgUrl);
 //                            int nextIndex = askIndexIsOk(index);
 //                            if (nextIndex!= 0) {
 //                                listener.getBitmap(bitmap, nextIndex, mNextUrl);
@@ -136,25 +133,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 //                            mBitmapIndexList.add(String.valueOf(index));
 //                            mBitmapUrlList.add(imgUrl);
 //                        }
-//                    }
-//                });
-        Future future = ThreadPoolManager.getThreadPoolProxy().submit(new Callable() {
-            @Override
-            public Object call() throws Exception {
-                return Glide.with(context)
-                        .load(imgUrl)
-                        .asBitmap()//强制Glide返回一个Bitmap对象
-                        .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                        .get();
-            }
-        });
-        try {
-            listener.getBitmap((Bitmap) future.get(), index, imgUrl);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+                    }
+                });
     }
 
     /**
