@@ -30,7 +30,11 @@ public class IvTextView extends ScrollView {
     private LinearLayout allLayout; // 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
     private LayoutInflater inflater;
     private int editNormalPadding = 0; //
-    private boolean mWaitingAddView = true;//标记是否正在添加View，因为有文字和图片的添加，有时图片比较耗时，导致文字插队添加.ture表示可以添加
+    private OnClickImageListener mOnClickImageListener;
+
+    public void setOnClickImageListener(OnClickImageListener listener){
+        mOnClickImageListener = listener;
+    }
 
     public IvTextView(Context context) {
         this(context, null);
@@ -112,12 +116,9 @@ public class IvTextView extends ScrollView {
      * @param editStr EditText显示的文字
      */
     public void addTextViewAtIndex(final int index, CharSequence editStr) {
-        if (mWaitingAddView) {
-            mWaitingAddView = false;
             TextView textView = createTextView("", EDIT_PADDING);
             textView.setText(editStr);
             allLayout.addView(textView, index);
-        }
     }
 
     /**
@@ -171,10 +172,8 @@ public class IvTextView extends ScrollView {
             @Override
             public void onClick(View view) {
                 Log.d("TTT", "view : " + allLayout.indexOfChild( view));
-                Log.d("TTT", "imgPath : " + imgPath);
+                mOnClickImageListener.onClickImg(imgPath);
             }
         });
-
     }
-
 }
