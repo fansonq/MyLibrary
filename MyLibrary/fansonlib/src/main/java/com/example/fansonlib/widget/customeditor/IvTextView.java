@@ -23,7 +23,7 @@ import com.example.fansonlib.image.ImageLoaderUtils;
  * Describe：图文混排View
  */
 
-public class IvTextView extends ScrollView   {
+public class IvTextView extends ScrollView {
     private static final int EDIT_PADDING = 10; // edittext常规padding是10dp
 
     private int viewTagIndex = 1; // 新生的view都会打一个tag，对每个view来说，这个tag是唯一的。
@@ -102,6 +102,12 @@ public class IvTextView extends ScrollView   {
         RelativeLayout layout = (RelativeLayout) inflater.inflate(
                 R.layout.custom_editor_iv, null);
         layout.setTag(viewTagIndex++);
+        layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickImageView(view);
+            }
+        });
         View closeView = layout.findViewById(R.id.image_close);
         closeView.setVisibility(GONE);
         return layout;
@@ -114,7 +120,7 @@ public class IvTextView extends ScrollView   {
      * @param editStr EditText显示的文字
      */
     public void addTextViewAtIndex(final int index, CharSequence editStr) {
-        if (mWaitingAddView){
+        if (mWaitingAddView) {
             mWaitingAddView = false;
             TextView textView = createTextView("", EDIT_PADDING);
             textView.setText(editStr);
@@ -129,7 +135,7 @@ public class IvTextView extends ScrollView   {
 //        if (imagePath.startsWith("http")) {
 //            ImageLoaderUtils.getBitmap(getContext(), imagePath, this, index);
 //        } else {
-            setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
+        setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
 //        }
     }
 
@@ -147,7 +153,7 @@ public class IvTextView extends ScrollView   {
                 LayoutParams.MATCH_PARENT, imageHeight);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
-        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         allLayout.addView(imageLayout, index);
     }
 
@@ -167,13 +173,8 @@ public class IvTextView extends ScrollView   {
         return BitmapFactory.decodeFile(filePath, options);
     }
 
-    private void onClickImageView(){
-        allLayout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("TTT","view : "+view);
-            }
-        });
+    private void onClickImageView(View view) {
+        Log.d("TTT", "view : " + allLayout.indexOfChild(view));
     }
 
 }
