@@ -170,7 +170,7 @@ public class IvTextView extends ScrollView {
         clickView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TTT", "view : " + allLayout.indexOfChild((RelativeLayout) view.getParent()));
+                Log.d("TTT", "view : " + allLayout.indexOfChild( view));
                 Log.d("TTT", "imgPath : " + imgPath);
             }
         });
