@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +58,8 @@ public class IvTextView extends ScrollView   {
         //editNormalPadding = dip2px(EDIT_PADDING);
         TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
         allLayout.addView(firstText, firstEditParam);
+
+        onClickImageView();
     }
 
     public int dip2px(Context context, float dipValue) {
@@ -162,6 +165,15 @@ public class IvTextView extends ScrollView   {
         options.inJustDecodeBounds = false;
         options.inSampleSize = sampleSize;
         return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    private void onClickImageView(){
+        allLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TTT","view : "+view);
+            }
+        });
     }
 
 }
