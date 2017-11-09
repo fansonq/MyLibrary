@@ -203,6 +203,11 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
+    public void clearMemory(Context context) {
+        imageLoader.clearMemoryCache();
+    }
+
+    @Override
     public void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl, OnWaitBitmapListener listener,int index) {
         //TODO
     }

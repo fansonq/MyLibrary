@@ -60,7 +60,6 @@ public class CustomEditor extends ScrollView {
         // 1. 初始化allLayout
         allLayout = new LinearLayout(context);
         allLayout.setOrientation(LinearLayout.VERTICAL);
-        //allLayout.setBackgroundColor(Color.WHITE);
         setupLayoutTransitions();
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT);

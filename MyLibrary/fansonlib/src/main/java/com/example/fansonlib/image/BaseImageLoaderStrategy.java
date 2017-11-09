@@ -62,6 +62,11 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
 
     /**
+     * 清除内存
+     */
+    void clearMemory(Context context);
+
+    /**
      * 获取Bitmap对象
      */
     void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl,OnWaitBitmapListener listener,int index);

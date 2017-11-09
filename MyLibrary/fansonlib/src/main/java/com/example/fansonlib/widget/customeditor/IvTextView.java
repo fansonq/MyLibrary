@@ -32,7 +32,7 @@ public class IvTextView extends ScrollView {
     private int editNormalPadding = 0; //
     private OnClickImageListener mOnClickImageListener;
 
-    public void setOnClickImageListener(OnClickImageListener listener){
+    public void setOnClickImageListener(OnClickImageListener listener) {
         mOnClickImageListener = listener;
     }
 
@@ -116,20 +116,16 @@ public class IvTextView extends ScrollView {
      * @param editStr EditText显示的文字
      */
     public void addTextViewAtIndex(final int index, CharSequence editStr) {
-            TextView textView = createTextView("", EDIT_PADDING);
-            textView.setText(editStr);
-            allLayout.addView(textView, index);
+        TextView textView = createTextView("", EDIT_PADDING);
+        textView.setText(editStr);
+        allLayout.addView(textView, index);
     }
 
     /**
      * 在特定位置添加ImageView
      */
     public void addImageViewAtIndex(final int index, String imagePath) {
-//        if (imagePath.startsWith("http")) {
-//            ImageLoaderUtils.getBitmap(getContext(), imagePath, this, index);
-//        } else {
         setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
-//        }
     }
 
     private void setImageLayout(Bitmap bmp, String imagePath, int index) {
@@ -137,7 +133,7 @@ public class IvTextView extends ScrollView {
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         imageView.setAbsolutePath(imagePath);
-        onClickImageView(imageLayout,imagePath);
+        onClickImageView(imageLayout, imagePath);
         int imageHeight = 1000; // 调整imageView的高度
         if (bmp != null) {
             imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
@@ -167,11 +163,11 @@ public class IvTextView extends ScrollView {
         return BitmapFactory.decodeFile(filePath, options);
     }
 
-    private void onClickImageView(View clickView,final String imgPath) {
+    private void onClickImageView(View clickView, final String imgPath) {
         clickView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TTT", "view : " + allLayout.indexOfChild( view));
+                Log.d("TTT", "view : " + allLayout.indexOfChild(view));
                 mOnClickImageListener.onClickImg(imgPath);
             }
         });

@@ -9,6 +9,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.fansonlib.R;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
@@ -44,6 +45,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
         with(context)
                 .load(imgUrl)
+                .thumbnail(0.1f) //先加载缩略图 然后在加载全图
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -68,8 +70,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadCircleImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
         with(context)
                 .load(imgUrl)
-                .placeholder(config.getPlacePicRes())
-                .error(config.getErrorPicRes())
+                .placeholder(R.mipmap.ic_person)
+                .error(R.mipmap.ic_person)
                 .crossFade()
                 .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -103,6 +105,11 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                         new RoundedCornersTransformation(
                                 context, Contants.CORNER_RADIUS, Contants.CORNER_RADIUS))
                 .into(imageView);
+    }
+
+    @Override
+    public void clearMemory(Context context) {
+        Glide.get(context).clearMemory();
     }
 
     @Override
