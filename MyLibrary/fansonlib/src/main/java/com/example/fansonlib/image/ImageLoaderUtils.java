@@ -95,6 +95,14 @@ public class ImageLoaderUtils {
     }
 
     /**
+     * 清除内存
+     * @param context
+     */
+    public static void clearMemory(Context context){
+        loaderConfig.getClient().clearMemory(context);
+    }
+
+    /**
      * 获取Bitmap对象
      * @param context
      * @param imgUrl
