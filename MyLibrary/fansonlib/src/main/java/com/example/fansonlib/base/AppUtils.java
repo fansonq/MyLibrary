@@ -14,7 +14,10 @@ public class AppUtils {
 
     public static Context mApplication;
 
-    //在Application中初始化
+    /**
+     * 在Application中初始化
+     * @param context
+     */
     public  static void init(Context context){
         mApplication = context;
     }
@@ -45,6 +48,15 @@ public class AppUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 根据StringID返回字符串
+     * @param stringId 资源ID
+     * @return 字符串
+     */
+    public static String getString(int stringId){
+        return mApplication.getString(stringId);
     }
 
 }
