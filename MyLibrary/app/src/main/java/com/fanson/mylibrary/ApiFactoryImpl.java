@@ -24,7 +24,7 @@ public class ApiFactoryImpl implements IApiFactory {
                 mFlowable = RetrofitClient.getRetrofit(ApiStores.class).getName(url, params);
                 break;
             case "post.php":
-                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).uploadMulti(url,params);
+//                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).uploadMulti(url,params);
                 break;
         }
         return mFlowable;

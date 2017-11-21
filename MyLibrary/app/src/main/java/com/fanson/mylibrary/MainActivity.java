@@ -10,7 +10,6 @@ import android.widget.ImageView;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseMvpActivity;
-import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
@@ -18,7 +17,6 @@ import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
-import com.fanson.mylibrary.bean.TestBean;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
@@ -30,8 +28,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
 
@@ -90,16 +93,15 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             @Override
             public void onClick(View view) {
                 //上传图文(多图)
-                String path1 = Environment.getExternalStorageDirectory() + File.separator + "TaxiGo/1_302443_258ACCB4495E5A9A5EB25D9D700F1B1C.jpg";
-                String path2 = Environment.getExternalStorageDirectory() + File.separator + "TaxiGo/1_302443_258ACCB4495E5A9A5EB25D9D700F1B1C.jpg";
+                String path1 = Environment.getExternalStorageDirectory() + File.separator + "DCIM/camera/IMG_20170821_181327.jpg";
                 ArrayList<String> pathList = new ArrayList<>();
                 pathList.add(path1);
-                pathList.add(path2);
                 Map<String , Object> bodyMap = new HashMap<>();
+                File file = null;
                 if(pathList.size() > 0) {
                     for (int i=0;i<pathList.size();i++ ){
-                        File file = new File(pathList.get(i));
-                        bodyMap.put("file"+i+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("image/png"),file));
+                        file = new File(pathList.get(i));
+                        bodyMap.put("file"+i+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("multipart/form-data"),file));
                     }
                 }
                 bodyMap.put("text","测试文字");
@@ -107,17 +109,30 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
                 RetrofitStrategy strategy = new RetrofitStrategy();
                 strategy.setApi(new ApiFactoryImpl());
                 HttpUtils.init(strategy);
-                HttpUtils.getHttpUtils().post("post.php", bodyMap, new HttpResponseCallback<TestBean>() {
-                    @Override
-                    public void onSuccess(TestBean bean) {
-                        Log.d("TAG",bean.getData());
-                    }
 
-                    @Override
-                    public void onFailure(String errorMsg) {
-                        Log.d("TAG",errorMsg);
-                    }
-                });
+                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+                bodyMap.put("part",part);
+
+                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test",bodyMap).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<ResponseBody>() {
+                            @Override
+                            public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
+                                Log.d("TAG",responseBody.string());
+                            }
+                        });
+
+//                HttpUtils.getHttpUtils().post("post.php", bodyMap, new HttpResponseCallback<TestBean>() {
+//                    @Override
+//                    public void onSuccess(TestBean bean) {
+//                        Log.d("TAG",bean.getData());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String errorMsg) {
+//                        Log.d("TAG",errorMsg);
+//                    }
+//                });
             }
         });
 

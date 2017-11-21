@@ -1,12 +1,9 @@
 package com.fanson.mylibrary;
 
 
-import com.fanson.mylibrary.bean.TestBean;
-
 import java.util.Map;
 
 import io.reactivex.Flowable;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -32,7 +29,7 @@ public interface ApiStores {
 
     //baseUrl
 //    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
-    String API_SERVER_URL = "http://174.140.166.152/"; //mei
+    String API_SERVER_URL = "http://192.168.0.165:8080/twentyfour/"; //mei
 
     @GET
     Flowable<ResponseBody> update(@Url String url);
@@ -53,11 +50,11 @@ public interface ApiStores {
     //上传文件
     @Multipart
     @POST
-    Call<ResponseBody> upload(@Url String fileUrl, @Part("description") RequestBody description, @Part MultipartBody.Part file);
+    Call<ResponseBody> upload(@Url String fileUrl, @Part("description") Map<String, Object> description, @Part RequestBody file);
 
     //上传多文件
     @Multipart
     @POST
-    Flowable<TestBean> uploadMulti(@Url String fileUrl, @PartMap Map<String, Object> params);
+    Flowable<ResponseBody> uploadMulti(@Url String fileUrl, @PartMap Map<String, Object> params);
 
 }
