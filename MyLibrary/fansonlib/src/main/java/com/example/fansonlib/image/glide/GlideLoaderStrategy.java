@@ -59,11 +59,17 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void displayFromDrawable(ImageLoaderConfig config, Context context, int imageId, ImageView imageView) {
+        with(context)
+                .load(imageId)
+                .thumbnail(0.1f) //先加载缩略图 然后在加载全图
+                .error(config.getErrorPicRes())
+                .placeholder(config.getPlacePicRes())
+                .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
+                .into(imageView);
     }
 
     @Override
     public void displayFromSDCard(ImageLoaderConfig config, String uri, ImageView imageView) {
-
     }
 
     @Override

@@ -42,7 +42,7 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static void loadImage( Context context, ImageView imageView, String imgUrl) {
+    public static void loadImage( Context context, ImageView imageView, Object imgUrl) {
         loaderConfig.getClient().loadImage(loaderConfig,context, imageView, imgUrl);
     }
 
