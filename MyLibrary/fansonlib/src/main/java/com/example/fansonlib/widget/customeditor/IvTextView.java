@@ -134,13 +134,13 @@ public class IvTextView extends ScrollView {
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         imageView.setAbsolutePath(imagePath);
         onClickImageView(imageLayout, imagePath);
-        int imageHeight = 1000; // 调整imageView的高度
+        int imageHeight = 1200; // 调整imageView的高度
         if (bmp != null) {
             imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
             bmp.recycle(); // 使用之后，还是回收掉吧
         }
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                LayoutParams.MATCH_PARENT, imageHeight);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
