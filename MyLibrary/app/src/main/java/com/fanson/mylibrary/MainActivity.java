@@ -112,9 +112,9 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
                 RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                 MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-                bodyMap.put("part",part);
+//                bodyMap.put("part",part);
 
-                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test",bodyMap).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
+                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test",part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<ResponseBody>() {
                             @Override
                             public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
