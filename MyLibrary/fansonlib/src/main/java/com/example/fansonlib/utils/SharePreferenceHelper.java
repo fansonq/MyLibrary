@@ -81,9 +81,12 @@ public class SharePreferenceHelper {
         editor.remove(key);
     }
 
-    //Clear Data
+    /**
+     * 清空所有数据
+     */
     public static void clear() {
         editor.clear();
+        editor.apply();
     }
 
     //Submit
