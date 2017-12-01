@@ -59,6 +59,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
         Log.d("TTT", "initView");
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

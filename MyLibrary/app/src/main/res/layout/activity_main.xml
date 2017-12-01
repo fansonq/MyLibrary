@@ -45,7 +45,7 @@
         android:scaleType="fitCenter" />
 
 
-    <include layout="@layout/common_loading"/>
+    <!--<include layout="@layout/common_loading"/>-->
 
 
 </RelativeLayout>

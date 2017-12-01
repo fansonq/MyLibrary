@@ -61,12 +61,12 @@ public class DateFormatUtil {
 
     /**
      * 将字符串时间转为文字描述
-     * @param time
+     * @param time 输入格式：yyyy-MM-dd HH:mm:ss
      * @return
      */
     public static String getTimeDifference(String time) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        long diff = 0;
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long diff ;
         try {
             Date publish_date = df.parse(time);
             Date now_date = new Date();
@@ -84,11 +84,12 @@ public class DateFormatUtil {
                 }
                 diff /= 24;
                 if (diff < 30) {
-                    if (diff == 1) return "昨天";
-                    return diff + "天前";
+                    if (diff == 1) {
+                        return "昨天";
+                    }
                 }
-                DateFormat df_date = new SimpleDateFormat("MM-dd");
-                return df_date.format(publish_date);
+//                DateFormat df_date = new SimpleDateFormat("MM-dd");
+//                return df_date.format(publish_date);
             }
         } catch (ParseException e) {
             e.printStackTrace();
