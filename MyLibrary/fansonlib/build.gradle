@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_7
     }
 }
 
@@ -40,7 +40,7 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'jp.wasabeef:glide-transformations:1.2.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
+//    compile 'de.greenrobot:eventbus:2.4.0'
 
     // Retrofit+Rxjava+Okhttp
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'

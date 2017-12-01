@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.fansonlib.bean.EventNetWork;
 
-import de.greenrobot.event.EventBus;
-
 
 /**
  * Created by fanson on 2016/8/25.
@@ -55,7 +53,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().registerSticky(this);
     }
 
     @Override
@@ -97,7 +94,6 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 //        SampleApplicationLike.getRefWatcher(getActivity()).watch(this);
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
