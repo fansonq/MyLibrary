@@ -51,14 +51,24 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         return R.layout.activity_main;
     }
 
+//    @Subscribe(eventTag = 0,threadMode = EventThread.MAIN_THREAD)
+//    public void dataBinding(String content){
+//        Log.d(TAG,content);
+//    }
+
+
     @Override
     protected void initView() {
+
         AppUtils.init(getApplicationContext());
         button = findMyViewId(R.id.btn);
         button2 = findMyViewId(R.id.btn2);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
         Log.d("TTT", "initView");
+
+//        MyRxbus2.getInstance().register(this);
+//        MyRxbus2.getInstance().send(0,"测试数据");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
