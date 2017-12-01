@@ -23,7 +23,6 @@ public class TestWindow extends BasePopup{
     }
 
     private void initMyView() {
-        notifyToObservers("from TestWindow");
     }
 
     @Override
