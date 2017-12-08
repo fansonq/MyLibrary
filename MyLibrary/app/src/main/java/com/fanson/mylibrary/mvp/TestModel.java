@@ -14,6 +14,8 @@ import com.fanson.mylibrary.SimpleBean;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.fansonlib.http.HttpUtils.getHttpUtils;
+
 /**
  * Created by fansonq on 2017/9/2.
  */
@@ -44,7 +46,7 @@ public class TestModel extends BaseModel{
 //        AsyncHttpStrategy.init(ApiStores.API_SERVER_URL);
 //        HttpUtils.init(new AsyncHttpStrategy());
 
-        HttpUtils.getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
+        getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
                 callback.successful(bean.getData().getName());
@@ -55,6 +57,7 @@ public class TestModel extends BaseModel{
                 callback.failure(errorMsg);
             }
         });
+
 
     }
 

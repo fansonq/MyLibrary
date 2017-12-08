@@ -75,8 +75,8 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-//                testBaseModel();
-                testImageLoader();
+                testBaseModel();
+//                testImageLoader();
 //                testDialogFragment();
 //                testLoadingView();
 //                ShowToast.singleLong("ttt");

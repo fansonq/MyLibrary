@@ -2,6 +2,8 @@ package com.example.fansonlib.http;
 
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by：fanson
  * Created on：2017/9/12 13:23
@@ -24,6 +26,11 @@ public interface IHttpStrategy<M> {
      * @param callback
      */
     void post(String url, Map  params, HttpResponseCallback<M> callback);
+
+    /**
+     * 获取当前网络的Disposable
+     */
+    Disposable getCurrentDisposable();
 
     /**
      * 取消当前的网络操作

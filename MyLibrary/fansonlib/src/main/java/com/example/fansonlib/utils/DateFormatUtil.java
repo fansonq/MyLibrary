@@ -72,7 +72,7 @@ public class DateFormatUtil {
             Date now_date = new Date();
             diff = now_date.getTime() - publish_date.getTime();
             if (diff < 0) {
-                return "from未来";
+                return "未来";
             } else {
                 diff /= (1000 * 60);
                 if (diff <= 60) {

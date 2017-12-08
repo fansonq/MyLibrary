@@ -2,6 +2,8 @@ package com.example.fansonlib.http;
 
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by：fanson
  * Created on：2017/9/12 14:39
@@ -41,6 +43,11 @@ public class HttpUtils implements IHttpStrategy {
     @Override
     public void post(String url, Map params, HttpResponseCallback callback) {
         mStrategy.post(url,params,callback);
+    }
+
+    @Override
+    public Disposable getCurrentDisposable() {
+        return mStrategy.getCurrentDisposable();
     }
 
     @Override
