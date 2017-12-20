@@ -62,7 +62,7 @@ public class RetrofitClient {
                 if (mRetrofit == null){
                     mRetrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
+//                            .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(getOkHttpClient())
                             .build();
@@ -160,8 +160,8 @@ public class RetrofitClient {
      */
     public static ResourceSubscriber startObservable(Flowable observable, ResourceSubscriber subscriber) {
         return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
-//                .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                //订阅后可以进行取消订阅
                 .doOnLifecycle(new Consumer<Subscription>() {
                     @Override
                     public void accept(Subscription subscription) throws Exception {

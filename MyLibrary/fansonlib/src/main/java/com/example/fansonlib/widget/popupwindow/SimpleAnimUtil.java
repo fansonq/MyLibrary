@@ -12,7 +12,7 @@ import android.view.animation.TranslateAnimation;
 /**
  * Created by：fanson
  * Created on：2017/4/28 11:32
- * Describe：
+ * Describe：动画类
  */
 
 public class SimpleAnimUtil {
@@ -26,16 +26,23 @@ public class SimpleAnimUtil {
     public static Animation getTranslateAnimation(int start, int end, int durationMillis) {
         Animation translateAnimation = new TranslateAnimation(0, 0, start, end);
         translateAnimation.setDuration(durationMillis);
-        translateAnimation.setFillEnabled(true);
-        translateAnimation.setFillAfter(true);
         return translateAnimation;
     }
 
 
     /**
+     * 生成自定义ScaleAnimation
+     */
+    public static Animation getDefaultScaleAnimation(boolean in) {
+        return getScaleAnimation(in ? 0 : 1, in ? 1 : 0, in ? 0 : 1, in ? 1 : 0, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+    }
+
+
+    /**
      * 生成ScaleAnimation
-     *
-     * time=300
+     * <p>
+     * time=360
      */
     public static Animation getScaleAnimation(float fromX,
                                               float toX,
@@ -48,24 +55,7 @@ public class SimpleAnimUtil {
         Animation scaleAnimation = new ScaleAnimation(fromX, toX, fromY, toY, pivotXType, pivotXValue, pivotYType,
                 pivotYValue
         );
-        scaleAnimation.setDuration(300);
-        scaleAnimation.setFillEnabled(true);
-        scaleAnimation.setFillAfter(true);
-        return scaleAnimation;
-    }
-
-
-    /**
-     * 生成自定义ScaleAnimation
-     */
-    public static Animation getDefaultScaleAnimation() {
-        Animation scaleAnimation = new ScaleAnimation(0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f,
-                Animation.RELATIVE_TO_SELF, 0.5f
-        );
-        scaleAnimation.setDuration(300);
-        scaleAnimation.setInterpolator(new AccelerateInterpolator());
-        scaleAnimation.setFillEnabled(true);
-        scaleAnimation.setFillAfter(true);
+        scaleAnimation.setDuration(360);
         return scaleAnimation;
     }
 
@@ -73,15 +63,12 @@ public class SimpleAnimUtil {
     /**
      * 生成默认的AlphaAnimation
      */
-    public static Animation getDefaultAlphaAnimation() {
-        Animation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(300);
+    public static Animation getDefaultAlphaAnimation(boolean in) {
+        Animation alphaAnimation = new AlphaAnimation(in ? 0 : 1, in ? 1 : 0);
+        alphaAnimation.setDuration(360);
         alphaAnimation.setInterpolator(new AccelerateInterpolator());
-        alphaAnimation.setFillEnabled(true);
-        alphaAnimation.setFillAfter(true);
         return alphaAnimation;
     }
-
 
 
     /**
@@ -97,6 +84,24 @@ public class SimpleAnimUtil {
             );
         }
         return set;
+    }
+
+
+    public static abstract class AnimationListenerAdapter implements Animation.AnimationListener {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
     }
 }
 
