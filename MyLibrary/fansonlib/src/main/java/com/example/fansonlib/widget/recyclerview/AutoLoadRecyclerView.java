@@ -6,8 +6,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.example.fansonlib.R;
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
 import com.example.fansonlib.utils.ImageLoaderProxy;
@@ -25,7 +28,14 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
     private LoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
-    private View emptyView; // 数据为空的时显示的View
+    /**
+     * 数据为空的时显示的View
+     */
+    private View emptyView;
+    /**
+     * 重试的视图
+     */
+    private View mRetryView;
     private boolean move = false;
     private int mIndex = 0;
     private LayoutManager mLayoutManager;
@@ -67,6 +77,8 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                 break;
             case ORIENTATION_HORIZONTAL:
                 mLayoutManager = new GridLayoutManager(mContext, column, GridLayoutManager.HORIZONTAL, false);
+                break;
+            default:
                 break;
         }
     }
@@ -152,6 +164,8 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                             imageLoader.resume();
                         }
                         break;
+                    default:
+                        break;
                 }
             }
         }
@@ -211,6 +225,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      *
      * @param adapter 适配器
      */
+    @Override
     public void setAdapter(Adapter adapter) {
         Adapter oldAdapter = getAdapter();
         if (oldAdapter != null && emptyObserver != null) {
@@ -245,12 +260,36 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
     };
 
     /**
-     * set view when no content item
+     * 设置空数据视图
      *
-     * @param emptyView visiable view when items is empty
+     * @param emptyView 传入空数据布局Layout；若传入为null则使用默认视图
      */
     public void setEmptyView(View emptyView) {
+        if (emptyView == null) {
+            emptyView = LayoutInflater.from(getContext()).inflate(R.layout.layout_no_data, AutoLoadRecyclerView.this, false);
+        }
         this.emptyView = emptyView;
+        ((ViewGroup) this.getRootView()).addView(emptyView);
+    }
+
+    /**
+     * 设置重试视图
+     *
+     * @param retryView 传入重试视图布局Layout；若传入为null则使用默认视图
+     * @param listener  监听重试
+     */
+    public void setRetryView(View retryView, final IRetryListener listener) {
+        if (mRetryView == null) {
+            mRetryView = LayoutInflater.from(getContext()).inflate(R.layout.layout_retry, AutoLoadRecyclerView.this, false);
+        }
+        this.mRetryView = retryView;
+        ((ViewGroup) this.getRootView()).addView(retryView);
+        (mRetryView.findViewById(R.id.td_retry)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClickRetry();
+            }
+        });
     }
 
 

@@ -2,7 +2,6 @@ package com.fanson.mylibrary;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.fansonlib.base.BaseFragment;
@@ -36,20 +35,22 @@ public class TestFragment extends BaseFragment {
         mRecyclerview = findMyViewId(R.id.recyclerview);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(hostActivity));
 
+
 //        List<IBean> list = new ArrayList<>();
         List<Dog> list = new ArrayList<>();
-        Dog dog = new Dog();
-        dog.setName("dog");
-        list.add(dog);
+//        Dog dog = new Dog();
+//        dog.setName("dog");
+//        list.add(dog);
 //        Cat cat = new Cat();
 //        cat.setAge(18);
 //        list.add(cat);
         adapter = new TestAdapter(hostActivity);
-        adapter.appendList(list);
+        mRecyclerview.setEmptyView(null);
         mRecyclerview.setAdapter(adapter);
+        adapter.appendList(list);
 
-        View view = LayoutInflater.from(hostActivity).inflate(R.layout.include_top_bar,null);
-        adapter.addHeaderView(view);
+//        View view = LayoutInflater.from(hostActivity).inflate(R.layout.include_top_bar,null);
+//        adapter.addHeaderView(view);
 
 //        multiAdapter = new TestMultiAdapter(hostActivity);
 //        mRecyclerview.setAdapter(multiAdapter);
