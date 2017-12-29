@@ -1,17 +1,10 @@
 package com.example.fansonlib.http.retrofit;
 
-import android.util.Log;
-
-import org.reactivestreams.Subscription;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.LongConsumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.ResourceSubscriber;
 import okhttp3.ConnectionPool;
@@ -162,22 +155,22 @@ public class RetrofitClient {
         return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //订阅后可以进行取消订阅
-                .doOnLifecycle(new Consumer<Subscription>() {
-                    @Override
-                    public void accept(Subscription subscription) throws Exception {
-                        Log.d("doOnLifecycle","OnSubscribe");
-                    }
-                }, new LongConsumer() {
-                    @Override
-                    public void accept(long t) throws Exception {
-                        Log.d("doOnLifecycle","OnRequest");
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        Log.d("doOnLifecycle","OnCancel");
-                    }
-                })
+//                .doOnLifecycle(new Consumer<Subscription>() {
+//                    @Override
+//                    public void accept(Subscription subscription) throws Exception {
+//                        Log.d("doOnLifecycle","OnSubscribe");
+//                    }
+//                }, new LongConsumer() {
+//                    @Override
+//                    public void accept(long t) throws Exception {
+//                        Log.d("doOnLifecycle","OnRequest");
+//                    }
+//                }, new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//                        Log.d("doOnLifecycle","OnCancel");
+//                    }
+//                })
                 .subscribeWith(subscriber);
     }
 
