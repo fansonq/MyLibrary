@@ -17,27 +17,29 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/7/26 14:28
  * Description：Retrofit实例
- *
- * @Param
  */
 public class RetrofitClient {
 
     public volatile static Retrofit mRetrofit;
 
-    //基础的Url
+    /**
+     * 基础的Url
+     */
     private static String BASE_URL ;
 
-    //超时的时间
+    /**
+     * 超时的时间
+     */
     private static final int DEFAULT_TIMEOUT = 10;
 
     private static Retrofit.Builder retrofitBuilder;
 
     /**
      * 初始化，设置基础URL
-     * @param url
+     * @param url 基础URL
      */
     public static void init(String url){
         BASE_URL = url;

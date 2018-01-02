@@ -14,7 +14,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.fansonlib.R;
-import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderUtils;
 
 /**
@@ -24,12 +23,24 @@ import com.example.fansonlib.image.ImageLoaderUtils;
  */
 
 public class IvTextView extends ScrollView {
-    private static final int EDIT_PADDING = 10; // edittext常规padding是10dp
 
-    private int viewTagIndex = 1; // 新生的view都会打一个tag，对每个view来说，这个tag是唯一的。
-    private LinearLayout allLayout; // 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
+    /**
+     *  edittext常规padding是10dp
+     */
+    private static final int EDIT_PADDING = 10;
+
+    /**
+     * 新生的view都会打一个tag，对每个view来说，这个tag是唯一的
+     */
+    private int viewTagIndex = 1;
+
+    /**
+     * 这个是所有子view的容器，scrollView内部的唯一一个ViewGroup
+     */
+    private LinearLayout allLayout;
+
     private LayoutInflater inflater;
-    private int editNormalPadding = 0; //
+    private int editNormalPadding = 0;
     private OnClickImageListener mOnClickImageListener;
 
     public void setOnClickImageListener(OnClickImageListener listener) {
@@ -54,14 +65,15 @@ public class IvTextView extends ScrollView {
         //allLayout.setBackgroundColor(Color.WHITE);//去掉背景
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT);
-        allLayout.setPadding(50, 15, 50, 15);//设置间距，防止生成图片时文字太靠边
+        //设置间距，防止生成图片时文字太靠边
+        allLayout.setPadding(30, 15, 30, 15);
         addView(allLayout, layoutParams);
 
         LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         //editNormalPadding = dip2px(EDIT_PADDING);
-        TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
-        allLayout.addView(firstText, firstEditParam);
+//        TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
+//        allLayout.addView(firstText, firstEditParam);
     }
 
     public int dip2px(Context context, float dipValue) {
@@ -87,7 +99,7 @@ public class IvTextView extends ScrollView {
     }
 
     /**
-     * 生成文本输入框
+     * 生成文本
      */
     public TextView createTextView(String hint, int paddingTop) {
         TextView textView = (TextView) inflater.inflate(R.layout.custom_editor_tx, null);
@@ -110,10 +122,10 @@ public class IvTextView extends ScrollView {
     }
 
     /**
-     * 在特定位置插入EditText
+     * 在特定位置插入TextView
      *
      * @param index   位置
-     * @param editStr EditText显示的文字
+     * @param editStr TextView显示的文字
      */
     public void addTextViewAtIndex(final int index, CharSequence editStr) {
         TextView textView = createTextView("", EDIT_PADDING);
