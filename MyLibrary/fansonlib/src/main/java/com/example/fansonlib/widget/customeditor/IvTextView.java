@@ -69,8 +69,9 @@ public class IvTextView extends ScrollView {
         allLayout.setPadding(30, 15, 30, 15);
         addView(allLayout, layoutParams);
 
-        LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        /**默认添加一个TextView**/
+//        LinearLayout.LayoutParams firstEditParam = new LinearLayout.LayoutParams(
+//                LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         //editNormalPadding = dip2px(EDIT_PADDING);
 //        TextView firstText = createTextView(AppUtils.getAppContext().getString(R.string.no_content), dip2px(context, EDIT_PADDING));
 //        allLayout.addView(firstText, firstEditParam);

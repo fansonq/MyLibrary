@@ -1,17 +1,10 @@
 package com.example.fansonlib.base;
 
-import android.util.Log;
-
 import com.example.fansonlib.http.HttpUtils;
-
-import org.reactivestreams.Subscription;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.LongConsumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.ResourceSubscriber;
 
@@ -45,25 +38,26 @@ public class BaseModel implements IBaseModel{
     protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
         return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnLifecycle(new Consumer<Subscription>() {
-                    @Override
-                    public void accept(Subscription subscription) throws Exception {
-                        Log.d(TAG, "OnSubscribe");
-                    }
-                }, new LongConsumer() {
-                    @Override
-                    public void accept(long t) throws Exception {
-                        Log.d(TAG, "OnRequest");
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        Log.d(TAG, "OnCancel");
-                    }
-                })
+//                .doOnLifecycle(new Consumer<Subscription>() {
+//                    @Override
+//                    public void accept(Subscription subscription) throws Exception {
+//                        Log.d(TAG, "OnSubscribe");
+//                    }
+//                }, new LongConsumer() {
+//                    @Override
+//                    public void accept(long t) throws Exception {
+//                        Log.d(TAG, "OnRequest");
+//                    }
+//                }, new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//                        Log.d(TAG, "OnCancel");
+//                    }
+//                })
                 .subscribeWith(subscriber);
     }
 
+    @Override
     public void onDestroy() {
         unSubscribe();
     }
