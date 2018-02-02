@@ -230,7 +230,11 @@ public  abstract class BaseDialogFragment extends DialogFragment {
     }
 
     public BaseDialogFragment show(FragmentManager manager) {
-        super.show(manager, String.valueOf(System.currentTimeMillis()));
+        try {
+            super.show(manager, String.valueOf(System.currentTimeMillis()));
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 
