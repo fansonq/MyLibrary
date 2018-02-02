@@ -13,7 +13,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
  * 数据层操作的BaseModel
  */
 
-public class BaseModel implements IBaseModel{
+public class BaseModel implements IBaseRepository {
     private static final String TAG = BaseModel.class.getSimpleName();
     private Disposable mDisposable;
 

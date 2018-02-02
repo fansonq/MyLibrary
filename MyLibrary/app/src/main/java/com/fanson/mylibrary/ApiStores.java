@@ -28,8 +28,7 @@ import retrofit2.http.Url;
 public interface ApiStores {
 
     //baseUrl
-//    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
-    String API_SERVER_URL = "http://192.168.0.165:8080/twentyfour/"; //mei
+    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
 
     @GET
     Flowable<ResponseBody> update(@Url String url);

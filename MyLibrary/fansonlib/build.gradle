@@ -40,7 +40,6 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'jp.wasabeef:glide-transformations:1.2.1'
-//    compile 'de.greenrobot:eventbus:2.4.0'
 
     // Retrofit+Rxjava+Okhttp
     compile 'io.reactivex.rxjava2:rxjava:2.0.7'
@@ -50,22 +49,14 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
+    compile "android.arch.lifecycle:runtime:1.1.0"
+    compile "android.arch.lifecycle:extensions:1.1.0"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+
 //    compile 'com.facebook.stetho:stetho:1.5.0'
 //    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
-    /*----------retrofit+rxjava--------*/
-    //    compile 'io.reactivex:rxjava:1.1.0'
-    //    compile 'io.reactivex:rxandroid:1.1.0'
-    //    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    //    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    //    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    //    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    //    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-    /*----------retrofit+rxjava--------*/
-
     compile 'com.lqr.emoji:library:1.0.2'
-    //    compile 'com.lqr.imagepicker:library:1.0.0' //图片选择
-    //    compile 'com.lzy.widget:imagepicker:0.5.5'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'de.hdodenhof:circleimageview:2.2.0'  //圆形图片
 //    compile 'com.jude:swipebackhelper:3.1.2' //侧滑返回

@@ -1,8 +1,10 @@
 package com.fanson.mylibrary;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +20,6 @@ import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.ContractTest;
-import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
 import com.fanson.mylibrary.update.TestWindow;
@@ -43,8 +44,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     private ImageView iv_pic;
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
-    private Test2Prensenter mTestPresenter2;
-    private Button button, button2,btn_fragment,btn_upload;
+    private Button button, button2, btn_fragment, btn_upload;
 
     @Override
     protected int getContentView() {
@@ -96,7 +96,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(R.id.fl_main,new TestFragment());
+                replaceFragment(R.id.fl_main, new TestFragment());
             }
         });
 
@@ -107,15 +107,15 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
                 String path1 = Environment.getExternalStorageDirectory() + File.separator + "DCIM/camera/IMG_20170821_181327.jpg";
                 ArrayList<String> pathList = new ArrayList<>();
                 pathList.add(path1);
-                Map<String , Object> bodyMap = new HashMap<>();
+                Map<String, Object> bodyMap = new HashMap<>();
                 File file = null;
-                if(pathList.size() > 0) {
-                    for (int i=0;i<pathList.size();i++ ){
+                if (pathList.size() > 0) {
+                    for (int i = 0; i < pathList.size(); i++) {
                         file = new File(pathList.get(i));
-                        bodyMap.put("file"+i+"\";filename=\""+file.getName(),RequestBody.create(MediaType.parse("multipart/form-data"),file));
+                        bodyMap.put("file" + i + "\";filename=\"" + file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
                     }
                 }
-                bodyMap.put("text","测试文字");
+                bodyMap.put("text", "测试文字");
                 RetrofitClient.init(ApiStores.API_SERVER_URL);
                 RetrofitStrategy strategy = new RetrofitStrategy();
                 strategy.setApi(new ApiFactoryImpl());
@@ -125,11 +125,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
                 MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 //                bodyMap.put("part",part);
 
-                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test",part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
+                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test", part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<ResponseBody>() {
                             @Override
                             public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
-                                Log.d("TAG",responseBody.string());
+                                Log.d("TAG", responseBody.string());
                             }
                         });
 
@@ -164,7 +164,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     private void testDialogFragment() {
 //        DoubleDialog.newInstance("你预约成功").show(getSupportFragmentManager());
-        DoubleDialog.newInstance("提示","抱歉！暂时没有在线客服人员，请稍后再试")
+        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试")
                 .setConfirmListener(new IConfirmListener() {
                     @Override
                     public void onConfirm() {
@@ -210,6 +210,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     private void testBaseModel() {
         mPresenter.testPresenterMethod();
+        mPresenter.observe(this, new Observer<SimpleBean>() {
+            @Override
+            public void onChanged(@Nullable SimpleBean bean) {
+                if (bean != null) {
+                    button.setText(bean.getData().getName());
+                }
+            }
+        });
     }
 
     private void testUpdate() {
@@ -276,8 +284,12 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     }
 
     @Override
-    public void testSuccess(String message) {
-        ShowToast.singleLong(message);
+    public void showCode102(String message) {
+
     }
 
+    @Override
+    public void showFailure(String errorMsg) {
+
+    }
 }

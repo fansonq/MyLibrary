@@ -49,7 +49,7 @@ public class TestModel extends BaseModel{
         getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
-                callback.successful(bean.getData().getName());
+                callback.successful(bean);
             }
 
             @Override

@@ -26,15 +26,11 @@ public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends Bas
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter1.onResume();
-        mPresenter2.onResume();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter1.onStop();
-        mPresenter2.onStop();
     }
 
     @Override

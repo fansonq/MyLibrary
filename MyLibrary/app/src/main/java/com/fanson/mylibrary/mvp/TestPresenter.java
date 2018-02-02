@@ -2,26 +2,39 @@ package com.fanson.mylibrary.mvp;
 
 import android.util.Log;
 
-import com.example.fansonlib.base.BasePresenterWithM;
+import com.example.fansonlib.base.BasePresenterRep;
+import com.fanson.mylibrary.SimpleBean;
 
 /**
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestPresenter extends BasePresenterWithM<TestModel,ContractTest.TestView> implements ContractTest.ITestPresenter,TestCallback{
+public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter,TestCallback{
 
-    public TestPresenter(ContractTest.TestView view){
-        attachView(view);
-    }
 
-    public void testMethod(){
-        mBaseModel.method(this);
-        Log.d("TTT","testMethod");
+    public TestPresenter(ContractTest.TestView baseView) {
+        super(baseView);
     }
 
     @Override
-    public void successful(String message) {
-        getBaseView().testSuccess(message);
+    protected TestModel createRepository() {
+        return new TestModel();
+    }
+
+
+    @Override
+    public void successful(SimpleBean bean ) {
+        switch (bean.getCode()){
+            case 1:
+                getSoftContext();
+                setValue(bean);
+                break;
+            case 2:
+                getBaseView().showCode102(bean.getMessage());
+            default:
+                break;
+        }
+
     }
 
     @Override
@@ -29,14 +42,10 @@ public class TestPresenter extends BasePresenterWithM<TestModel,ContractTest.Tes
 
     }
 
-    @Override
-    protected TestModel createModel() {
-        return new TestModel();
-    }
 
     @Override
     public void testPresenterMethod() {
-        mBaseModel.method(this);
         Log.d("TTT","testMethod");
+        mBaseRepository.method(this);
     }
 }

@@ -12,7 +12,9 @@ public class ContractTest {
 
     public interface TestView extends BaseView {
 
-        void testSuccess(String message);
+        void showCode102(String message);
+
+        void showFailure(String errorMsg);
     }
 
     public interface ITestPresenter   {

@@ -23,20 +23,19 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.onResume();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mPresenter.onStop();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null)
+        if (mPresenter != null){
             mPresenter.detachView();
+        }
     }
 
     /**
