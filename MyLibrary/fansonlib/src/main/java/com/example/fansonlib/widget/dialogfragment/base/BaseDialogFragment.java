@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ import com.example.fansonlib.R;
  */
 
 public  abstract class BaseDialogFragment extends DialogFragment {
+
+    private static final String TAG = BaseDialogFragment.class.getSimpleName();
     private static final String MARGIN = "margin";
     private static final String WIDTH = "width";
     private static final String HEIGHT = "height";
@@ -230,7 +233,12 @@ public  abstract class BaseDialogFragment extends DialogFragment {
     }
 
     public BaseDialogFragment show(FragmentManager manager) {
-        super.show(manager, String.valueOf(System.currentTimeMillis()));
+        try {
+            super.show(manager, String.valueOf(System.currentTimeMillis()));
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Log.e(TAG,"Show Dialogfragment IllegalStateException");
+        }
         return this;
     }
 

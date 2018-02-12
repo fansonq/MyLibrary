@@ -322,52 +322,62 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 切换Framgment（hide/show）
      *
-     * @param id_content
+     * @param idContent
      * @param fromFragment
      * @param toFragment
      */
-    protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
-        }
+    protected void switchFragment(int idContent, Fragment fromFragment, Fragment toFragment) {
+        switchFragmentWithTag(idContent,fromFragment,toFragment,null);
     }
 
     /**
-     * 切换Framgment（hide/show）
-     * 带TAG
+     * 切换Framgment（hide/show）带TAG
      *
-     * @param id_content
+     * @param idContent
      * @param fromFragment
      * @param toFragment
      * @param tagOfTo      标识
      */
-    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
+    protected void switchFragmentWithTag(int idContent, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
+            transaction.hide(fromFragment).add(idContent, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
         }
     }
 
     /**
      * 切换Framgment（hide/show）（带动画）
      *
-     * @param id_content
+     * @param idContent
      * @param fromFragment
      * @param toFragment
+     * @param enter
+     * @param eixt
      */
-    protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
+    protected void switchFragmentWithAnim(int idContent, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
+        switchFragment(idContent,fromFragment,toFragment,enter,eixt,null);
+    }
+
+    /**
+     * 切换Framgment（hide/show）（带动画和TAG）
+     * @param idContent
+     * @param fromFragment
+     * @param toFragment
+     * @param enter
+     * @param eixt
+     * @param tag
+     */
+    protected void switchFragment(int idContent, Fragment fromFragment, Fragment toFragment, int enter, int eixt,String tag) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         if (toFragment.isAdded()) {
             transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
         } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
+            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(idContent, toFragment).addToBackStack(tag).commitAllowingStateLoss();
         }
     }
+
 
     /**
      * 通过Class跳转界面
