@@ -2,7 +2,7 @@ package com.fanson.mylibrary.adapter;
 
 import android.util.Log;
 
-import com.example.fansonlib.base.BaseHolder;
+import com.example.fansonlib.base.adapter.BaseHolder;
 import com.example.fansonlib.base.adapter.ItemViewDelegate;
 import com.fanson.mylibrary.R;
 

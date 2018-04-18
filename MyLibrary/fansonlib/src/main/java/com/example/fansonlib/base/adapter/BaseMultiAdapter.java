@@ -5,9 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.base.BaseDataAdapter;
-import com.example.fansonlib.base.BaseHolder;
-
 import java.util.List;
 
 /**

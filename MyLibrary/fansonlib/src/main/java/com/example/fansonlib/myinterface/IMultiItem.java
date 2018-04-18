@@ -2,7 +2,7 @@ package com.example.fansonlib.myinterface;
 
 import android.support.annotation.LayoutRes;
 
-import com.example.fansonlib.base.BaseHolder;
+import com.example.fansonlib.base.adapter.BaseHolder;
 
 /**
  * Created by：fanson

@@ -1,7 +1,5 @@
 package com.example.fansonlib.base.adapter;
 
-import com.example.fansonlib.base.BaseHolder;
-
 /**
  * Created by zhy on 16/6/22.
  */

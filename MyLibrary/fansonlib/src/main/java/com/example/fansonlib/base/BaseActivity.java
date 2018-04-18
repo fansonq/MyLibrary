@@ -12,9 +12,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
@@ -31,16 +28,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private Context mContext;
 
-    public static final String CHINESE = "zh";
-    public static final String ENGLISH = "en";
-
     /**
      * 监听网络连接状态的广播
      */
     private BroadcastReceiver netStateBroadcastReceiver;
     private AlertDialog.Builder dialogBuilder;
 
-    private FragmentManager fragmentManager = getSupportFragmentManager();
     /**
      * 记录退出时间
      */
@@ -178,195 +171,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         return view;
     }
 
-
-    /**
-     * 加载Fragment(带动画)
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragment(int id_content, Fragment fragment, int enter, int exit) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enter, exit);
-        transaction.replace(id_content, fragment);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 加载Fragment
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragment(int id_content, Fragment fragment) {
-        replaceFragmentWithTag(id_content, fragment, null);
-    }
-
-    /**
-     * 加载Fragment（附带tag）
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment, tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 加载Fragment,添加回退栈
-     *
-     * @param id_content
-     * @param fragment   目标Fragment
-     * @param tag        标志
-     */
-    protected void replaceFragmentToStack(int id_content, Fragment fragment, String tag) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(id_content, fragment, tag).addToBackStack(tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 添加Fragment(带动画)
-     *
-     * @param id_content
-     * @param fragment
-     * @param enter      进场动画
-     * @param exit       退场动画
-     * @param tag
-     */
-    protected void addFragmentWithTag(int id_content, Fragment fragment, int enter, int exit, String tag) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setCustomAnimations(enter, exit);
-        transaction.add(id_content, fragment, tag).addToBackStack(tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 添加Fragment
-     *
-     * @param id_content
-     * @param fragment
-     * @param tag
-     */
-    protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(id_content, fragment, tag).addToBackStack(tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 切换Framgment（hide/show）
-     *
-     * @param id_content
-     * @param fromFragment
-     * @param toFragment
-     */
-    protected void switchFragment(int id_content, Fragment fromFragment, Fragment toFragment) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 切换Framgment（hide/show）
-     * 带TAG
-     *
-     * @param id_content
-     * @param fromFragment
-     * @param toFragment
-     * @param tagOfTo      标识
-     */
-    protected void switchFragmentWithTag(int id_content, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).add(id_content, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 切换Framgment（hide/show）（带动画）
-     *
-     * @param id_content
-     * @param fromFragment
-     * @param toFragment
-     */
-    protected void switchFragmentWithAnim(int id_content, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(id_content, toFragment).addToBackStack(null).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 显示存在的Fragment
-     *
-     * @param fragment
-     */
-    protected void showFragment(Fragment fragment) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if (fragment.isAdded()) {
-            transaction.show(fragment).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 删除指定的Fragment
-     *
-     * @param fragment
-     */
-    protected void removeFragment(Fragment fragment) {
-        if (fragmentManager != null && fragment != null) {
-            fragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 查找指定Tag的Fragment
-     *
-     * @param tag
-     * @return
-     */
-    public Fragment findFragmentByTag(String tag) {
-        if (fragmentManager != null) {
-            return fragmentManager.findFragmentByTag(tag);
-        }
-        return null;
-    }
-
-    /**
-     * 查找指定Id的Fragment
-     *
-     * @param id
-     * @return
-     */
-    public Fragment findFragmentById(int id) {
-        if (fragmentManager != null) {
-            return fragmentManager.findFragmentById(id);
-        }
-        return null;
-    }
-
-    /**
-     * 删除指定tag的Fragment
-     *
-     * @param tag
-     */
-    protected void removeFragment(String tag) {
-        if (fragmentManager != null) {
-            removeFragment(fragmentManager.findFragmentByTag(tag));
-            fragmentManager.popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
     /**
      * 跳转Activity
      *
@@ -388,25 +192,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK
-//                && event.getAction() == KeyEvent.ACTION_DOWN) {
-//            if ((System.currentTimeMillis() - exitTime) > 2000) {
-//                exitTime = System.currentTimeMillis();
-//                ShowToast.Short(getResources().getString(R.string.again_exit));
-//            } else {
-//                finish();
-//            }
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
-
-
     /**
      * 退出所有的Activity
      */
-    public void CloseAllActivity() {
+    public void closeAllActivity() {
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

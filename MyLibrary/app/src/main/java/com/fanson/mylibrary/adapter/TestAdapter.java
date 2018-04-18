@@ -2,8 +2,8 @@ package com.fanson.mylibrary.adapter;
 
 import android.content.Context;
 
-import com.example.fansonlib.base.BaseDataAdapter;
-import com.example.fansonlib.base.BaseHolder;
+import com.example.fansonlib.base.adapter.BaseDataAdapter;
+import com.example.fansonlib.base.adapter.BaseHolder;
 import com.fanson.mylibrary.R;
 
 /**

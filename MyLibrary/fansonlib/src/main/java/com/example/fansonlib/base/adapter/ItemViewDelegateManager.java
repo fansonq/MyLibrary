@@ -4,8 +4,6 @@ import android.support.v4.util.SparseArrayCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.base.BaseHolder;
-
 
 /**
  * Created by zhy on 16/6/22.
