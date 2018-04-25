@@ -92,8 +92,10 @@
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 27 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="appcompat-v7-27.1.1" level="project" />
+    <orderEntry type="library" exported="" name="support-vector-drawable-27.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
     <orderEntry type="library" exported="" name="okhttp3-integration-1.4.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-idling-resource-2.2.2" level="project" />
@@ -101,35 +103,36 @@
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.3" level="project" />
     <orderEntry type="library" exported="" name="glide-transformations-1.2.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-integration-1.3" level="project" />
-    <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="viewmodel-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="library-1.2.4" level="project" />
+    <orderEntry type="library" exported="" name="support-compat-27.1.1" level="project" />
+    <orderEntry type="library" exported="" name="animated-vector-drawable-27.1.1" level="project" />
     <orderEntry type="library" exported="" name="library-1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="palette-v7-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-27.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
-    <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-fragment-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="espresso-core-2.2.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="rules-0.5" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-solver-1.0.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javax.annotation-api-1.2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javax.inject-1" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="circleimageview-2.2.0" level="project" />
+    <orderEntry type="library" exported="" name="livedata-core-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="runtime-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="1_runtime-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="support-core-utils-27.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
-    <orderEntry type="library" exported="" name="support-v4-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-media-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" exported="" name="support-core-ui-27.1.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
-    <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="support-fragment-27.1.1" level="project" />
+    <orderEntry type="library" exported="" name="palette-v7-27.1.1" level="project" />
     <orderEntry type="module" module-name="fansonlib" exported="" />
-    <orderEntry type="library" exported="" name="android-android-25" level="project" />
+    <orderEntry type="library" exported="" name="android-android-27" level="project" />
     <orderEntry type="library" exported="" name="rxjava-2.0.7" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-27.1.1" level="project" />
     <orderEntry type="library" exported="" name="httpclient-4.3.6" level="project" />
     <orderEntry type="library" exported="" name="glide-3.7.0" level="project" />
     <orderEntry type="library" exported="" name="reactive-streams-1.0.0" level="project" />
@@ -139,6 +142,8 @@
     <orderEntry type="library" exported="" name="converter-gson-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="okio-1.11.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-3.6.0" level="project" />
+    <orderEntry type="library" exported="" name="common-1.1.0" level="project" />
+    <orderEntry type="library" exported="" name="1_common-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="logging-interceptor-3.6.0" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
   </component>
