@@ -180,7 +180,7 @@ public class BaseBuilder {
 
 
     public void build(){
-        cBuilder = new NotificationCompat.Builder(MyNotificationUtils.mContext);
+        cBuilder = new NotificationCompat.Builder(MyNotificationUtils.mContext,"1");
         cBuilder.setContentIntent(contentIntent);// 该通知要启动的Intent
 
         if(smallIcon >0){

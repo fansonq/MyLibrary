@@ -1,6 +1,5 @@
 package com.fanson.mylibrary;
 
-import android.content.Intent;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -14,14 +13,13 @@ import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.Test2Prensenter;
 import com.fanson.mylibrary.mvp.TestPresenter;
-import com.fanson.mylibrary.update.MyUpdateService;
-import com.fanson.mylibrary.update.TestWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -75,13 +73,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             public void onClick(View view) {
 //                testUpdate();
 //                testPopuWindow();
-                testBaseModel();
+//                testBaseModel();
 //                testImageLoader();
 //                testDialogFragment();
 //                testLoadingView();
 //                ShowToast.singleLong("ttt");
 //                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
 //                ShowToast.Long("QQQQ");
+                testNotification();
             }
         });
 
@@ -203,21 +202,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 //        });
     }
 
-    private void testPopuWindow() {
-        TestWindow window = new TestWindow(this);
-        window.showPopupWindow();
-    }
-
     private void testBaseModel() {
         mPresenter.testPresenterMethod();
     }
 
-    private void testUpdate() {
-        String updateUrl = "WVector/AppUpdateDemo/master/json/json.txt";
-        Intent intent = new Intent(this, MyUpdateService.class);
-        intent.putExtra("url", updateUrl);
-        startService(intent);
-    }
 
     private void testLoadingView() {
 //        View view = this.getLayoutInflater().inflate(R.layout.view_loading, null);
@@ -278,6 +266,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     @Override
     public void testSuccess(String message) {
         ShowToast.singleLong(message);
+    }
+
+    private void testNotification(){
+        MyNotificationUtils.init(this);
+        MyNotificationUtils.buildSimple(1,R.mipmap.ic_launcher_round,"test","test content!",MyNotificationUtils.buildIntent(MainActivity.class)).show();
     }
 
 }

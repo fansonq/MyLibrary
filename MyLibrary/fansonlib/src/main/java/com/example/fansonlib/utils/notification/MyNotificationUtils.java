@@ -2,6 +2,7 @@ package com.example.fansonlib.utils.notification;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -27,6 +28,10 @@ public class MyNotificationUtils {
 
     private static NotificationManager mNotificationManager;
 
+    private static String mChannelID = "1";
+
+    private static String mChannelName = "channel_name";
+
     /**
      * 初始化
      *
@@ -35,6 +40,10 @@ public class MyNotificationUtils {
     public static void init(Context context) {
         mContext = context;
         mNotificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= 26) {
+            NotificationChannel channel = new NotificationChannel(mChannelID, mChannelName, NotificationManager.IMPORTANCE_HIGH);
+            mNotificationManager.createNotificationChannel(channel);
+        }
     }
 
     /**
