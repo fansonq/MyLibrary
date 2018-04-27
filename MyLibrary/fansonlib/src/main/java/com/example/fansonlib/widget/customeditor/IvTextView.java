@@ -195,14 +195,12 @@ public class IvTextView extends ScrollView {
                     @Override
                     public void accept(@NonNull float[] image) throws Exception {
                         //为了图片宽度适应屏幕，所以按比例拉伸
-                        Log.d("TTT","width = "+image[0]);
                         float ratio = DimensUtils.getScreenWidth(getContext()) / image[0];
                         imageView.setAbsolutePath(imagePath);
                         if (ratio > 1) {
                             image[1] = (image[1] * ratio);
                         }
                         imageView.setMinimumHeight((int) image[1]);
-                        Log.d("TTT","height = "+(int) image[1]+"  ratio = "+ratio);
                         ImageLoaderUtils.loadCornerImage(getContext(), imageView, imagePath);
                     }
                 });
