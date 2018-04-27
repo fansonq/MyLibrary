@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -149,10 +149,34 @@ public class IvTextView extends ScrollView {
 
     /**
      * 在特定位置添加ImageView
-     * @param index 序号
+     *
+     * @param index     序号
      * @param imagePath 图片Url
      */
     public void addImageViewAtIndex(final int index, final String imagePath) {
+        setImageLayout(index, imagePath);
+    }
+
+    /**
+     * 将图片资源加载入布局
+     *
+     * @param imagePath 图片Url
+     * @param index     序号
+     */
+    private void setImageLayout(int index, String imagePath) {
+
+        final RelativeLayout imageLayout = createImageLayout();
+        ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.bottomMargin = 10;
+        imageView.setLayoutParams(lp);
+        onClickImageView(imageLayout, imagePath);
+        allLayout.addView(imageLayout, index);
+        loadImage(imagePath,imageView);
+    }
+
+    private void loadImage(final String imagePath, final ImageEditor imageView) {
         Observable.create(new ObservableOnSubscribe<float[]>() {
             @Override
             public void subscribe(ObservableEmitter<float[]> e) throws Exception {
@@ -162,43 +186,26 @@ public class IvTextView extends ScrollView {
                 Bitmap bitmap = BitmapFactory.decodeStream(stream);
                 int imageHeight = bitmap.getHeight();
                 int imageWidth = bitmap.getWidth();
-                e.onNext(new float[]{imageWidth, imageHeight});
                 bitmap.recycle();
+                e.onNext(new float[]{imageWidth, imageHeight});
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<float[]>() {
                     @Override
                     public void accept(@NonNull float[] image) throws Exception {
-                        setImageLayout(image[0], image[1], imagePath, index);
+                        //为了图片宽度适应屏幕，所以按比例拉伸
+                        Log.d("TTT","width = "+image[0]);
+                        float ratio = DimensUtils.getScreenWidth(getContext()) / image[0];
+                        imageView.setAbsolutePath(imagePath);
+                        if (ratio > 1) {
+                            image[1] = (image[1] * ratio);
+                        }
+                        imageView.setMinimumHeight((int) image[1]);
+                        Log.d("TTT","height = "+(int) image[1]+"  ratio = "+ratio);
+                        ImageLoaderUtils.loadCornerImage(getContext(), imageView, imagePath);
                     }
                 });
-    }
-
-    /**
-     * 将图片资源加载入布局
-     * @param width 图片宽度
-     * @param height 图片长度
-     * @param imagePath 图片Url
-     * @param index 序号
-     */
-    private void setImageLayout(float width, float height, String imagePath, int index) {
-        //为了图片宽度适应屏幕，所以按比例拉伸
-        float ratio = DimensUtils.getScreenWidth(getContext()) / width;
-        final RelativeLayout imageLayout = createImageLayout();
-        ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
-        ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
-        imageView.setAbsolutePath(imagePath);
-        onClickImageView(imageLayout, imagePath);
-        if (ratio > 0) {
-            height = (height * ratio);
-        }
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, (int) height);
-        lp.bottomMargin = 10;
-        imageView.setLayoutParams(lp);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        allLayout.addView(imageLayout, index);
     }
 
     /**

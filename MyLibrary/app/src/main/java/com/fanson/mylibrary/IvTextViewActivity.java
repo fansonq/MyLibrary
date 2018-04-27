@@ -1,7 +1,5 @@
 package com.fanson.mylibrary;
 
-import android.util.Log;
-
 import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.ImageLoaderUtils;
@@ -24,13 +22,15 @@ public class IvTextViewActivity extends BaseActivity {
             "\n" +
             "隨著比特幣價格的起起伏伏，媒體一直孜孜不倦地報導著比特幣的「死亡」。根據 99bitcoins 網站實時更新的「比特幣訃告」，到目前為止，比特幣已「死亡」278 次。其中，2011 年 1 月至 6 月，被報導 3 次「死亡」； 2013 年 10 月至 11 月有 5 次；2018 年以來有 46 次。";
 
-    private String content2 = "<img src=\"/file//images/article//31/YwRBX_1524564495038104.jpg\"/>";
+    private String content2 =  "<img src=\"/file//images/article//2/VGnVQ_1524734763718949.jpg\"/>";
 
-    private String content3 = "<img src=\"/file//images/article//2/VGnVQ_1524734763718949.jpg\"/>";
+    private String content3 = "测试图片中插入文字";
 
-    private String content4 = "<img src=\"/file//images/article//3/6AZnj_1524565337661150.jpg\"/>";
+    private String content4 = "<img src=\"/file//images/article//31/YwRBX_1524564495038104.jpg\"/>";
 
-    private String content5 = "這真的只是巧合嗎？也許是。\n" +
+    private String content5 = "<img src=\"/file//images/article//3/6AZnj_1524565337661150.jpg\"/>";
+
+    private String content6 = "這真的只是巧合嗎？也許是。\n" +
             "\n" +
             "比特幣需求的激增不僅加劇了泡沫，也觸發了對期貨市場的需求。但是，比特幣價格崩盤的時機恰好發生在引入比特幣期貨市場之後，這正是其可怕之處。它反映了經濟學家 Charles Noussair 和 Steven Tucker 在 2006 年發表的一篇論文的研究結果，論文將期貨市場引入交易實驗：";
 
@@ -52,6 +52,7 @@ public class IvTextViewActivity extends BaseActivity {
         setData(content3);
         setData(content4);
         setData(content5);
+        setData(content6);
     }
 
     private void initImageUtil() {
@@ -69,10 +70,8 @@ public class IvTextViewActivity extends BaseActivity {
         if (text.contains("<img") && text.contains("src=")) {
             String imagePath = BASE_URL + StringUtils.getImgSrc(text);
             mIvTextView.addImageViewAtIndex(mIvTextView.getLastIndex(), imagePath);
-            Log.d("TTT",""+mIvTextView.getLastIndex());
         } else {
             mIvTextView.addTextViewAtIndex(mIvTextView.getLastIndex(), text);
-            Log.d("TTT",""+mIvTextView.getLastIndex());
         }
     }
 
