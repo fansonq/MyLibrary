@@ -22,7 +22,7 @@ public class IvTextViewActivity extends BaseActivity {
             "\n" +
             "隨著比特幣價格的起起伏伏，媒體一直孜孜不倦地報導著比特幣的「死亡」。根據 99bitcoins 網站實時更新的「比特幣訃告」，到目前為止，比特幣已「死亡」278 次。其中，2011 年 1 月至 6 月，被報導 3 次「死亡」； 2013 年 10 月至 11 月有 5 次；2018 年以來有 46 次。";
 
-    private String content2 =  "<img src=\"/file//images/article//2/VGnVQ_1524734763718949.jpg\"/>";
+    private String content2 =  "<img src=\"/file//images/article//2/u2KWs_1523945230506284.png\"/>";
 
     private String content3 = "测试图片中插入文字";
 

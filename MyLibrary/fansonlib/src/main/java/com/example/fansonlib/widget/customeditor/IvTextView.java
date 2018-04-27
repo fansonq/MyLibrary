@@ -17,6 +17,7 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.utils.DimensUtils;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -173,21 +174,33 @@ public class IvTextView extends ScrollView {
         imageView.setLayoutParams(lp);
         onClickImageView(imageLayout, imagePath);
         allLayout.addView(imageLayout, index);
-        loadImage(imagePath,imageView);
+        loadImage(imagePath, imageView);
     }
 
     private void loadImage(final String imagePath, final ImageEditor imageView) {
         Observable.create(new ObservableOnSubscribe<float[]>() {
             @Override
             public void subscribe(ObservableEmitter<float[]> e) throws Exception {
-                URLConnection connection = new URL(imagePath).openConnection();
-                connection.connect();
-                InputStream stream = connection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                int imageHeight = bitmap.getHeight();
-                int imageWidth = bitmap.getWidth();
-                bitmap.recycle();
-                e.onNext(new float[]{imageWidth, imageHeight});
+                InputStream stream = null;
+                Bitmap bitmap = null;
+                try {
+                    URLConnection connection = new URL(imagePath).openConnection();
+                    connection.connect();
+                    stream = connection.getInputStream();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+                BitmapFactory.Options options = null;
+                if (stream != null) {
+                     options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeStream(stream, null, options);
+                }
+                if (options != null) {
+                    int imageHeight = options.outHeight;
+                    int imageWidth = options.outWidth;
+                    e.onNext(new float[]{imageWidth, imageHeight});
+                }
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
