@@ -15,6 +15,19 @@ import android.widget.TextView;
 
 import com.example.fansonlib.R;
 import com.example.fansonlib.image.ImageLoaderUtils;
+import com.example.fansonlib.utils.DimensUtils;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by：fanson
@@ -25,7 +38,7 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 public class IvTextView extends ScrollView {
 
     /**
-     *  edittext常规padding是10dp
+     * edittext常规padding是10dp
      */
     private static final int EDIT_PADDING = 10;
 
@@ -136,27 +149,55 @@ public class IvTextView extends ScrollView {
 
     /**
      * 在特定位置添加ImageView
+     * @param index 序号
+     * @param imagePath 图片Url
      */
-    public void addImageViewAtIndex(final int index, String imagePath) {
-        setImageLayout(BitmapFactory.decodeFile(imagePath), imagePath, index);
+    public void addImageViewAtIndex(final int index, final String imagePath) {
+        Observable.create(new ObservableOnSubscribe<float[]>() {
+            @Override
+            public void subscribe(ObservableEmitter<float[]> e) throws Exception {
+                URLConnection connection = new URL(imagePath).openConnection();
+                connection.connect();
+                InputStream stream = connection.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                int imageHeight = bitmap.getHeight();
+                int imageWidth = bitmap.getWidth();
+                e.onNext(new float[]{imageWidth, imageHeight});
+                bitmap.recycle();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<float[]>() {
+                    @Override
+                    public void accept(@NonNull float[] image) throws Exception {
+                        setImageLayout(image[0], image[1], imagePath, index);
+                    }
+                });
     }
 
-    private void setImageLayout(Bitmap bmp, String imagePath, int index) {
+    /**
+     * 将图片资源加载入布局
+     * @param width 图片宽度
+     * @param height 图片长度
+     * @param imagePath 图片Url
+     * @param index 序号
+     */
+    private void setImageLayout(float width, float height, String imagePath, int index) {
+        //为了图片宽度适应屏幕，所以按比例拉伸
+        float ratio = DimensUtils.getScreenWidth(getContext()) / width;
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
         ImageLoaderUtils.loadImage(getContext(), imageView, imagePath);
         imageView.setAbsolutePath(imagePath);
         onClickImageView(imageLayout, imagePath);
-        int imageHeight = 1200; // 调整imageView的高度
-        if (bmp != null) {
-            imageHeight = allLayout.getWidth() * bmp.getHeight() / bmp.getWidth();
-            bmp.recycle(); // 使用之后，还是回收掉吧
+        if (ratio > 0) {
+            height = (height * ratio);
         }
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, imageHeight);
+                LayoutParams.MATCH_PARENT, (int) height);
         lp.bottomMargin = 10;
         imageView.setLayoutParams(lp);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         allLayout.addView(imageLayout, index);
     }
 
