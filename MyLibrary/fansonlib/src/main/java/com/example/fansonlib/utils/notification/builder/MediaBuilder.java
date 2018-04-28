@@ -3,8 +3,8 @@ package com.example.fansonlib.utils.notification.builder;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.support.v4.media.app.NotificationCompat;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v7.app.NotificationCompat;
 
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 
