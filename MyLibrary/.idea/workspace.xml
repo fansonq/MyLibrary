@@ -97,13 +97,88 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseBuilder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BaseBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/notification/builder/BaseBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="220" column="11" selection-start-line="220" selection-start-column="11" selection-end-line="220" selection-end-column="11" />
+            <state relative-caret-position="805">
+              <caret line="218" column="22" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IvTextView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/IvTextView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="131" column="37" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1710#1711#0" expanded="true" />
+                <element signature="e#1745#1746#0" expanded="true" />
+                <element signature="e#1807#1808#0" expanded="true" />
+                <element signature="e#1846#1847#0" expanded="true" />
+                <element signature="e#3134#3135#0" expanded="true" />
+                <element signature="e#3176#3177#0" expanded="true" />
+                <element signature="e#5472#6571#0" expanded="true" />
+                <element signature="e#6570#6571#0" expanded="true" />
+                <element signature="e#6688#7351#0" expanded="true" />
+                <element signature="e#7350#7351#0" expanded="true" />
+                <element signature="e#8038#8283#0" expanded="true" />
+                <element signature="e#8282#8283#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_editor_iv.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_iv.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlideLoaderStrategy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/glide/GlideLoaderStrategy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="529">
+              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="e#4581#4582#0" expanded="true" />
+                <element signature="e#4629#4630#0" expanded="true" />
+                <element signature="e#4927#5913#0" expanded="true" />
+                <element signature="e#5912#5913#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseDialogFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/base/BaseDialogFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="489">
+              <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="custom_editor_tx.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_tx.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
@@ -3032,9 +3107,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/DateFormatUtil.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/rxbus/pojo/Msg.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/rxbus/annotation/UseRxBus.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/rxbus/event/EventTag.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/rxbus/Msg.java" />
@@ -3062,7 +3134,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BasePresenter.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseFragment.java" />
-        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/base/BaseDialogFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/TestJava.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/SharePreferenceHelper.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/BaseDataAdapter.java" />
@@ -3083,6 +3154,10 @@
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/notification/builder/MailboxBuilder.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/notification/builder/MediaBuilder.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/notification/builder/BaseBuilder.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/IvTextView.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_iv.xml" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/glide/GlideLoaderStrategy.java" />
+        <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/base/BaseDialogFragment.java" />
       </list>
     </option>
   </component>
@@ -3206,7 +3281,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3236,11 +3311,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="notification" />
+              <option name="myItemId" value="dialogfragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3270,15 +3345,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="notification" />
+              <option name="myItemId" value="dialogfragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="builder" />
+              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -3742,6 +3817,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32163742" sideWeight="0.5032189" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5295429" sideWeight="0.4967811" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32622603" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -3767,7 +3843,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32671675" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32552955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -4061,34 +4136,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-fragment/25.3.1/support-fragment-25.3.1-sources.jar!/android/support/v4/app/DialogFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2438">
-          <caret line="139" column="26" selection-start-line="139" selection-start-column="26" selection-end-line="139" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/ApiStores.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/IBaseRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/ContractTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -4231,14 +4278,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/base/BaseDialogFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="226" column="22" selection-start-line="226" selection-start-column="22" selection-end-line="226" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/TestJava.java" />
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/adapter/BaseViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -4339,8 +4378,8 @@
         <state relative-caret-position="115">
           <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#817#825#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#817#825#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4374,7 +4413,7 @@
         <state relative-caret-position="221">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -4426,8 +4465,73 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/notification/builder/BaseBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="220" column="11" selection-start-line="220" selection-start-column="11" selection-end-line="220" selection-end-column="11" />
+        <state relative-caret-position="805">
+          <caret line="218" column="22" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_tx.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/customeditor/IvTextView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="131" column="37" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1710#1711#0" expanded="true" />
+            <element signature="e#1745#1746#0" expanded="true" />
+            <element signature="e#1807#1808#0" expanded="true" />
+            <element signature="e#1846#1847#0" expanded="true" />
+            <element signature="e#3134#3135#0" expanded="true" />
+            <element signature="e#3176#3177#0" expanded="true" />
+            <element signature="e#5472#6571#0" expanded="true" />
+            <element signature="e#6570#6571#0" expanded="true" />
+            <element signature="e#6688#7351#0" expanded="true" />
+            <element signature="e#7350#7351#0" expanded="true" />
+            <element signature="e#8038#8283#0" expanded="true" />
+            <element signature="e#8282#8283#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/res/layout/custom_editor_iv.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/glide/GlideLoaderStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="e#4581#4582#0" expanded="true" />
+            <element signature="e#4629#4630#0" expanded="true" />
+            <element signature="e#4927#5913#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/dialogfragment/base/BaseDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="244" column="13" selection-start-line="244" selection-start-column="13" selection-end-line="244" selection-end-column="13" />
           <folding />
         </state>
       </provider>

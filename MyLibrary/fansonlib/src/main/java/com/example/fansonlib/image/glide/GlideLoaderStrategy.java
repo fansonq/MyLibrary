@@ -37,7 +37,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     static class Contants {
         public static final int BLUR_VALUE = 20; //模糊
-        public static final int CORNER_RADIUS = 20; //圆角
+        public static final int CORNER_RADIUS = 10; //圆角
+        public static final int MARGIN = 5;  //边距
         public static final float THUMB_SIZE = 0.5f; //0-1之间  10%原图的大小
     }
 
@@ -45,9 +46,11 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
         with(context)
                 .load(imgUrl)
-                .thumbnail(0.1f) //先加载缩略图 然后在加载全图
+                .thumbnail(Contants.THUMB_SIZE) //先加载缩略图 然后在加载全图
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
+                .crossFade()
+                .priority(Priority.NORMAL) //下载的优先级
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
                 .into(view);
     }
@@ -61,7 +64,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void displayFromDrawable(ImageLoaderConfig config, Context context, int imageId, ImageView imageView) {
         with(context)
                 .load(imageId)
-                .thumbnail(0.1f) //先加载缩略图 然后在加载全图
+                .thumbnail(Contants.THUMB_SIZE) //先加载缩略图 然后在加载全图
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
@@ -102,6 +105,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     public void loadCornerImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
         with(context)
                 .load(imgUrl)
+                .thumbnail(Contants.THUMB_SIZE)
                 .error(config.getErrorPicRes())
                 .placeholder(config.getPlacePicRes())
                 .crossFade()
@@ -109,7 +113,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                 .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
                 .bitmapTransform(
                         new RoundedCornersTransformation(
-                                context, Contants.CORNER_RADIUS, Contants.CORNER_RADIUS))
+                                context, Contants.CORNER_RADIUS, Contants.MARGIN))
                 .into(imageView);
     }
 
@@ -127,7 +131,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     @Override
                     public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
 //                        if (index != 0) {
-                            listener.getBitmap(bitmap, index, imgUrl);
+                        listener.getBitmap(bitmap, index, imgUrl);
 //                            int nextIndex = askIndexIsOk(index);
 //                            if (nextIndex!= 0) {
 //                                listener.getBitmap(bitmap, nextIndex, mNextUrl);
