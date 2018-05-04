@@ -3,6 +3,7 @@ package com.fanson.mylibrary;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.fansonlib.base.BaseFragment;
 import com.example.fansonlib.widget.recyclerview.AutoLoadRecyclerView;
@@ -31,10 +32,9 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected View initView(View rootView, Bundle savedInstanceState) {
+    protected View initView(View rootView, ViewGroup container, Bundle savedInstanceState) {
         mRecyclerview = findMyViewId(R.id.recyclerview);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(hostActivity));
-
 
 //        List<IBean> list = new ArrayList<>();
         List<Dog> list = new ArrayList<>();
