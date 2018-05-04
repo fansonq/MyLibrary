@@ -2,6 +2,7 @@ package com.fanson.mylibrary;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,7 +33,7 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected View initView(View rootView, ViewGroup container, Bundle savedInstanceState) {
+    protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRecyclerview = findMyViewId(R.id.recyclerview);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(hostActivity));
 
