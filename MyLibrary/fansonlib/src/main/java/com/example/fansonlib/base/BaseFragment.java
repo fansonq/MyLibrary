@@ -58,7 +58,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
-        initView(rootView,container, savedInstanceState);
+        initView(rootView,inflater,container, savedInstanceState);
         return rootView;
     }
 
@@ -182,7 +182,7 @@ public abstract class BaseFragment extends Fragment {
      * @param container
      * @param savedInstanceState
      */
-    protected abstract View initView(View rootView,ViewGroup container, Bundle savedInstanceState);
+    protected abstract View initView(View rootView,LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState);
 
     /**
      * 初始化数据
