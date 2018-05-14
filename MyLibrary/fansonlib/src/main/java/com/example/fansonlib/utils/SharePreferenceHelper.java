@@ -99,7 +99,7 @@ public class SharePreferenceHelper {
      * @param key
      * @param data
      */
-    public static void putFloat(String key, long data) {
+    public static void putFloat(String key, float data) {
         editor.putFloat(key, data);
     }
 
@@ -109,7 +109,7 @@ public class SharePreferenceHelper {
      * @param defValue
      * @return
      */
-    public static float getFloat(String key, long defValue) {
+    public static float getFloat(String key, float defValue) {
         return mSharedPreferences.getFloat(key, defValue);
     }
 
