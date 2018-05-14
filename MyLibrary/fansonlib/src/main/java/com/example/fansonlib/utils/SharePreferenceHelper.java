@@ -95,6 +95,25 @@ public class SharePreferenceHelper {
     }
 
     /**
+     * 保存Float类型
+     * @param key
+     * @param data
+     */
+    public static void putFloat(String key, long data) {
+        editor.putFloat(key, data);
+    }
+
+    /**
+     * 获取Float类型
+     * @param key
+     * @param defValue
+     * @return
+     */
+    public static float getFloat(String key, long defValue) {
+        return mSharedPreferences.getFloat(key, defValue);
+    }
+
+    /**
      * 保存long类型
      * @param key
      * @param data
