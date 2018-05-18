@@ -316,6 +316,7 @@ public class MyRippleDrawable extends GradientDrawable {
     public void setBgDefaultColor(int bgDefaultColor) {
         mDefaultBgColor = bgDefaultColor;
         mBgColor = mDefaultBgColor;
+        setColor(bgDefaultColor);
     }
 
     /**

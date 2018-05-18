@@ -59,9 +59,6 @@ public class ShapeButton extends AppCompatButton {
     //文字颜色
     private int mTextColor;
 
-    //x和y方向上的圆角半径
-    private int mCircleRadiusX, mCircleRadiusY;
-
     //每次绘制Ripple的半径（刷新速率）
     private int mDrawRippleRadius;
 
@@ -84,8 +81,6 @@ public class ShapeButton extends AppCompatButton {
             mBgPressColor = typedArray.getColor(R.styleable.MyShapeButton_bgPressColor, Color.LTGRAY);
             mBgRippleColor = typedArray.getColor(R.styleable.MyShapeButton_bgRippleColor, Color.DKGRAY);
             mTextColor = typedArray.getColor(R.styleable.MyShapeButton_textColor, Color.BLACK);
-            mCircleRadiusX = typedArray.getDimensionPixelSize(R.styleable.MyShapeButton_bgCircleRadiusX, 0);
-            mCircleRadiusY = typedArray.getDimensionPixelSize(R.styleable.MyShapeButton_bgCircleRadiusY, 0);
             mDrawRippleRadius = typedArray.getInt(R.styleable.MyShapeButton_drawRippleRadius, 12);
             mOpenRipple = typedArray.getBoolean(R.styleable.MyShapeButton_openRipple, false);
             mStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.MyShapeButton_strokeWidth, 0);
@@ -185,12 +180,10 @@ public class ShapeButton extends AppCompatButton {
     /**
      * 设置按钮圆角半径
      *
-     * @param x x方向的圆角半径
-     * @param y y方向的圆角半径
+     * @param cornerRadius 圆角半径
      */
-    public ShapeButton setCircleRadius(int x, int y) {
-        mCircleRadiusX = x;
-        mCircleRadiusY = y;
+    public ShapeButton setCircleRadius(int cornerRadius) {
+        mFourCornerRadius = cornerRadius;
         return this;
     }
 
