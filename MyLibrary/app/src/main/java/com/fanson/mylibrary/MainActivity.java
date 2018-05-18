@@ -66,6 +66,8 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         button2 = findMyViewId(R.id.btn2);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
+
+
         Log.d("TTT", "initView");
 
 //        MyRxbus2.getInstance().register(this);

@@ -205,4 +205,24 @@
     </declare-styleable>
     <!--标签选项按钮-->
 
+    <!--Shape按钮-->
+    <declare-styleable name="MyShapeButton">
+        <attr name="bgDefaultColor" format="color" />       <!--背景默认的颜色-->
+        <attr name="bgPressColor" format="color" />         <!--点击按钮的颜色-->
+        <attr name="textColor" format="color" />
+        <attr name="bgCircleRadiusX" format="dimension" />  <!--X方向的矩形圆角半径-->
+        <attr name="bgCircleRadiusY" format="dimension" />  <!--Y方向的矩形圆角半径-->
+        <attr name="bgRippleColor" format="color" />
+        <attr name="drawRippleRadius" format="integer"/>    <!--每次绘制Ripple的半径（刷新速率）-->
+        <attr name="openRipple" format="boolean"/>          <!--是否开启Ripple效果-->
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="fourCornerRadius" format="dimension"/>    <!--矩形四个圆角的半径-->
+        <attr name="leftTopRadius" format="dimension"/>       <!--矩形左上角圆角半径-->
+        <attr name="rightTopRadius" format="dimension"/>      <!--矩形右上角圆角半径-->
+        <attr name="rightBottomRadius" format="dimension"/>   <!--矩形右下角圆角半径-->
+        <attr name="leftBottomRadius" format="dimension"/>    <!--矩形左下角圆角半径-->
+    </declare-styleable>
+    <!--Ripple按钮-->
+
 </resources>
