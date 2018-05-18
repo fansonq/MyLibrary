@@ -65,4 +65,6 @@ dependencies {
 //    compile 'com.jude:swipebackhelper:3.1.2' //侧滑返回
     compile 'com.loopj.android:android-async-http:1.4.9'
 
+    compile 'com.github.fansonq:ShapeButton:1.0.0'
+
 }

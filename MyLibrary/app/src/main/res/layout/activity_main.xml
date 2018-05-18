@@ -43,18 +43,16 @@
         android:layout_marginTop="150dp"
         android:scaleType="fitCenter" />
 
-    <com.example.fansonlib.widget.shapebutton.ShapeButton
+    <com.fansonq.shapebuttonlib.ShapeButton
         android:id="@+id/btn_ripple"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="180dp"
         android:text="Ripple"
-        app:openRipple="false"
-        app:rightTopRadius="20dp"
-        app:strokeWidth="2dp"
-        app:rightBottomRadius="20dp"
-        app:strokeColor="#29801f"
-        app:textColor="@color/black"
+        app:textColor="@color/white"
+        app:openRipple="true"
+        app:fourCornerRadius="30dp"
+        app:bgDefaultColor="@android:color/holo_blue_light"
         app:bgPressColor="#29801f"
         app:bgRippleColor="#4d8c46" />
 

@@ -2,6 +2,8 @@ package com.example.fansonlib.base;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import java.util.List;
 
@@ -48,6 +50,23 @@ public class AppUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 獲取當前程序的版本號
+     *
+     * @param mContext
+     * @return 版本號；例：23
+     */
+    private int getCurrentVersion(Context mContext) {
+        PackageManager packageManager = mContext.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packageInfo != null ? packageInfo.versionCode : 1;
     }
 
     /**

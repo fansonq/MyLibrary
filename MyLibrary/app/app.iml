@@ -98,6 +98,7 @@
     <orderEntry type="library" exported="" name="com.android.support:animated-vector-drawable-27.1.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:appcompat-v7-27.1.1" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:design-27.1.1" level="project" />
+    <orderEntry type="library" exported="" name="com.github.fansonq:ShapeButton-1.0.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="junit:junit:4.12@jar" level="project" />
     <orderEntry type="library" exported="" name="de.hdodenhof:circleimageview-2.2.0" level="project" />
     <orderEntry type="library" exported="" name="com.github.chrisbanes.photoview:library-1.2.4" level="project" />
