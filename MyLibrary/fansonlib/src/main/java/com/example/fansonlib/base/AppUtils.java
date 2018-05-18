@@ -58,7 +58,7 @@ public class AppUtils {
      * @param mContext
      * @return 版本號；例：23
      */
-    private int getCurrentVersion(Context mContext) {
+    public static int getCurrentVersion(Context mContext) {
         PackageManager packageManager = mContext.getPackageManager();
         PackageInfo packageInfo = null;
         try {
