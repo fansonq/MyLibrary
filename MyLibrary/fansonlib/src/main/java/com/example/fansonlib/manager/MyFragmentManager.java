@@ -20,16 +20,16 @@ public class MyFragmentManager {
     /**
      * 装载Fragment的集合
      */
-    public static List<Fragment> mFragmentList = new LinkedList<>();
+    public  List<Fragment> mFragmentList = new LinkedList<>();
 
     /**
      * 切换Fragment不带动画
      */
-    private static final int NO_ANIM = 0x11;
+    private  final int NO_ANIM = 0x11;
 
-/*    public volatile static MyFragmentManager mFragmentManager;
+/*    public volatile  MyFragmentManager mFragmentManager;
 
-    public static MyFragmentManager getFragmentManager() {
+    public  MyFragmentManager getFragmentManager() {
         if (mFragmentManager == null) {
             synchronized (MyFragmentManager.class) {
                 if (mFragmentManager == null) {
@@ -45,7 +45,7 @@ public class MyFragmentManager {
      *
      * @return Fragment的个数
      */
-    public static int getSize() {
+    public  int getSize() {
         return mFragmentList.size();
     }
 
@@ -54,17 +54,17 @@ public class MyFragmentManager {
      *
      * @param fragment 指定Fragment
      */
-    public static synchronized void addToList(Fragment fragment) {
+    public  synchronized void addToList(Fragment fragment) {
         mFragmentList.add(fragment);
     }
 
     /**
      * 移除集合的顶部Fragment
      */
-    public static synchronized void deleteTopInList() {
+    public  synchronized void deleteTopInList() {
         if (mFragmentList == null || mFragmentList.isEmpty()) {
             return;
-        }
+    }
         mFragmentList.remove(mFragmentList.size() - 1);
     }
 
@@ -73,7 +73,7 @@ public class MyFragmentManager {
      *
      * @param fragment 指定Fragment
      */
-    public static synchronized void deleteInList(Fragment fragment) {
+    public  synchronized void deleteInList(Fragment fragment) {
         if (mFragmentList == null || mFragmentList.isEmpty() || fragment == null) {
             return;
         }
@@ -85,7 +85,7 @@ public class MyFragmentManager {
     /**
      * 清除集合里的所有Fragment
      */
-    public static synchronized void clearList() {
+    public  synchronized void clearList() {
         Fragment fragment;
         for (int i = mFragmentList.size(); i > -1; i--) {
             fragment = mFragmentList.get(i);
@@ -98,7 +98,7 @@ public class MyFragmentManager {
     /**
      * 清除所有Fragment（除了栈顶的以外）
      */
-    public static synchronized void clearExceptTop() {
+    public  synchronized void clearExceptTop() {
         Fragment fragment;
         for (int i = mFragmentList.size() - 2; i > -1; i--) {
             fragment = mFragmentList.get(i);
@@ -112,7 +112,7 @@ public class MyFragmentManager {
      * @param fragmentManager fragment管理器
      * @return true: 出栈成功; false: 出栈失败
      */
-    public static boolean popTopFragment(@NonNull FragmentManager fragmentManager) {
+    public  boolean popTopFragment(@NonNull FragmentManager fragmentManager) {
         if (fragmentManager.popBackStackImmediate()) {
             deleteTopInList();
             return true;
@@ -129,7 +129,7 @@ public class MyFragmentManager {
      * @param isIncludeSelf   是否包括Fragment类自己
      * @return true: 出栈成功;false: 出栈失败
      */
-    public static boolean popFragment(@NonNull FragmentManager fragmentManager, Fragment fragment, boolean isIncludeSelf) {
+    public  boolean popFragment(@NonNull FragmentManager fragmentManager, Fragment fragment, boolean isIncludeSelf) {
         if (fragmentManager.popBackStackImmediate(fragment.getClass().getName(), isIncludeSelf ? FragmentManager.POP_BACK_STACK_INCLUSIVE : 0)) {
             deleteTopInList();
             return true;
@@ -145,7 +145,7 @@ public class MyFragmentManager {
      * @param fragmentManager Fragment管理类
      * @return 栈顶的Fragment
      */
-    public static synchronized Fragment getTopFragment(@NonNull FragmentManager fragmentManager) {
+    public  synchronized Fragment getTopFragment(@NonNull FragmentManager fragmentManager) {
         return getSize() > 0 ? fragmentManager.getFragments().get(getSize() - 1) : null;
     }
 
@@ -154,7 +154,7 @@ public class MyFragmentManager {
      *
      * @return 栈顶的Fragment
      */
-    public static synchronized Fragment getTopFragmentInList() {
+    public  synchronized Fragment getTopFragmentInList() {
         if (mFragmentList == null || mFragmentList.isEmpty()) {
             return null;
         }
@@ -167,7 +167,7 @@ public class MyFragmentManager {
      * @param cls 指定的类名
      * @return 指定类名的fragment
      */
-    public static Fragment findFragmentInList(Class<?> cls) {
+    public  Fragment findFragmentInList(Class<?> cls) {
         Fragment targetFragment = null;
         if (mFragmentList != null) {
             for (Fragment fragment : mFragmentList) {
@@ -187,7 +187,7 @@ public class MyFragmentManager {
      * @param tag             标签
      * @return 指定Tag的Fragment
      */
-    public static Fragment findFragmentByTag(@NonNull FragmentManager fragmentManager, String tag) {
+    public  Fragment findFragmentByTag(@NonNull FragmentManager fragmentManager, String tag) {
         return fragmentManager.findFragmentByTag(tag);
     }
 
@@ -198,7 +198,7 @@ public class MyFragmentManager {
      * @param fragmentClass   fragment类
      * @return 查找到的fragment
      */
-    public static Fragment findFragment(@NonNull FragmentManager fragmentManager, Class<? extends Fragment> fragmentClass) {
+    public  Fragment findFragment(@NonNull FragmentManager fragmentManager, Class<? extends Fragment> fragmentClass) {
         List<Fragment> fragments = fragmentManager.getFragments();
         if (fragments.isEmpty()) {
             return null;
@@ -209,7 +209,7 @@ public class MyFragmentManager {
     /**
      * @return 获取当前最顶部的fragment 名字
      */
-    public static String getTopFragmentName() {
+    public  String getTopFragmentName() {
         Fragment fragment;
         synchronized (mFragmentList) {
             final int size = mFragmentList.size() - 1;
@@ -231,7 +231,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment) {
+    public  void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment) {
         replaceFragment(fragmentManager, layoutId, fragment, null, NO_ANIM, NO_ANIM);
     }
 
@@ -241,7 +241,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag) {
+    public  void replaceFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag) {
         replaceFragment(fragmentManager, layoutId, fragment, tag, NO_ANIM, NO_ANIM);
     }
 
@@ -251,7 +251,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, int enter, int exit) {
+    public  void replaceFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, int enter, int exit) {
         replaceFragment(fragmentManager, layoutId, fragment, null, enter, exit);
     }
 
@@ -261,7 +261,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, int enter, int exit) {
+    public  void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, int enter, int exit) {
         replaceFragment(fragmentManager, layoutId, fragment, null, enter, exit, NO_ANIM, NO_ANIM);
     }
 
@@ -271,7 +271,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag, int enter, int exit) {
+    public  void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag, int enter, int exit) {
         replaceFragment(fragmentManager, layoutId, fragment, tag, enter, exit, NO_ANIM, NO_ANIM);
     }
 
@@ -281,7 +281,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public static void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag, int enter, int exit, int popEnter, int popExit) {
+    public  void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag, int enter, int exit, int popEnter, int popExit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (popEnter != NO_ANIM) {
             transaction.setCustomAnimations(enter, exit, popEnter, popExit);
@@ -301,7 +301,7 @@ public class MyFragmentManager {
      * @param fromFragment
      * @param toFragment
      */
-    public static void switchFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment) {
+    public  void switchFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment) {
         switchFragment(fragmentManager, layoutId, fromFragment, toFragment, null, NO_ANIM, NO_ANIM, NO_ANIM, NO_ANIM);
     }
 
@@ -314,7 +314,7 @@ public class MyFragmentManager {
      * @param toFragment
      * @param tagOfTo      标识
      */
-    public static void switchFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
+    public  void switchFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         switchFragment(fragmentManager, layoutId, fromFragment, toFragment, tagOfTo, NO_ANIM, NO_ANIM, NO_ANIM, NO_ANIM);
     }
 
@@ -326,7 +326,7 @@ public class MyFragmentManager {
      * @param fromFragment
      * @param toFragment
      */
-    public static void switchFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, int enter, int exit) {
+    public  void switchFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, int enter, int exit) {
         switchFragment(fragmentManager, layoutId, fromFragment, toFragment, null, enter, exit, NO_ANIM, NO_ANIM);
     }
 
@@ -338,7 +338,7 @@ public class MyFragmentManager {
      * @param fromFragment
      * @param toFragment
      */
-    public static void switchFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tag, int enter, int exit) {
+    public  void switchFragmentWithAnim(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tag, int enter, int exit) {
         switchFragment(fragmentManager, layoutId, fromFragment, toFragment, tag, enter, exit, NO_ANIM, NO_ANIM);
     }
 
@@ -349,7 +349,7 @@ public class MyFragmentManager {
      * @param fromFragment
      * @param toFragment
      */
-    public static void switchFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tag, int enter, int exit, int popEnter, int popExit) {
+    public  void switchFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tag, int enter, int exit, int popEnter, int popExit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (toFragment.isAdded()) {
             if (popEnter != NO_ANIM) {
@@ -375,7 +375,7 @@ public class MyFragmentManager {
      * @param fragmentManager FragmentManager
      * @param fragment        指定的Fragment
      */
-    public static void hideFragment(@NonNull FragmentManager fragmentManager, Fragment fragment) {
+    public  void hideFragment(@NonNull FragmentManager fragmentManager, Fragment fragment) {
         fragmentManager.beginTransaction().hide(fragment).commitAllowingStateLoss();
     }
 
@@ -385,7 +385,7 @@ public class MyFragmentManager {
      * @param fragmentManager FragmentManager
      * @param fragment        指定的Fragment
      */
-    public static void showFragment(@NonNull FragmentManager fragmentManager, Fragment fragment) {
+    public  void showFragment(@NonNull FragmentManager fragmentManager, Fragment fragment) {
         fragmentManager.beginTransaction().show(fragment).commitAllowingStateLoss();
     }
 
@@ -404,7 +404,7 @@ public class MyFragmentManager {
      * @return 是否消费回退事件
      */
 
-    public static boolean handlerBackPress(@NonNull Fragment fragment) {
+    public  boolean handlerBackPress(@NonNull Fragment fragment) {
         return handlerBackPress(fragment.getFragmentManager());
     }
 
@@ -415,7 +415,7 @@ public class MyFragmentManager {
      * @param fragmentManager fragment管理器
      * @return 是否消费回退事件
      */
-    public static boolean handlerBackPress(@NonNull FragmentManager fragmentManager) {
+    public  boolean handlerBackPress(@NonNull FragmentManager fragmentManager) {
         List<Fragment> fragments = fragmentManager.getFragments();
         if (fragments == null || fragments.isEmpty()) {
             return false;
