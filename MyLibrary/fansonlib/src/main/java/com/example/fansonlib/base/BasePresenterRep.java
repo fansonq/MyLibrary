@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.app.Activity;
 import android.util.Log;
 
 /**
@@ -16,6 +17,11 @@ public abstract class BasePresenterRep<R extends IBaseRepository, B, T extends B
 
     public BasePresenterRep(T baseView) {
         super(baseView);
+        mBaseRepository = createRepository();
+    }
+
+    public BasePresenterRep(Activity activity,T baseView) {
+        super(activity,baseView);
         mBaseRepository = createRepository();
     }
 

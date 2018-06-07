@@ -1,12 +1,12 @@
 package com.example.fansonlib.base;
 
 
+import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.OnLifecycleEvent;
-import android.content.Context;
 import android.util.Log;
 
 import java.lang.ref.SoftReference;
@@ -15,38 +15,38 @@ import java.lang.ref.SoftReference;
  * @author Created by：fanson
  *         Created on：2018/1/30 17:37
  *         Description：基于Rx的Presenter封装,加入LiveData控制生命周期
- * @Param B是实体类集成LiveData，T是绑定的视图
+ * @Param B是实体类集成LiveData，V是绑定的视图
  */
-public abstract class BasePresenter<B, T extends BaseView> extends LiveData<B> implements LifecycleObserver {
+public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> implements LifecycleObserver {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
-    protected T mBaseView;
+    protected SoftReference<V> mBaseView;
     protected B mBaseBean;
     protected BasePresenter presenter;
-    private Context mSoftContext;
+    private SoftReference<Activity> mSoftActivity;
 
     /**
-     * 获取软引用持有的Context
-     * @return Context软引用
+     * 获取软引用持有的Activity
+     * @return Activity软引用
      */
-    public Context getSoftContext(){
-        if (mSoftContext!=null){
-            return mSoftContext;
+    public Activity getSoftActivity(){
+        if (mSoftActivity!=null){
+            return mSoftActivity.get();
         }else {
             throw new NullPointerException();
         }
     }
 
-    public BasePresenter(T baseView) {
+    public BasePresenter(V baseView) {
         initPresenter(baseView);
     }
 
-    public BasePresenter(Context context, T baseView) {
-        mSoftContext  = new SoftReference<>(context).get();
+    public BasePresenter(Activity activity, V baseView) {
+        mSoftActivity  = new SoftReference<>(activity);
         initPresenter(baseView);
     }
 
-    private void initPresenter(T baseView) {
+    private void initPresenter(V baseView) {
         presenter = this;
         // 与View绑定
         attachView(baseView);
@@ -65,8 +65,8 @@ public abstract class BasePresenter<B, T extends BaseView> extends LiveData<B> i
      * @param baseView
      * @param
      */
-    public void attachView(T baseView) {
-        this.mBaseView = baseView;
+    public void attachView(V baseView) {
+        mBaseView = new SoftReference<V>(baseView);
     }
 
     /**
@@ -92,9 +92,9 @@ public abstract class BasePresenter<B, T extends BaseView> extends LiveData<B> i
      *
      * @return
      */
-    public T getBaseView() {
+    public V getBaseView() {
         if (mBaseView != null) {
-            return this.mBaseView;
+            return this.mBaseView.get();
         } else {
             throw new BaseViewNotAttachedException();
         }
