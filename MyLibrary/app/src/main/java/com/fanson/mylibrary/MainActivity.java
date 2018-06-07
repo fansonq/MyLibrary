@@ -15,6 +15,7 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.utils.NetWorkUtil;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -44,7 +45,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     private ImageView iv_pic;
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
-    private Button button, button2, btn_fragment, btn_upload;
+    private Button mBtnNet, button2, btn_fragment, btn_upload;
 
     @Override
     protected int getContentView() {
@@ -61,18 +62,19 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     protected void initView() {
 
         AppUtils.init(getApplicationContext());
-        button = findMyViewId(R.id.btn);
+        mBtnNet = findMyViewId(R.id.btn_net);
         button2 = findMyViewId(R.id.btn2);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
 
 
-        Log.d("TTT", "initView");
+        Log.d("TTT", "brand = "+ NetWorkUtil.getOperatorName(this));
+        Log.d("TTT", "net = "+ NetWorkUtil.getNetworkState(this));
 
 //        MyRxbus2.getInstance().register(this);
 //        MyRxbus2.getInstance().send(0,"测试数据");
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mBtnNet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                testUpdate();
@@ -98,7 +100,8 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MyFragmentManager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
+//                MyFragmentManager manager = new MyFragmentManager();
+//                manager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
             }
         });
 
@@ -210,13 +213,16 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         window.showPopupWindow();
     }
 
+    /**
+     * 测试网络
+     */
     private void testBaseModel() {
         mPresenter.testPresenterMethod();
         mPresenter.observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
                 if (bean != null) {
-                    button.setText(bean.getData().getName());
+                    mBtnNet.setText(bean.getData().getName());
                 }
             }
         });
