@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.fansonlib.base.BaseModel;
 import com.example.fansonlib.http.HttpResponseCallback;
-import com.example.fansonlib.http.HttpUtils;
 import com.fanson.mylibrary.SimpleBean;
 
 import java.util.HashMap;
@@ -48,11 +47,6 @@ public class TestModel extends BaseModel{
         });
 
 
-    }
-
-    @Override
-    protected int setCompositeDisposableType() {
-        return getHttpUtils().setCompositeDisposableType(HttpUtils.REQUEST_TYPE_A);
     }
 
     @Override

@@ -53,11 +53,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="219" column="41" lean-forward="true" selection-start-line="219" selection-start-column="41" selection-end-line="219" selection-end-column="41" />
+            <state relative-caret-position="999">
+              <caret line="228" column="5" lean-forward="false" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
               <folding>
                 <element signature="e#8567#8821#0" expanded="true" />
                 <element signature="e#8820#8821#0" expanded="true" />
@@ -69,8 +69,8 @@
       <file leaf-file-name="BaseModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+            <state relative-caret-position="324">
+              <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -124,11 +124,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestModel.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestModel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-164">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="164">
+              <caret line="49" column="5" lean-forward="false" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -138,7 +138,7 @@
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="322">
-              <caret line="102" column="42" lean-forward="true" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
+              <caret line="102" column="42" lean-forward="false" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -2879,9 +2879,9 @@
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/IHttpStrategy.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/HttpUtils.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/asynchttp/AsyncHttpStrategy.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java" />
       </list>
     </option>
   </component>
@@ -3063,7 +3063,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528354958294" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528355297466" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -3111,7 +3111,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528354958294" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528355297466" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -3273,7 +3273,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528354958295" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1528355297467" />
       </method>
     </configuration>
     <list size="2">
@@ -3382,7 +3382,7 @@
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2664437" sideWeight="0.49573562" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32664436" sideWeight="0.47974414" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32664436" sideWeight="0.47974414" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -4074,23 +4074,7 @@
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/http/retrofit/RetrofitStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="102" column="42" lean-forward="true" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-164">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+          <caret line="102" column="42" lean-forward="false" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -4105,12 +4089,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="219" column="41" lean-forward="true" selection-start-line="219" selection-start-column="41" selection-end-line="219" selection-end-column="41" />
+        <state relative-caret-position="999">
+          <caret line="228" column="5" lean-forward="false" selection-start-line="228" selection-start-column="5" selection-end-line="228" selection-end-column="5" />
           <folding>
             <element signature="e#8567#8821#0" expanded="true" />
             <element signature="e#8820#8821#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="49" column="5" lean-forward="false" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>

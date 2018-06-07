@@ -15,10 +15,8 @@ public abstract class BaseModel implements IBaseRepository {
 
     private int mCompositeDisposableType;
 
-    protected abstract int setCompositeDisposableType();
 
     public BaseModel() {
-        mCompositeDisposableType = setCompositeDisposableType();
     }
 
     /**
