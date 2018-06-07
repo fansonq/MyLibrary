@@ -15,7 +15,6 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.manager.MyFragmentManager;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -99,7 +98,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyFragmentManager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
+//                MyFragmentManager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
             }
         });
 
@@ -283,7 +282,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     @Override
     protected TestPresenter createPresenter() {
-        return new TestPresenter(this);
+        return new TestPresenter(this,this);
     }
 
     @Override

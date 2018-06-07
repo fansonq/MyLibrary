@@ -1,5 +1,6 @@
 package com.fanson.mylibrary.mvp;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.example.fansonlib.base.BasePresenterRep;
@@ -12,8 +13,8 @@ import com.fanson.mylibrary.SimpleBean;
 public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter,TestCallback{
 
 
-    public TestPresenter(ContractTest.TestView baseView) {
-        super(baseView);
+    public TestPresenter(Activity activity,ContractTest.TestView baseView) {
+        super(activity,baseView);
     }
 
     @Override
@@ -26,7 +27,7 @@ public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,Contrac
     public void successful(SimpleBean bean ) {
         switch (bean.getCode()){
             case 1:
-                getSoftContext();
+                getSoftActivity();
                 setValue(bean);
                 break;
             case 2:
