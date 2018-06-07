@@ -5,10 +5,6 @@ import android.util.Log;
 import com.example.fansonlib.base.BaseModel;
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.HttpUtils;
-import com.example.fansonlib.http.retrofit.RetrofitClient;
-import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.fanson.mylibrary.ApiFactoryImpl;
-import com.fanson.mylibrary.ApiStores;
 import com.fanson.mylibrary.SimpleBean;
 
 import java.util.HashMap;
@@ -22,25 +18,17 @@ import static com.example.fansonlib.http.HttpUtils.getHttpUtils;
 
 public class TestModel extends BaseModel{
 
-    TestCallback callback;
-
-    public TestModel() {
-    }
+    TestCallback mCallback;
 
     /**
      * 测试Mock网络操作
      */
     public void method(final TestCallback callback){
-        this.callback = callback;
+        this.mCallback = callback;
         Log.d("TTT","Test1Model发送的数据");
         Map<String,Object> maps = new HashMap<>();
         maps.put("key","fanson");
 
-        /*---Retrofit策略---*/
-        RetrofitClient.init(ApiStores.API_SERVER_URL);
-        RetrofitStrategy strategy = new RetrofitStrategy();
-        strategy.setApi(new ApiFactoryImpl());
-        HttpUtils.init(strategy);
 
         /*---AsyncHttp策略---*/
 //        AsyncHttpStrategy.init(ApiStores.API_SERVER_URL);
@@ -49,12 +37,13 @@ public class TestModel extends BaseModel{
         getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
-                callback.successful(bean);
+                Log.d("TTT","onSuccess");
+                mCallback.successful(bean);
             }
 
             @Override
             public void onFailure(String errorMsg) {
-                callback.failure(errorMsg);
+                mCallback.failure(errorMsg);
             }
         });
 
@@ -62,8 +51,13 @@ public class TestModel extends BaseModel{
     }
 
     @Override
+    protected int setCompositeDisposableType() {
+        return getHttpUtils().setCompositeDisposableType(HttpUtils.REQUEST_TYPE_A);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d("TTT",""+callback);
+        mCallback = null;
     }
 }

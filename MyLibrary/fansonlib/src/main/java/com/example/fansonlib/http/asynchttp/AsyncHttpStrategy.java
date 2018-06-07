@@ -73,7 +73,12 @@ public class AsyncHttpStrategy implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent() {
+    public int setCompositeDisposableType(int type) {
+        return 0;
+    }
+
+    @Override
+    public void cancelCurrent(int type) {
 
     }
 

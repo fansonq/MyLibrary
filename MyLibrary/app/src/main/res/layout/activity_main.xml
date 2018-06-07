@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.fanson.mylibrary.MainActivity">
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/btn_net"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="button" />
+        android:text="测试网络框架" />
 
     <Button
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:text="button2" />
 
     <Button
         android:id="@+id/btn_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
         android:text="Upload" />
 
     <Button
         android:id="@+id/btn_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:layout_marginStart="120dp"
         android:text="Fragment" />
 
 
@@ -40,14 +37,12 @@
         android:id="@+id/iv_pic"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="150dp"
         android:scaleType="fitCenter" />
 
     <com.fansonq.shapebuttonlib.ShapeButton
         android:id="@+id/btn_ripple"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="180dp"
         android:text="Ripple"
         app:textColor="@color/white"
         app:openRipple="true"
@@ -60,4 +55,4 @@
     <!--<include layout="@layout/common_loading"/>-->
 
 
-</FrameLayout>
+</LinearLayout>

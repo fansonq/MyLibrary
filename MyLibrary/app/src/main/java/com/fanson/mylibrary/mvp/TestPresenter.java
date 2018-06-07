@@ -26,7 +26,6 @@ public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,Contrac
     public void successful(SimpleBean bean ) {
         switch (bean.getCode()){
             case 1:
-                getSoftContext();
                 setValue(bean);
                 break;
             case 2:

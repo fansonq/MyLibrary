@@ -33,9 +33,16 @@ public interface IHttpStrategy<M> {
     Disposable getCurrentDisposable();
 
     /**
-     * 取消当前的网络操作
+     * 设置存储CompositeDisposable的Key值
+     * @param type CompositeDisposable的Key值
      */
-    void cancelCurrent();
+    int setCompositeDisposableType(int type);
+
+    /**
+     * 取消当前的网络操作
+     * @param type CompositeDisposable的Key值
+     */
+    void cancelCurrent(int type);
 
     /**
      * 取消所有的网络操作
