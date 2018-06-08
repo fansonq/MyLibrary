@@ -45,7 +45,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     private ImageView iv_pic;
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
-    private Button mBtnNet, button2, btn_fragment, btn_upload;
+    private Button mBtnNet, mBtnDownload, btn_fragment, btn_upload;
 
     @Override
     protected int getContentView() {
@@ -63,7 +63,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
         AppUtils.init(getApplicationContext());
         mBtnNet = findMyViewId(R.id.btn_net);
-        button2 = findMyViewId(R.id.btn2);
+        mBtnDownload = findMyViewId(R.id.btn_download);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
 
@@ -89,11 +89,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             }
         });
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        mBtnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                mPresenter.detachView();
-//                ShowToast.singleLong("WWWW");
+//                DownLoadManager.downloadFile()
             }
         });
 
