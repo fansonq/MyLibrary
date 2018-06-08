@@ -19,9 +19,9 @@ import okhttp3.ResponseBody;
  * Describe：下载文件类
  */
 
-public class DownLoadManager {
+public class MyDownLoadManager {
 
-    private static final String TAG = DownLoadManager.class.getSimpleName();
+    private static final String TAG = MyDownLoadManager.class.getSimpleName();
 
     /**
      * 下载单文件
