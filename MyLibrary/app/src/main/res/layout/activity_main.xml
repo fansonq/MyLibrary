@@ -39,18 +39,6 @@
         android:layout_height="200dp"
         android:scaleType="fitCenter" />
 
-    <com.fansonq.shapebuttonlib.ShapeButton
-        android:id="@+id/btn_ripple"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:text="Ripple"
-        app:textColor="@color/white"
-        app:openRipple="true"
-        app:fourCornerRadius="30dp"
-        app:bgDefaultColor="@android:color/holo_blue_light"
-        app:bgPressColor="#29801f"
-        app:bgRippleColor="#4d8c46" />
-
 
     <!--<include layout="@layout/common_loading"/>-->
 

@@ -45,6 +45,27 @@ public class RetrofitClient {
         BASE_URL = url;
     }
 
+
+    /**
+     * 获取Retrofit实例
+     * @return Retrofit
+     */
+    public static Retrofit getRetrofit( ) {
+        if (mRetrofit == null) {
+            synchronized (RetrofitClient.class){
+                if (mRetrofit == null){
+                    mRetrofit = new Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .client(getOkHttpClient())
+                            .build();
+                }
+            }
+        }
+        return mRetrofit;
+    }
+
     /**
      * 获取Retrofit实例
      * @param serviceClass API服务类
