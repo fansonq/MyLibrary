@@ -18,6 +18,7 @@ import com.example.fansonlib.widget.dialogfragment.base.ViewHolder;
 public class DoubleDialog extends BaseDialogFragment {
 
     private String title, content;
+    private BaseDialogFragment mDialog;
 
     @Override
     public int intLayoutId() {
@@ -63,6 +64,7 @@ public class DoubleDialog extends BaseDialogFragment {
 
     @Override
     public void convertView(ViewHolder holder, final BaseDialogFragment dialog) {
+        mDialog = dialog;
         holder.setText(R.id.title, title);
         holder.setText(R.id.message, content);
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
@@ -71,7 +73,6 @@ public class DoubleDialog extends BaseDialogFragment {
                 if (mICancelListener != null) {
                     mICancelListener.onCancel();
                 }
-                dialog.dismiss();
             }
         });
 
@@ -84,6 +85,12 @@ public class DoubleDialog extends BaseDialogFragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    public void dismiss(){
+        if (mDialog!=null){
+            mDialog.dismiss();
+        }
     }
 
 }
