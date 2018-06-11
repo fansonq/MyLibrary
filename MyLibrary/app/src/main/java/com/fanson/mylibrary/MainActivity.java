@@ -18,6 +18,7 @@ import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.utils.NetWorkUtil;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
+import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.mvp.ContractTest;
@@ -45,7 +46,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     private ImageView iv_pic;
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
-    private Button mBtnNet, mBtnDownload, btn_fragment, btn_upload;
+    private Button mBtnNet, mBtnDownload, btn_fragment, btn_upload, mBtnDialog;
 
     @Override
     protected int getContentView() {
@@ -63,13 +64,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
         AppUtils.init(getApplicationContext());
         mBtnNet = findMyViewId(R.id.btn_net);
+        mBtnDialog = findMyViewId(R.id.btn_dialog_fragment);
         mBtnDownload = findMyViewId(R.id.btn_download);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
 
 
-        Log.d("TTT", "brand = "+ NetWorkUtil.getOperatorName(this));
-        Log.d("TTT", "net = "+ NetWorkUtil.getNetworkState(this));
+        Log.d("TTT", "brand = " + NetWorkUtil.getOperatorName(this));
+        Log.d("TTT", "net = " + NetWorkUtil.getNetworkState(this));
 
 //        MyRxbus2.getInstance().register(this);
 //        MyRxbus2.getInstance().send(0,"测试数据");
@@ -81,7 +83,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 //                testPopuWindow();
                 testBaseModel();
 //                testImageLoader();
-//                testDialogFragment();
 //                testLoadingView();
 //                ShowToast.singleLong("ttt");
 //                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
@@ -93,6 +94,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             @Override
             public void onClick(View view) {
 //                DownLoadManager.downloadFile()
+            }
+        });
+
+        mBtnDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testDialogFragment();
             }
         });
 
@@ -167,16 +175,19 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     }
 
     private void testDialogFragment() {
-//        DoubleDialog.newInstance("你预约成功").show(getSupportFragmentManager());
         DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试")
                 .setConfirmListener(new IConfirmListener() {
                     @Override
                     public void onConfirm() {
                         ShowToast.singleLong("onConfirm");
                     }
-                })
-                .setOutCancel(true)
-                .show(getSupportFragmentManager());
+                }).setCancelListener(new ICancelListener() {
+            @Override
+            public void onCancel() {
+                ShowToast.singleLong("onCancel");
+            }
+        }).show(getSupportFragmentManager());
+
     }
 
 
@@ -287,7 +298,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     @Override
     protected TestPresenter createPresenter() {
-        return new TestPresenter(this,this);
+        return new TestPresenter(this, this);
     }
 
     @Override

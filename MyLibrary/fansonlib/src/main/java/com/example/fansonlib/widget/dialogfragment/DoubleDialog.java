@@ -19,6 +19,7 @@ public class DoubleDialog extends BaseDialogFragment {
 
     private String title, content;
     private BaseDialogFragment mDialog;
+    private boolean mCancelNotDismiss = false;
 
     @Override
     public int intLayoutId() {
@@ -43,9 +44,22 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return
      */
     public static DoubleDialog newInstance(String title, String content) {
+        return newInstance(title, content,false);
+    }
+
+    /**
+     * 传值
+     *
+     * @param title   标题
+     * @param content 内容
+     * @param cancelNotDismiss 点击取消按钮不消失对话框
+     * @return
+     */
+    public static DoubleDialog newInstance(String title, String content,boolean cancelNotDismiss) {
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("content", content);
+        bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
         DoubleDialog dialog = new DoubleDialog();
         dialog.setArguments(bundle);
         return dialog;
@@ -60,6 +74,7 @@ public class DoubleDialog extends BaseDialogFragment {
         }
         title = bundle.getString("title");
         content = bundle.getString("content");
+        mCancelNotDismiss = bundle.getBoolean("cancelNotDismiss");
     }
 
     @Override
@@ -72,6 +87,9 @@ public class DoubleDialog extends BaseDialogFragment {
             public void onClick(View v) {
                 if (mICancelListener != null) {
                     mICancelListener.onCancel();
+                }
+                if (!mCancelNotDismiss){
+                    dialog.dismiss();
                 }
             }
         });
@@ -86,11 +104,4 @@ public class DoubleDialog extends BaseDialogFragment {
             }
         });
     }
-
-    public void dismiss(){
-        if (mDialog!=null){
-            mDialog.dismiss();
-        }
-    }
-
 }
