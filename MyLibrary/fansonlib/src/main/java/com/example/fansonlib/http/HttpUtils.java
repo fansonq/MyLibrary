@@ -61,7 +61,7 @@ public class HttpUtils implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent(int type) {
+    public void cancelCurrent(String type) {
         mStrategy.cancelCurrent(type);
     }
 

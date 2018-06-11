@@ -41,6 +41,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
         super.onDestroy();
         if (mPresenter != null){
             mPresenter.detachView();
+            mPresenter.detachActivity();
         }
         InputMethodUtils.fixInputMethodManagerLeak(this);
     }

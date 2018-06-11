@@ -74,7 +74,18 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
      */
     public void detachView() {
         if (mBaseView != null) {
+            mBaseView.clear();
             mBaseView = null;
+        }
+    }
+
+    /**
+     * 解除绑定的Activity
+     */
+    public void detachActivity() {
+        if (mSoftActivity != null) {
+            mSoftActivity.clear();
+            mSoftActivity = null;
         }
     }
 

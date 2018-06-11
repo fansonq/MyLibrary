@@ -1,6 +1,6 @@
 package com.example.fansonlib.http.retrofit;
 
-import android.util.Log;
+import android.support.v4.util.ArrayMap;
 import android.util.SparseArray;
 
 import com.example.fansonlib.http.HttpResponseCallback;
@@ -31,6 +31,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
      * 记录所有的网络Disposable
      */
     private CompositeDisposable mCompositeDisposable;
+    private ArrayMap<Object, Disposable> mMaps ;//处理,请求列表
     /**
      * 当前网络的Disposable
      */
@@ -47,6 +48,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
         if (mCompositeDisposableArray == null){
             mCompositeDisposableArray = new SparseArray<>();
         }
+        mMaps = new ArrayMap<>();
     }
 
     /**
@@ -65,7 +67,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
     @Override
     public void post(String url, Map params, final HttpResponseCallback callback) {
-         RetrofitClient.startObservable(mFactory.createApi(url, params), new ResourceSubscriber<M>() {
+        mCurrentDisposable = RetrofitClient.startObservable(mFactory.createApi(url, params), new ResourceSubscriber<M>() {
             @Override
             public void onNext(M bean) {
                 callback.onSuccess(bean);
@@ -81,6 +83,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             }
         });
+        mMaps.put(url,mCurrentDisposable);
 //        mCompositeDisposable.add(mCurrentDisposable);
 //        mCompositeDisposableArray.put(mTypeArray,mCompositeDisposable);
     }
@@ -97,16 +100,20 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent(int type) {
-        if (mCompositeDisposableArray != null && mCompositeDisposableArray.size() >0) {
-            Disposable compositeDisposable = mCompositeDisposableArray.get(type);
-            compositeDisposable.dispose();
-            compositeDisposable = null;
-            mCompositeDisposableArray.remove(type);
-            mCompositeDisposableArray.clear();
-            mCompositeDisposableArray = null;
-            Log.d("TTT","cancel");
-        }
+    public void cancelCurrent(String url) {
+        Disposable disposable = mMaps.get(url);
+        mMaps.remove(url);
+        disposable.dispose();
+        disposable=null;
+//        if (mCompositeDisposableArray != null && mCompositeDisposableArray.size() >0) {
+//            Disposable compositeDisposable = mCompositeDisposableArray.get(type);
+//            compositeDisposable.dispose();
+//            compositeDisposable = null;
+//            mCompositeDisposableArray.remove(type);
+//            mCompositeDisposableArray.clear();
+//            mCompositeDisposableArray = null;
+//            Log.d("TTT","cancel");
+//        }
     }
 
     @Override

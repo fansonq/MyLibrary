@@ -40,9 +40,9 @@ public interface IHttpStrategy<M> {
 
     /**
      * 取消当前的网络操作
-     * @param type CompositeDisposable的Key值
+     * @param url CompositeDisposable的Key值
      */
-    void cancelCurrent(int type);
+    void cancelCurrent(String url);
 
     /**
      * 取消所有的网络操作

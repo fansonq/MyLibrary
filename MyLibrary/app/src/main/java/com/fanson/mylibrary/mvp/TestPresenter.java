@@ -10,7 +10,7 @@ import com.fanson.mylibrary.SimpleBean;
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter,TestCallback{
+public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter{
 
 
     public TestPresenter(Activity activity,ContractTest.TestView baseView) {
@@ -24,29 +24,32 @@ public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,Contrac
 
 
     @Override
-    public void successful(SimpleBean bean ) {
-        switch (bean.getCode()){
-            case 1:
-                getSoftActivity();
-                setValue(bean);
-                break;
-            case 2:
-                getBaseView().showCode102(bean.getMessage());
-            default:
-                break;
-        }
-
-    }
-
-    @Override
-    public void failure(String errorMsg) {
-
-    }
-
-
-    @Override
     public void testPresenterMethod() {
         Log.d("TTT","testMethod");
-        mBaseRepository.method(this);
+        mBaseRepository.method(callback);
     }
+
+    /**
+     * 测试网络的Repository层回调
+     */
+    private TestCallback callback = new TestCallback() {
+        @Override
+        public void successful(SimpleBean bean) {
+            switch (bean.getCode()){
+                case 1:
+                    getSoftActivity();
+                    setValue(bean);
+                    break;
+                case 2:
+                    getBaseView().showCode102(bean.getMessage());
+                default:
+                    break;
+            }
+        }
+
+        @Override
+        public void failure(String errorMsg) {
+
+        }
+    };
 }

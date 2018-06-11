@@ -27,19 +27,6 @@ public class MyFragmentManager {
      */
     private final int NO_ANIM = 0x11;
 
-/*    public volatile  MyFragmentManager mFragmentManager;
-
-    public  MyFragmentManager getFragmentManager() {
-        if (mFragmentManager == null) {
-            synchronized (MyFragmentManager.class) {
-                if (mFragmentManager == null) {
-                    mFragmentManager = new MyFragmentManager();
-                }
-            }
-        }
-        return mFragmentManager;
-    }*/
-
     /**
      * 获取Fragment的个数
      *

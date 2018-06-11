@@ -78,7 +78,7 @@ public class AsyncHttpStrategy implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent(int type) {
+    public void cancelCurrent(String type) {
 
     }
 
