@@ -12,11 +12,6 @@ import io.reactivex.disposables.Disposable;
 
 public class HttpUtils implements IHttpStrategy {
 
-    // 不同页面的请求类型标记
-    public static final int REQUEST_TYPE_A = 0;
-    public static final int REQUEST_TYPE_B = 1;
-    public static final int REQUEST_TYPE_C = 2;
-
     private static IHttpStrategy mStrategy; //被代理的对象
 
     private volatile static HttpUtils instance;
@@ -53,11 +48,6 @@ public class HttpUtils implements IHttpStrategy {
     @Override
     public Disposable getCurrentDisposable() {
         return mStrategy.getCurrentDisposable();
-    }
-
-    @Override
-    public int setCompositeDisposableType(int type) {
-       return mStrategy.setCompositeDisposableType(type);
     }
 
     @Override

@@ -1,14 +1,13 @@
 package com.example.fansonlib.http.retrofit;
 
 import android.support.v4.util.ArrayMap;
-import android.util.SparseArray;
 
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.IHttpStrategy;
 
+import java.util.Iterator;
 import java.util.Map;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.ResourceSubscriber;
 
@@ -21,17 +20,9 @@ import io.reactivex.subscribers.ResourceSubscriber;
 public class RetrofitStrategy<M> implements IHttpStrategy {
 
     /**
-     * 通过SparseArray存放CompositeDisposable
+     * 记录所有的网络请求的处理
      */
-    private SparseArray<CompositeDisposable> mCompositeDisposableArray;
-
-    private int mTypeArray;
-
-    /**
-     * 记录所有的网络Disposable
-     */
-    private CompositeDisposable mCompositeDisposable;
-    private ArrayMap<Object, Disposable> mMaps ;//处理,请求列表
+    private ArrayMap<Object, Disposable> mDisposableMaps ;
     /**
      * 当前网络的Disposable
      */
@@ -42,13 +33,9 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     private IApiFactory mFactory;
 
     public RetrofitStrategy() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
+        if (mDisposableMaps == null) {
+            mDisposableMaps = new ArrayMap<>();
         }
-        if (mCompositeDisposableArray == null){
-            mCompositeDisposableArray = new SparseArray<>();
-        }
-        mMaps = new ArrayMap<>();
     }
 
     /**
@@ -83,9 +70,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             }
         });
-        mMaps.put(url,mCurrentDisposable);
-//        mCompositeDisposable.add(mCurrentDisposable);
-//        mCompositeDisposableArray.put(mTypeArray,mCompositeDisposable);
+        mDisposableMaps.put(url,mCurrentDisposable);
     }
 
     @Override
@@ -94,38 +79,32 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     }
 
     @Override
-    public int setCompositeDisposableType(int type) {
-        mTypeArray = type;
-        return type;
-    }
-
-    @Override
     public void cancelCurrent(String url) {
-        Disposable disposable = mMaps.get(url);
-        mMaps.remove(url);
-        disposable.dispose();
-        disposable=null;
-//        if (mCompositeDisposableArray != null && mCompositeDisposableArray.size() >0) {
-//            Disposable compositeDisposable = mCompositeDisposableArray.get(type);
-//            compositeDisposable.dispose();
-//            compositeDisposable = null;
-//            mCompositeDisposableArray.remove(type);
-//            mCompositeDisposableArray.clear();
-//            mCompositeDisposableArray = null;
-//            Log.d("TTT","cancel");
-//        }
+        if (mDisposableMaps.isEmpty()){
+            return;
+        }
+        mCurrentDisposable = mDisposableMaps.get(url);
+        mDisposableMaps.remove(url);
+        if (mCurrentDisposable!=null){
+            mCurrentDisposable.dispose();
+            mCurrentDisposable=null;
+        }
     }
 
     @Override
     public void cancelAll() {
-//        if (mCompositeDisposableArray != null && mCompositeDisposableArray.size() >0) {
-//            for (int i=0;i<mCompositeDisposableArray.size();i++){
-//                CompositeDisposable compositeDisposable = mCompositeDisposableArray.get(i);
-//                mCompositeDisposableArray.remove(i);
-//                compositeDisposable.dispose();
-//                compositeDisposable=null;
-//
-//            }
-//        }
+        if (mDisposableMaps.isEmpty()){
+            return;
+        }
+        Iterator<Object> iterator = mDisposableMaps.keySet().iterator();
+        while (iterator.hasNext()){
+            Object key =  iterator.next();
+            mCurrentDisposable = mDisposableMaps.get(key);
+            if (mCurrentDisposable!=null){
+                mCurrentDisposable.dispose();
+                mCurrentDisposable = null;
+            }
+        }
+        mDisposableMaps.clear();
     }
 }

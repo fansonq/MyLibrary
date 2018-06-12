@@ -52,6 +52,7 @@ public class TestModel extends BaseModel{
     @Override
     public void onDestroy() {
         super.onDestroy();
+        getHttpUtils().cancelCurrent("getName");
         mCallback = null;
     }
 }

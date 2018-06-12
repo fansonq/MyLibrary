@@ -79,7 +79,6 @@ public class DoubleDialog extends BaseDialogFragment {
 
     @Override
     public void convertView(ViewHolder holder, final BaseDialogFragment dialog) {
-        mDialog = dialog;
         holder.setText(R.id.title, title);
         holder.setText(R.id.message, content);
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
