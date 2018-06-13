@@ -73,7 +73,7 @@ public class MyActivityManager {
      */
     public synchronized void clearAllActivity() {
         Activity activity;
-        for (int i = mActivities.size(); i > -1; i--) {
+        for (int i = mActivities.size()-1; i > -1; i--) {
             activity = mActivities.get(i);
             mActivities.remove(activity);
             activity.finish();
