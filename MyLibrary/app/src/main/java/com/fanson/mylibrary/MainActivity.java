@@ -3,6 +3,7 @@ package com.fanson.mylibrary;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -15,13 +16,16 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.utils.NetWorkUtil;
+import com.example.fansonlib.rxbus.MyRxbus2;
+import com.example.fansonlib.rxbus.annotation.Subscribe;
+import com.example.fansonlib.rxbus.event.EventThread;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
+import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
@@ -45,40 +49,34 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private ImageView iv_pic;
-    //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Button mBtnNet, mBtnDownload, btn_fragment, btn_upload, mBtnDialog;
-    private Button mBtnNotification;
+    private Button mBtnNotification, mBtnRxBus;
 
     @Override
     protected int getContentView() {
         return R.layout.activity_main;
     }
 
-//    @Subscribe(eventTag = 0,threadMode = EventThread.MAIN_THREAD)
-//    public void dataBinding(String content){
-//        Log.d(TAG,content);
-//    }
+    @Subscribe(eventTag = RxBusTag.TEST,threadMode = EventThread.NEW_THREAD)
+    public void receiverRxMessage(String content) {
+        mBtnRxBus.setText(content+" 线程："+(getMainLooper()== Looper.myLooper()));
+    }
 
 
     @Override
     protected void initView() {
 
         AppUtils.init(getApplicationContext());
+        MyRxbus2.getInstance().register(this);
+
         mBtnNet = findMyViewId(R.id.btn_net);
+        mBtnRxBus = findMyViewId(R.id.btn_rxBus);
         mBtnNotification = findMyViewId(R.id.btn_notification);
         mBtnDialog = findMyViewId(R.id.btn_dialog_fragment);
         mBtnDownload = findMyViewId(R.id.btn_download);
         btn_upload = findMyViewId(R.id.btn_upload);
         btn_fragment = findMyViewId(R.id.btn_fragment);
-
-
-        Log.d("TTT", "brand = " + NetWorkUtil.getOperatorName(this));
-        Log.d("TTT", "net = " + NetWorkUtil.getNetworkState(this));
-
-//        MyRxbus2.getInstance().register(this);
-//        MyRxbus2.getInstance().send(0,"测试数据");
-
         mBtnNet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,8 +117,15 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             @Override
             public void onClick(View v) {
                 MyNotificationUtils.init(getApplicationContext());
-                MyNotificationUtils.buildSimple(1,MyNotificationUtils.CHANNEL_ID_SERVICE,R.mipmap.default_image,"通知栏标题",
-                        "通知栏内容",MyNotificationUtils.buildIntent(MainActivity.class)).show();
+                MyNotificationUtils.buildSimple(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
+                        "通知栏内容", MyNotificationUtils.buildIntent(MainActivity.class)).show();
+            }
+        });
+
+        mBtnRxBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyRxbus2.getInstance().send(RxBusTag.TEST,"Rx消息");
             }
         });
 

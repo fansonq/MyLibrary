@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 import android.view.View;
+import android.widget.Button;
 
 import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.http.HttpUtils;
@@ -15,6 +16,9 @@ import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 
 public class TestActivity extends BaseActivity{
 
+    private static final String TAG =TestActivity .class.getSimpleName();
+
+    private Button mBtn;
 
 
     @Override
@@ -29,8 +33,11 @@ public class TestActivity extends BaseActivity{
         RetrofitStrategy strategy = new RetrofitStrategy();
         strategy.setApi(new ApiFactoryImpl());
         HttpUtils.init(strategy);
+        mBtn = findViewById(R.id.btn_go);
 
-        findViewById(R.id.btn_go).setOnClickListener(new View.OnClickListener() {
+
+
+        mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMyActivity(MainActivity.class);
