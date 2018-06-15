@@ -17,6 +17,7 @@ import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.utils.NetWorkUtil;
 import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -47,6 +48,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
     //    private MyPermissionHelper myPermissionHelper;
     private TestPresenter mTestPresenter;
     private Button mBtnNet, mBtnDownload, btn_fragment, btn_upload, mBtnDialog;
+    private Button mBtnNotification;
 
     @Override
     protected int getContentView() {
@@ -64,6 +66,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
 
         AppUtils.init(getApplicationContext());
         mBtnNet = findMyViewId(R.id.btn_net);
+        mBtnNotification = findMyViewId(R.id.btn_notification);
         mBtnDialog = findMyViewId(R.id.btn_dialog_fragment);
         mBtnDownload = findMyViewId(R.id.btn_download);
         btn_upload = findMyViewId(R.id.btn_upload);
@@ -109,6 +112,15 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             public void onClick(View view) {
 //                MyFragmentManager manager = new MyFragmentManager();
 //                manager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
+            }
+        });
+
+        mBtnNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyNotificationUtils.init(getApplicationContext());
+                MyNotificationUtils.buildSimple(1,MyNotificationUtils.CHANNEL_ID_SERVICE,R.mipmap.default_image,"通知栏标题",
+                        "通知栏内容",MyNotificationUtils.buildIntent(MainActivity.class)).show();
             }
         });
 

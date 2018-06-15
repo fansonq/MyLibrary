@@ -249,7 +249,7 @@ private static final String TAG = DialogActivity.class.getSimpleName();
                         mNumberProgressBar.setProgress((int)status.getPercentNumber());
                         Log.d(TAG,"下载进度:"+(int)status.getPercentNumber());
                         MyNotificationUtils.init(getApplicationContext());
-                        MyNotificationUtils.buildProgress(LibNotificationID.UPDATE_PROGRESS,R.mipmap.ic_launcher_round,getString(R.string.downloading),
+                        MyNotificationUtils.buildProgress(LibNotificationID.UPDATE_PROGRESS,MyNotificationUtils.CHANNEL_ID_SERVICE,R.mipmap.ic_launcher_round,getString(R.string.downloading),
                                 (int)status.getPercentNumber(),100).show();
                     }
                 }, new Consumer<Throwable>() {
@@ -262,7 +262,7 @@ private static final String TAG = DialogActivity.class.getSimpleName();
                     public void run() throws Exception {
                        Log.d(TAG,"下载成功");
                         PendingIntent intent = PendingIntent.getActivity(DialogActivity.this, 0, getInstallIntent(mAppFile), PendingIntent.FLAG_UPDATE_CURRENT);
-                        MyNotificationUtils.buildSimple(LibNotificationID.UPDATE_PROGRESS,R.mipmap.ic_launcher_round,getString(R.string.tip),
+                        MyNotificationUtils.buildSimple(LibNotificationID.UPDATE_PROGRESS,MyNotificationUtils.CHANNEL_ID_SERVICE,R.mipmap.ic_launcher_round,getString(R.string.tip),
                                 getString(R.string.download_complete) ,intent).show();
                         installApp();
                     }

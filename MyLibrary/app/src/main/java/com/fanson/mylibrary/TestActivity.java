@@ -19,31 +19,27 @@ public class TestActivity extends BaseActivity{
 
     @Override
     protected int getContentView() {
-        return R.layout.activity_main;
+        return R.layout.activity_test;
     }
 
     @Override
     protected void initView() {
-
         /*---Retrofit策略---*/
         RetrofitClient.init(ApiStores.API_SERVER_URL);
         RetrofitStrategy strategy = new RetrofitStrategy();
         strategy.setApi(new ApiFactoryImpl());
         HttpUtils.init(strategy);
 
-        findViewById(R.id.btn_net).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_go).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startMyActivity(MainActivity.class);
             }
         });
-
-
     }
 
     @Override
     protected void initData() {
-
     }
 
     @Override
