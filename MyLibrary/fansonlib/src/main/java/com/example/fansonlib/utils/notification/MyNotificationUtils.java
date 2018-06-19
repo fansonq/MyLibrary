@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.fansonlib.utils.notification.builder.BigPicBuilder;
@@ -69,11 +70,33 @@ public class MyNotificationUtils {
      * @param contentIntent 跳转的意图
      * @return
      */
-    public static SingleLineBuilder buildSimple(int id,String channelId, int smallIcon, CharSequence contentTitle, CharSequence contentText, PendingIntent contentIntent) {
+    public static SingleLineBuilder buildSimple(int id, String channelId,  int smallIcon, CharSequence contentTitle, CharSequence contentText, PendingIntent contentIntent) {
         SingleLineBuilder builder = new SingleLineBuilder();
         builder.setBase(smallIcon, contentTitle, contentText)
                 .setId(id)
                 .setChannelId(channelId)
+                .setContentIntent(contentIntent);
+        return builder;
+    }
+
+    /**
+     * 单行，普通的建造
+     *
+     * @param id 通知ID
+     * @param channelId Android8.0新增的渠道ID
+     * @param soundUri 自定义声音文件Uri
+     * @param smallIcon 通知图标
+     * @param contentTitle 通知标题
+     * @param contentText  通知内容
+     * @param contentIntent 跳转的意图
+     * @return
+     */
+    public static SingleLineBuilder buildSimple(int id, String channelId, Uri soundUri, int smallIcon, CharSequence contentTitle, CharSequence contentText, PendingIntent contentIntent) {
+        SingleLineBuilder builder = new SingleLineBuilder();
+        builder.setBase(smallIcon, contentTitle, contentText)
+                .setId(id)
+                .setChannelId(channelId)
+                .setSound(soundUri)
                 .setContentIntent(contentIntent);
         return builder;
     }

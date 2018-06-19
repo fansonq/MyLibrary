@@ -37,7 +37,7 @@ public class BaseBuilder {
     public int flag = NotificationCompat.FLAG_AUTO_CANCEL;
     public int priority = NotificationCompat.PRIORITY_DEFAULT;
 
-    public Uri soundUri;
+    public Uri soundUri = null;
     public long[] vibratePatten;
     public int rgb;
     public int onMs;
@@ -188,6 +188,11 @@ public class BaseBuilder {
         return this;
     }
 
+    public BaseBuilder setSound(Uri soundUri){
+        this.soundUri = soundUri;
+        return this;
+    }
+
     public BaseBuilder setAction(boolean sound, boolean vibrate, boolean lights) {
         this.sound = sound;
         this.vibrate = vibrate;
@@ -208,6 +213,7 @@ public class BaseBuilder {
         if (mChannelId != null) {
             cBuilder.setChannelId(mChannelId);
         }
+
 
         cBuilder.setTicker(ticker);// 在顶部状态栏中的提示信息
 
@@ -233,8 +239,7 @@ public class BaseBuilder {
          */
 //        cBuilder.setPriority(priority);
 
-        //int defaults = 0;
-
+//        int defaults = 0;
 //        if (sound) {
 //            defaults |= Notification.DEFAULT_SOUND;
 //        }
@@ -246,6 +251,9 @@ public class BaseBuilder {
 //        }
 //        cBuilder.setDefaults(defaults);
 
+        if (soundUri!=null){
+            cBuilder.setSound(soundUri);
+        }
 
         //按钮
         if (btnActionBeens != null && btnActionBeens.size() > 0) {

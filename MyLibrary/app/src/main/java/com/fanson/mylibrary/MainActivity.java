@@ -58,9 +58,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         return R.layout.activity_main;
     }
 
-    @Subscribe(eventTag = RxBusTag.TEST,threadMode = EventThread.NEW_THREAD)
+    /**
+     * 接收Rx事件
+     *
+     * @param content 内容
+     */
+    @Subscribe(eventTag = RxBusTag.TEST, threadMode = EventThread.NEW_THREAD)
     public void receiverRxMessage(String content) {
-        mBtnRxBus.setText(content+" 线程："+(getMainLooper()== Looper.myLooper()));
+        mBtnRxBus.setText(content + " 线程：" + (getMainLooper() == Looper.myLooper()));
     }
 
 
@@ -80,12 +85,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         mBtnNet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                testUpdate();
 //                testPopuWindow();
                 testBaseModel();
 //                testImageLoader();
 //                testLoadingView();
-//                ShowToast.singleLong("ttt");
 //                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
 //                ShowToast.Long("QQQQ");
             }
@@ -125,7 +128,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         mBtnRxBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyRxbus2.getInstance().send(RxBusTag.TEST,"Rx消息");
+                MyRxbus2.getInstance().send(RxBusTag.TEST, "Rx消息");
             }
         });
 
