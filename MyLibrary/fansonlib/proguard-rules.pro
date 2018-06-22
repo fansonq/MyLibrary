@@ -157,16 +157,16 @@
 # Platform used when running on Java 8 VMs. Will not be used at runtime.
 -dontwarn retrofit2.Platform$Java8
 
-###############rxbus2###################
-# keep annotated by Subscribe
--keep @com.example.fansonlib.rxbus.annotation.Subscribe class * {*;}
--keep class * {
-    @com.example.fansonlib.rxbus.annotation.Subscribe <fields>;
-}
--keepclassmembers class * {
-    @com.example.fansonlib.rxbus.annotation.Subscribe <methods>;
-}
 
+############### RxBus2 ###################
+-keepattributes *Annotation*
+-keepattributes RuntimeVisibleAnnotations
+-keepattributes RuntimeInvisibleAnnotations
+-keepattributes RuntimeVisibleParameterAnnotations
+-keepattributes RuntimeInvisibleParameterAnnotations
+-keepclassmembers class ** {@com.example.fansonlib.rxbus.annotation.Subscribe <methods>;}
+-keep enum com.example.fansonlib.rxbus.event.EventThread { *; }
+-keep class com.example.fansonlib.rxbus.**{*;}
 
 #okhttp
 -dontwarn com.squareup.okhttp.
