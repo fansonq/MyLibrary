@@ -4,25 +4,27 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.bean.EventNetWork;
-
 
 /**
- * Created by fanson on 2016/8/25.
- */
-public abstract class BaseFragment extends Fragment {
+* @author Created by：Fanson
+* Created on：2016/8/25.
+* Description：基类Fragment（带DataBinding）
+*/
+public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment {
 
     protected Activity hostActivity;
+    protected ViewDataBinding mBinding;
 
     /**
      * 是否初始化的标识
@@ -35,8 +37,6 @@ public abstract class BaseFragment extends Fragment {
      * 默认false
      */
     protected boolean mIsVisible = true;
-
-//    private OnFragmentInteractionListener mListener;
 
     /**
      * 根View
@@ -56,8 +56,9 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(getLayoutId(), container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        rootView = mBinding.getRoot();
         initView(rootView,inflater,container, savedInstanceState);
         return rootView;
     }
@@ -93,7 +94,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        SampleApplicationLike.getRefWatcher(getActivity()).watch(this);
     }
 
     @Override
@@ -101,6 +101,14 @@ public abstract class BaseFragment extends Fragment {
         super.onDetach();
 //        mListener = null;
         hostActivity = null;
+    }
+
+    /**
+     * 获取DataBinding
+     * @return DataBinding的绑定
+     */
+    public  D  getBinding(){
+        return (D) mBinding;
     }
 
     @SuppressWarnings("deprecation")
@@ -189,196 +197,6 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initData();
 
-    /**
-     * 查找指定Tag的Fragment
-     *
-     * @param tag
-     * @return
-     */
-    public Fragment findFragmentByTag(String tag) {
-        if (getChildFragmentManager() != null) {
-            return getChildFragmentManager().findFragmentByTag(tag);
-        }
-        return null;
-    }
-
-    /**
-     * 查找指定Id的Fragment
-     *
-     * @param id
-     * @return
-     */
-    public Fragment findFragmentById(int id) {
-        if (getChildFragmentManager() != null) {
-            return getChildFragmentManager().findFragmentById(id);
-        }
-        return null;
-    }
-
-    /**
-     * 删除指定的Fragment
-     *
-     * @param fragment
-     */
-    protected void removeFragment(Fragment fragment) {
-        if (getChildFragmentManager() != null && fragment != null) {
-            getChildFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 删除指定tag的Fragment
-     *
-     * @param tag
-     */
-    protected void removeFragment(String tag) {
-        if (getChildFragmentManager() != null) {
-            removeFragment(getChildFragmentManager().findFragmentByTag(tag));
-            getChildFragmentManager().popBackStackImmediate(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
-    /**
-     * show Fragment
-     *
-     * @param fragment
-     */
-    protected void showFragment(Fragment fragment) {
-        if (getChildFragmentManager() != null &&fragment.isAdded()) {
-            getChildFragmentManager().beginTransaction().show(fragment).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 添加Fragment
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void addFragment(int id_content, Fragment fragment) {
-        addFragmentWithTag(id_content, fragment, null);
-    }
-
-    /**
-     * 添加Fragment（附带Tag）
-     *
-     * @param id_content
-     * @param fragment
-     * @param tag
-     */
-    protected void addFragmentWithTag(int id_content, Fragment fragment, String tag) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(id_content, fragment, tag).addToBackStack(tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 添加Fragment（带动画）
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void addFragment(int id_content, Fragment fragment, int enter, int exit) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(enter, exit);
-        transaction.add(id_content, fragment).addToBackStack(null);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 替换Fragment（带动画）
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragment(int id_content, Fragment fragment, int enter, int exit) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(enter, exit);
-        transaction.replace(id_content, fragment).addToBackStack(null);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 替换Fragment
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragment(int id_content, Fragment fragment) {
-        replaceFragmentWithTag(id_content, fragment, null);
-    }
-
-    /**
-     * 替换Fragment（附带tag）
-     *
-     * @param id_content
-     * @param fragment
-     */
-    protected void replaceFragmentWithTag(int id_content, Fragment fragment, String tag) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(id_content, fragment, tag).addToBackStack(tag);
-        transaction.commitAllowingStateLoss();
-    }
-
-    /**
-     * 切换Framgment（hide/show）
-     *
-     * @param idContent
-     * @param fromFragment
-     * @param toFragment
-     */
-    protected void switchFragment(int idContent, Fragment fromFragment, Fragment toFragment) {
-        switchFragmentWithTag(idContent,fromFragment,toFragment,null);
-    }
-
-    /**
-     * 切换Framgment（hide/show）带TAG
-     *
-     * @param idContent
-     * @param fromFragment
-     * @param toFragment
-     * @param tagOfTo      标识
-     */
-    protected void switchFragmentWithTag(int idContent, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).add(idContent, toFragment, tagOfTo).addToBackStack(tagOfTo).commitAllowingStateLoss();
-        }
-    }
-
-    /**
-     * 切换Framgment（hide/show）（带动画）
-     *
-     * @param idContent
-     * @param fromFragment
-     * @param toFragment
-     * @param enter
-     * @param eixt
-     */
-    protected void switchFragmentWithAnim(int idContent, Fragment fromFragment, Fragment toFragment, int enter, int eixt) {
-        switchFragment(idContent,fromFragment,toFragment,enter,eixt,null);
-    }
-
-    /**
-     * 切换Framgment（hide/show）（带动画和TAG）
-     * @param idContent
-     * @param fromFragment
-     * @param toFragment
-     * @param enter
-     * @param eixt
-     * @param tag
-     */
-    protected void switchFragment(int idContent, Fragment fromFragment, Fragment toFragment, int enter, int eixt,String tag) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        if (toFragment.isAdded()) {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).show(toFragment).commitAllowingStateLoss();
-        } else {
-            transaction.hide(fromFragment).setCustomAnimations(enter, eixt).add(idContent, toFragment).addToBackStack(tag).commitAllowingStateLoss();
-        }
-    }
-
 
     /**
      * 通过Class跳转界面
@@ -397,15 +215,5 @@ public abstract class BaseFragment extends Fragment {
         }
         startActivity(intent);
     }
-
-    /**
-     * 在此类注册了EventBus，如果此类中不实现四个方法中的其中一个不行，空参数也不行
-     *
-     * @param event
-     */
-    public void onEvent(EventNetWork event) {
-
-    }
-
 
 }

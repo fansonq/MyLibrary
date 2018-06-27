@@ -18,6 +18,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Subscribe {
+
     int eventTag() default -1;
 
     EventThread threadMode() default EventThread.CURRENT_THREAD;

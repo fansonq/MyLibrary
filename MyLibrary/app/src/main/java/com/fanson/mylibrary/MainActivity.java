@@ -64,7 +64,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
      * @param content 内容
      */
     @Subscribe(eventTag = RxBusTag.TEST, threadMode = EventThread.NEW_THREAD)
-    public void receiverRxMessage(String content) {
+    public void receiverRxMessage(Integer content) {
         mBtnRxBus.setText(content + " 线程：" + (getMainLooper() == Looper.myLooper()));
     }
 
@@ -101,6 +101,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
             }
         });
 
+
         mBtnDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,16 +120,28 @@ public class MainActivity extends BaseMvpActivity<TestPresenter> implements Cont
         mBtnNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
                 MyNotificationUtils.init(getApplicationContext());
-                MyNotificationUtils.buildSimple(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
-                        "通知栏内容", MyNotificationUtils.buildIntent(MainActivity.class)).show();
+//                MyNotificationUtils.buildSimple(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
+//                        "通知栏内容", MyNotificationUtils.buildIntent(MainActivity.class)).show();
+
+                MyNotificationUtils.buildProgress(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
+                        1, 100).show();
+                for (int i = 0; i < 100; i++) {
+                    try {
+                        Thread.sleep(1000);
+                        MyNotificationUtils.updateProgress(i).show();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
 
         mBtnRxBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyRxbus2.getInstance().send(RxBusTag.TEST, "Rx消息");
+                MyRxbus2.getInstance().send(RxBusTag.TEST, 100);
             }
         });
 

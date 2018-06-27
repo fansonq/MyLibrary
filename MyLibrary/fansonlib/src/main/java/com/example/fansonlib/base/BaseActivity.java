@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -19,13 +21,16 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.utils.NetWorkUtil;
 
 /**
- * Created by fanson on 2016/8/23.
- */
-public abstract class BaseActivity extends AppCompatActivity {
+* @author Created by：Fanson
+* Created on：2016/8/23
+* Description：Activity基类(带DataBinding)
+*/
+public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
 
-    private Context mContext;
+    protected Context mContext;
+    protected ViewDataBinding mBinding;
 
     /**
      * 监听网络连接状态的广播
@@ -43,39 +48,31 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        setContentView(getContentView());
+        mBinding = DataBindingUtil.setContentView(this,getContentView());
         initNetStateBroadCastReceiver();
-        //注册EventBus
-//        EventBus.getDefault().registerSticky(this);
         initView();
         initData();
         listenEvent();
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        MobclickAgent.onResume(this);
-//        loadLanguageToViews();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
     }
 
     @Override
@@ -110,7 +107,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected abstract void initView();
 
-
     /**
      * 初始化数据
      */
@@ -120,6 +116,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 点击事件
      */
     protected abstract void listenEvent();
+
+    /**
+     * 获取DataBinding的绑定
+     * @return DataBinding
+     */
+    public D getBinding(){
+        return (D) mBinding;
+    }
 
     /**
      * 初始化监听网络连接的广播
@@ -191,15 +195,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 退出所有的Activity
-     */
-    public void closeAllActivity() {
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
 }
 
 

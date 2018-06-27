@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -11,7 +12,7 @@ import com.example.fansonlib.utils.InputMethodUtils;
  * Describe：集成Mvp的BaseActivity
  */
 
-public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements BaseView {
+public abstract class BaseMvpActivity<P extends BasePresenter,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView {
 
     protected P mPresenter;
 

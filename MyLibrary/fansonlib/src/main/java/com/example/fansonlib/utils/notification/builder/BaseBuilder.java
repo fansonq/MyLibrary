@@ -188,7 +188,7 @@ public class BaseBuilder {
         return this;
     }
 
-    public BaseBuilder setSound(Uri soundUri){
+    public BaseBuilder setSound(Uri soundUri) {
         this.soundUri = soundUri;
         return this;
     }
@@ -251,7 +251,7 @@ public class BaseBuilder {
 //        }
 //        cBuilder.setDefaults(defaults);
 
-        if (soundUri!=null){
+        if (soundUri != null) {
             cBuilder.setSound(soundUri);
         }
 
@@ -276,7 +276,6 @@ public class BaseBuilder {
         cBuilder.setOngoing(onGoing);
         cBuilder.setFullScreenIntent(fullscreenIntent, true);
         cBuilder.setVisibility(lockScreenVisiablity);
-
     }
 
     public void show() {
@@ -285,8 +284,11 @@ public class BaseBuilder {
         if (forgroundService) {
             notification.flags = Notification.FLAG_FOREGROUND_SERVICE;
         }
-
         MyNotificationUtils.notify(id, notification);
+    }
+
+    public void updateProgress() {
+        MyNotificationUtils.notify(id, cBuilder.build());
     }
 
 

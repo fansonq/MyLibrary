@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -11,7 +12,7 @@ import com.example.fansonlib.utils.InputMethodUtils;
  * Describe：多个Presenter
  */
 
-public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends BasePresenter> extends BaseActivity implements BaseView{
+public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends BasePresenter,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView{
 
     protected P1 mPresenter1;
     protected P2 mPresenter2;

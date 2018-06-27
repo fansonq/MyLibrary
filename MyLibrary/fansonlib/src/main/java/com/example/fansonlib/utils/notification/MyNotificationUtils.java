@@ -29,9 +29,11 @@ public class MyNotificationUtils {
 
     private static NotificationManager mNotificationManager;
 
+    private static ProgressBuilder mProgressBuilder;
+
     public final static String CHANNEL_ID_CHAT = "chat";
-    public final static String CHANNEL_ID_RECOMMEND= "recommend";
-    public final static String CHANNEL_ID_SERVICE= "service";
+    public final static String CHANNEL_ID_RECOMMEND = "recommend";
+    public final static String CHANNEL_ID_SERVICE = "service";
     private final static String CHANNEL_NAME_CHAT = "聊天消息";
     private final static String CHANNEL_NAME_RECOMMEND = "推荐消息";
     private final static String CHANNEL_NAME_SERVICE = "系统推送消息";
@@ -44,17 +46,18 @@ public class MyNotificationUtils {
     public static void init(Context context) {
         mContext = context;
         mNotificationManager = (NotificationManager) context.getSystemService(Activity.NOTIFICATION_SERVICE);
-        createNotificationChannel(CHANNEL_ID_SERVICE,CHANNEL_NAME_SERVICE);
+        createNotificationChannel(CHANNEL_ID_SERVICE, CHANNEL_NAME_SERVICE);
     }
 
     /**
      * 创建通知渠道
-     * @param channelId 渠道ID
+     *
+     * @param channelId   渠道ID
      * @param channelName 渠道名称
      */
-    public static void createNotificationChannel(String channelId,String channelName){
+    public static void createNotificationChannel(String channelId, String channelName) {
         if (android.os.Build.VERSION.SDK_INT >= 26) {
-            NotificationChannel channel = new NotificationChannel(channelId,channelName,NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
             mNotificationManager.createNotificationChannel(channel);
         }
     }
@@ -62,15 +65,15 @@ public class MyNotificationUtils {
     /**
      * 单行，普通的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param smallIcon 通知图标
-     * @param contentTitle 通知标题
-     * @param contentText  通知内容
+     * @param id            通知ID
+     * @param channelId     Android8.0新增的渠道ID
+     * @param smallIcon     通知图标
+     * @param contentTitle  通知标题
+     * @param contentText   通知内容
      * @param contentIntent 跳转的意图
      * @return
      */
-    public static SingleLineBuilder buildSimple(int id, String channelId,  int smallIcon, CharSequence contentTitle, CharSequence contentText, PendingIntent contentIntent) {
+    public static SingleLineBuilder buildSimple(int id, String channelId, int smallIcon, CharSequence contentTitle, CharSequence contentText, PendingIntent contentIntent) {
         SingleLineBuilder builder = new SingleLineBuilder();
         builder.setBase(smallIcon, contentTitle, contentText)
                 .setId(id)
@@ -82,12 +85,12 @@ public class MyNotificationUtils {
     /**
      * 单行，普通的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param soundUri 自定义声音文件Uri
-     * @param smallIcon 通知图标
-     * @param contentTitle 通知标题
-     * @param contentText  通知内容
+     * @param id            通知ID
+     * @param channelId     Android8.0新增的渠道ID
+     * @param soundUri      自定义声音文件Uri
+     * @param smallIcon     通知图标
+     * @param contentTitle  通知标题
+     * @param contentText   通知内容
      * @param contentIntent 跳转的意图
      * @return
      */
@@ -104,35 +107,40 @@ public class MyNotificationUtils {
     /**
      * 带进度条的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param smallIcon 通知图标
+     * @param id           通知ID
+     * @param channelId    Android8.0新增的渠道ID
+     * @param smallIcon    通知图标
      * @param contentTitle 通知标题
-     * @param progress 进度条
-     * @param max 进度条最大值
+     * @param progress     进度条
+     * @param max          进度条最大值
      * @return
      */
     public static ProgressBuilder buildProgress(int id, String channelId, int smallIcon, CharSequence contentTitle, int progress, int max) {
-        ProgressBuilder builder = new ProgressBuilder();
-        builder.setBase(smallIcon, contentTitle, progress + "/" + max)
+        mProgressBuilder = new ProgressBuilder();
+        mProgressBuilder.setBase(smallIcon, contentTitle, progress + "/" + max)
                 .setChannelId(channelId)
                 .setId(id);
-        builder.setProgress(max, progress, false);
-        return builder;
+        mProgressBuilder.setProgress(max, progress, false);
+        return mProgressBuilder;
+    }
+
+    public static ProgressBuilder updateProgress(int progress) {
+        mProgressBuilder.setProgress(100, progress, false);
+        return mProgressBuilder;
     }
 
     /**
      * 带图片的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param smallIcon 通知图标
+     * @param id           通知ID
+     * @param channelId    Android8.0新增的渠道ID
+     * @param smallIcon    通知图标
      * @param contentTitle 通知标题
      * @param contentText  通知内容
      * @param summaryText
      * @return
      */
-    public static BigPicBuilder buildBigPic(int id, String channelId,  int smallIcon, CharSequence contentTitle, CharSequence contentText, CharSequence summaryText) {
+    public static BigPicBuilder buildBigPic(int id, String channelId, int smallIcon, CharSequence contentTitle, CharSequence contentText, CharSequence summaryText) {
         BigPicBuilder builder = new BigPicBuilder();
         builder.setBase(smallIcon, contentTitle, contentText).setChannelId(channelId).setId(id);
         builder.setSummaryText(summaryText);
@@ -142,9 +150,9 @@ public class MyNotificationUtils {
     /**
      * 长文的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param smallIcon 通知图标
+     * @param id           通知ID
+     * @param channelId    Android8.0新增的渠道ID
+     * @param smallIcon    通知图标
      * @param contentTitle 通知标题
      * @param contentText  通知内容
      * @return
@@ -159,9 +167,9 @@ public class MyNotificationUtils {
     /**
      * 多条信息的建造
      *
-     * @param id 通知ID
-     * @param channelId Android8.0新增的渠道ID
-     * @param smallIcon 通知图标
+     * @param id           通知ID
+     * @param channelId    Android8.0新增的渠道ID
+     * @param smallIcon    通知图标
      * @param contentTitle 通知标题
      * @return
      */
@@ -178,7 +186,7 @@ public class MyNotificationUtils {
      * @param contentText
      * @return
      */
-    public static MediaBuilder buildMedia(int id, String channelId,  int smallIcon, CharSequence contentTitle, CharSequence contentText) {
+    public static MediaBuilder buildMedia(int id, String channelId, int smallIcon, CharSequence contentTitle, CharSequence contentText) {
         MediaBuilder builder = new MediaBuilder();
         builder.setBase(smallIcon, contentTitle, contentText).setId(id).setChannelId(channelId);
         return builder;
@@ -197,14 +205,14 @@ public class MyNotificationUtils {
     /**
      * 建造PendingIntent带参数
      *
-     * @param clazz 指定跳转的类
+     * @param clazz  指定跳转的类
      * @param bundle 参数
      * @return
      */
     public static PendingIntent buildIntentWithBundle(Class clazz, Bundle bundle) {
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
         Intent intent = new Intent(MyNotificationUtils.mContext, clazz);
-        if (bundle!=null){
+        if (bundle != null) {
             intent.putExtras(bundle);
         }
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
