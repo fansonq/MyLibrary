@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment {
 
     protected Activity hostActivity;
-    protected ViewDataBinding mBinding;
+    protected D mBinding;
 
     /**
      * 是否初始化的标识

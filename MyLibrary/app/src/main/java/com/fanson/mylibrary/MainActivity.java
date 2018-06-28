@@ -26,6 +26,7 @@ import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.constant.RxBusTag;
+import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.update.MyUpdateService;
@@ -44,7 +45,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
-public class MainActivity extends BaseMvpActivity<TestPresenter> implements ContractTest.TestView {
+public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBinding> implements ContractTest.TestView {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();

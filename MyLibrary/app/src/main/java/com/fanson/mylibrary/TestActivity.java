@@ -1,5 +1,6 @@
 package com.fanson.mylibrary;
 
+import android.databinding.ViewDataBinding;
 import android.view.View;
 import android.widget.Button;
 
@@ -7,6 +8,7 @@ import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.fanson.mylibrary.databinding.ActivityTestBinding;
 
 /**
  * @author Created by：Fanson
@@ -14,12 +16,11 @@ import com.example.fansonlib.http.retrofit.RetrofitStrategy;
  *         Describe：
  */
 
-public class TestActivity extends BaseActivity{
+public class TestActivity extends BaseActivity<ActivityTestBinding>{
 
     private static final String TAG =TestActivity .class.getSimpleName();
-
+    private ViewDataBinding viewDataBinding;
     private Button mBtn;
-
 
     @Override
     protected int getContentView() {

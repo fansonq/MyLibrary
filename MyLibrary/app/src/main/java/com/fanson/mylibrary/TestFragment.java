@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fansonlib.base.BaseFragment;
+import com.example.fansonlib.databinding.FragmentTestBinding;
 import com.example.fansonlib.widget.recyclerview.AutoLoadRecyclerView;
 import com.fanson.mylibrary.adapter.Dog;
 import com.fanson.mylibrary.adapter.TestAdapter;
 import com.fanson.mylibrary.adapter.TestMultiAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  * Describe：
  */
 
-public class TestFragment extends BaseFragment {
+public class TestFragment extends BaseFragment<FragmentTestBinding> {
 
     private TestAdapter adapter;
     private TestMultiAdapter multiAdapter;

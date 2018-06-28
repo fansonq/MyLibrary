@@ -30,7 +30,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     protected Context mContext;
-    protected ViewDataBinding mBinding;
+    protected D mBinding;
 
     /**
      * 监听网络连接状态的广播
