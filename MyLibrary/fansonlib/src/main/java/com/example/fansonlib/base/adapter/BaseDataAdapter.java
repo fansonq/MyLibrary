@@ -38,9 +38,15 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
 
     @Override
     public BaseHolder bindHolder(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),viewType, parent, false);
-        BaseHolder holder = new BaseHolder(binding.getRoot());
-        holder.setBinding(binding);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false);
+        BaseHolder holder;
+        //如果子类的布局没有引用DataBinding，则不加载
+        if (binding != null) {
+            holder = new BaseHolder(binding.getRoot());
+            holder.setBinding(binding);
+        } else {
+            holder = new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false));
+        }
         return holder;
     }
 
