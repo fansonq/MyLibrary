@@ -2,6 +2,7 @@ package com.example.fansonlib.base.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.databinding.ViewDataBinding;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -31,6 +32,16 @@ public  class BaseHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> viewArray;
     private View mConvertView;
     private Context mContext;
+    private ViewDataBinding binding;
+
+    public ViewDataBinding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(ViewDataBinding binding) {
+        this.binding = binding;
+    }
+
 
     public  BaseHolder(View itemView){
         super(itemView);

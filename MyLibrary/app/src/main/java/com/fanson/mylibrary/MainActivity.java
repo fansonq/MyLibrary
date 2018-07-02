@@ -25,6 +25,7 @@ import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
+import com.fanson.mylibrary.adapter.RecyclerViewActivity;
 import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
@@ -113,8 +114,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         btn_fragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MyFragmentManager manager = new MyFragmentManager();
-//                manager.replaceFragment(getSupportFragmentManager(),R.id.fl_main, new TestFragment());
+                startMyActivity(RecyclerViewActivity.class);
             }
         });
 

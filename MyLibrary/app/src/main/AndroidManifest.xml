@@ -22,6 +22,8 @@
 
         <activity android:name="com.example.fansonlib.function.update.DialogActivity"/>
 
+        <activity android:name=".adapter.RecyclerViewActivity"/>
+
         <service android:name=".update.MyUpdateService"/>
 
         <provider

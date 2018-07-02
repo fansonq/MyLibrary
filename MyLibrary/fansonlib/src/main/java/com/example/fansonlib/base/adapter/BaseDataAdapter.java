@@ -1,6 +1,8 @@
 package com.example.fansonlib.base.adapter;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,8 +37,11 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
     }
 
     @Override
-    public BaseHolder bindHolder(ViewGroup parent, int viewType){
-        return  new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
+    public BaseHolder bindHolder(ViewGroup parent, int viewType) {
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),viewType, parent, false);
+        BaseHolder holder = new BaseHolder(binding.getRoot());
+        holder.setBinding(binding);
+        return holder;
     }
 
 //    @Override
@@ -61,7 +66,7 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
     /**
      * 清空所有数据
      */
-    public void clearList(){
+    public void clearList() {
         mDataList.clear();
         notifyDataSetChanged();
     }
@@ -108,18 +113,19 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
     public boolean appendList(List<M> list) {
         boolean result = mDataList.addAll(list);
         if (result) {
-            notifyItemRangeInserted(getItemCount()-list.size(),list.size());
+            notifyItemRangeInserted(getItemCount() - list.size(), list.size());
         }
         return result;
     }
 
     /**
      * 指定位置插入数据
+     *
      * @param index
      * @param data
      */
-    public void insertByPos(int index,M data) {
-        mDataList.add(index,data);
+    public void insertByPos(int index, M data) {
+        mDataList.add(index, data);
         notifyDataSetChanged();
     }
 
@@ -145,7 +151,7 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
     public void proposeList(List<M> list) {
         mDataList.addAll(0, list);
 //        notifyDataSetChanged();
-        notifyItemRangeInserted(0,list.size());
+        notifyItemRangeInserted(0, list.size());
     }
 
     @Override
@@ -166,9 +172,9 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
 
     /**
      * 返回布局layout
+     *
      * @param position 列表位置
-     * @return
-     *  布局Layout ID
+     * @return 布局Layout ID
      */
     @LayoutRes
     public abstract int getLayoutRes(int position);
@@ -224,11 +230,11 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
         if (headerView == null) {
             mDataList.remove(position);
             notifyItemRemoved(position);
-            notifyItemRangeChanged(position,mDataList.size()-position);
+            notifyItemRangeChanged(position, mDataList.size() - position);
         } else {
             mDataList.remove(position - 1);
-            notifyItemRemoved(position- 1);
-            notifyItemRangeChanged(position,mDataList.size()-(position - 1));
+            notifyItemRemoved(position - 1);
+            notifyItemRangeChanged(position, mDataList.size() - (position - 1));
         }
 
     }
@@ -246,10 +252,10 @@ public abstract class BaseDataAdapter<M> extends BaseViewAdapter<M> {
         mDataList.remove(index);
         if (headerView == null) {
             notifyItemRemoved(index);// 显示动画效果
-            notifyItemRangeChanged(index,mDataList.size()-index); // 对于被删掉的位置及其后range大小范围内的view进行重新onBindViewHolder
+            notifyItemRangeChanged(index, mDataList.size() - index); // 对于被删掉的位置及其后range大小范围内的view进行重新onBindViewHolder
         } else {
             notifyItemRemoved(index + 1);
-            notifyItemRangeChanged(index,mDataList.size()-(index+1));
+            notifyItemRangeChanged(index, mDataList.size() - (index + 1));
         }
     }
 

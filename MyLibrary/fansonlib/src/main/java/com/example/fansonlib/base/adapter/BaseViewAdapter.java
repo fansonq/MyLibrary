@@ -12,15 +12,15 @@ import android.view.ViewGroup;
  * Created on：2016/12/19 15:14
  * Describe：RecyclerView.Adapter的扩展,View相关的封装
  */
-public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder> implements View.OnTouchListener{
+public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder> implements View.OnTouchListener {
 
     private static final String TAG = BaseViewAdapter.class.getSimpleName();
 
     public static final int VIEW_TYPE_HEADER = 1024;
     public static final int VIEW_TYPE_FOOTER = 1025;
 
-    private boolean isFirst=false;
-    private boolean isLast=false;
+    private boolean isFirst = false;
+    private boolean isLast = false;
     private int lastY;
     private RecyclerView.ViewHolder mCurrentViewHolder;
 
@@ -44,19 +44,21 @@ public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder
 
     /**
      * 底部进入的item
+     *
      * @param viewHolder
      */
     public abstract void bottomEnterAnim(RecyclerView.ViewHolder viewHolder);
 
     /**
      * 顶部进入的item
+     *
      * @param viewHolder
      */
     public abstract void topEnterAnim(RecyclerView.ViewHolder viewHolder);
 
 
     @Override
-    public  BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         parent.setOnTouchListener(this);
 //        BaseHolder baseHolder = new BaseHolder(LayoutInflater.from(parent.getContext()).inflate(viewType,parent,false));
         if (viewType == VIEW_TYPE_HEADER) {
@@ -80,22 +82,22 @@ public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder
     @Override
     public final void onBindViewHolder(BaseHolder holder, int position) {
         mCurrentViewHolder = holder;
-        if(position==getExtraViewCount()-1){
-            isLast=true;
-        }else{
-            isLast=false;
+        if (position == getExtraViewCount() - 1) {
+            isLast = true;
+        } else {
+            isLast = false;
         }
-        if(position==0){
-            isFirst=true;
-        }else{
-            isFirst=false;
+        if (position == 0) {
+            isFirst = true;
+        } else {
+            isFirst = false;
         }
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_HEADER:
             case VIEW_TYPE_FOOTER:
                 break;
             default:
-                bindCustomViewHolder( holder, position);
+                bindCustomViewHolder(holder, position);
                 break;
         }
     }
@@ -143,7 +145,7 @@ public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder
             return;
         }
         this.footerView = footerView;
-        notifyItemInserted(getItemCount()-1);
+        notifyItemInserted(getItemCount() - 1);
     }
 
     /**
@@ -202,17 +204,17 @@ public abstract class BaseViewAdapter<M> extends RecyclerView.Adapter<BaseHolder
             case MotionEvent.ACTION_MOVE:
                 int deltaY = y - lastY;
                 if (deltaY < 0) {   //swipe up
-                    if(!isLast()){
+                    if (!isLast()) {
                         bottomEnterAnim(mCurrentViewHolder);
                     }
                 } else {   //swipe down
-                    if(!isFirst()){
+                    if (!isFirst()) {
                         topEnterAnim(mCurrentViewHolder);
                     }
                 }
                 break;
         }
-        lastY=y;
+        lastY = y;
         return false;
     }
 }
