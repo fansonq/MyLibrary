@@ -24,6 +24,8 @@
 
         <activity android:name=".adapter.RecyclerViewActivity"/>
 
+        <activity android:name=".TestLoadingActivity"/>
+
         <service android:name=".update.MyUpdateService"/>
 
         <provider

@@ -139,6 +139,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
             }
         });
 
+        mBinding.btnLoadingView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               startMyActivity(TestLoadingActivity.class);
+            }
+        });
+
+
         mBtnRxBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

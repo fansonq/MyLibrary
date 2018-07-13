@@ -147,7 +147,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
         drawable.setBounds(0, 0, 100, 100);
         mBtnRetry = new Button(getContext());
         mBtnRetry.setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent));
-        mBtnRetry.setText(AppUtils.getAppContext().getString(R.string.retry_loding));
+        mBtnRetry.setText(AppUtils.getAppContext().getString(R.string.retry_loading));
         mBtnRetry.setTextSize(15);
         mBtnRetry.setTextColor(ContextCompat.getColor(mContext, R.color.grey_dark));
         mBtnRetry.setCompoundDrawables(drawable, null, null, null);
@@ -181,7 +181,7 @@ public class MyLoadingView extends RelativeLayout implements View.OnClickListene
     public void failRetry(String msg) {
         createRetryView();
         if (TextUtils.isEmpty(msg)) {
-            mWarnText = AppUtils.getAppContext().getString(R.string.retry_loding);
+            mWarnText = AppUtils.getAppContext().getString(R.string.retry_loading);
         } else {
             mWarnText = msg;
         }
