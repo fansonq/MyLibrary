@@ -153,10 +153,8 @@ public class LoadingStateView extends FrameLayout {
             mNoDataView = mInflater.inflate(R.layout.layout_loading_no_data, this, false);
             mNoDataContentView = mNoDataView.findViewById(R.id.empty_content);
             mTvNoData = (TextView) mNoDataView.findViewById(R.id.tv_empty);
-            mTvReload = mNoDataView.findViewById(R.id.tv_reload);
             mTvNoData.setTextSize(mTextSize);
             mTvNoData.setTextColor(mTextColor);
-            mTvReload.setTextColor(mTextColor);
             mIvNoData = (ImageView) mNoDataView.findViewById(R.id.iv_no_data);
             if (mNoDataDrawable != null) {
                 mIvNoData.setImageDrawable(mNoDataDrawable);
