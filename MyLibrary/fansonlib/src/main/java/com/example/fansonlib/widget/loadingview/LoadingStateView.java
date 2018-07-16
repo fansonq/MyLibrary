@@ -25,27 +25,37 @@ import com.example.fansonlib.widget.loading.MyProgressWheel;
  * Describe：加载页面（加载中，加载失败，无数据）
  */
 public class LoadingStateView extends FrameLayout {
-    private View contentView;
 
-    //加载数据的界面控件
-    private View mEmptyView;
-    private View mEmptyContentView;
-    private TextView mTvEmpty;
-    private ImageView mIvEmpty;
+    private View contentView;
+    private Context mContext;
+    private int mProgressViewId;
+    private TextView mTvReload;
+    private int mTextColor;
+    private int mTextSize;
+    private int mDrawableColor;
+    private LayoutInflater mInflater;
+    private Drawable mErrorDrawable;
+    private Drawable mNoDataDrawable;
+    private View.OnClickListener mOnErrorButtonClickListener = null;
+    private View.OnClickListener mOnNoDataButtonClickListener = null;
+
+    //加载数据为空的界面控件
+    private View mNoDataView = null;
+    private View mNoDataContentView = null;
+    private TextView mTvNoData;
+    private ImageView mIvNoData;
 
     //加载出错的界面控件
-    private View mErrorView;
+    private View mErrorView = null;
     private View mErrorContentView;
     private TextView mTvError;
     private ImageView mIvError;
 
     //加载中的界面控件
-    private View mProgressView;
+    private View mProgressView = null;
     private View mProgressContentView;
     private TextView mTvProgress;
     private MyProgressWheel mProgressWheel;
-
-    private TextView mTvReload;
 
     //当前显示的View
     private View mCurrentShowingView;
@@ -72,95 +82,94 @@ public class LoadingStateView extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         parseAttrs(context, attrs);
-
-        mEmptyView.setVisibility(View.GONE);
-
-        mErrorView.setVisibility(View.GONE);
-
-        mProgressView.setVisibility(View.GONE);
-
+//        mNoDataView.setVisibility(View.GONE);
+//        mErrorView.setVisibility(View.GONE);
+//        mProgressView.setVisibility(View.GONE);
         mCurrentShowingView = contentView;
     }
 
     private void parseAttrs(Context context, AttributeSet attrs) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.LoadingStateView, 0, 0);
-        int progressViewId;
-        Drawable errorDrawable;
-        Drawable emptyDrawable;
-        int textSize;
-        int textColor;
-        int drawableColor;
         try {
-            errorDrawable = a.getDrawable(R.styleable.LoadingStateView_errorDrawable);
-            emptyDrawable = a.getDrawable(R.styleable.LoadingStateView_emptyDrawable);
-            progressViewId = a.getResourceId(R.styleable.LoadingStateView_progressView, -1);
-            textSize = a.getDimensionPixelSize(R.styleable.LoadingStateView_tipTextSize,16);
-            textColor = a.getColor(R.styleable.LoadingStateView_tipTextColor, Color.GRAY);
-            drawableColor = a.getColor(R.styleable.LoadingStateView_drawableColor,0);
+            mErrorDrawable = a.getDrawable(R.styleable.LoadingStateView_errorDrawable);
+            mNoDataDrawable = a.getDrawable(R.styleable.LoadingStateView_emptyDrawable);
+            mProgressViewId = a.getResourceId(R.styleable.LoadingStateView_progressView, -1);
+            mTextSize = a.getDimensionPixelSize(R.styleable.LoadingStateView_tipTextSize, 16);
+            mTextColor = a.getColor(R.styleable.LoadingStateView_tipTextColor, Color.GRAY);
+            mDrawableColor = a.getColor(R.styleable.LoadingStateView_drawableColor, 0);
         } finally {
             a.recycle();
         }
+    }
 
-        /**************************************----初始化加载中界面的控件------****************************************************/
-        if (progressViewId != -1) {
-            mProgressView = inflater.inflate(progressViewId, this, false);
+    /**
+     * 初始化加载中的View
+     */
+    private void initLoadingView() {
+        if (mProgressViewId != -1) {
+            mProgressView = mInflater.inflate(mProgressViewId, this, false);
         } else {
-            mProgressView = inflater.inflate(R.layout.layout_loading_progress, this, false);
+            mProgressView = mInflater.inflate(R.layout.layout_loading_progress, this, false);
             mProgressWheel = (MyProgressWheel) mProgressView.findViewById(R.id.progressWheel);
-            mProgressWheel.setBarColor(drawableColor);
+            mProgressWheel.setBarColor(mDrawableColor);
             mTvProgress = (TextView) mProgressView.findViewById(R.id.tv_progress);
-            mTvProgress.setTextSize(textSize);
-            mTvProgress.setTextColor(textColor);
+            mTvProgress.setTextSize(mTextSize);
+            mTvProgress.setTextColor(mTextColor);
             mProgressContentView = mProgressView.findViewById(R.id.progress_content);
         }
-
         addView(mProgressView);
-        /******************************************************************************************/
+    }
 
-
-        /***************************************----初始化加载出错界面的控件------***************************************************/
-        mErrorView = inflater.inflate(R.layout.layout_loading_error, this, false);
-        mErrorContentView = mErrorView.findViewById(R.id.error_content);
-        mTvError = (TextView) mErrorView.findViewById(R.id.tv_error);
-        mTvReload = mErrorView.findViewById(R.id.tv_reload);
-        mTvError.setTextSize(textSize);
-        mTvError.setTextColor(textColor);
-        mTvReload.setTextColor(textColor);
-        mIvError = (ImageView) mErrorView.findViewById(R.id.iv_error);
-        if (errorDrawable != null) {
-            mIvError.setImageDrawable(errorDrawable);
-        } else {
-            mIvError.setImageResource(R.mipmap.ic_loading_error);
+    /**
+     * 初始化加载出错的View
+     */
+    private void initErrorView() {
+        if (mErrorView == null) {
+            mErrorView = mInflater.inflate(R.layout.layout_loading_error, this, false);
+            mErrorContentView = mErrorView.findViewById(R.id.error_content);
+            mTvError = (TextView) mErrorView.findViewById(R.id.tv_error);
+            mTvReload = mErrorView.findViewById(R.id.tv_reload);
+            mTvError.setTextSize(mTextSize);
+            mTvError.setTextColor(mTextColor);
+            mTvReload.setTextColor(mTextColor);
+            mIvError = (ImageView) mErrorView.findViewById(R.id.iv_error);
+            if (mErrorDrawable != null) {
+                mIvError.setImageDrawable(mErrorDrawable);
+            } else {
+                mIvError.setImageResource(R.mipmap.ic_loading_error);
+            }
+            mIvError.setColorFilter(mDrawableColor);
         }
-        mIvError.setColorFilter(drawableColor);
         addView(mErrorView);
-        /******************************************************************************************/
+    }
 
-
-        /***************************************----初始化加载后数据为空界面的控件------**************************************************/
-        mEmptyView = inflater.inflate(R.layout.layout_loading_empty, this, false);
-        mEmptyContentView = mEmptyView.findViewById(R.id.empty_content);
-        mTvEmpty = (TextView) mEmptyView.findViewById(R.id.tv_empty);
-        mTvReload = mEmptyView.findViewById(R.id.tv_reload);
-        mTvEmpty.setTextSize(textSize);
-        mTvEmpty.setTextColor(textColor);
-        mTvReload.setTextColor(textColor);
-        mIvEmpty = (ImageView) mEmptyView.findViewById(R.id.iv_no_data);
-        if (emptyDrawable != null) {
-            mIvEmpty.setImageDrawable(emptyDrawable);
-        } else {
-            mIvEmpty.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.ic_no_data));
+    /**
+     * 初始化加载数据为空的View
+     */
+    private void initNoDataView() {
+        if (mNoDataView == null) {
+            mNoDataView = mInflater.inflate(R.layout.layout_loading_no_data, this, false);
+            mNoDataContentView = mNoDataView.findViewById(R.id.empty_content);
+            mTvNoData = (TextView) mNoDataView.findViewById(R.id.tv_empty);
+            mTvReload = mNoDataView.findViewById(R.id.tv_reload);
+            mTvNoData.setTextSize(mTextSize);
+            mTvNoData.setTextColor(mTextColor);
+            mTvReload.setTextColor(mTextColor);
+            mIvNoData = (ImageView) mNoDataView.findViewById(R.id.iv_no_data);
+            if (mNoDataDrawable != null) {
+                mIvNoData.setImageDrawable(mNoDataDrawable);
+            } else {
+                mIvNoData.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.ic_no_data));
+            }
+            mIvNoData.setColorFilter(mDrawableColor);
         }
-        mIvEmpty.setColorFilter(drawableColor);
-        addView(mEmptyView);
-        /******************************************************************************************/
-
+        addView(mNoDataView);
     }
 
     private void checkIsContentView(View view) {
-        if (contentView == null && view != mErrorView && view != mProgressView && view != mEmptyView) {
+        if (contentView == null && view != mErrorView && view != mProgressView && view != mNoDataView) {
             contentView = view;
             mCurrentShowingView = contentView;
         }
@@ -180,8 +189,8 @@ public class LoadingStateView extends FrameLayout {
      *
      * @return ImageView
      */
-    public ImageView getEmptyImageView() {
-        return mIvEmpty;
+    public ImageView getNoDataImageView() {
+        return mIvNoData;
     }
 
     /**
@@ -305,8 +314,8 @@ public class LoadingStateView extends FrameLayout {
      * @param right
      * @param bottom
      */
-    public void setEmptyContentViewMargin(int left, int top, int right, int bottom) {
-        ((LinearLayout.LayoutParams) mIvEmpty.getLayoutParams()).setMargins(left, top, right, bottom);
+    public void setNoDataContentViewMargin(int left, int top, int right, int bottom) {
+        ((LinearLayout.LayoutParams) mIvNoData.getLayoutParams()).setMargins(left, top, right, bottom);
     }
 
     /**
@@ -335,7 +344,7 @@ public class LoadingStateView extends FrameLayout {
     }
 
     public void setInfoContentViewMargin(int left, int top, int right, int bottom) {
-        setEmptyContentViewMargin(left, top, right, bottom);
+        setNoDataContentViewMargin(left, top, right, bottom);
         setErrorContentViewMargin(left, top, right, bottom);
         setProgressContentViewMargin(left, top, right, bottom);
     }
@@ -348,8 +357,8 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 显示数据为空的界面
      */
-    public void showLoadEmptyView() {
-        showLoadEmptyView(null);
+    public void showLoadNoDataView() {
+        showLoadNoDataView(null);
     }
 
     /**
@@ -357,12 +366,16 @@ public class LoadingStateView extends FrameLayout {
      *
      * @param msg 提示语
      */
-    public void showLoadEmptyView(String msg) {
-        onHideContentView();
-        if (!TextUtils.isEmpty(msg)){
-            mTvEmpty.setText(msg);
+    public void showLoadNoDataView(String msg) {
+        initNoDataView();
+        if (mOnNoDataButtonClickListener!=null){
+            mNoDataView.setOnClickListener(mOnNoDataButtonClickListener);
         }
-        switchWithAnimation(mEmptyView);
+        onHideOtherView();
+        if (!TextUtils.isEmpty(msg)) {
+            mTvNoData.setText(msg);
+        }
+        switchWithAnimation(mNoDataView);
     }
 
     /**
@@ -378,8 +391,12 @@ public class LoadingStateView extends FrameLayout {
      * @param msg 提示语
      */
     public void showLoadErrorView(String msg) {
-        onHideContentView();
-        if (msg != null){
+        initErrorView();
+        if (mOnErrorButtonClickListener!=null){
+            mErrorView.setOnClickListener(mOnErrorButtonClickListener);
+        }
+        onHideOtherView();
+        if (msg != null) {
             mTvError.setText(msg);
         }
         switchWithAnimation(mErrorView);
@@ -398,11 +415,39 @@ public class LoadingStateView extends FrameLayout {
      * @param msg 提示语
      */
     public void showLoadingView(String msg) {
-        onHideContentView();
-        if (msg != null){
+        initLoadingView();
+        onHideOtherView();
+        if (msg != null) {
             mTvProgress.setText(msg);
         }
         switchWithAnimation(mProgressView);
+    }
+
+    /**
+     * 隐藏错误的界面
+     */
+    public void hideErrorView(){
+        if (mErrorView!=null){
+            mErrorView.setVisibility(GONE);
+        }
+    }
+
+    /**
+     * 隐藏暂无数据的界面
+     */
+    public void hideNoDataView(){
+        if (mNoDataView!=null){
+            mNoDataView.setVisibility(GONE);
+        }
+    }
+
+    /**
+     * 隐藏加载中的界面
+     */
+    public void hideLoadingView(){
+        if (mProgressView!=null){
+            mProgressView.setVisibility(GONE);
+        }
     }
 
     /**
@@ -411,30 +456,44 @@ public class LoadingStateView extends FrameLayout {
      * @param onErrorButtonClickListener
      */
     public void setErrorAction(final View.OnClickListener onErrorButtonClickListener) {
-        mErrorView.setOnClickListener(onErrorButtonClickListener);
+        if (mErrorView==null){
+            mOnErrorButtonClickListener = onErrorButtonClickListener;
+        }else {
+            mErrorView.setOnClickListener(onErrorButtonClickListener);
+        }
     }
 
     /**
      * 设置点击“加载后数据为空”的监听
      *
-     * @param onEmptyButtonClickListener
+     * @param onNoDataButtonClickListener
      */
-    public void setEmptyAction(final View.OnClickListener onEmptyButtonClickListener) {
-        mEmptyView.setOnClickListener(onEmptyButtonClickListener);
+    public void setNoDataAction(final View.OnClickListener onNoDataButtonClickListener) {
+        if (mNoDataView==null){
+            mOnNoDataButtonClickListener = onNoDataButtonClickListener;
+        }else {
+            mNoDataView.setOnClickListener(onNoDataButtonClickListener);
+        }
     }
 
     /**
      * 设置点击“加载后数据为空”和“加载出错界面”的监听
      *
-     * @param errorAndEmptyAction
+     * @param errorAndNoDataAction
      */
-    public void setErrorAndEmptyAction(final View.OnClickListener errorAndEmptyAction) {
-        mProgressView.setOnClickListener(errorAndEmptyAction);
-        mEmptyView.setOnClickListener(errorAndEmptyAction);
+    public void setErrorAndNoDataAction(final View.OnClickListener errorAndNoDataAction) {
+        mProgressView.setOnClickListener(errorAndNoDataAction);
+        mNoDataView.setOnClickListener(errorAndNoDataAction);
     }
 
-    protected void onHideContentView() {
-        //Override me
+    /**
+     * 隐藏其他正在显示的View
+     */
+    protected void onHideOtherView() {
+        //TODO 懒得判断，全体隐藏
+        hideErrorView();
+        hideNoDataView();
+        hideLoadingView();
     }
 
     /**

@@ -26,18 +26,26 @@ public class TestLoadingActivity extends AppCompatActivity{
         mLoadingStateView = findViewById(R.id.loadingStateView);
         mLoadingStateView.setViewSwitchAnimProvider(new FadeScaleViewAnimProvider());
 
-        mLoadingStateView.setErrorAction(new View.OnClickListener() {
+        mLoadingStateView.setNoDataAction(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowToast.singleLong("Retry Loading");
+                ShowToast.singleLong("hideNoDataView");
+                mLoadingStateView.hideNoDataView();
             }
         });
 
-        mLoadingStateView.showLoadEmptyView();
+        mLoadingStateView.setErrorAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLoadingStateView.hideErrorView();
+            }
+        });
+
+//        mLoadingStateView.showLoadNoDataView();
 
 //        mLoadingStateView.showLoadErrorView();
 
-//        mLoadingStateView.showLoadingView();
+        mLoadingStateView.showLoadingView();
 
     }
 }
