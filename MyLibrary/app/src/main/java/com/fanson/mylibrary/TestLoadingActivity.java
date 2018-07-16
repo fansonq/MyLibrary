@@ -33,11 +33,11 @@ public class TestLoadingActivity extends AppCompatActivity{
             }
         });
 
-//        mLoadingView.showLoadEmptyView();
+        mLoadingStateView.showLoadEmptyView();
 
-//        mLoadingView.showLoadErrorView();
+//        mLoadingStateView.showLoadErrorView();
 
-        mLoadingStateView.showLoadingView();
+//        mLoadingStateView.showLoadingView();
 
     }
 }

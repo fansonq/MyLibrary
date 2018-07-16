@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -45,6 +44,8 @@ public class LoadingStateView extends FrameLayout {
     private View mProgressContentView;
     private TextView mTvProgress;
     private MyProgressWheel mProgressWheel;
+
+    private TextView mTvReload;
 
     //当前显示的View
     private View mCurrentShowingView;
@@ -123,15 +124,17 @@ public class LoadingStateView extends FrameLayout {
         mErrorView = inflater.inflate(R.layout.layout_loading_error, this, false);
         mErrorContentView = mErrorView.findViewById(R.id.error_content);
         mTvError = (TextView) mErrorView.findViewById(R.id.tv_error);
+        mTvReload = mErrorView.findViewById(R.id.tv_reload);
         mTvError.setTextSize(textSize);
         mTvError.setTextColor(textColor);
+        mTvReload.setTextColor(textColor);
         mIvError = (ImageView) mErrorView.findViewById(R.id.iv_error);
         if (errorDrawable != null) {
             mIvError.setImageDrawable(errorDrawable);
         } else {
             mIvError.setImageResource(R.mipmap.ic_loading_error);
         }
-        changeImageViewColor(mIvError,drawableColor);
+        mIvError.setColorFilter(drawableColor);
         addView(mErrorView);
         /******************************************************************************************/
 
@@ -140,15 +143,17 @@ public class LoadingStateView extends FrameLayout {
         mEmptyView = inflater.inflate(R.layout.layout_loading_empty, this, false);
         mEmptyContentView = mEmptyView.findViewById(R.id.empty_content);
         mTvEmpty = (TextView) mEmptyView.findViewById(R.id.tv_empty);
+        mTvReload = mEmptyView.findViewById(R.id.tv_reload);
         mTvEmpty.setTextSize(textSize);
         mTvEmpty.setTextColor(textColor);
+        mTvReload.setTextColor(textColor);
         mIvEmpty = (ImageView) mEmptyView.findViewById(R.id.iv_no_data);
         if (emptyDrawable != null) {
             mIvEmpty.setImageDrawable(emptyDrawable);
         } else {
-            mIvEmpty.setImageResource(R.mipmap.ic_no_data);
+            mIvEmpty.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.ic_no_data));
         }
-        changeImageViewColor(mIvEmpty,drawableColor);
+        mIvEmpty.setColorFilter(drawableColor);
         addView(mEmptyView);
         /******************************************************************************************/
 
@@ -430,17 +435,6 @@ public class LoadingStateView extends FrameLayout {
 
     protected void onHideContentView() {
         //Override me
-    }
-
-    /**
-     * 更改图片资源的颜色
-     * @param imageView
-     * @param color 颜色值
-     */
-    private void changeImageViewColor(ImageView imageView,int color){
-        Drawable drawable = imageView.getDrawable();
-        DrawableCompat.setTint(drawable,ContextCompat.getColor(getContext(),color));
-        imageView.setImageDrawable(drawable);
     }
 
     /**
