@@ -16,6 +16,7 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
@@ -236,7 +237,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
         String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
-//        ImageLoaderUtils.loadCircleImage(this,iv_pic,picUrl);
+        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override
 //            public void loadStart() {
