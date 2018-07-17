@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.example.fansonlib.widget.loadingview.LoadingStateView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/loadingStateView"
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:drawableColor="@color/orange"
-    app:tipTextColor="@color/orange" />
+    android:orientation="vertical"
+    android:layout_margin="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <com.example.fansonlib.widget.loadingview.LoadingStateView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/loadingStateView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:drawableColor="@color/orange"
+        app:tipTextColor="@color/orange" />
+
+    <Button
+        android:id="@+id/btnNoData"
+        android:text="NoData"
+        android:layout_width="120dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:id="@+id/btnLoading"
+        android:text="Loading"
+        android:layout_width="120dp"
+        android:layout_height="50dp" />
+
+    <Button
+        android:id="@+id/btn_hide"
+        android:text="Hide"
+        android:layout_width="120dp"
+        android:layout_height="50dp" />
+
+
+</LinearLayout>
+
 
