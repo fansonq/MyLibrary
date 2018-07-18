@@ -88,7 +88,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                 .apply(getOptions1(config))
                 //先加载缩略图 然后在加载全图
                 .thumbnail(Contants.THUMB_SIZE)
-                .transition(DrawableTransitionOptions.withCrossFade())
+//                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view);
     }
 
@@ -115,7 +115,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         with(context)
                 .load(imgUrl)
                 .apply(getOptionsCircle())
-                .transition(DrawableTransitionOptions.withCrossFade())
+//                .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(bitmapTransform(new RoundedCornersTransformation(imageView.getMaxHeight()/2, 0, RoundedCornersTransformation.CornerType.ALL)))
                 .into(imageView);
     }
@@ -136,7 +136,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                 .thumbnail(Contants.THUMB_SIZE)
                 .apply(getOptions1(config))
                 .apply(bitmapTransform(new RoundedCornersTransformation(18, 0, RoundedCornersTransformation.CornerType.ALL)))
-                .transition(DrawableTransitionOptions.withCrossFade())
+//                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
     }
 
