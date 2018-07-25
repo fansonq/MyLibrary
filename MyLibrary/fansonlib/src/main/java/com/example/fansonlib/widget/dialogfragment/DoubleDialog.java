@@ -21,6 +21,10 @@ public class DoubleDialog extends BaseDialogFragment {
     private BaseDialogFragment mDialog;
     private boolean mCancelNotDismiss = false;
 
+    public DoubleDialog(){
+        this.setAnimStyle(R.style.DialogScaleAnim);
+    }
+
     @Override
     public int intLayoutId() {
         return R.layout.dialog_double_layout;

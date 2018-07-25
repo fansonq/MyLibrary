@@ -84,6 +84,12 @@
         <item name="android:textColor">#969696</item>
         <item name="android:textSize">16sp</item>
     </style>
+    
+    <style name="DialogScaleAnim">
+        <item name="android:windowEnterAnimation">@anim/scale_small_to_big_interpolator</item>
+        <item name="android:windowExitAnimation">@anim/scale_out</item>
+        
+    </style>
 
 
 </resources>

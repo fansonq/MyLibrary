@@ -6,6 +6,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="orange">#EE6633</color>
     <color name="light_orange">#FF6600</color>

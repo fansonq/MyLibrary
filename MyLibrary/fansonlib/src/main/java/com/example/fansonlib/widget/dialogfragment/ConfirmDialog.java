@@ -19,6 +19,10 @@ public class ConfirmDialog extends BaseDialogFragment {
 
     private String title, content;
 
+    public ConfirmDialog(){
+        this.setAnimStyle(R.style.DialogScaleAnim);
+    }
+
     @Override
     public int intLayoutId() {
         return R.layout.dialog_confirm_layout;

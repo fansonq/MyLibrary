@@ -20,13 +20,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.example.fansonlib.function.update.DialogActivity"/>
 
         <activity android:name=".adapter.RecyclerViewActivity"/>
 
         <activity android:name=".TestLoadingActivity"/>
 
-        <service android:name=".update.MyUpdateService"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

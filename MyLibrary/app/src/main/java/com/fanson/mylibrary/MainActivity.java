@@ -1,7 +1,6 @@
 package com.fanson.mylibrary;
 
 import android.arch.lifecycle.Observer;
-import android.content.Intent;
 import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -31,8 +30,6 @@ import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
-import com.fanson.mylibrary.update.MyUpdateService;
-import com.fanson.mylibrary.update.TestWindow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -261,11 +258,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 //        });
     }
 
-    private void testPopuWindow() {
-        TestWindow window = new TestWindow(this);
-        window.showPopupWindow();
-    }
-
     /**
      * 测试网络
      */
@@ -279,13 +271,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 }
             }
         });
-    }
-
-    private void testUpdate() {
-        String updateUrl = "WVector/AppUpdateDemo/master/json/json.txt";
-        Intent intent = new Intent(this, MyUpdateService.class);
-        intent.putExtra("url", updateUrl);
-        startService(intent);
     }
 
     private void testLoadingView() {
