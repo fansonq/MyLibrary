@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 import android.databinding.ViewDataBinding;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 
@@ -8,6 +9,7 @@ import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.utils.SpannableStringUtils;
 import com.fanson.mylibrary.databinding.ActivityTestBinding;
 
 /**
@@ -48,6 +50,8 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
 
     @Override
     protected void initData() {
+        mBinding.tv1.setText(SpannableStringUtils.getBuilder("测试").append("大号字体")
+                .setProportion(1.2f).setForegroundColor(ContextCompat.getColor(this,R.color.light_orange)).create());
     }
 
     @Override
