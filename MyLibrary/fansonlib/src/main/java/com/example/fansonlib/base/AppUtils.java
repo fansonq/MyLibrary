@@ -58,7 +58,7 @@ public class AppUtils {
      * @param mContext
      * @return 版本號；例：23
      */
-    public static int getCurrentVersion(Context mContext) {
+    public static int getCurrentVersionCode(Context mContext) {
         PackageManager packageManager = mContext.getPackageManager();
         PackageInfo packageInfo = null;
         try {
@@ -67,6 +67,23 @@ public class AppUtils {
             e.printStackTrace();
         }
         return packageInfo != null ? packageInfo.versionCode : 1;
+    }
+
+    /**
+     * 獲取當前程序的版本名称
+     *
+     * @param mContext
+     * @return 版本；例：1.0.0
+     */
+    public static String getCurrentVersionName(Context mContext) {
+        PackageManager packageManager = mContext.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packageInfo != null ? packageInfo.versionName : "1.0.0";
     }
 
     /**
