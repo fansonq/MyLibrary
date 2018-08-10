@@ -70,7 +70,7 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
+    public static void loadCircleImage(Context context, ImageView imageView, String imgUrl ) {
         loaderConfig.getClient().loadCircleImage(loaderConfig ,context, imageView, imgUrl);
     }
 
@@ -80,8 +80,8 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static  void loadCornerImage(Context context, ImageView imageView, String imgUrl){
-        loaderConfig.getClient().loadCornerImage(loaderConfig ,context,imageView,imgUrl);
+    public static  void loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius){
+        loaderConfig.getClient().loadCornerImage(loaderConfig ,context,imageView,imgUrl,radius);
     }
 
     /**

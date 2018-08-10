@@ -1,5 +1,6 @@
 package com.example.fansonlib.widget.customeditor;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -177,6 +178,7 @@ public class IvTextView extends ScrollView {
         loadImage(imagePath, imageView);
     }
 
+    @SuppressLint("CheckResult")
     private void loadImage(final String imagePath, final ImageEditor imageView) {
         Observable.create(new ObservableOnSubscribe<float[]>() {
             @Override
@@ -214,7 +216,7 @@ public class IvTextView extends ScrollView {
                             image[1] = (image[1] * ratio);
                         }
                         imageView.setMinimumHeight((int) image[1]);
-                        ImageLoaderUtils.loadCornerImage(getContext(), imageView, imagePath);
+                        ImageLoaderUtils.loadCornerImage(getContext(), imageView, imagePath,5);
                     }
                 });
     }

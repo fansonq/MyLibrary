@@ -16,6 +16,7 @@ import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 import static com.bumptech.glide.Glide.with;
@@ -111,12 +112,13 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadCircleImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+    public void loadCircleImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl ) {
         with(context)
                 .load(imgUrl)
                 .apply(getOptionsCircle())
+                .apply(bitmapTransform(new CropCircleTransformation()))
 //                .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(bitmapTransform(new RoundedCornersTransformation(imageView.getMaxHeight()/2, 0, RoundedCornersTransformation.CornerType.ALL)))
+//                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
                 .into(imageView);
     }
 
@@ -130,12 +132,12 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+    public void loadCornerImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl,int radius) {
         with(context)
                 .load(imgUrl)
                 .thumbnail(Contants.THUMB_SIZE)
                 .apply(getOptions1(config))
-                .apply(bitmapTransform(new RoundedCornersTransformation(18, 0, RoundedCornersTransformation.CornerType.ALL)))
+                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
 //                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
     }

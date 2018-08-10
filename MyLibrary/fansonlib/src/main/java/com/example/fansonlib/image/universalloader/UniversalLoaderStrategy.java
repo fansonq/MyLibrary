@@ -196,7 +196,7 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
+    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius) {
         //避免使用RoundedBitmapDisplayer，会创建新的ARGB_8888格式的Bitmap对象
         mRoundedBitmapDisplayer = new RoundedBitmapDisplayer(CORNER_RADIUS);
         imageLoader.displayImage(imgUrl,imageView,getCircleOption(mRoundedBitmapDisplayer));

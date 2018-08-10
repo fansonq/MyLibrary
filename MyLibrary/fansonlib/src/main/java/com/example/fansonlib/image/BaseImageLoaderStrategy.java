@@ -43,7 +43,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     /**
      * 加载圆角图片
      */
-    void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl );
 
     /**
      * 加载Gif
@@ -59,7 +59,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius);
 
     /**
      * 清除内存
