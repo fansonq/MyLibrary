@@ -1,5 +1,7 @@
 package com.example.fansonlib.http.retrofit;
 
+import com.example.fansonlib.http.retrofit.customConverter.CustomResponseConverter;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -56,7 +58,7 @@ public class RetrofitClient {
                 if (mRetrofit == null){
                     mRetrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(CustomResponseConverter.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(getOkHttpClient())
                             .build();
