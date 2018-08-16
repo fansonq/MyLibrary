@@ -80,7 +80,7 @@ public class RetrofitClient {
                 if (mRetrofit == null){
                     mRetrofit = new Retrofit.Builder()
                             .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
+                            .addConverterFactory(CustomResponseConverter.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(getOkHttpClient())
                             .build();
