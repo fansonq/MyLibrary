@@ -90,7 +90,7 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static  void loadGifImage(Context context, ImageView imageView, String imgUrl){
+    public static  void loadGifImage(Context context, ImageView imageView, Object imgUrl){
         loaderConfig.getClient().loadGifImage(loaderConfig ,context,imageView,imgUrl);
     }
 
