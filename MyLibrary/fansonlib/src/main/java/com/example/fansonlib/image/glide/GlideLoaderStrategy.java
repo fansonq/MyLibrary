@@ -82,6 +82,25 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         return mOptionsCircle;
     }
 
+    /**
+     * 初始化tGif加载配置
+     *
+     * @param config ImageLoaderConfig
+     */
+    @SuppressLint("CheckResult")
+    private RequestOptions getGifOptions(ImageLoaderConfig config) {
+        if (mOptions1 == null) {
+            mOptions1 = new RequestOptions();
+            mOptions1.error(config.getErrorPicRes())
+                    .placeholder(config.getPlacePicRes())
+                    //下载的优先级
+                    .priority(Priority.NORMAL)
+                    //缓存策略
+                    .diskCacheStrategy(DiskCacheStrategy.NONE);
+        }
+        return mOptions1;
+    }
+
     @Override
     public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
         with(context)
@@ -123,11 +142,11 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl) {
+    public void loadGifImage(ImageLoaderConfig config, Context context, ImageView imageView, Object imgUrl) {
         with(context)
                 .load(imgUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(getOptions1(config))
+                .apply(getGifOptions(config))
                 .into(imageView);
     }
 

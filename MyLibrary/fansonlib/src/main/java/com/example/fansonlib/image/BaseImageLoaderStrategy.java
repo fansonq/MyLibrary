@@ -51,7 +51,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl);
 
     /**
      * 加载圆角图片

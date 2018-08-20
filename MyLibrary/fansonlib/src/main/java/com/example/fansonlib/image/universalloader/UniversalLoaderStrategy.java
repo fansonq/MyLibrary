@@ -191,7 +191,7 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
+    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl) {
 
     }
 
