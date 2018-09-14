@@ -5,14 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.bumptech.glide.manager.SupportRequestManagerFragment;
+
 import java.util.LinkedList;
 import java.util.List;
 
 
 /**
  * @author Created by：fanson
- *         Created Time: 2018/4/17 13:14
- *         Describe：管理App中Fragment的工具类
+ * Created Time: 2018/4/17 13:14
+ * Describe：管理App中Fragment的工具类
  */
 
 public class MyFragmentManager {
@@ -133,7 +135,18 @@ public class MyFragmentManager {
      * @return 栈顶的Fragment
      */
     public synchronized Fragment getTopFragment(@NonNull FragmentManager fragmentManager) {
-        return getSize() > 0 ? fragmentManager.getFragments().get(getSize() - 1) : null;
+        if (getSize() <= 0) {
+            return null;
+        }
+        Fragment fragment = null;
+        for (int i = 0; i < fragmentManager.getFragments().size(); i++) {
+            //判断Glide的SupportRequestManagerFragment问题
+            if (!(fragmentManager.getFragments().get(getSize() - 1- i) instanceof SupportRequestManagerFragment)) {
+                fragment = fragmentManager.getFragments().get(getSize() - 1 - i);
+                break;
+            }
+        }
+        return fragment;
     }
 
     /**
@@ -144,7 +157,7 @@ public class MyFragmentManager {
     public synchronized Fragment getTopFragmentInList() {
         if (mFragmentList == null || mFragmentList.isEmpty()) {
             return null;
-        }
+    }
         return mFragmentList.get(mFragmentList.size() - 1);
     }
 
@@ -228,7 +241,7 @@ public class MyFragmentManager {
      * @param layoutId
      * @param fragment
      */
-    public void replaceFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag) {
+    public void replaceFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fragment, String tag) {
         replaceFragment(fragmentManager, layoutId, fragment, tag, NO_ANIM, NO_ANIM);
     }
 
@@ -301,7 +314,7 @@ public class MyFragmentManager {
      * @param toFragment
      * @param tagOfTo      标识
      */
-    public void switchFragmentWithTag(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
+    public void switchFragment(@NonNull FragmentManager fragmentManager, int layoutId, Fragment fromFragment, Fragment toFragment, String tagOfTo) {
         switchFragment(fragmentManager, layoutId, fromFragment, toFragment, tagOfTo, NO_ANIM, NO_ANIM, NO_ANIM, NO_ANIM);
     }
 
