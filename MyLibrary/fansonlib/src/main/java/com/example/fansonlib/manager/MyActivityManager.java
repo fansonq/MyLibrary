@@ -2,6 +2,7 @@ package com.example.fansonlib.manager;
 
 import android.app.Activity;
 
+import java.lang.ref.SoftReference;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class MyActivityManager {
     /**
      * 装载Activity
      */
-    public static List<Activity> mActivities = new LinkedList<>();
+    public static List<SoftReference<Activity>> mActivities = new LinkedList<>();
 
     public static MyActivityManager getAppManager() {
         if (mActivityManager == null) {
@@ -45,7 +46,7 @@ public class MyActivityManager {
      * @return 栈顶的Activity
      */
     public synchronized Activity getForwardActivity() {
-        return getSize() > 0 ? mActivities.get(getSize() - 1) : null;
+        return getSize() > 0 ? mActivities.get(getSize() - 1).get() : null;
     }
 
     /**
@@ -53,7 +54,7 @@ public class MyActivityManager {
      *
      * @param activity 指定Activity
      */
-    public synchronized void addActivity(Activity activity) {
+    public synchronized void addActivity(SoftReference<Activity> activity) {
         mActivities.add(activity);
     }
 
@@ -62,7 +63,7 @@ public class MyActivityManager {
      *
      * @param activity 指定Activity
      */
-    public synchronized void removeActivity(Activity activity) {
+    public synchronized void removeActivity(SoftReference<Activity> activity) {
         if (mActivities.contains(activity)) {
             mActivities.remove(activity);
         }
@@ -72,11 +73,11 @@ public class MyActivityManager {
      * 清除所有的Activity
      */
     public synchronized void clearAllActivity() {
-        Activity activity;
+        SoftReference<Activity> activity;
         for (int i = mActivities.size()-1; i > -1; i--) {
             activity = mActivities.get(i);
             mActivities.remove(activity);
-            activity.finish();
+            activity.get().finish();
         }
         mActivities.clear();
     }
@@ -86,11 +87,11 @@ public class MyActivityManager {
      * 清除所有Activity（除了栈顶的以外）
      */
     public synchronized void clearExceptTop() {
-        Activity activity;
+        SoftReference<Activity> activity;
         for (int i = mActivities.size() - 2; i > -1; i--) {
             activity = mActivities.get(i);
             mActivities.remove(activity);
-            activity.finish();
+            activity.get().finish();
         }
     }
 
@@ -102,7 +103,7 @@ public class MyActivityManager {
         if (mActivities==null||mActivities.isEmpty()){
             return null;
         }
-        return mActivities.get(mActivities.size()-1);
+        return mActivities.get(mActivities.size()-1).get();
     }
 
     /**
@@ -119,13 +120,13 @@ public class MyActivityManager {
      * 移除指定的Activity
      * @param activity 指定的Activity
      */
-    public static synchronized void finishActivity(Activity activity){
+    public static synchronized void finishActivity(SoftReference<Activity> activity){
         if (mActivities==null||mActivities.isEmpty()){
             return;
         }
         if (activity!=null){
             mActivities.remove(activity);
-            activity.finish();
+            activity.get().finish();
             activity = null;
         }
     }
@@ -137,7 +138,7 @@ public class MyActivityManager {
         if (mActivities == null||mActivities.isEmpty()) {
             return;
         }
-        for (Activity activity : mActivities) {
+        for (SoftReference<Activity> activity : mActivities) {
             if (activity.getClass().equals(cls)) {
                 finishActivity(activity);
             }
@@ -153,9 +154,9 @@ public class MyActivityManager {
     public static Activity findActivity(Class<?> cls) {
         Activity targetActivity = null;
         if (mActivities != null) {
-            for (Activity activity : mActivities) {
+            for (SoftReference<Activity> activity : mActivities) {
                 if (activity.getClass().equals(cls)) {
-                    targetActivity = activity;
+                    targetActivity = activity.get();
                     break;
                 }
             }
@@ -167,7 +168,7 @@ public class MyActivityManager {
      * @return 获取当前最顶部的acitivity 名字
      */
     public String getTopActivityName() {
-        Activity activity ;
+        SoftReference<Activity> activity ;
         synchronized (mActivities) {
             final int size = mActivities.size() - 1;
             if (size < 0) {
