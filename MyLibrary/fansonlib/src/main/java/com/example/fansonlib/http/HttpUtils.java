@@ -2,6 +2,8 @@ package com.example.fansonlib.http;
 
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by：fanson
  * Created on：2017/9/12 14:39
@@ -27,7 +29,7 @@ public class HttpUtils implements IHttpStrategy {
 
     /**
      * 初始化立即启动
-     * 传入被代理的对象，Volly实现类 okHttp实现类 等等
+     * 传入被代理的对象，Volley实现类 okHttp实现类 等等
      */
     public static void init(IHttpStrategy strategy){
         mStrategy = strategy;
@@ -44,8 +46,13 @@ public class HttpUtils implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent() {
-        mStrategy.cancelCurrent();
+    public Disposable getCurrentDisposable() {
+        return mStrategy.getCurrentDisposable();
+    }
+
+    @Override
+    public void cancelCurrent(String type) {
+        mStrategy.cancelCurrent(type);
     }
 
     @Override

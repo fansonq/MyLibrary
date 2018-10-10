@@ -18,6 +18,11 @@ import com.example.fansonlib.widget.dialogfragment.base.ViewHolder;
 public class ConfirmDialog extends BaseDialogFragment {
 
     private String title, content;
+    private static   ConfirmDialog mDialog;
+
+    public ConfirmDialog(){
+        this.setAnimStyle(R.style.DialogScaleAnim);
+    }
 
     @Override
     public int intLayoutId() {
@@ -43,9 +48,11 @@ public class ConfirmDialog extends BaseDialogFragment {
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("content", content);
-        ConfirmDialog dialog = new ConfirmDialog();
-        dialog.setArguments(bundle);
-        return dialog;
+        if (mDialog==null){
+            mDialog = new ConfirmDialog();
+        }
+        mDialog.setArguments(bundle);
+        return mDialog;
     }
 
     @Override
@@ -57,6 +64,14 @@ public class ConfirmDialog extends BaseDialogFragment {
         }
         title = bundle.getString("title");
         content = bundle.getString("content");
+    }
+
+    /**
+     * 是否在显示中
+     * @return true/false
+     */
+    public  boolean isShowing(){
+        return this.isResumed();
     }
 
     @Override
@@ -71,6 +86,7 @@ public class ConfirmDialog extends BaseDialogFragment {
                     mIConfirmListener.onConfirm();
                 }
                 dialog.dismiss();
+                mDialog = null;
             }
         });
     }

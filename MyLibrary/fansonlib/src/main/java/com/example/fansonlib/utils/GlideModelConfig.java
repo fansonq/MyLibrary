@@ -1,11 +1,11 @@
 package com.example.fansonlib.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.integration.okhttp3.OkHttpGlideModule;
-import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.Registry;
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool;
 import com.bumptech.glide.load.engine.cache.ExternalCacheDiskCacheFactory;
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory;
@@ -17,7 +17,7 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache;
  * Describe：
  */
 
-public class GlideModelConfig extends OkHttpGlideModule {
+public class GlideModelConfig implements com.bumptech.glide.module.GlideModule {
 
     int diskSize = 1024 * 1024 * 250;//磁盘缓存空间，如果不设置，默认是：250 * 1024 * 1024 即250MB
     int memorySize = (int) (Runtime.getRuntime().maxMemory()) / 6;  // 取1/4最大内存作为最大缓存
@@ -40,11 +40,11 @@ public class GlideModelConfig extends OkHttpGlideModule {
         builder.setBitmapPool(new LruBitmapPool(memorySize));
 
         // 定义图片格式
-        builder.setDecodeFormat(DecodeFormat.PREFER_RGB_565);
+//        builder.setDecodeFormat(DecodeFormat.PREFER_RGB_565);
     }
 
     @Override
-    public void registerComponents(Context context, Glide glide) {
+    public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
 
     }
 }

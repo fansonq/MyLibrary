@@ -12,7 +12,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -50,11 +49,11 @@ public interface ApiStores {
     //上传文件
     @Multipart
     @POST
-    Call<ResponseBody> upload(@Url String fileUrl, @Part("description") RequestBody description, @Part MultipartBody.Part file);
+    Call<ResponseBody> upload(@Url String fileUrl, @Part("description") Map<String, Object> description, @Part RequestBody file);
 
     //上传多文件
     @Multipart
     @POST
-    Call<ResponseBody> uploadMulti(@Url String fileUrl, @PartMap Map<String, RequestBody> params);
+    Flowable<ResponseBody> uploadMulti(@Url String fileUrl,@Part MultipartBody.Part imgs);
 
 }

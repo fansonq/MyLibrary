@@ -1,17 +1,10 @@
 package com.example.fansonlib.http.retrofit;
 
-import android.util.Log;
-
-import org.reactivestreams.Subscription;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.LongConsumer;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.ResourceSubscriber;
 import okhttp3.ConnectionPool;
@@ -24,30 +17,53 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/7/26 14:28
  * Description：Retrofit实例
- *
- * @Param
  */
 public class RetrofitClient {
 
     public volatile static Retrofit mRetrofit;
 
-    //基础的Url
+    /**
+     * 基础的Url
+     */
     private static String BASE_URL ;
 
-    //超时的时间
+    /**
+     * 超时的时间
+     */
     private static final int DEFAULT_TIMEOUT = 10;
 
     private static Retrofit.Builder retrofitBuilder;
 
     /**
      * 初始化，设置基础URL
-     * @param url
+     * @param url 基础URL
      */
     public static void init(String url){
         BASE_URL = url;
+    }
+
+
+    /**
+     * 获取Retrofit实例
+     * @return Retrofit
+     */
+    public static Retrofit getRetrofit( ) {
+        if (mRetrofit == null) {
+            synchronized (RetrofitClient.class){
+                if (mRetrofit == null){
+                    mRetrofit = new Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .client(getOkHttpClient())
+                            .build();
+                }
+            }
+        }
+        return mRetrofit;
     }
 
     /**
@@ -160,24 +176,24 @@ public class RetrofitClient {
      */
     public static ResourceSubscriber startObservable(Flowable observable, ResourceSubscriber subscriber) {
         return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
-//                .observeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnLifecycle(new Consumer<Subscription>() {
-                    @Override
-                    public void accept(Subscription subscription) throws Exception {
-                        Log.d("doOnLifecycle","OnSubscribe");
-                    }
-                }, new LongConsumer() {
-                    @Override
-                    public void accept(long t) throws Exception {
-                        Log.d("doOnLifecycle","OnRequest");
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        Log.d("doOnLifecycle","OnCancel");
-                    }
-                })
+                //订阅后可以进行取消订阅
+//                .doOnLifecycle(new Consumer<Subscription>() {
+//                    @Override
+//                    public void accept(Subscription subscription) throws Exception {
+//                        Log.d("doOnLifecycle","OnSubscribe");
+//                    }
+//                }, new LongConsumer() {
+//                    @Override
+//                    public void accept(long t) throws Exception {
+//                        Log.d("doOnLifecycle","OnRequest");
+//                    }
+//                }, new Action() {
+//                    @Override
+//                    public void run() throws Exception {
+//                        Log.d("doOnLifecycle","OnCancel");
+//                    }
+//                })
                 .subscribeWith(subscriber);
     }
 

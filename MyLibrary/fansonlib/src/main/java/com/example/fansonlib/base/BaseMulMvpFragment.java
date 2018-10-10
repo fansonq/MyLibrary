@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -7,10 +8,10 @@ import android.view.View;
 /**
  * Created by：fanson
  * Created on：2017/3/31 9:34
- * Describe：
+ * Describe：集成Mvp的BaseMvpFragment(两个P层)
  */
 
-public abstract class BaseMulMvpFragment <P1 extends BasePresenter,P2 extends BasePresenter> extends BaseFragment implements BaseView {
+public abstract class BaseMulMvpFragment <P1 extends BasePresenter,P2 extends BasePresenter,D extends ViewDataBinding> extends BaseFragment<D> implements BaseView {
 
     protected P1 mPresenter1;
     protected P2 mPresenter2;
@@ -25,15 +26,11 @@ public abstract class BaseMulMvpFragment <P1 extends BasePresenter,P2 extends Ba
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter1.onResume();
-        mPresenter2.onResume();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mPresenter1.onStop();
-        mPresenter2.onStop();
     }
 
     @Override

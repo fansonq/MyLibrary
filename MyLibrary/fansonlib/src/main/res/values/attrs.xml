@@ -2,33 +2,33 @@
 <resources>
 
     <declare-styleable name="UpdateAppNumberProgressBar">
-        <attr name="progress_current" format="integer"/>
-        <attr name="progress_max" format="integer"/>
+        <attr name="progress_current" format="integer" />
+        <attr name="progress_max" format="integer" />
 
-        <attr name="progress_unreached_color" format="color"/>
-        <attr name="progress_reached_color" format="color"/>
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_reached_color" format="color" />
 
-        <attr name="progress_reached_bar_height" format="dimension"/>
-        <attr name="progress_unreached_bar_height" format="dimension"/>
+        <attr name="progress_reached_bar_height" format="dimension" />
+        <attr name="progress_unreached_bar_height" format="dimension" />
 
-        <attr name="progress_text_size" format="dimension"/>
-        <attr name="progress_text_color" format="color"/>
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
 
-        <attr name="progress_text_offset" format="dimension"/>
+        <attr name="progress_text_offset" format="dimension" />
 
         <attr name="progress_text_visibility" format="enum">
-            <enum name="visible" value="0"/>
-            <enum name="invisible" value="1"/>
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
         </attr>
     </declare-styleable>
 
     <declare-styleable name="MyLoadingView">
         <!-- 默认提示文字 -->
-        <attr name="empty_warn_txt" format="string|reference"/>
+        <attr name="empty_warn_txt" format="string|reference" />
         <!-- 默认加载中文字 -->
-        <attr name="empty_loading_txt" format="string|reference"/>
+        <attr name="empty_loading_txt" format="string|reference" />
         <!-- 重新加载按钮文字 -->
-        <attr name="empty_button_txt" format="string|reference"/>
+        <attr name="empty_button_txt" format="string|reference" />
     </declare-styleable>
 
     <declare-styleable name="MyProgressWheel">
@@ -45,44 +45,44 @@
     </declare-styleable>
 
     <declare-styleable name="CropImageView">
-        <attr name="cropMaskColor" format="color"/>
-        <attr name="cropBorderColor" format="color"/>
-        <attr name="cropBorderWidth" format="dimension"/>
-        <attr name="cropFocusWidth" format="dimension"/>
-        <attr name="cropFocusHeight" format="dimension"/>
+        <attr name="cropMaskColor" format="color" />
+        <attr name="cropBorderColor" format="color" />
+        <attr name="cropBorderWidth" format="dimension" />
+        <attr name="cropFocusWidth" format="dimension" />
+        <attr name="cropFocusHeight" format="dimension" />
         <attr name="cropStyle" format="enum">
-            <enum name="rectangle" value="0"/>
-            <enum name="circle" value="1"/>
+            <enum name="rectangle" value="0" />
+            <enum name="circle" value="1" />
         </attr>
     </declare-styleable>
 
     <!--斜边三角形标签-->
     <declare-styleable name="LabelView">
         <!-- 设置文字内容 -->
-        <attr name="lv_text" format="string"/>
+        <attr name="lv_text" format="string" />
         <!-- 设置文字颜色,默认#ffffff -->
-        <attr name="lv_text_color" format="color"/>
+        <attr name="lv_text_color" format="color" />
         <!-- 设置文字大小,默认11sp -->
-        <attr name="lv_text_size" format="dimension"/>
+        <attr name="lv_text_size" format="dimension" />
         <!-- 设置文字是否支持加粗,默认true -->
-        <attr name="lv_text_bold" format="boolean"/>
+        <attr name="lv_text_bold" format="boolean" />
         <!-- 设置文字是否支持全部大写,默认true-->
-        <attr name="lv_text_all_caps" format="boolean"/>
+        <attr name="lv_text_all_caps" format="boolean" />
         <!-- 设置背景颜色,默认"#FF4081"-->
-        <attr name="lv_background_color" format="color"/>
+        <attr name="lv_background_color" format="color" />
         <!-- 设置LabelView所在矩形最小宽高,默认mFillTriangle?35dp:50dp-->
-        <attr name="lv_min_size" format="dimension"/>
+        <attr name="lv_min_size" format="dimension" />
         <!-- 设置文字上下padding,默认3.5dp,mFillTriangle为true时无效-->
-        <attr name="lv_padding" format="dimension"/>
+        <attr name="lv_padding" format="dimension" />
         <!-- 设置LabelView方向 -->
         <attr name="lv_gravity" format="enum">
-            <enum name="TOP_LEFT" value="51"/>
-            <enum name="TOP_RIGHT" value="53"/>
-            <enum name="BOTTOM_LEFT" value="83"/>
-            <enum name="BOTTOM_RIGHT" value="85"/>
+            <enum name="TOP_LEFT" value="51" />
+            <enum name="TOP_RIGHT" value="53" />
+            <enum name="BOTTOM_LEFT" value="83" />
+            <enum name="BOTTOM_RIGHT" value="85" />
         </attr>
         <!-- 设置是否填充三角区域,默认false -->
-        <attr name="lv_fill_triangle" format="boolean"/>
+        <attr name="lv_fill_triangle" format="boolean" />
     </declare-styleable>
 
 
@@ -140,6 +140,97 @@
         <attr name="cit_iconWidth" format="dimension" />
         <attr name="cit_iconHeight" format="dimension" />
         <attr name="cit_iconColor" format="color" />
+    </declare-styleable>
+
+    <!--CalendarView-->
+    <declare-styleable name="CalendarView">
+        <attr name="week_background" format="color" />
+        <attr name="week_text_color" format="color" />
+        <attr name="calendar_card_view" format="string" /><!-- -->
+        <attr name="scheme_text" format="string" />
+        <attr name="scheme_text_size" format="dimension" />
+        <attr name="scheme_text_color" format="color" />
+        <attr name="scheme_month_text_color" format="color" />
+        <attr name="scheme_lunar_text_color" format="color" />
+        <attr name="scheme_theme_color" format="color" />
+        <attr name="selected_theme_color" format="color" />
+        <attr name="selected_text_color" format="color" />
+        <attr name="current_day_text_color" format="color" />
+        <attr name="current_month_text_color" format="color" />
+        <attr name="other_month_text_color" format="color" />
+        <attr name="lunar_text_color" format="color" />
+        <attr name="other_month_lunar_text_color" format="color" />
+        <attr name="min_year" format="integer" />
+        <attr name="max_year" format="integer" />
+
+        <attr name="scheme_theme_style" format="integer">
+            <enum name="fill" value="1" />
+            <enum name="stroke" value="2" />
+        </attr>
+
+        <attr name="selected_theme_style" format="integer">
+            <enum name="fill" value="1" />
+            <enum name="stroke" value="2" />
+        </attr>
+
+        <attr name="show_lunar" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MonthView">
+        <attr name="month_view_text_size" format="dimension" />
+        <attr name="month_view_text_color" format="color" />
+        <attr name="month_view_remark_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CalendarLayout">
+        <attr name="calendar_content_view_id" format="integer" />
+    </declare-styleable>
+    <!--CalendarView-->
+
+    <!--标签选项按钮-->
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <attr name="selectedBackgroundColors" format="color|reference" />
+        <attr name="selectedTextColors" format="color|reference" />
+        <attr name="texts" format="string|reference" />
+        <attr name="android:textSize" />
+        <attr name="direction" format="enum">
+            <enum name="horizon" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="gaps" format="dimension|reference" />
+        <attr name="horizonGap" format="dimension|reference" />
+        <attr name="verticalGap" format="dimension|reference" />
+        <attr name="selectedIndex" format="integer" />
+    </declare-styleable>
+    <!--标签选项按钮-->
+
+    <!--Shape按钮-->
+    <declare-styleable name="MyShapeButton">
+        <attr name="bgDefaultColor" format="color" />       <!--背景默认的颜色-->
+        <attr name="bgPressColor" format="color" />         <!--点击按钮的颜色-->
+        <attr name="textColor" format="color" />
+        <attr name="bgRippleColor" format="color" />
+        <attr name="drawRippleRadius" format="integer" />    <!--每次绘制Ripple的半径（刷新速率）-->
+        <attr name="openRipple" format="boolean" />          <!--是否开启Ripple效果-->
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="strokeColor" format="color" />
+        <attr name="fourCornerRadius" format="dimension" />    <!--矩形四个圆角的半径-->
+        <attr name="leftTopRadius" format="dimension" />       <!--矩形左上角圆角半径-->
+        <attr name="rightTopRadius" format="dimension" />      <!--矩形右上角圆角半径-->
+        <attr name="rightBottomRadius" format="dimension" />   <!--矩形右下角圆角半径-->
+        <attr name="leftBottomRadius" format="dimension" />    <!--矩形左下角圆角半径-->
+    </declare-styleable>
+    <!--Shape按钮-->
+
+    <!--LoadingStateView（加载中，加载失败等等）-->
+    <declare-styleable name="LoadingStateView">
+        <attr name="errorDrawable" format="reference" />
+        <attr name="emptyDrawable" format="reference" />
+        <attr name="progressView" format="reference" />
+        <attr name="drawableColor" format="color" />
+        <attr name="tipTextSize" format="dimension" />
+        <attr name="tipTextColor" format="color" />
     </declare-styleable>
 
 </resources>

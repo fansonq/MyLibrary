@@ -2,6 +2,8 @@ package com.example.fansonlib.base;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import java.util.List;
 
@@ -14,7 +16,10 @@ public class AppUtils {
 
     public static Context mApplication;
 
-    //在Application中初始化
+    /**
+     * 在Application中初始化
+     * @param context
+     */
     public  static void init(Context context){
         mApplication = context;
     }
@@ -45,6 +50,49 @@ public class AppUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 獲取當前程序的版本號
+     *
+     * @param mContext
+     * @return 版本號；例：23
+     */
+    public static int getCurrentVersionCode(Context mContext) {
+        PackageManager packageManager = mContext.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packageInfo != null ? packageInfo.versionCode : 1;
+    }
+
+    /**
+     * 獲取當前程序的版本名称
+     *
+     * @param mContext
+     * @return 版本；例：1.0.0
+     */
+    public static String getCurrentVersionName(Context mContext) {
+        PackageManager packageManager = mContext.getPackageManager();
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = packageManager.getPackageInfo(mContext.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return packageInfo != null ? packageInfo.versionName : "1.0.0";
+    }
+
+    /**
+     * 根据StringID返回字符串
+     * @param stringId 资源ID
+     * @return 字符串
+     */
+    public static String getString(int stringId){
+        return mApplication.getString(stringId);
     }
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go MainActivity" />
+
+
+        <TextView
+            android:id="@+id/tv1"
+            android:text="@string/confirm"
+            android:textSize="18sp"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.fansonlib.widget.textview.TextViewDrawable
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="qq_friend"
+            android:textSize="16sp"
+            app:cit_drawableTop="@mipmap/ic_no_data"
+            app:cit_iconHeight="50dp"
+            app:cit_iconWidth="80dp" />
+
+    </LinearLayout>
+</layout>

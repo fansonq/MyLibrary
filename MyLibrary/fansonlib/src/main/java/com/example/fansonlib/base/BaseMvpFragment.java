@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.view.View;
  * Describe：集成Mvp的BaseMvpFragment
  */
 
-public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragment implements BaseView {
+public abstract class BaseMvpFragment<P extends BasePresenter,D extends ViewDataBinding> extends BaseFragment<D> implements BaseView {
 
     protected P mPresenter;
 
@@ -23,20 +24,19 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.onResume();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mPresenter.onStop();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null)
+        if (mPresenter != null){
             mPresenter.detachView();
+        }
     }
 
     /**

@@ -7,9 +7,10 @@ import android.widget.ImageView;
 
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
-import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
+import com.example.fansonlib.image.OnWaitBitmapListener;
+import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -190,15 +191,25 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
+    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl) {
 
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
+    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius) {
         //避免使用RoundedBitmapDisplayer，会创建新的ARGB_8888格式的Bitmap对象
         mRoundedBitmapDisplayer = new RoundedBitmapDisplayer(CORNER_RADIUS);
         imageLoader.displayImage(imgUrl,imageView,getCircleOption(mRoundedBitmapDisplayer));
+    }
+
+    @Override
+    public void clearMemory(Context context) {
+        imageLoader.clearMemoryCache();
+    }
+
+    @Override
+    public void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl, OnWaitBitmapListener listener,int index) {
+        //TODO
     }
 
 }

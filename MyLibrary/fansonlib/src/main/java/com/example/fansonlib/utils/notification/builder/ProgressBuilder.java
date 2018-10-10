@@ -22,7 +22,6 @@ public class ProgressBuilder extends BaseBuilder{
     public void build() {
         super.build();
         cBuilder.setProgress(max,progress, interminate);
-        cBuilder.setDefaults(0);
         cBuilder.setPriority(NotificationCompat.PRIORITY_LOW);
     }
 }

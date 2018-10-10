@@ -1,5 +1,6 @@
 package com.example.fansonlib.http.ThreadPool;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -37,8 +38,6 @@ public class ThreadPoolManager {
 
         private ThreadPoolExecutor mThreadPoolExecutor;
 
-//        private ExecutorService mExecutorService;
-
         //线程池中核心线程数
         private int corePoolSize;
         //线程池中最大并发数，若并发数高于该数，后面的任务则会等待
@@ -65,7 +64,7 @@ public class ThreadPoolManager {
 
 
         /**
-         * 提交任务
+         * 提交任务（Runnable）
          */
         public Future<?> submit(Runnable runnable){
             initThreadPoolExecutor();
@@ -73,9 +72,18 @@ public class ThreadPoolManager {
             return submitResult;
         }
 
+        /**
+         * 执行任务（Callable）
+         */
+        public Future<?> submit(Callable callable){
+            initThreadPoolExecutor();
+            Future<?> submitResult = mThreadPoolExecutor.submit(callable);
+            return submitResult;
+        }
+
 
         /**
-         * 执行任务
+         * 执行任务（Runnable）
          */
         public void execute(Runnable runnable) {
             if (runnable == null) {

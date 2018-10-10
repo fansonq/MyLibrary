@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by：fanson
@@ -67,7 +68,12 @@ public class AsyncHttpStrategy implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent() {
+    public Disposable getCurrentDisposable() {
+        return null;
+    }
+
+    @Override
+    public void cancelCurrent(String type) {
 
     }
 

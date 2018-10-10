@@ -1,11 +1,14 @@
 package com.example.fansonlib.http.retrofit;
 
+import android.support.v4.util.ArrayMap;
+
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.IHttpStrategy;
 
+import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.Map;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.ResourceSubscriber;
 
@@ -18,9 +21,9 @@ import io.reactivex.subscribers.ResourceSubscriber;
 public class RetrofitStrategy<M> implements IHttpStrategy {
 
     /**
-     * 记录所有的网络Disposable
+     * 记录所有的网络请求的处理
      */
-    private CompositeDisposable mCompositeDisposable;
+    private ArrayMap<Object, Disposable> mDisposableMaps ;
     /**
      * 当前网络的Disposable
      */
@@ -31,13 +34,14 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     private IApiFactory mFactory;
 
     public RetrofitStrategy() {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
+        if (mDisposableMaps == null) {
+            mDisposableMaps = new ArrayMap<>();
         }
     }
 
     /**
      * 设置Retrofit的Api，通过传入实现的工厂类
+     *
      * @param factory
      */
     public void setApi(IApiFactory factory) {
@@ -59,7 +63,13 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             @Override
             public void onError(Throwable t) {
-                callback.onFailure(t.getMessage());
+                //TODO 最佳方案重写封装ResourceSubscriber
+                if (t instanceof UnknownHostException){
+                    callback.onFailure("无法链接到服务器");
+                }else {
+                    callback.onFailure(t.getMessage());
+                }
+
             }
 
             @Override
@@ -67,20 +77,41 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             }
         });
-        mCompositeDisposable.add(mCurrentDisposable);
+        mDisposableMaps.put(url,mCurrentDisposable);
     }
 
     @Override
-    public void cancelCurrent() {
-        if (mCompositeDisposable != null&&mCurrentDisposable!=null) {
-            mCompositeDisposable.delete(mCurrentDisposable);
+    public Disposable getCurrentDisposable() {
+        return mCurrentDisposable;
+    }
+
+    @Override
+    public void cancelCurrent(String url) {
+        if (mDisposableMaps.isEmpty()){
+            return;
+        }
+        mCurrentDisposable = mDisposableMaps.get(url);
+        mDisposableMaps.remove(url);
+        if (mCurrentDisposable!=null){
+            mCurrentDisposable.dispose();
+            mCurrentDisposable=null;
         }
     }
 
     @Override
     public void cancelAll() {
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
+        if (mDisposableMaps.isEmpty()){
+            return;
         }
+        Iterator<Object> iterator = mDisposableMaps.keySet().iterator();
+        while (iterator.hasNext()){
+            Object key =  iterator.next();
+            mCurrentDisposable = mDisposableMaps.get(key);
+            if (mCurrentDisposable!=null){
+                mCurrentDisposable.dispose();
+                mCurrentDisposable = null;
+            }
+        }
+        mDisposableMaps.clear();
     }
 }

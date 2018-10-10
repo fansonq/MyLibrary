@@ -1,5 +1,6 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 
 
@@ -8,7 +9,7 @@ import android.os.Bundle;
  * 可侧滑返回的Activity
  */
 
-public abstract class SwipeBackActivity extends BaseActivity{
+public abstract class SwipeBackActivity<D extends ViewDataBinding> extends BaseActivity<D>{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

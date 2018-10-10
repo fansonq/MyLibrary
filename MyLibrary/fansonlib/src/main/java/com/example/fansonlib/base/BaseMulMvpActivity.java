@@ -1,7 +1,10 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.example.fansonlib.utils.InputMethodUtils;
 
 /**
  * Created by：fanson
@@ -9,7 +12,7 @@ import android.support.annotation.Nullable;
  * Describe：多个Presenter
  */
 
-public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends BasePresenter> extends BaseActivity implements BaseView{
+public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends BasePresenter,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView{
 
     protected P1 mPresenter1;
     protected P2 mPresenter2;
@@ -24,25 +27,23 @@ public abstract class BaseMulMvpActivity<P1 extends BasePresenter,P2 extends Bas
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter1.onResume();
-        mPresenter2.onResume();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter1.onStop();
-        mPresenter2.onStop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter1 != null)
+        if (mPresenter1 != null){
             mPresenter1.detachView();
-        if (mPresenter2!=null){
-            mPresenter2 = null;
         }
+        if (mPresenter2!=null){
+            mPresenter2.detachView();
+        }
+        InputMethodUtils.fixInputMethodManagerLeak(this);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.example.fansonlib.utils.notification.builder;
 
-import android.support.v7.app.NotificationCompat;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import java.util.ArrayList;

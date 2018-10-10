@@ -1,6 +1,7 @@
 package com.fanson.mylibrary.mvp;
 
 import com.example.fansonlib.callback.BaseModelCallback;
+import com.fanson.mylibrary.SimpleBean;
 
 /**
  * Created by：fanson
@@ -10,7 +11,7 @@ import com.example.fansonlib.callback.BaseModelCallback;
 
 public interface TestCallback extends BaseModelCallback{
 
-    void successful(String message);
+    void successful(SimpleBean bean);
 
     void failure(String errorMsg);
 }

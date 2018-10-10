@@ -21,6 +21,7 @@ import retrofit2.Converter;
 
 public final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 
+    private static final String TAG = GsonResponseBodyConverter.class.getSimpleName();
     private final Gson gson;
     private final Type type;
 
@@ -35,6 +36,7 @@ public final class GsonResponseBodyConverter<T> implements Converter<ResponseBod
     @Override
     public T convert(ResponseBody value) throws IOException {
         String response = value.string();
+        Log.d(TAG,"response = "+response);
         try {
             // 这里的type实际类型是 HttpResult<PhoneBean>  PhoneBean就是retData要获取的对象。
             HttpResultBean result = gson.fromJson(response, HttpResultBean.class);

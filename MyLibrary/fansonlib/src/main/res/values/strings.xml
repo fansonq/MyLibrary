@@ -15,6 +15,12 @@
     <string name="downloading">Downloading</string>
     <string name="download_complete">完成下载，点击安装</string>
 
+    <string name="error">出错了</string>
+    <string name="loading_error_retry">加载出错，点击重试</string>
+    <string name="retry_loading">轻触屏幕重试</string>
+    <string name="loading">加载中...</string>
+    <string name="no_data">暂无数据</string>
+
     <!--PickImage-->
     <string name="all_images">全部图片</string>
     <string name="folder_image_count">共%1$d张</string>
@@ -27,5 +33,10 @@
     <string name="origin">原图</string>
     <string name="origin_size">原图(%1$s)</string>
     <!--PickImage-->
+
+    <!--CustomEditor-->
+    <string name="please_input">请输入内容</string>
+    <string name="no_content">没有内容</string>
+    <!--CustomEditor-->
 
 </resources>

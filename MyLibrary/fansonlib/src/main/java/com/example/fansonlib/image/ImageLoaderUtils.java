@@ -42,7 +42,7 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static void loadImage( Context context, ImageView imageView, String imgUrl) {
+    public static void loadImage( Context context, ImageView imageView, Object imgUrl) {
         loaderConfig.getClient().loadImage(loaderConfig,context, imageView, imgUrl);
     }
 
@@ -70,7 +70,7 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
+    public static void loadCircleImage(Context context, ImageView imageView, String imgUrl ) {
         loaderConfig.getClient().loadCircleImage(loaderConfig ,context, imageView, imgUrl);
     }
 
@@ -80,8 +80,8 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static  void loadCornerImage(Context context, ImageView imageView, String imgUrl){
-        loaderConfig.getClient().loadCornerImage(loaderConfig ,context,imageView,imgUrl);
+    public static  void loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius){
+        loaderConfig.getClient().loadCornerImage(loaderConfig ,context,imageView,imgUrl,radius);
     }
 
     /**
@@ -90,8 +90,26 @@ public class ImageLoaderUtils {
      * @param imageView
      * @param imgUrl
      */
-    public static  void loadGifImage(Context context, ImageView imageView, String imgUrl){
+    public static  void loadGifImage(Context context, ImageView imageView, Object imgUrl){
         loaderConfig.getClient().loadGifImage(loaderConfig ,context,imageView,imgUrl);
+    }
+
+    /**
+     * 清除内存
+     * @param context
+     */
+    public static void clearMemory(Context context){
+        loaderConfig.getClient().clearMemory(context);
+    }
+
+    /**
+     * 获取Bitmap对象
+     * @param context
+     * @param imgUrl
+     * @return
+     */
+    public static void getBitmap(Context context,  String imgUrl,OnWaitBitmapListener listener,int index){
+         loaderConfig.getClient().getBitmap(loaderConfig,context,imgUrl,listener,index);
     }
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <com.example.fansonlib.widget.textview.TextViewDrawable
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:cit_drawableTop="@mipmap/ic_tip"
+        android:gravity="center"
+        app:cit_iconColor="@color/grey"
+        app:cit_iconHeight="50dp"
+        app:cit_iconWidth="50dp"
+        android:text="@string/no_data" />
+
+</LinearLayout>

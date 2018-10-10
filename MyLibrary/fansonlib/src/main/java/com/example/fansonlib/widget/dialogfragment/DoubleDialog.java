@@ -18,6 +18,12 @@ import com.example.fansonlib.widget.dialogfragment.base.ViewHolder;
 public class DoubleDialog extends BaseDialogFragment {
 
     private String title, content;
+    private boolean mCancelNotDismiss = false;
+    private static DoubleDialog mDialog = null;
+
+    public DoubleDialog() {
+        this.setAnimStyle(R.style.DialogScaleAnim);
+    }
 
     @Override
     public int intLayoutId() {
@@ -42,12 +48,27 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return
      */
     public static DoubleDialog newInstance(String title, String content) {
+        return newInstance(title, content, false);
+    }
+
+    /**
+     * 传值
+     *
+     * @param title            标题
+     * @param content          内容
+     * @param cancelNotDismiss 点击取消按钮不消失对话框
+     * @return
+     */
+    public static DoubleDialog newInstance(String title, String content, boolean cancelNotDismiss) {
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("content", content);
-        DoubleDialog dialog = new DoubleDialog();
-        dialog.setArguments(bundle);
-        return dialog;
+        bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
+        if (mDialog == null) {
+            mDialog = new DoubleDialog();
+        }
+        mDialog.setArguments(bundle);
+        return mDialog;
     }
 
     @Override
@@ -59,6 +80,19 @@ public class DoubleDialog extends BaseDialogFragment {
         }
         title = bundle.getString("title");
         content = bundle.getString("content");
+        mCancelNotDismiss = bundle.getBoolean("cancelNotDismiss");
+    }
+
+    /**
+     * 是否在显示中
+     *
+     * @return true/false
+     */
+    public boolean isShowing() {
+        if (mDialog==null){
+            return false;
+        }
+        return mDialog.isResumed();
     }
 
     @Override
@@ -71,7 +105,10 @@ public class DoubleDialog extends BaseDialogFragment {
                 if (mICancelListener != null) {
                     mICancelListener.onCancel();
                 }
-                dialog.dismiss();
+                if (!mCancelNotDismiss) {
+                    dialog.dismiss();
+                    mDialog = null;
+                }
             }
         });
 
@@ -82,6 +119,7 @@ public class DoubleDialog extends BaseDialogFragment {
                     mIConfirmListener.onConfirm();
                 }
                 dialog.dismiss();
+                mDialog = null;
             }
         });
     }

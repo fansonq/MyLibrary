@@ -1,7 +1,10 @@
 package com.example.fansonlib.base;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
+import com.example.fansonlib.utils.InputMethodUtils;
 
 /**
  * Created by：fanson
@@ -9,7 +12,7 @@ import android.support.annotation.Nullable;
  * Describe：集成Mvp的BaseActivity
  */
 
-public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements BaseView {
+public abstract class BaseMvpActivity<P extends BasePresenter,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView {
 
     protected P mPresenter;
 
@@ -22,13 +25,11 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.onResume();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.onStop();
     }
 
     /**
@@ -39,7 +40,10 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null)
+        if (mPresenter != null){
             mPresenter.detachView();
+            mPresenter.detachActivity();
+        }
+        InputMethodUtils.fixInputMethodManagerLeak(this);
     }
 }

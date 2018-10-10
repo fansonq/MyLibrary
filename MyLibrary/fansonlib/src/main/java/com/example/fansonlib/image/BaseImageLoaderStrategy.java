@@ -43,7 +43,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     /**
      * 加载圆角图片
      */
-    void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl );
 
     /**
      * 加载Gif
@@ -51,7 +51,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl);
 
     /**
      * 加载圆角图片
@@ -59,6 +59,16 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl);
+    void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius);
+
+    /**
+     * 清除内存
+     */
+    void clearMemory(Context context);
+
+    /**
+     * 获取Bitmap对象
+     */
+    void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl,OnWaitBitmapListener listener,int index);
 
 }
