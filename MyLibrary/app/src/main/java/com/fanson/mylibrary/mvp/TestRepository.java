@@ -2,7 +2,7 @@ package com.fanson.mylibrary.mvp;
 
 import android.util.Log;
 
-import com.example.fansonlib.base.BaseModel;
+import com.example.fansonlib.base.BaseRepository;
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.fanson.mylibrary.SimpleBean;
 
@@ -15,7 +15,7 @@ import static com.example.fansonlib.http.HttpUtils.getHttpUtils;
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestModel extends BaseModel{
+public class TestRepository extends BaseRepository {
 
     TestCallback mCallback;
 

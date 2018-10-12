@@ -10,7 +10,7 @@ import com.fanson.mylibrary.SimpleBean;
  * Created by fansonq on 2017/9/2.
  */
 
-public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter{
+public class TestPresenter extends BasePresenterRep<TestRepository,SimpleBean,ContractTest.TestView> implements ContractTest.ITestPresenter{
 
 
     public TestPresenter(Activity activity,ContractTest.TestView baseView) {
@@ -18,8 +18,8 @@ public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,Contrac
     }
 
     @Override
-    protected TestModel createRepository() {
-        return new TestModel();
+    protected TestRepository createRepository() {
+        return new TestRepository();
     }
 
 
@@ -41,7 +41,7 @@ public class TestPresenter extends BasePresenterRep<TestModel,SimpleBean,Contrac
                     setValue(bean);
                     break;
                 case 2:
-                    getBaseView().showCode102(bean.getMessage());
+//                    getBaseView().showCode102(bean.getMessage());
                 default:
                     break;
             }

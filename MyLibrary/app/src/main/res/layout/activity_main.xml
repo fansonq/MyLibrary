@@ -61,6 +61,11 @@
                 android:layout_height="wrap_content"
                 android:text="LoadingView" />
 
+            <Button
+                android:id="@+id/btn_viewModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ViewModel" />
 
             <ImageView
                 android:id="@+id/iv_pic"

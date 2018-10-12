@@ -5,7 +5,6 @@ import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,7 +14,6 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
@@ -30,19 +28,16 @@ import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
+import com.fanson.mylibrary.mvvm.ViewModelActivity;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
 public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBinding> implements ContractTest.TestView {
 
@@ -177,13 +172,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 //                bodyMap.put("part",part);
 
-                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test", part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<ResponseBody>() {
-                            @Override
-                            public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
-                                Log.d("TAG", responseBody.string());
-                            }
-                        });
+//                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test", part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Consumer<ResponseBody>() {
+//                            @Override
+//                            public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
+//                                Log.d("TAG", responseBody.string());
+//                            }
+//                        });
 
 //                HttpUtils.getHttpUtils().post("post.php", bodyMap, new HttpResponseCallback<TestBean>() {
 //                    @Override
@@ -212,6 +207,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 //
 //            }
 //        }, Manifest.permission.CAMERA);
+
+        mBinding.btnViewModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMyActivity(ViewModelActivity.class);
+            }
+        });
     }
 
     private void testDialogFragment() {
@@ -234,7 +236,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
         String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
-        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
+//        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override
 //            public void loadStart() {
@@ -327,11 +329,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     @Override
     protected TestPresenter createPresenter() {
         return new TestPresenter(this, this);
-    }
-
-    @Override
-    public void showCode102(String message) {
-
     }
 
     @Override

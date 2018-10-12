@@ -1,22 +1,17 @@
 package com.example.fansonlib.base;
 
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subscribers.ResourceSubscriber;
-
 /**
  * Created by fansonq on 2017/9/2.
- * 数据层操作的BaseModel
+ * 数据层处理的BaseRepository
  */
 
-public abstract class BaseModel implements IBaseRepository {
-    private static final String TAG = BaseModel.class.getSimpleName();
+public abstract class BaseRepository implements IBaseRepository {
+
+    private static final String TAG = BaseRepository.class.getSimpleName();
 
     private int mCompositeDisposableType;
 
-
-    public BaseModel() {
+    public BaseRepository() {
     }
 
     /**
@@ -34,9 +29,9 @@ public abstract class BaseModel implements IBaseRepository {
          mCompositeDisposable.add(disposable);
      }
  */
-    protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
-        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+//    protected ResourceSubscriber addSubscrebe(Flowable observable, ResourceSubscriber subscriber) {
+//        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
 //                .doOnLifecycle(new Consumer<Subscription>() {
 //                    @Override
 //                    public void accept(Subscription subscription) throws Exception {
@@ -53,8 +48,8 @@ public abstract class BaseModel implements IBaseRepository {
 //                        Log.d(TAG, "OnCancel");
 //                    }
 //                })
-                .subscribeWith(subscriber);
-    }
+//                .subscribeWith(subscriber);
+//    }
 
     @Override
     public void onDestroy() {
