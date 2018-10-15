@@ -36,7 +36,7 @@ public class MyDownLoadManager {
                 .create(DownloadApi.class)
                 .downloadFile(url)
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+//                .observeOn(Schedulers.io())
                 .observeOn(Schedulers.computation())
                 .map(new Function<ResponseBody, File>() {
                     @Override
