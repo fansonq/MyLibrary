@@ -17,6 +17,10 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
         dataSuccessObserver();
     }
 
+    /**
+     * 创建ViewModel实例
+     * @return ViewModel实例
+     */
     protected abstract VM  createViewModel();
 
     /**
