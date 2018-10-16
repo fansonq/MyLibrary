@@ -123,7 +123,6 @@ public class DimensUtils {
         return mStatusHeight;
     }
 
-
     /**
      * 获取当前屏幕截图，不包含状态栏
      *
