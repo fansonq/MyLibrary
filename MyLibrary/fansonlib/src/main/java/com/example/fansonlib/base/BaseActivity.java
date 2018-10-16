@@ -3,7 +3,6 @@ package com.example.fansonlib.base;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -11,20 +10,20 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.NetWorkUtil;
 
 /**
-* @author Created by：Fanson
-* Created on：2016/8/23
-* Description：Activity基类(带DataBinding)
-*/
+ * @author Created by：Fanson
+ * Created on：2016/8/23
+ * Description：Activity基类(带DataBinding)
+ */
 public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -48,7 +47,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mBinding = DataBindingUtil.setContentView(this,getContentView());
+        mBinding = DataBindingUtil.setContentView(this, getContentView());
         initNetStateBroadCastReceiver();
         initView();
         initData();
@@ -119,9 +118,10 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
 
     /**
      * 获取DataBinding的绑定
+     *
      * @return DataBinding
      */
-    public D getBinding(){
+    public D getBinding() {
         return (D) mBinding;
     }
 
@@ -132,28 +132,29 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         netStateBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
                     if (!NetWorkUtil.isNetWordConnected(mContext)) {
-                        if (dialogBuilder == null) {
-                            dialogBuilder = new AlertDialog.Builder(mContext)
-                                    .setTitle(getResources().getString(R.string.no_net))
-                                    .setMessage(getResources().getString(R.string.go_open_net))
-                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                                        }
-                                    })
-                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            dialogBuilder.show();
-                        }
+                        MySnackBarUtils.Indefinite(getWindow().getDecorView(),getResources().getString(R.string.no_net)).show();
+//                        if (dialogBuilder == null) {
+//                            dialogBuilder = new AlertDialog.Builder(mContext)
+//                                    .setTitle(getResources().getString(R.string.no_net))
+//                                    .setMessage(getResources().getString(R.string.go_open_net))
+//                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            dialog.dismiss();
+//                                            startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+//                                        }
+//                                    })
+//                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            dialog.dismiss();
+//                                        }
+//                                    });
+//                            dialogBuilder.show();
+//                        }
                     }
                 }
             }

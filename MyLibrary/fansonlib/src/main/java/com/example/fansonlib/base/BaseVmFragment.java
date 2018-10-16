@@ -1,15 +1,11 @@
 package com.example.fansonlib.base;
 
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.utils.TUtil;
 
 /**
  * @author Created by：Fanson
@@ -22,25 +18,20 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = VMProviders(this, (Class<VM>) TUtil.getInstance(this, 0));
-        if (null != mViewModel) {
-            dataObserver();
-        }
+        mViewModel = createViewModel();
+        dataSuccessObserver();
         return  rootView;
     }
 
     /**
-     * 观察接收数据
+     * 创建ViewModel实例
+     * @return ViewModel实例
      */
-    protected abstract void dataObserver();
+    protected abstract VM  createViewModel();
 
     /**
-     * 创建ViewModelProviders
-     *
-     * @return ViewModel
+     * 观察接收成功的数据
      */
-    protected <VM extends AndroidViewModel> VM VMProviders(BaseFragment fragment, @NonNull Class<VM> modelClass) {
-        return ViewModelProviders.of(fragment).get(modelClass);
-    }
+    protected abstract void dataSuccessObserver();
 
 }
