@@ -41,6 +41,7 @@ public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityVie
         mBinding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showLoading();
                 mViewModel.getData(1);
             }
         });

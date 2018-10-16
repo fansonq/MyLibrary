@@ -3,6 +3,9 @@ package com.example.fansonlib.base;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.example.fansonlib.callback.IBaseViewModel;
 
 import java.lang.ref.SoftReference;
 
@@ -11,7 +14,7 @@ import java.lang.ref.SoftReference;
  * Created Time: 2018/10/11 14:58
  * Describe：ViewModel基类
  */
-public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository> extends AndroidViewModel {
+public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository> extends AndroidViewModel implements IBaseViewModel {
 
     private static final String TAG = BaseViewModel.class.getSimpleName();
 
@@ -81,4 +84,35 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
         }
     }
 
+
+    @Override
+    public void onCreate() {
+        Log.d(TAG,"生命周期onCreate阶段");
+    }
+
+    @Override
+    public void onStart() {
+        Log.d(TAG,"生命周期onStart阶段");
+    }
+
+    @Override
+    public void onResume() {
+        Log.d(TAG,"生命周期onResume阶段");
+    }
+
+
+    @Override
+    public void onPause() {
+        Log.d(TAG,"生命周期onPause阶段");
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG,"生命周期onStop阶段");
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG,"生命周期onDestroy阶段");
+    }
 }
