@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.http.retrofit.download.FileDownLoadObserver;
+import com.example.fansonlib.http.retrofit.download.MyDownLoadManager;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
@@ -92,7 +95,23 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBtnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DownLoadManager.downloadFile()
+                MyDownLoadManager.downloadFile("http://p.gdown.baidu.com/f2db1156581f17f40fa491c9ef82e14e3e94b33d48fe2815156ff454b02fdb429d2dc99a926495e2aa1d9d90683e825e8d5853beab866f64a9498d23cf9e5c7582fddefa770767c812d0fd36d771e944677ad1a8b12fbf832d08dd1279d3e0d9f40b3e93d357373a98ab9162535fec522093102d7e6c0d3e362af2a3ae9b2f662e403a4bd66b45fcd92f4332ea90b831dd5538c47c7f39703b15856488028ecc6aaa028bd1797736cbb37d2d4b64148a2d25c17fe2804a56631b6938747e707344f8802c06dfe467",
+                        AppUtils.getAppContext().getExternalCacheDir() + "/apk/", "Test.apk", new FileDownLoadObserver<File>() {
+                            @Override
+                            public void onDownLoadSuccess(File file) {
+                                Log.d(TAG,"onDownLoadSuccess");
+                            }
+
+                            @Override
+                            public void onDownLoadFail(Throwable throwable) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int progress, long total) {
+                                Log.d(TAG,"progress = "+(float) progress % total);
+                            }
+                        });
             }
         });
 

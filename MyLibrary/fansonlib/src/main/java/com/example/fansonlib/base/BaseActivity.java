@@ -10,9 +10,11 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 
 import com.example.fansonlib.R;
@@ -134,27 +136,17 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
             public void onReceive(Context context, Intent intent) {
                 if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
                     if (!NetWorkUtil.isNetWordConnected(mContext)) {
-                        MySnackBarUtils.Indefinite(getWindow().getDecorView(),getResources().getString(R.string.no_net)).show();
-//                        if (dialogBuilder == null) {
-//                            dialogBuilder = new AlertDialog.Builder(mContext)
-//                                    .setTitle(getResources().getString(R.string.no_net))
-//                                    .setMessage(getResources().getString(R.string.go_open_net))
-//                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-//
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            dialog.dismiss();
-//                                            startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-//                                        }
-//                                    })
-//                                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            dialog.dismiss();
-//                                        }
-//                                    });
-//                            dialogBuilder.show();
-//                        }
+                        MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).show();
+                        if (MySnackBarUtils.getSnackbarView() != null) {
+                            MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                }
+                            });
+                        }
+                    } else {
+                        MySnackBarUtils.dismiss();
                     }
                 }
             }
