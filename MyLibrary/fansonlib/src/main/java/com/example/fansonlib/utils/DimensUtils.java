@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.Window;
 
 /**
  * @author Created by：fanson
@@ -121,6 +122,19 @@ public class DimensUtils {
             e.printStackTrace();
         }
         return mStatusHeight;
+    }
+
+    /**
+     * 获取标题栏高度
+     *
+     * @param activity Activity
+     * @return 标题栏高度
+     */
+    public static int getTitleHeight(Activity activity) {
+        int contentTop = activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
+        //statusBarHeight是上面所求的状态栏的高度
+        int titleHeight = contentTop - getStatusHeight(activity);
+        return titleHeight > 0 ? titleHeight : 0;
     }
 
     /**

@@ -27,9 +27,10 @@ import com.example.fansonlib.R;
 import java.lang.ref.WeakReference;
 
 /**
- * SnackBar工具类
- */
-
+* @author Created by：Fanson
+* Created on：2018/10/17 11:54
+* Description：SnackBar工具类（基于原作者：https://github.com/HuanHaiLiuXin/SnackbarUtils）
+*/
 public class MySnackBarUtils {
 
     private static final String TAG = MySnackBarUtils.class.getSimpleName();
@@ -41,26 +42,26 @@ public class MySnackBarUtils {
     private static final int color_danger = 0XFFF44336;
 
     /**
-     * 工具类当前持有的Snackbar实例
+     * 工具类当前持有的Snackbar实例（弱引用）
      */
     private static WeakReference<Snackbar> mSnackbarWeakReference;
 
     private MySnackBarUtils() {
-        throw new RuntimeException("禁止无参创建实例");
+        throw new RuntimeException("You can't instantiate me...");
     }
 
     private MySnackBarUtils(@Nullable WeakReference<Snackbar> snackbarWeakReference) {
-        this.mSnackbarWeakReference = snackbarWeakReference;
+        mSnackbarWeakReference = snackbarWeakReference;
     }
 
     /**
-     * 获取 mSnackbar
+     * 获取Snackbar
      *
-     * @return
+     * @return 弱引用的Snackbar
      */
     public Snackbar getSnackbar() {
-        if (this.mSnackbarWeakReference != null && this.mSnackbarWeakReference.get() != null) {
-            return this.mSnackbarWeakReference.get();
+        if (mSnackbarWeakReference != null && mSnackbarWeakReference.get() != null) {
+            return mSnackbarWeakReference.get();
         } else {
             return null;
         }
@@ -226,7 +227,7 @@ public class MySnackBarUtils {
      *
      * @param gravity
      */
-    public MySnackBarUtils gravityFrameLayout(int gravity) {
+    public MySnackBarUtils setGravityFrameLayout(int gravity) {
         if (getSnackbar() != null) {
             FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(getSnackbar().getView().getLayoutParams().width, getSnackbar().getView().getLayoutParams().height);
             params.gravity = gravity;
@@ -240,7 +241,7 @@ public class MySnackBarUtils {
      *
      * @param gravity
      */
-    public MySnackBarUtils gravityCoordinatorLayout(int gravity) {
+    public MySnackBarUtils setGravityCoordinatorLayout(int gravity) {
         if (getSnackbar() != null) {
             CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(getSnackbar().getView().getLayoutParams().width, getSnackbar().getView().getLayoutParams().height);
             params.gravity = gravity;
@@ -337,7 +338,7 @@ public class MySnackBarUtils {
             message.setLayoutParams(paramsMessage);
             message.setCompoundDrawablePadding(message.getPaddingLeft());
             int textSize = (int) message.getTextSize();
-            Log.e("Jet", "textSize:" + textSize);
+            Log.d(TAG, "textSize:" + textSize);
             if (leftDrawable != null) {
                 leftDrawable.setBounds(0, 0, textSize, textSize);
             }
@@ -459,29 +460,6 @@ public class MySnackBarUtils {
     }
 
     /**
-     * 经试验发现:
-     *      执行过{@link MySnackBarUtils#backColor(int)}后:background instanceof ColorDrawable
-     *      未执行过{@link MySnackBarUtils#backColor(int)}:background instanceof GradientDrawable
-     * @return
-     */
-    /*
-    public MySnackBarUtils radius(){
-        Drawable background = snackbarWeakReference.get().getView().getBackground();
-        if(background instanceof GradientDrawable){
-            Log.e("Jet","radius():GradientDrawable");
-        }
-        if(background instanceof ColorDrawable){
-            Log.e("Jet","radius():ColorDrawable");
-        }
-        if(background instanceof StateListDrawable){
-            Log.e("Jet","radius():StateListDrawable");
-        }
-        Log.e("Jet","radius()background:"+background.getClass().getSimpleName());
-        return new MySnackBarUtils(mSnackbar);
-    }
-    */
-
-    /**
      * 通过SnackBar现在的背景,获取其设置圆角值时候所需的GradientDrawable实例
      *
      * @param backgroundOri
@@ -566,7 +544,7 @@ public class MySnackBarUtils {
         */
         //文字高度+paddingTop+paddingBottom : 14sp + 14dp*2
         int SnackbarHeight = DimensUtils.dipToPx(getSnackbar().getView().getContext(), 28) + DimensUtils.sp2px(getSnackbar().getView().getContext(), 14);
-        Log.e("Jet", "直接获取MessageView高度:" + getSnackbar().getView().findViewById(R.id.snackbar_text).getHeight());
+        Log.d(TAG, "直接获取MessageView高度:" + getSnackbar().getView().findViewById(R.id.snackbar_text).getHeight());
         return SnackbarHeight;
     }
 
@@ -586,12 +564,12 @@ public class MySnackBarUtils {
             marginRight = marginRight <= 0 ? 0 : marginRight;
             int[] locations = new int[2];
             targetView.getLocationOnScreen(locations);
-            Log.e("Jet", "距离屏幕左侧:" + locations[0] + "==距离屏幕顶部:" + locations[1]);
+            Log.d(TAG, "距离屏幕左侧:" + locations[0] + "==距离屏幕顶部:" + locations[1]);
             int snackbarHeight = calculateSnackBarHeight();
-            Log.e("Jet", "Snackbar高度:" + snackbarHeight);
+            Log.d(TAG, "Snackbar高度:" + snackbarHeight);
             //必须保证指定View的顶部可见 且 单行Snackbar可以完整的展示
             if (locations[1] >= contentViewTop + snackbarHeight) {
-                gravityFrameLayout(Gravity.BOTTOM);
+                setGravityFrameLayout(Gravity.BOTTOM);
                 ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                 ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, getSnackbar().getView().getResources().getDisplayMetrics().heightPixels - locations[1]);
                 getSnackbar().getView().setLayoutParams(params);
@@ -607,12 +585,12 @@ public class MySnackBarUtils {
             marginRight = marginRight <= 0 ? 0 : marginRight;
             int[] locations = new int[2];
             targetView.getLocationOnScreen(locations);
-            Log.e("Jet", "距离屏幕左侧:" + locations[0] + "==距离屏幕顶部:" + locations[1]);
+            Log.d(TAG, "距离屏幕左侧:" + locations[0] + "==距离屏幕顶部:" + locations[1]);
             int snackbarHeight = calculateSnackBarHeight();
-            Log.e("Jet", "Snackbar高度:" + snackbarHeight);
+            Log.d(TAG, "Snackbar高度:" + snackbarHeight);
             //必须保证指定View的顶部可见 且 单行Snackbar可以完整的展示
             if (locations[1] >= contentViewTop + snackbarHeight) {
-                gravityCoordinatorLayout(Gravity.BOTTOM);
+                setGravityCoordinatorLayout(Gravity.BOTTOM);
                 ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                 ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, getSnackbar().getView().getResources().getDisplayMetrics().heightPixels - locations[1]);
                 getSnackbar().getView().setLayoutParams(params);
@@ -644,14 +622,14 @@ public class MySnackBarUtils {
                 //为什么要'+2'? 因为在Android L(Build.VERSION_CODES.LOLLIPOP)以上,例如Button会有一定的'阴影(shadow)',阴影的大小由'高度(elevation)'决定.
                 //为了在Android L以上的系统中展示的Snackbar不要覆盖targetView的阴影部分太大比例,所以人为减小2px的layout_marginBottom属性.
                 if (locations[1] + targetView.getHeight() >= contentViewTop && locations[1] + targetView.getHeight() + snackbarHeight + 2 <= screenHeight) {
-                    gravityFrameLayout(Gravity.BOTTOM);
+                    setGravityFrameLayout(Gravity.BOTTOM);
                     ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                     ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, screenHeight - (locations[1] + targetView.getHeight() + snackbarHeight + 2));
                     getSnackbar().getView().setLayoutParams(params);
                 }
             } else {
                 if (locations[1] + targetView.getHeight() >= contentViewTop && locations[1] + targetView.getHeight() + snackbarHeight <= screenHeight) {
-                    gravityFrameLayout(Gravity.BOTTOM);
+                    setGravityFrameLayout(Gravity.BOTTOM);
                     ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                     ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, screenHeight - (locations[1] + targetView.getHeight() + snackbarHeight));
                     getSnackbar().getView().setLayoutParams(params);
@@ -674,14 +652,14 @@ public class MySnackBarUtils {
                 //为什么要'+2'? 因为在Android L(Build.VERSION_CODES.LOLLIPOP)以上,例如Button会有一定的'阴影(shadow)',阴影的大小由'高度(elevation)'决定.
                 //为了在Android L以上的系统中展示的Snackbar不要覆盖targetView的阴影部分太大比例,所以人为减小2px的layout_marginBottom属性.
                 if (locations[1] + targetView.getHeight() >= contentViewTop && locations[1] + targetView.getHeight() + snackbarHeight + 2 <= screenHeight) {
-                    gravityCoordinatorLayout(Gravity.BOTTOM);
+                    setGravityCoordinatorLayout(Gravity.BOTTOM);
                     ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                     ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, screenHeight - (locations[1] + targetView.getHeight() + snackbarHeight + 2));
                     getSnackbar().getView().setLayoutParams(params);
                 }
             } else {
                 if (locations[1] + targetView.getHeight() >= contentViewTop && locations[1] + targetView.getHeight() + snackbarHeight <= screenHeight) {
-                    gravityCoordinatorLayout(Gravity.BOTTOM);
+                    setGravityCoordinatorLayout(Gravity.BOTTOM);
                     ViewGroup.LayoutParams params = getSnackbar().getView().getLayoutParams();
                     ((ViewGroup.MarginLayoutParams) params).setMargins(marginLeft, 0, marginRight, screenHeight - (locations[1] + targetView.getHeight() + snackbarHeight));
                     getSnackbar().getView().setLayoutParams(params);
@@ -692,13 +670,14 @@ public class MySnackBarUtils {
     }
 
     /**
-     * 获取Snackbar的View视图
-     * @return Snackbar的View视图
+     * 获取Snackbar的视图
+     *
+     * @return Snackbar的视图
      */
-    public static View  getSnackbarView(){
-        if (mSnackbarWeakReference!=null&&mSnackbarWeakReference.get()!=null){
+    public static View getSnackbarView() {
+        if (mSnackbarWeakReference != null && mSnackbarWeakReference.get() != null) {
             return mSnackbarWeakReference.get().getView();
-        }else {
+        } else {
             Log.e(TAG, "Snackbar已经被回收");
             return null;
         }
@@ -721,6 +700,7 @@ public class MySnackBarUtils {
     public static void dismiss() {
         if (mSnackbarWeakReference != null && mSnackbarWeakReference.get() != null) {
             mSnackbarWeakReference.get().dismiss();
+            mSnackbarWeakReference = null;
         } else {
             Log.e(TAG, "Snackbar已经被回收");
         }

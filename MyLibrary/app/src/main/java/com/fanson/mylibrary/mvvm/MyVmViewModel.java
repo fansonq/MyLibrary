@@ -1,6 +1,8 @@
 package com.fanson.mylibrary.mvvm;
 
 import android.app.Application;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
@@ -51,5 +53,10 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
         if (isViewAttached()){
             getBaseView().showFailure(errorMsg);
         }
+    }
+
+    @Override
+    public void onAny(LifecycleOwner owner, Lifecycle.Event event) {
+
     }
 }

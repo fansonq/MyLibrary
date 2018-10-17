@@ -14,10 +14,12 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.utils.DimensUtils;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.NetWorkUtil;
 
@@ -136,7 +138,8 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
             public void onReceive(Context context, Intent intent) {
                 if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
                     if (!NetWorkUtil.isNetWordConnected(mContext)) {
-                        MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).show();
+                        MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
+                                .margins(0, DimensUtils.dipToPx(mContext,50),0,0).show();
                         if (MySnackBarUtils.getSnackbarView() != null) {
                             MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
                                 @Override

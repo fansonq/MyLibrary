@@ -38,8 +38,6 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
         HttpUtils.init(strategy);
         mBtn = findViewById(R.id.btn_go);
 
-
-
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
