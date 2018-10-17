@@ -12,7 +12,6 @@ import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.Space;
-import android.util.DebugUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,21 +31,26 @@ import java.lang.ref.WeakReference;
  */
 
 public class MySnackBarUtils {
+
+    private static final String TAG = MySnackBarUtils.class.getSimpleName();
+
     //设置Snackbar背景颜色
     private static final int color_info = 0XFF2094F3;
     private static final int color_confirm = 0XFF4CB04E;
     private static final int color_warning = 0XFFFEC005;
     private static final int color_danger = 0XFFF44336;
-    
-    //工具类当前持有的Snackbar实例
-    private static WeakReference<Snackbar> snackbarWeakReference;
+
+    /**
+     * 工具类当前持有的Snackbar实例
+     */
+    private static WeakReference<Snackbar> mSnackbarWeakReference;
 
     private MySnackBarUtils() {
         throw new RuntimeException("禁止无参创建实例");
     }
 
     private MySnackBarUtils(@Nullable WeakReference<Snackbar> snackbarWeakReference) {
-        this.snackbarWeakReference = snackbarWeakReference;
+        this.mSnackbarWeakReference = snackbarWeakReference;
     }
 
     /**
@@ -55,8 +59,8 @@ public class MySnackBarUtils {
      * @return
      */
     public Snackbar getSnackbar() {
-        if (this.snackbarWeakReference != null && this.snackbarWeakReference.get() != null) {
-            return this.snackbarWeakReference.get();
+        if (this.mSnackbarWeakReference != null && this.mSnackbarWeakReference.get() != null) {
+            return this.mSnackbarWeakReference.get();
         } else {
             return null;
         }
@@ -70,31 +74,7 @@ public class MySnackBarUtils {
      * @param message
      * @return
      */
-    public static MySnackBarUtils Short(View view, String message) {
-        /*
-        <view xmlns:android="http://schemas.android.com/apk/res/android"
-          class="android.support.design.widget.Snackbar$SnackbarLayout"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_gravity="bottom"
-          android:theme="@style/ThemeOverlay.AppCompat.Dark"
-          style="@style/Widget.Design.Snackbar" />
-        <style name="Widget.Design.Snackbar" parent="android:Widget">
-            <item name="android:minWidth">@dimen/design_snackbar_min_width</item>
-            <item name="android:maxWidth">@dimen/design_snackbar_max_width</item>
-            <item name="android:background">@drawable/design_snackbar_background</item>
-            <item name="android:paddingLeft">@dimen/design_snackbar_padding_horizontal</item>
-            <item name="android:paddingRight">@dimen/design_snackbar_padding_horizontal</item>
-            <item name="elevation">@dimen/design_snackbar_elevation</item>
-            <item name="maxActionInlineWidth">@dimen/design_snackbar_action_inline_max_width</item>
-        </style>
-        <shape xmlns:android="http://schemas.android.com/apk/res/android"
-            android:shape="rectangle">
-            <corners android:radius="@dimen/design_snackbar_background_corner_radius"/>
-            <solid android:color="@color/design_snackbar_background_color"/>
-        </shape>
-        <color name="design_snackbar_background_color">#323232</color>
-        */
+    public static MySnackBarUtils showShort(View view, String message) {
         return new MySnackBarUtils(new WeakReference<Snackbar>(Snackbar.make(view, message, Snackbar.LENGTH_SHORT))).backColor(0XFF323232);
     }
 
@@ -106,7 +86,7 @@ public class MySnackBarUtils {
      * @param message
      * @return
      */
-    public static MySnackBarUtils Long(View view, String message) {
+    public static MySnackBarUtils showLong(View view, String message) {
         return new MySnackBarUtils(new WeakReference<Snackbar>(Snackbar.make(view, message, Snackbar.LENGTH_LONG))).backColor(0XFF323232);
     }
 
@@ -118,7 +98,7 @@ public class MySnackBarUtils {
      * @param message
      * @return
      */
-    public static MySnackBarUtils Indefinite(View view, String message) {
+    public static MySnackBarUtils showIndefinite(View view, String message) {
         return new MySnackBarUtils(new WeakReference<Snackbar>(Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE))).backColor(0XFF323232);
     }
 
@@ -131,7 +111,7 @@ public class MySnackBarUtils {
      * @param duration 展示时长(毫秒)
      * @return
      */
-    public static MySnackBarUtils Custom(View view, String message, int duration) {
+    public static MySnackBarUtils showCustom(View view, String message, int duration) {
         return new MySnackBarUtils(new WeakReference<Snackbar>(Snackbar.make(view, message, Snackbar.LENGTH_SHORT).setDuration(duration))).backColor(0XFF323232);
     }
 
@@ -711,30 +691,38 @@ public class MySnackBarUtils {
         return this;
     }
 
-
     /**
-     * 显示 mSnackbar
+     * 获取Snackbar的View视图
+     * @return Snackbar的View视图
      */
-    public void show() {
-        Log.e("Jet", "show()");
-        if (getSnackbar() != null) {
-            Log.e("Jet", "show");
-            getSnackbar().show();
-        } else {
-            Log.e("Jet", "已经被回收");
+    public static View  getSnackbarView(){
+        if (mSnackbarWeakReference!=null&&mSnackbarWeakReference.get()!=null){
+            return mSnackbarWeakReference.get().getView();
+        }else {
+            Log.e(TAG, "Snackbar已经被回收");
+            return null;
         }
     }
 
     /**
-     * 显示 mSnackbar
+     * 显示 Snackbar
      */
-    public void dismiss() {
-        Log.e("Jet", "show()");
+    public void show() {
         if (getSnackbar() != null) {
-            Log.e("Jet", "show");
-            getSnackbar().dismiss();
+            getSnackbar().show();
         } else {
-            Log.e("Jet", "已经被回收");
+            Log.e(TAG, "Snackbar已经被回收");
+        }
+    }
+
+    /**
+     * 隐藏Snackbar
+     */
+    public static void dismiss() {
+        if (mSnackbarWeakReference != null && mSnackbarWeakReference.get() != null) {
+            mSnackbarWeakReference.get().dismiss();
+        } else {
+            Log.e(TAG, "Snackbar已经被回收");
         }
     }
 }
