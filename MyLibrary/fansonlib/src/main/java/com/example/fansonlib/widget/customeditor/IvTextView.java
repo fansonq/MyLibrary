@@ -216,7 +216,7 @@ public class IvTextView extends ScrollView {
                             image[1] = (image[1] * ratio);
                         }
                         imageView.setMinimumHeight((int) image[1]);
-                        ImageLoaderUtils.loadCornerImage(getContext(), imageView, imagePath,5);
+                        ImageLoaderUtils.getInstance().loadCornerImage(getContext(), imageView, imagePath,5);
                     }
                 });
     }

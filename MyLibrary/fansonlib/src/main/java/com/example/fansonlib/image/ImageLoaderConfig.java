@@ -11,10 +11,6 @@ package com.example.fansonlib.image;
 public class ImageLoaderConfig {
 
     /**
-     * 具体加载器
-     */
-    private BaseImageLoaderStrategy mClient;
-    /**
      * 占位图
      */
     private int mPlacePicRes;
@@ -39,16 +35,11 @@ public class ImageLoaderConfig {
     private int maxMemoryCache;
 
     public ImageLoaderConfig(Builder builder) {
-        this.mClient = builder.mClient;
         this.mPlacePicRes = builder.mPlacePicRes;
         this.mErrorPicRes = builder.mErrorPicRes;
         this.mImgUrl = builder.mImgUrl;
         this.maxDishCache = builder.maxDiskCache;
         this.maxMemoryCache = builder.maxMemoryCache;
-    }
-
-    public BaseImageLoaderStrategy getClient() {
-        return mClient;
     }
 
     public int getPlacePicRes() {
@@ -76,7 +67,6 @@ public class ImageLoaderConfig {
     }
 
     public static class Builder {
-        private BaseImageLoaderStrategy mClient;//具体加载器
         private int mPlacePicRes;//占位图
         private int mErrorPicRes;//错误图
         private String mImgUrl;
@@ -84,11 +74,6 @@ public class ImageLoaderConfig {
         private int maxMemoryCache;
 
         public Builder() {
-        }
-
-        public Builder client(BaseImageLoaderStrategy provider) {
-            this.mClient = provider;
-            return this;
         }
 
         public Builder errorPicRes(int res) {

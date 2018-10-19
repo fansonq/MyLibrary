@@ -17,6 +17,8 @@ import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.http.retrofit.download.FileDownLoadObserver;
 import com.example.fansonlib.http.retrofit.download.MyDownLoadManager;
+import com.example.fansonlib.image.ImageLoaderConfig;
+import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
@@ -233,6 +235,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 startMyActivity(ViewModelActivity.class);
             }
         });
+
+        mBinding.btnLoadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testImageLoader();
+            }
+        });
+
     }
 
     private void testDialogFragment() {
@@ -254,7 +264,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
+        String picUrl = "http://guolin.tech/book.png";
+        ImageLoaderUtils.getInstance()
+                .setImageLoaderConfig(new ImageLoaderConfig.Builder().placePicRes(R.mipmap.default_image).build())
+                .loadImage(this,iv_pic,picUrl);
+
 //        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override

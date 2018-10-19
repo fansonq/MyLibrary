@@ -10,7 +10,6 @@ import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
-import com.example.fansonlib.utils.ImageLoaderProxy;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,23 +31,47 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListe
 
 public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
 
-    private static int MAX_DISK_CACHE = 1024 * 1024 * 50; // 磁盘缓存大小
-    private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10; // 内存大小
-    public static final int CORNER_RADIUS = 20; // 圆角
-    private volatile static ImageLoader imageLoader;
+    /**
+     * 磁盘缓存大小
+     */
+    private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
+    /**
+     * 内存大小
+     */
+    private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
+    /**
+     * 圆角半径
+     */
+    public static final int CORNER_RADIUS = 20;
+    /**
+     * UniversalLoader实例
+     */
+    private volatile static ImageLoader sImageLoader;
+    /**
+     * 参数配置
+     */
+    private ImageLoaderConfig mImageLoaderConfig;
 
     private CircleBitmapDisplayer mCircleBitmapDisplayer;
     private RoundedBitmapDisplayer mRoundedBitmapDisplayer;
 
+    /**
+     * 获取实例
+     * @return ImageLoader实例
+     */
     public static ImageLoader getImageLoader() {
-        if (imageLoader == null) {
-            synchronized (ImageLoaderProxy.class) {
-                imageLoader = ImageLoader.getInstance();
+        if (sImageLoader == null) {
+            synchronized (UniversalLoaderStrategy.class) {
+                sImageLoader = ImageLoader.getInstance();
             }
         }
-        return imageLoader;
+        return sImageLoader;
     }
 
+    /**
+     * 配置参数
+     * @param context 上下文
+     */
     public static void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder build = new ImageLoaderConfiguration.Builder(context);
         build.tasksProcessingOrder(QueueProcessingType.LIFO);
@@ -139,14 +162,20 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
         UniversalLoaderStrategy.initImageLoader(context);
     }
 
+
     @Override
-    public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
-        imageLoader.displayImage((String) imgUrl, view, getOptions4Header(config.getErrorPicRes(),config.getPlacePicRes()));
+    public void setLoaderConfig(ImageLoaderConfig config) {
+        mImageLoaderConfig = config;
     }
 
     @Override
-    public void  loadImageWithListener(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl, final OnLoadingListener listener1, final OnProgressListener listener2) {
-        imageLoader.displayImage((String) imgUrl, view, getOptions4Header(config.getErrorPicRes(), config.getPlacePicRes()), new ImageLoadingListener() {
+    public void loadImage( Context context, ImageView view, Object imgUrl) {
+        sImageLoader.displayImage((String) imgUrl, view, getOptions4Header(mImageLoaderConfig.getErrorPicRes(),mImageLoaderConfig.getPlacePicRes()));
+    }
+
+    @Override
+    public void  loadImageWithListener( Context context, ImageView view, Object imgUrl, final OnLoadingListener listener1, final OnProgressListener listener2) {
+        sImageLoader.displayImage((String) imgUrl, view, getOptions4Header(mImageLoaderConfig.getErrorPicRes(), mImageLoaderConfig.getPlacePicRes()), new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {
                 listener1.loadStart();
@@ -175,40 +204,40 @@ public class UniversalLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void displayFromDrawable(ImageLoaderConfig config,Context context,int imageId, ImageView imageView) {
-        imageLoader.displayImage("drawable://" + imageId, imageView, getOptionCustom());
+    public void displayFromDrawable(Context context,int imageId, ImageView imageView) {
+        sImageLoader.displayImage("drawable://" + imageId, imageView, getOptionCustom());
     }
 
     @Override
-    public void displayFromSDCard(ImageLoaderConfig config,String uri, ImageView imageView) {
-        imageLoader.displayImage("file://" + uri, imageView, getOptionCustom());
+    public void displayFromSDCard(String uri, ImageView imageView) {
+        sImageLoader.displayImage("file://" + uri, imageView, getOptionCustom());
     }
 
     @Override
-    public void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl) {
+    public void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
         mCircleBitmapDisplayer = new CircleBitmapDisplayer();
-        imageLoader.displayImage(imgUrl,imageView,getCircleOption(mCircleBitmapDisplayer));
+        sImageLoader.displayImage(imgUrl,imageView,getCircleOption(mCircleBitmapDisplayer));
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl) {
+    public void loadGifImage(Context context, ImageView imageView, Object imgUrl) {
 
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius) {
+    public void loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius) {
         //避免使用RoundedBitmapDisplayer，会创建新的ARGB_8888格式的Bitmap对象
         mRoundedBitmapDisplayer = new RoundedBitmapDisplayer(CORNER_RADIUS);
-        imageLoader.displayImage(imgUrl,imageView,getCircleOption(mRoundedBitmapDisplayer));
+        sImageLoader.displayImage(imgUrl,imageView,getCircleOption(mRoundedBitmapDisplayer));
     }
 
     @Override
     public void clearMemory(Context context) {
-        imageLoader.clearMemoryCache();
+        sImageLoader.clearMemoryCache();
     }
 
     @Override
-    public void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl, OnWaitBitmapListener listener,int index) {
+    public void getBitmap( Context context, Object imgUrl, OnWaitBitmapListener listener,int index) {
         //TODO
     }
 

@@ -33,6 +33,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
     private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
+    private ImageLoaderConfig mImageLoaderConfig;
+
     private RequestOptions mOptions1;
     private RequestOptions mOptionsCircle;
 
@@ -102,10 +104,15 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImage(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl) {
+    public void setLoaderConfig(ImageLoaderConfig config) {
+        mImageLoaderConfig = config;
+    }
+
+    @Override
+    public void loadImage( Context context, ImageView view, Object imgUrl) {
         with(context)
                 .load(imgUrl)
-                .apply(getOptions1(config))
+                .apply(getOptions1(mImageLoaderConfig))
                 //先加载缩略图 然后在加载全图
                 .thumbnail(Contants.THUMB_SIZE)
 //                .transition(DrawableTransitionOptions.withCrossFade())
@@ -113,25 +120,25 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImageWithListener(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl, OnLoadingListener listener1, OnProgressListener listener2) {
+    public void loadImageWithListener( Context context, ImageView view, Object imgUrl, OnLoadingListener listener1, OnProgressListener listener2) {
 
     }
 
     @Override
-    public void displayFromDrawable(ImageLoaderConfig config, Context context, int imageId, ImageView imageView) {
+    public void displayFromDrawable(Context context, int imageId, ImageView imageView) {
         with(context)
                 .load(imageId)
                 .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(config))
+                .apply(getOptions1(mImageLoaderConfig))
                 .into(imageView);
     }
 
     @Override
-    public void displayFromSDCard(ImageLoaderConfig config, String uri, ImageView imageView) {
+    public void displayFromSDCard( String uri, ImageView imageView) {
     }
 
     @Override
-    public void loadCircleImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl ) {
+    public void loadCircleImage( Context context, ImageView imageView, String imgUrl ) {
         with(context)
                 .load(imgUrl)
                 .apply(getOptionsCircle())
@@ -142,20 +149,20 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadGifImage(ImageLoaderConfig config, Context context, ImageView imageView, Object imgUrl) {
+    public void loadGifImage( Context context, ImageView imageView, Object imgUrl) {
         with(context)
                 .load(imgUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(getGifOptions(config))
+                .apply(getGifOptions(mImageLoaderConfig))
                 .into(imageView);
     }
 
     @Override
-    public void loadCornerImage(ImageLoaderConfig config, Context context, ImageView imageView, String imgUrl,int radius) {
+    public void loadCornerImage( Context context, ImageView imageView, String imgUrl,int radius) {
         with(context)
                 .load(imgUrl)
                 .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(config))
+                .apply(getOptions1(mImageLoaderConfig))
                 .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
 //                .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
@@ -167,7 +174,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void getBitmap(ImageLoaderConfig config, final Context context, final Object imgUrl, final OnWaitBitmapListener listener, final int index) {
+    public void getBitmap(final Context context, final Object imgUrl, final OnWaitBitmapListener listener, final int index) {
 //        Glide.with(context)
 //                .load(imgUrl)
 //                .asBitmap()//强制Glide返回一个Bitmap对象
