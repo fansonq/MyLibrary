@@ -10,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.fansonlib.R;
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
-import com.example.fansonlib.utils.ImageLoaderProxy;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 /**
@@ -61,7 +60,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         super(context, attrs, defStyle);
         isLoadingMore = false;
         mContext = context;
-        addOnScrollListener(new AutoLoadScrollListener(null, true, true));
+        addOnScrollListener(new AutoLoadScrollListener( true, true));
 
         init();
     }
@@ -90,8 +89,8 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      * @param pauseOnFling
      */
     public void setOnPauseListenerParams(boolean pauseOnScroll, boolean pauseOnFling) {
-        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
-//        addOnScrollListener(new AutoLoadScrollListener(MyGlideUtils.getInstance(), pauseOnScroll, pauseOnFling));
+//        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
+        addOnScrollListener(new AutoLoadScrollListener( pauseOnScroll, pauseOnFling));
     }
 
     public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
@@ -108,15 +107,15 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      */
     private class AutoLoadScrollListener extends OnScrollListener {
 
-        private ImageLoader imageLoader;
+//        private ImageLoader imageLoader;
         private final boolean pauseOnScroll;
         private final boolean pauseOnFling;
 
-        public AutoLoadScrollListener(ImageLoader imageLoader, boolean pauseOnScroll, boolean pauseOnFling) {
+        public AutoLoadScrollListener( boolean pauseOnScroll, boolean pauseOnFling) {
             super();
             this.pauseOnScroll = pauseOnScroll;
             this.pauseOnFling = pauseOnFling;
-            this.imageLoader = imageLoader;
+//            this.imageLoader = imageLoader;
         }
 
         @Override
@@ -139,35 +138,32 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
 
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-            if (imageLoader != null) {
                 switch (newState) {
                     case SCROLL_STATE_IDLE:
 //                        imageLoader.resumeRequests(mContext);
-                        imageLoader.resume();
+                        Glide.with(mContext).resumeRequests();
                         break;
                     case SCROLL_STATE_DRAGGING:
                         if (pauseOnScroll) {
 //                            imageLoader.pauseRequests(mContext);
-                            imageLoader.pause();
+                            Glide.with(mContext).pauseRequests();
                         } else {
 //                            imageLoader.resumeRequests(mContext);
-                            imageLoader.resume();
+                            Glide.with(mContext).resumeRequests();
                         }
                         break;
                     case SCROLL_STATE_SETTLING:
                         if (pauseOnFling) {
+                            Glide.with(mContext).pauseRequests();
 //                            imageLoader.pauseRequests(mContext);
-                            imageLoader.pause();
                         } else {
 //                            imageLoader.resumeRequests(mContext);
-                            imageLoader.resume();
+                            Glide.with(mContext).resumeRequests();
                         }
                         break;
                     default:
                         break;
                 }
-            }
         }
     }
 

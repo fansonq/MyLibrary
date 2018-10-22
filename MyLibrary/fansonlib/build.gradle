@@ -73,7 +73,6 @@ dependencies {
 //    compile 'com.facebook.stetho:stetho:1.5.0'
 //    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'de.hdodenhof:circleimageview:2.2.0'  //圆形图片
 //    compile 'com.jude:swipebackhelper:3.1.2' //侧滑返回

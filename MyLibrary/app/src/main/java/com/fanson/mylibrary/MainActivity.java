@@ -265,6 +265,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
         String picUrl = "http://guolin.tech/book.png";
+        ImageLoaderUtils.init();
         ImageLoaderUtils.getInstance()
                 .setImageLoaderConfig(new ImageLoaderConfig.Builder().placePicRes(R.mipmap.default_image).build())
                 .loadImage(this,iv_pic,picUrl);

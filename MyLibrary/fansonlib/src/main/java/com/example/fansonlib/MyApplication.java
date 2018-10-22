@@ -2,6 +2,8 @@ package com.example.fansonlib;
 
 import android.app.Application;
 
+import com.example.fansonlib.image.ImageLoaderUtils;
+
 /**
  * Created by：fanson
  * Created on：2016/11/19 14:17
@@ -19,6 +21,6 @@ public class MyApplication extends Application{
 //                .setMaxMemoryCache(1024 * 1024 * 10)
 //                .placePicRes(R.mipmap.default_image)
 //                .build();
-//        ImageLoaderUtils.init(loaderConfig);
+        ImageLoaderUtils.init();
     }
 }
