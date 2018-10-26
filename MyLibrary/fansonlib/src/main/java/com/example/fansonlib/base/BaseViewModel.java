@@ -2,9 +2,12 @@ package com.example.fansonlib.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.fansonlib.bean.BaseBean;
 import com.example.fansonlib.callback.IBaseViewModel;
 
 import java.lang.ref.SoftReference;
@@ -14,12 +17,13 @@ import java.lang.ref.SoftReference;
  * Created Time: 2018/10/11 14:58
  * Describe：ViewModel基类
  */
-public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository> extends AndroidViewModel implements IBaseViewModel {
+public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository,B extends BaseBean> extends AndroidViewModel implements IBaseViewModel {
 
     private static final String TAG = BaseViewModel.class.getSimpleName();
 
-    protected R mRepository;
     protected SoftReference<V> mBaseView;
+    protected R mRepository;
+    protected MutableLiveData<B> mBean;
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -27,6 +31,17 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     }
 
     protected abstract R createRepository();
+
+    /**
+     * 供观察者调用
+     * @return 实体类
+     */
+    public LiveData<B> getData() {
+        if (mBean == null) {
+            mBean = new MutableLiveData<>();
+        }
+        return mBean;
+    }
 
     /**
      * 注册设置BaseView，用于回调到View层，如果不需要回调，则不用注册

@@ -3,8 +3,10 @@ package com.example.fansonlib.bean;
 import java.io.Serializable;
 
 /**
- * Created by fansonq on 2017/9/2.
- */
+* @author Created by：Fanson
+* Created on：2018/10/26 14:29
+* Description：实体类Bean的基类
+*/
 
 public class BaseBean implements Serializable{
 

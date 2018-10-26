@@ -20,11 +20,16 @@ import com.fanson.mylibrary.mvp.ContractTest;
  */
 public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding> implements ContractTest.TestView {
 
-    private static final String TAG = "MyViewModelActivity";
+    private static final String TAG = ViewModelActivity.class.getSimpleName();
 
     @Override
     protected int getContentView() {
         return R.layout.activity_viewmodel;
+    }
+
+    @Override
+    protected MyVmViewModel createViewModel() {
+        return ViewModelProviders.of(this).get(MyVmViewModel.class);
     }
 
     @Override
@@ -48,17 +53,12 @@ public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityVie
     }
 
     @Override
-    protected MyVmViewModel createViewModel() {
-        return ViewModelProviders.of(this).get(MyVmViewModel.class);
-    }
-
-    @Override
     protected void dataSuccessObserver() {
         mViewModel.setBaseView(this);
         mViewModel.getData().observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
-                Log.d(TAG, "onChanged");
+                Log.d(TAG, "请求数据成功，返回数据");
                 if (bean != null) {
                     mBinding.tv.setText(bean.getData().getName());
                 }

@@ -1,12 +1,14 @@
 package com.fanson.mylibrary;
 
+import com.example.fansonlib.bean.BaseBean;
+
 /**
  * Created by：fanson
  * Created on：2017/9/12 18:05
  * Describe：
  */
 
-public class SimpleBean {
+public class SimpleBean extends BaseBean{
 
     private int code;
 

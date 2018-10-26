@@ -24,11 +24,13 @@ import static com.example.fansonlib.http.HttpUtils.getHttpUtils;
  */
 public class TestVmRepository extends BaseRepository{
 
+    private static final String TAG = TestVmRepository.class.getSimpleName();
     TestCallback mCallback;
 
     public void getTestData(TestCallback callback){
         mCallback = callback;
 
+        //这段代码放Application初始化即可
         RetrofitClient.init(ApiStores.API_SERVER_URL);
         RetrofitStrategy strategy = new RetrofitStrategy();
         strategy.setApi(new ApiFactoryImpl());
@@ -39,7 +41,7 @@ public class TestVmRepository extends BaseRepository{
         getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
-                Log.d("TTT","onSuccess");
+                Log.d(TAG,"onSuccess");
                 mCallback.successful(bean);
             }
 

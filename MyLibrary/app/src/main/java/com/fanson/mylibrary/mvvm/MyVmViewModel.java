@@ -3,8 +3,6 @@ package com.fanson.mylibrary.mvvm;
 import android.app.Application;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.example.fansonlib.base.BaseViewModel;
@@ -15,12 +13,9 @@ import com.fanson.mylibrary.mvp.TestCallback;
 /**
  * @author Created by：Fanson
  * Created Time: 2018/10/11 17:05
- * Describe：
+ * Describe：测试ViewModel
  */
-public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRepository> implements TestCallback {
-
-    private MutableLiveData<SimpleBean> mBean;
-
+public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRepository,SimpleBean> implements TestCallback {
 
     public MyVmViewModel(@NonNull Application application) {
         super(application);
@@ -31,13 +26,10 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
         return new TestVmRepository();
     }
 
-    public LiveData<SimpleBean> getData() {
-        if (mBean == null) {
-            mBean = new MutableLiveData<>();
-        }
-        return mBean;
-    }
-
+    /**
+     * 请求网络加载数据
+     * @param id 字段ID
+     */
     public void getData(int id){
         mRepository.getTestData(this);
     }
