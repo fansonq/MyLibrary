@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 import android.arch.lifecycle.Observer;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -70,7 +71,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
 
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
 
         AppUtils.init(getApplicationContext());
         MyRxbus2.getInstance().register(this);

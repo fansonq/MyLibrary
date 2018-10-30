@@ -1,6 +1,5 @@
 package com.example.fansonlib.base;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -39,7 +38,6 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      * 监听网络连接状态的广播
      */
     private BroadcastReceiver netStateBroadcastReceiver;
-    private AlertDialog.Builder dialogBuilder;
 
     /**
      * 记录退出时间
@@ -53,7 +51,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, getContentView());
         initNetStateBroadCastReceiver();
-        initView();
+        initView(savedInstanceState);
         initData();
         listenEvent();
     }
@@ -108,7 +106,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     /**
      * 初始化View
      */
-    protected abstract void initView();
+    protected abstract void initView(Bundle savedInstanceState);
 
     /**
      * 初始化数据

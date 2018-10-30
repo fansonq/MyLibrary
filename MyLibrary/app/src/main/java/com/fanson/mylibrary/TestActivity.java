@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
     }
 
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
         /*---Retrofit策略---*/
         RetrofitClient.init(ApiStores.API_SERVER_URL);
         RetrofitStrategy strategy = new RetrofitStrategy();

@@ -115,7 +115,6 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
         Log.d(TAG,"生命周期onResume阶段");
     }
 
-
     @Override
     public void onPause() {
         Log.d(TAG,"生命周期onPause阶段");

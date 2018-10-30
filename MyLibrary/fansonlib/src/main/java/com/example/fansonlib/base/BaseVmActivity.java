@@ -1,6 +1,7 @@
 package com.example.fansonlib.base;
 
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 
 /**
  * @author Created by：Fanson
@@ -12,7 +13,7 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
     protected VM mViewModel;
 
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
         mViewModel = createViewModel();
         dataSuccessObserver();
     }

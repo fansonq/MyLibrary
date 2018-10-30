@@ -1,5 +1,7 @@
 package com.fanson.mylibrary.adapter;
 
+import android.os.Bundle;
+
 import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.manager.MyFragmentManager;
 import com.fanson.mylibrary.R;
@@ -19,7 +21,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     }
 
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
         MyFragmentManager manager = new MyFragmentManager();
         manager.replaceFragment(getSupportFragmentManager(),R.id.fl_main,new TestFragment());
     }

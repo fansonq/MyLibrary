@@ -2,6 +2,7 @@ package com.fanson.mylibrary.mvvm;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -33,8 +34,8 @@ public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityVie
     }
 
     @Override
-    protected void initView() {
-        super.initView();
+    protected void initView(Bundle savedInstanceState) {
+        super.initView(savedInstanceState);
     }
 
     @Override
