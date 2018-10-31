@@ -63,11 +63,11 @@ public class PowerfulEditText extends TextInputEditText {
     /**
      * 关闭查看密码图标的资源id
      */
-    private int eyeCloseResourseId;
+    private int eyeCloseResourceId;
     /**
      * 开启查看密码图标的资源id
      */
-    private int eyeOpenResourseId;
+    private int eyeOpenResourceId;
     /**
      * 左侧drawable的宽度
      */
@@ -102,8 +102,8 @@ public class PowerfulEditText extends TextInputEditText {
 
         funcType = ta.getInt(R.styleable.PowerfulEditText_funcType, TYPE_NORMAL);
 
-        eyeCloseResourseId = ta.getResourceId(R.styleable.PowerfulEditText_eyeClose, R.mipmap.ic_hide_password);
-        eyeOpenResourseId = ta.getResourceId(R.styleable.PowerfulEditText_eyeOpen, R.mipmap.ic_show_password);
+        eyeCloseResourceId = ta.getResourceId(R.styleable.PowerfulEditText_eyeClose, R.mipmap.ic_hide_password);
+        eyeOpenResourceId = ta.getResourceId(R.styleable.PowerfulEditText_eyeOpen, R.mipmap.ic_show_password);
 
         init();
     }
@@ -121,8 +121,8 @@ public class PowerfulEditText extends TextInputEditText {
                 mRightDrawable = ContextCompat.getDrawable(getContext(),R.mipmap.ic_clear);
             } else if (funcType == TYPE_CAN_WATCH_PWD) {
                 //有查看密码功能，设置默认查看密码功能
-                mRightDrawable = getResources().getDrawable(eyeCloseResourseId);
-                mEyeOpenDrawable = getResources().getDrawable(eyeOpenResourseId);
+                mRightDrawable = getResources().getDrawable(eyeCloseResourceId);
+                mEyeOpenDrawable = getResources().getDrawable(eyeOpenResourceId);
             }
         }
 
@@ -154,7 +154,6 @@ public class PowerfulEditText extends TextInputEditText {
                 //如果不是清除功能,不隐藏右侧默认图标
                 setRightIconVisible(true);
             }
-
         }
 
         //设置输入框里面内容发生改变的监听
@@ -163,8 +162,7 @@ public class PowerfulEditText extends TextInputEditText {
              * 当输入框里面内容发生变化的时候回调的方法
              */
             @Override
-            public void onTextChanged(CharSequence s, int start, int count,
-                                      int after) {
+            public void onTextChanged(CharSequence s, int start, int count,int after) {
                 //如果是带有清除功能的类型，当文本内容发生变化的时候，根据内容的长度是否为0进行隐藏或显示
                 if (funcType == TYPE_CAN_CLEAR) {
                     setRightIconVisible(s.length() > 0);

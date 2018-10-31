@@ -17,11 +17,11 @@ import com.fanson.mylibrary.mvp.ContractTest;
 /**
  * @author Created by：Fanson
  * Created Time: 2018/10/11 16:49
- * Describe：ViewModel的Activity
+ * Describe：测试ViewModel的Activity
  */
-public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding> implements ContractTest.TestView {
+public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding> implements ContractTest.TestView {
 
-    private static final String TAG = ViewModelActivity.class.getSimpleName();
+    private static final String TAG = TestViewModelActivity.class.getSimpleName();
 
     @Override
     protected int getContentView() {
@@ -79,6 +79,11 @@ public class ViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityVie
 
     @Override
     public void hideLoading() {
+
+    }
+
+    @Override
+    public void showTip(String tipContent) {
 
     }
 }

@@ -34,7 +34,7 @@ import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
-import com.fanson.mylibrary.mvvm.ViewModelActivity;
+import com.fanson.mylibrary.mvvm.TestViewModelActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -233,7 +233,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBinding.btnViewModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startMyActivity(ViewModelActivity.class);
+                startMyActivity(TestViewModelActivity.class);
             }
         });
 
@@ -358,6 +358,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
     @Override
     public void hideLoading() {
+
+    }
+
+    @Override
+    public void showTip(String tipContent) {
 
     }
 
