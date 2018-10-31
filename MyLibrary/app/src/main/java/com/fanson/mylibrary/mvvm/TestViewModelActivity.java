@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.fansonlib.base.BaseVmActivity;
+import com.example.fansonlib.utils.MySnackBarUtils;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.SimpleBean;
 import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
@@ -84,6 +85,6 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     public void showTip(String tipContent) {
-
+        MySnackBarUtils.showLong(getWindow().getDecorView(),tipContent).show();
     }
 }

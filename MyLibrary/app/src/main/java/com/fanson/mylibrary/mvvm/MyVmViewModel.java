@@ -38,6 +38,9 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
     @Override
     public void successful(SimpleBean bean) {
         mBean.setValue(bean);
+        if (isViewAttached()){
+            getBaseView().showTip(bean.getData().getName());
+        }
     }
 
     @Override
