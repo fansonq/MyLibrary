@@ -44,6 +44,11 @@ public class MyFragmentManager {
      * @param fragment 指定Fragment
      */
     public synchronized void addToList(Fragment fragment) {
+        //如果要装载的fragment已经存在，则删除，重新装载
+        if (mFragmentList.contains(fragment)){
+            mFragmentList.remove(fragment);
+            mFragmentList.add(fragment);
+        }
         mFragmentList.add(fragment);
     }
 
