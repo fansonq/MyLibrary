@@ -48,8 +48,9 @@ public class MyFragmentManager {
         if (mFragmentList.contains(fragment)){
             mFragmentList.remove(fragment);
             mFragmentList.add(fragment);
+        }else {
+            mFragmentList.add(fragment);
         }
-        mFragmentList.add(fragment);
     }
 
     /**
