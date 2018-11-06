@@ -363,6 +363,7 @@ public class MyFragmentManager {
                 transaction.setCustomAnimations(enter, exit);
             }
             transaction.show(toFragment).hide(fromFragment).commitAllowingStateLoss();
+            addToList(toFragment);
         } else {
             if (popEnter != NO_ANIM) {
                 transaction.setCustomAnimations(enter, exit, popEnter, popExit);
