@@ -30,7 +30,7 @@ public class MyFragmentManager {
     private final int NO_ANIM = 0x11;
 
     /**
-     * 获取Fragment的个数
+     * 获取Fragment的个数（使用switch切换Fragment后，统计的数量不正确）
      *
      * @return Fragment的个数
      */
@@ -45,12 +45,12 @@ public class MyFragmentManager {
      */
     public synchronized void addToList(Fragment fragment) {
         //如果要装载的fragment已经存在，则删除，重新装载
-        if (mFragmentList.contains(fragment)){
-            mFragmentList.remove(fragment);
+//        if (mFragmentList.contains(fragment)){
+//            mFragmentList.remove(fragment);
+//            mFragmentList.add(fragment);
+//        }else {
             mFragmentList.add(fragment);
-        }else {
-            mFragmentList.add(fragment);
-        }
+//        }
     }
 
     /**
