@@ -77,5 +77,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.2.0'  //圆形图片
 //    compile 'com.jude:swipebackhelper:3.1.2' //侧滑返回
     compile 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'com.orhanobut:logger:2.1.1'
 
 }

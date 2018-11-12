@@ -7,7 +7,7 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 /**
  * Created by：fanson
  * Created on：2016/11/19 14:17
- * Describe：
+ * Describe：项目中的Application
  */
 public class MyApplication extends Application{
 
