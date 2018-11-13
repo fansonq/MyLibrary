@@ -1,6 +1,6 @@
 package com.example.fansonlib.http.retrofit;
 
-import com.example.fansonlib.BuildConfig;
+import com.example.fansonlib.base.AppUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -142,9 +142,8 @@ public class RetrofitClient {
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里8个，和每个保持时间为20s
-                .connectionPool(new ConnectionPool(8, 20, TimeUnit.SECONDS))
-                ;
-        if(BuildConfig.DEBUG){
+                .connectionPool(new ConnectionPool(8, 20, TimeUnit.SECONDS));
+        if(AppUtils.isDebug()){
             //显示日志
             okHttpClientBuilder.addInterceptor( new LoggingInterceptor());
         }
