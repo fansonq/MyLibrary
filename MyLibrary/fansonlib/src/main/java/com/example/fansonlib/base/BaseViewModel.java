@@ -28,6 +28,9 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     public BaseViewModel(@NonNull Application application) {
         super(application);
         mRepository = createRepository();
+        if (mBean == null) {
+            mBean = new MutableLiveData<>();
+        }
     }
 
     protected abstract R createRepository();
@@ -37,9 +40,6 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * @return 实体类
      */
     public LiveData<B> getData() {
-        if (mBean == null) {
-            mBean = new MutableLiveData<>();
-        }
         return mBean;
     }
 

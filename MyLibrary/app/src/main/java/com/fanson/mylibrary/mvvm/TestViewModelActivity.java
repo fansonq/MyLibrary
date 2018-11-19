@@ -56,7 +56,6 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected void dataSuccessObserver() {
-        mViewModel.setBaseView(this);
         mViewModel.getData().observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
