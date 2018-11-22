@@ -38,7 +38,7 @@ public class ShowToast {
 
     private static final Typeface LOADED_TOAST_TYPEFACE = Typeface.create("sans-serif-condensed", Typeface.NORMAL);
     private static Typeface currentTypeface = LOADED_TOAST_TYPEFACE;
-    private static int textSize = 16; // in SP
+    private static int textSize = 12; // in SP
     private static boolean tintIcon = true;
 
     private static Toast mToast;
@@ -197,7 +197,7 @@ public class ShowToast {
             ShowToast.DEFAULT_TEXT_COLOR = Color.parseColor("#FFFFFF");
             ShowToast.INFO_COLOR = Color.parseColor("#3F51B5");
             ShowToast.currentTypeface = LOADED_TOAST_TYPEFACE;
-            ShowToast.textSize = 16;
+            ShowToast.textSize = 12;
             ShowToast.tintIcon = true;
         }
 
