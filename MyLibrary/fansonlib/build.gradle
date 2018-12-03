@@ -38,6 +38,17 @@ android {
 }
 
 /*被引用可提供注释查看*/
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 task javadoc(type: Javadoc) {
     failOnError false
     source = android.sourceSets.main.java.sourceFiles
