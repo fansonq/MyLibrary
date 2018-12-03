@@ -12,14 +12,13 @@
             android:layout_height="wrap_content"
             android:text="Go MainActivity" />
 
-
         <TextView
             android:id="@+id/tv1"
-            android:text="@string/confirm"
-            android:textSize="18sp"
-            android:layout_margin="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/confirm"
+            android:textSize="18sp" />
 
         <com.example.fansonlib.widget.textview.TextViewDrawable
             android:layout_width="200dp"

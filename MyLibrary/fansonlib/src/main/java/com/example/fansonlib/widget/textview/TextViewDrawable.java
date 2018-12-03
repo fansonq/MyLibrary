@@ -31,10 +31,11 @@ import java.util.Locale;
 /**
  * Created by：fanson
  * Created on：2017/9/29 10:40
- * Describe：自定义带icon的Textview（可控制icon大小）
+ * Describe：自定义带icon的TextView（可控制icon大小）
  */
 
 public class TextViewDrawable extends AppCompatTextView{
+
     public static final int UNDEFINED_RESOURCE = -0x001;
 
     private static final int INDEX_LEFT = 0;

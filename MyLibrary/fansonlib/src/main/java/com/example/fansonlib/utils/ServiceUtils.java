@@ -20,7 +20,7 @@ public class ServiceUtils {
      * @param serviceName 即为Service的全名(包名+服务的类名)
      * @return 是否在运行中
      */
-    private static boolean isServiceRunning(Context context, String serviceName) {
+    public static boolean isServiceRunning(Context context, String serviceName) {
         boolean isRun = false;
         ActivityManager myManager = (ActivityManager) context
                 .getApplicationContext().getSystemService(

@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.fansonlib.base.BaseVmActivity;
 import com.example.fansonlib.utils.MySnackBarUtils;
+import com.example.fansonlib.utils.ShowToast;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.SimpleBean;
 import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
@@ -62,6 +63,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 Log.d(TAG, "请求数据成功，返回数据");
                 if (bean != null) {
                     mBinding.tv.setText(bean.getData().getName());
+                    ShowToast.singleLong("请求数据成功");
                 }
             }
         });

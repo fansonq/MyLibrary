@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -90,8 +91,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 testBaseModel();
 //                testImageLoader();
 //                testLoadingView();
-//                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
-//                ShowToast.Long("QQQQ");
             }
         });
 
@@ -130,6 +129,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
             @Override
             public void onClick(View view) {
                 startMyActivity(RecyclerViewActivity.class);
+            }
+        });
+
+        mBinding.btnToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
+                ShowToast.Long("测试的数据提示");
             }
         });
 
