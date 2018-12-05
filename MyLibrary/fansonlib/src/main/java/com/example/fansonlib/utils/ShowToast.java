@@ -83,7 +83,12 @@ public class ShowToast {
      * @param message 内容
      */
     public static void singleShort(String message) {
-        getSingleToast(message, Toast.LENGTH_SHORT).show();
+        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
+        try {
+            getSingleToast(message, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -92,7 +97,12 @@ public class ShowToast {
      * @param text 内容
      */
     public static void singleLong(String text) {
-        getSingleToast(text, Toast.LENGTH_LONG).show();
+        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
+        try {
+            getSingleToast(text, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -101,7 +111,12 @@ public class ShowToast {
      * @param text 内容
      */
     public static void Short(String text) {
-        getToast(text, Toast.LENGTH_SHORT).show();
+        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
+        try {
+            getToast(text, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -110,7 +125,12 @@ public class ShowToast {
      * @param text 内容
      */
     public static void Long(String text) {
-        getToast(text, Toast.LENGTH_LONG).show();
+        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
+        try {
+            getToast(text, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static  void changeShowMessage( @NonNull CharSequence message){
