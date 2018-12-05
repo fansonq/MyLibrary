@@ -237,9 +237,19 @@ public  abstract class BaseDialogFragment extends DialogFragment {
             super.show(manager, String.valueOf(System.currentTimeMillis()));
         } catch (IllegalStateException e) {
             e.printStackTrace();
-            Log.e(TAG,"Show Dialogfragment IllegalStateException");
+            Log.e(TAG,"Show DialogFragment IllegalStateException");
         }
         return this;
+    }
+
+    @Override
+    public void dismiss() {
+        try {
+            super.dismiss();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Log.e(TAG,"dismiss DialogFragment IllegalStateException");
+        }
     }
 
     @Override
