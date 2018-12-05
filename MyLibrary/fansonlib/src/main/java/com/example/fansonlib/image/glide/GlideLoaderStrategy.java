@@ -1,7 +1,10 @@
 package com.example.fansonlib.image.glide;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -71,7 +74,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      * 初始化加载配置
      */
     @SuppressLint("CheckResult")
-    private RequestOptions getOptionsCircle( ) {
+    private RequestOptions getOptionsCircle() {
         if (mOptionsCircle == null) {
             mOptionsCircle = new RequestOptions();
             mOptionsCircle.placeholder(R.mipmap.ic_person)
@@ -109,67 +112,81 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadImage( Context context, ImageView view, Object imgUrl) {
-        with(context)
-                .load(imgUrl)
-                .apply(getOptions1(mImageLoaderConfig))
-                //先加载缩略图 然后在加载全图
-                .thumbnail(Contants.THUMB_SIZE)
+    public void loadImage(Context context, ImageView view, Object imgUrl) {
+        if (isValidContextForGlide(context)) {
+            with(context)
+                    .load(imgUrl)
+                    .apply(getOptions1(mImageLoaderConfig))
+                    //先加载缩略图 然后在加载全图
+                    .thumbnail(Contants.THUMB_SIZE)
 //                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(view);
+                    .into(view);
+        }
+
     }
 
     @Override
-    public void loadImageWithListener( Context context, ImageView view, Object imgUrl, OnLoadingListener listener1, OnProgressListener listener2) {
+    public void loadImageWithListener(Context context, ImageView view, Object imgUrl, OnLoadingListener listener1, OnProgressListener listener2) {
 
     }
 
     @Override
     public void displayFromDrawable(Context context, int imageId, ImageView imageView) {
-        with(context)
-                .load(imageId)
-                .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(mImageLoaderConfig))
-                .into(imageView);
+        if (isValidContextForGlide(context)) {
+            with(context)
+                    .load(imageId)
+                    .thumbnail(Contants.THUMB_SIZE)
+                    .apply(getOptions1(mImageLoaderConfig))
+                    .into(imageView);
+        }
     }
 
     @Override
-    public void displayFromSDCard( String uri, ImageView imageView) {
+    public void displayFromSDCard(String uri, ImageView imageView) {
     }
 
     @Override
-    public void loadCircleImage( Context context, ImageView imageView, String imgUrl ) {
-        with(context)
-                .load(imgUrl)
-                .apply(getOptionsCircle())
-                .apply(bitmapTransform(new CropCircleTransformation()))
+    public void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
+        if (isValidContextForGlide(context)) {
+            with(context)
+                    .load(imgUrl)
+                    .apply(getOptionsCircle())
+                    .apply(bitmapTransform(new CropCircleTransformation()))
 //                .transition(DrawableTransitionOptions.withCrossFade())
 //                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
-                .into(imageView);
+                    .into(imageView);
+        }
     }
 
     @Override
-    public void loadGifImage( Context context, ImageView imageView, Object imgUrl) {
-        with(context)
-                .load(imgUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .apply(getGifOptions(mImageLoaderConfig))
-                .into(imageView);
+    public void loadGifImage(Context context, ImageView imageView, Object imgUrl) {
+        if (isValidContextForGlide(context)) {
+            with(context)
+                    .load(imgUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(getGifOptions(mImageLoaderConfig))
+                    .into(imageView);
+        }
     }
 
     @Override
-    public void loadCornerImage( Context context, ImageView imageView, String imgUrl,int radius) {
-        with(context)
-                .load(imgUrl)
-                .thumbnail(Contants.THUMB_SIZE)
-                .apply(getOptions1(mImageLoaderConfig))
-                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
+    public void loadCornerImage(Context context, ImageView imageView, String imgUrl, int radius) {
+        if (isValidContextForGlide(context)){
+            with(context)
+                    .load(imgUrl)
+                    .thumbnail(Contants.THUMB_SIZE)
+                    .apply(getOptions1(mImageLoaderConfig))
+                    .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
 //                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(imageView);
+                    .into(imageView);
+        }
     }
 
     @Override
     public void clearMemory(Context context) {
+        if (context==null){
+            return;
+        }
         Glide.get(context).clearMemory();
     }
 
@@ -184,5 +201,25 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 //                        listener.getBitmap(bitmap, index, imgUrl);
 //                    }
 //                });
+    }
+
+    /**
+     * 检测Glide使用的Context是否可用
+     *
+     * @param context 上下文
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private boolean isValidContextForGlide(Context context) {
+        boolean valid = true;
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                valid = false;
+            }
+        }
+        return valid;
     }
 }
