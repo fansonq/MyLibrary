@@ -1,6 +1,8 @@
 package com.example.fansonlib.utils;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -26,7 +28,7 @@ public class MyImageUtil {
     private Context mContext;
 
     public MyImageUtil(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     public static MyImageUtil getImageUtil(Context context) {
@@ -62,9 +64,9 @@ public class MyImageUtil {
     /**
      * Drawable转换成byte[]
      */
-    public byte[] Drawable2Bytes(Drawable d) {
+    public byte[] drawable2Bytes(Drawable d) {
         Bitmap bitmap = this.drawable2Bitmap(d);
-        return this.Bitmap2Bytes(bitmap);
+        return this.bitmap2Bytes(bitmap);
     }
 
     /**
@@ -94,7 +96,7 @@ public class MyImageUtil {
      * @param bm
      * @return
      */
-    public byte[] Bitmap2Bytes(Bitmap bm) {
+    public byte[] bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
@@ -106,8 +108,8 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public Drawable Bytes2Drawable(byte[] b) {
-        Bitmap bitmap = this.Bytes2Bitmap(b);
+    public Drawable bytes2Drawable(byte[] b) {
+        Bitmap bitmap = this.bytes2Bitmap(b);
         return this.bitmap2Drawable(bitmap);
     }
 
@@ -117,7 +119,7 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public Bitmap Bytes2Bitmap(byte[] b) {
+    public Bitmap bytes2Bitmap(byte[] b) {
         if (b.length != 0) {
             return BitmapFactory.decodeByteArray(b, 0, b.length);
         }
@@ -142,7 +144,7 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public InputStream Byte2InputStream(byte[] b) {
+    public InputStream byte2InputStream(byte[] b) {
         ByteArrayInputStream bais = new ByteArrayInputStream(b);
         return bais;
     }
@@ -153,7 +155,7 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public byte[] InputStream2Bytes(InputStream is) {
+    public byte[] inputStream2Bytes(InputStream is) {
         String str = "";
         byte[] readByte = new byte[1024];
         int readCount = -1;
@@ -174,7 +176,7 @@ public class MyImageUtil {
      * @param bm
      * @return
      */
-    public InputStream Bitmap2InputStream(Bitmap bm) {
+    public InputStream bitmap2InputStream(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         InputStream is = new ByteArrayInputStream(baos.toByteArray());
@@ -187,7 +189,7 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public Bitmap InputStream2Bitmap(InputStream is) {
+    public Bitmap inputStream2Bitmap(InputStream is) {
         return BitmapFactory.decodeStream(is);
     }
 
@@ -197,9 +199,9 @@ public class MyImageUtil {
      * @param d
      * @return
      */
-    public InputStream Drawable2InputStream(Drawable d) {
+    public InputStream drawable2InputStream(Drawable d) {
         Bitmap bitmap = this.drawable2Bitmap(d);
-        return this.Bitmap2InputStream(bitmap);
+        return this.bitmap2InputStream(bitmap);
     }
 
     /**
@@ -208,9 +210,23 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public Drawable InputStream2Drawable(InputStream is) {
-        Bitmap bitmap = this.InputStream2Bitmap(is);
+    public Drawable inputStream2Drawable(InputStream is) {
+        Bitmap bitmap = this.inputStream2Bitmap(is);
         return this.bitmap2Drawable(bitmap);
+    }
+
+    /**
+     * 获取资源文件中图片的Uri
+     * @param context 上下文
+     * @param resourceId 资源ID
+     * @return 资源文件中图片的Uri
+     */
+    public String getResourceUri(Context context,int resourceId){
+        Resources resources = context.getResources();
+        return ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                resources.getResourcePackageName(resourceId) + "/" +
+                resources.getResourceTypeName(resourceId) + "/" +
+                resources.getResourceEntryName(resourceId);
     }
 
 }
