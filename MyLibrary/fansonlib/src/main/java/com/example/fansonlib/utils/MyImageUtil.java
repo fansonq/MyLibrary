@@ -240,8 +240,10 @@ public class MyImageUtil {
      * 保存图片资源Bitmap到相册
      * @param context 上下文
      * @param bmp 图片资源Bitmap
+     * @return 是否保存成功，true/false
      */
-    public  void saveImageToGallery(Context context, Bitmap bmp) {
+    public  boolean saveImageToGallery(Context context, Bitmap bmp) {
+        boolean result = true;
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();//注意小米手机必须这样获得public绝对路径
         File appDir = new File(file ,"ytl_picture");
         if (!appDir.exists()) {
@@ -256,8 +258,10 @@ public class MyImageUtil {
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
         } catch (FileNotFoundException e) {
+            result = false;
             e.printStackTrace();
         } catch (IOException e) {
+            result = false;
             e.printStackTrace();
         } finally {
             try {
@@ -265,6 +269,7 @@ public class MyImageUtil {
                     fos.close();
                 }
             } catch (IOException e) {
+                result = false;
                 e.printStackTrace();
             }
         }
@@ -280,6 +285,7 @@ public class MyImageUtil {
         // 最后通知图库更新
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                 Uri.fromFile(new File(currentFile.getPath()))));
+        return result;
     }
 
 }
