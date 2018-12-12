@@ -7,6 +7,7 @@ import java.io.IOException;
 import okhttp3.FormBody;
 import okhttp3.Interceptor;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -18,30 +19,47 @@ import okhttp3.ResponseBody;
 public class LoggingInterceptor implements Interceptor {
 
     private static final String TAG = "NetLog";
+    private StringBuilder mStringBuilder;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         //这个chain里面包含了request和response，所以你要什么都可以从这里拿
         Request request = chain.request();
+        Response response;
         long t1 = System.nanoTime();//请求发起的时间
 
         String method = request.method();
         if ("POST".equals(method)) {
-            StringBuilder sb = new StringBuilder();
-            if (request.body() instanceof FormBody) {
-                FormBody body = (FormBody) request.body();
-                for (int i = 0; i < body.size(); i++) {
-                    sb.append(body.encodedName(i) + "=" + body.encodedValue(i) + ",");
+            RequestBody requestBody = request.body();
+
+            if (requestBody instanceof FormBody) {
+
+                if (mStringBuilder == null) {
+                    mStringBuilder = new StringBuilder();
+                } else {
+                    mStringBuilder.setLength(0);
                 }
-                sb.delete(sb.length() - 1, sb.length());
-                Log.d(TAG, String.format("发送请求 %s on %s %n%s %nRequestParams:{%s}",
-                        request.url(), chain.connection(), request.headers(), sb.toString()));
+                
+                FormBody body = (FormBody) request.body();
+                if (body != null) {
+                    for (int i = 0; i < body.size(); i++) {
+                        mStringBuilder.append(body.encodedName(i)).append("=").append(body.encodedValue(i)).append(",");
+                    }
+                    mStringBuilder.delete(mStringBuilder.length() - 1, mStringBuilder.length());
+                    Log.d(TAG, String.format("发送请求 %s on %s %n%s %nRequestParams:【%s】",
+                            request.url(), chain.connection(), request.headers(), mStringBuilder.toString()));
+                }
+            } else {
+                Log.d(TAG, String.format("发送请求 %s  %nheaders : %s %nRequestParams : 【%s】",
+                        request.url(), request.headers(),
+                        request.url().toString().substring(request.url().toString().indexOf("?") + 1)));
             }
         } else {
+            //"GET"方式
             Log.d(TAG, String.format("发送请求 %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
         }
-        Response response = chain.proceed(request);
+        response = chain.proceed(request);
         long t2 = System.nanoTime();//收到响应的时间
         //这里不能直接使用response.body().string()的方式输出日志
         //因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一
