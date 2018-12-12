@@ -49,10 +49,6 @@ public class LoggingInterceptor implements Interceptor {
                     Log.d(TAG, String.format("发送请求 %s on %s %n%s %nRequestParams:【%s】",
                             request.url(), chain.connection(), request.headers(), mStringBuilder.toString()));
                 }
-            } else {
-                Log.d(TAG, String.format("发送请求 %s  %nheaders : %s %nRequestParams : 【%s】",
-                        request.url(), request.headers(),
-                        request.url().toString().substring(request.url().toString().indexOf("?") + 1)));
             }
         } else {
             //"GET"方式
