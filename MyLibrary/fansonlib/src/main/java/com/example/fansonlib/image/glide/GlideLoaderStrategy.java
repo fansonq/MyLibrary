@@ -19,6 +19,8 @@ import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
 
+import java.lang.ref.WeakReference;
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
@@ -44,7 +46,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     /**
      * 常量
      */
-    static class Contants {
+    static class Constants {
         public static final int BLUR_VALUE = 20; //模糊
         public static final int CORNER_RADIUS = 10; //圆角
         public static final int MARGIN = 5;  //边距
@@ -113,12 +115,12 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImage(Context context, ImageView view, Object imgUrl) {
-        if (isValidContextForGlide(context)) {
+        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
             with(context)
                     .load(imgUrl)
                     .apply(getOptions1(mImageLoaderConfig))
                     //先加载缩略图 然后在加载全图
-                    .thumbnail(Contants.THUMB_SIZE)
+                    .thumbnail(Constants.THUMB_SIZE)
 //                .transition(DrawableTransitionOptions.withCrossFade())
                     .into(view);
         }
@@ -131,13 +133,13 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void displayFromDrawable(Context context, int imageId, ImageView imageView) {
-        if (isValidContextForGlide(context)) {
+    public void displayFromDrawable(Context context, int imageId, ImageView view) {
+        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
             with(context)
                     .load(imageId)
-                    .thumbnail(Contants.THUMB_SIZE)
+                    .thumbnail(Constants.THUMB_SIZE)
                     .apply(getOptions1(mImageLoaderConfig))
-                    .into(imageView);
+                    .into(view);
         }
     }
 
@@ -146,45 +148,45 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
-    public void loadCircleImage(Context context, ImageView imageView, String imgUrl) {
-        if (isValidContextForGlide(context)) {
+    public void loadCircleImage(Context context, ImageView view, String imgUrl) {
+        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
             with(context)
                     .load(imgUrl)
                     .apply(getOptionsCircle())
                     .apply(bitmapTransform(new CropCircleTransformation()))
 //                .transition(DrawableTransitionOptions.withCrossFade())
 //                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
-                    .into(imageView);
+                    .into(view);
         }
     }
 
     @Override
-    public void loadGifImage(Context context, ImageView imageView, Object imgUrl) {
-        if (isValidContextForGlide(context)) {
+    public void loadGifImage(Context context, ImageView view, Object imgUrl) {
+        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
             with(context)
                     .load(imgUrl)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .apply(getGifOptions(mImageLoaderConfig))
-                    .into(imageView);
+                    .into(view);
         }
     }
 
     @Override
-    public void loadCornerImage(Context context, ImageView imageView, String imgUrl, int radius) {
-        if (isValidContextForGlide(context)){
+    public void loadCornerImage(Context context, ImageView view, String imgUrl, int radius) {
+        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
             with(context)
                     .load(imgUrl)
-                    .thumbnail(Contants.THUMB_SIZE)
+                    .thumbnail(Constants.THUMB_SIZE)
                     .apply(getOptions1(mImageLoaderConfig))
                     .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
 //                .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imageView);
+                    .into(view);
         }
     }
 
     @Override
     public void clearMemory(Context context) {
-        if (context==null){
+        if (context == null) {
             return;
         }
         Glide.get(context).clearMemory();
@@ -222,4 +224,23 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         }
         return valid;
     }
+
+    /**
+     * 检测Glide使用的ImageView是否可用
+     *
+     * @param view 图片控件
+     * @return ImageView/null
+     */
+    private ImageView isValidImageViewForGlide(ImageView view) {
+        if (view == null) {
+            return null;
+        }
+        final WeakReference<ImageView> weakReference = new WeakReference<>(view);
+        ImageView target = weakReference.get();
+        if (target != null) {
+            return target;
+        }
+        return null;
+    }
+
 }

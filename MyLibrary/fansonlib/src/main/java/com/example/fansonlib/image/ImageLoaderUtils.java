@@ -29,18 +29,21 @@ public class ImageLoaderUtils {
 
     public static void init() {
         //默认使用Glide框架
-        sImageLoaderStrategy = new GlideLoaderStrategy();
-        sImageLoaderStrategy.setLoaderConfig(mDefaultConfig);
+        if (sImageLoaderStrategy == null) {
+            sImageLoaderStrategy = new GlideLoaderStrategy();
+            sImageLoaderStrategy.setLoaderConfig(mDefaultConfig);
+        }
     }
 
     /**
      * 获取实例
+     *
      * @return ImageLoaderUtils实例
      */
-    public static ImageLoaderUtils getInstance(){
-        if (mInstance==null){
-            synchronized (ImageLoaderUtils.class){
-                if (mInstance == null){
+    public static ImageLoaderUtils getInstance() {
+        if (mInstance == null) {
+            synchronized (ImageLoaderUtils.class) {
+                if (mInstance == null) {
                     mInstance = new ImageLoaderUtils();
                     return mInstance;
                 }
@@ -51,41 +54,45 @@ public class ImageLoaderUtils {
 
     /**
      * 设置图片框架策略
+     *
      * @param strategy 图片框架策略
      */
-    public  void setImageLoaderStrategy(BaseImageLoaderStrategy strategy){
+    public void setImageLoaderStrategy(BaseImageLoaderStrategy strategy) {
         sImageLoaderStrategy = strategy;
     }
 
     /**
      * 设置框架的配置
+     *
      * @param config 配置
      * @return BaseImageLoaderStrategy
      */
-    public BaseImageLoaderStrategy setImageLoaderConfig(ImageLoaderConfig config){
+    public BaseImageLoaderStrategy setImageLoaderConfig(ImageLoaderConfig config) {
         sImageLoaderStrategy.setLoaderConfig(config);
         return sImageLoaderStrategy;
     }
 
     /**
      * 常规加载图片
+     *
      * @param context
      * @param imageView
      * @param imgUrl
      */
-    public BaseImageLoaderStrategy loadImage( Context context, ImageView imageView, Object imgUrl) {
+    public BaseImageLoaderStrategy loadImage(Context context, ImageView imageView, Object imgUrl) {
         sImageLoaderStrategy.loadImage(context, imageView, imgUrl);
         return sImageLoaderStrategy;
     }
 
     /**
      * 常规加载图片带监听
+     *
      * @param context
      * @param imageView
      * @param imgUrl
      */
-    public  <L1 extends OnLoadingListener,L2 extends OnProgressListener> BaseImageLoaderStrategy loadImageWithListener( Context context, ImageView imageView, String imgUrl,L1 listener1,L2 listener2) {
-        sImageLoaderStrategy.loadImageWithListener(context, imageView, imgUrl,listener1,listener2);
+    public <L1 extends OnLoadingListener, L2 extends OnProgressListener> BaseImageLoaderStrategy loadImageWithListener(Context context, ImageView imageView, String imgUrl, L1 listener1, L2 listener2) {
+        sImageLoaderStrategy.loadImageWithListener(context, imageView, imgUrl, listener1, listener2);
         return sImageLoaderStrategy;
     }
 
@@ -101,54 +108,59 @@ public class ImageLoaderUtils {
 
     /**
      * 加载圆形图片
+     *
      * @param context
      * @param imageView
      * @param imgUrl
      */
-    public BaseImageLoaderStrategy loadCircleImage(Context context, ImageView imageView, String imgUrl ) {
+    public BaseImageLoaderStrategy loadCircleImage(Context context, ImageView imageView, String imgUrl) {
         sImageLoaderStrategy.loadCircleImage(context, imageView, imgUrl);
         return sImageLoaderStrategy;
     }
 
     /**
      * 加载圆角图片
+     *
      * @param context
      * @param imageView
      * @param imgUrl
      */
-    public BaseImageLoaderStrategy loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius){
-        sImageLoaderStrategy.loadCornerImage(context,imageView,imgUrl,radius);
+    public BaseImageLoaderStrategy loadCornerImage(Context context, ImageView imageView, String imgUrl, int radius) {
+        sImageLoaderStrategy.loadCornerImage(context, imageView, imgUrl, radius);
         return sImageLoaderStrategy;
     }
 
     /**
      * 加载Gif图片
+     *
      * @param context
      * @param imageView
      * @param imgUrl
      */
-    public BaseImageLoaderStrategy loadGifImage(Context context, ImageView imageView, Object imgUrl){
-        sImageLoaderStrategy.loadGifImage(context,imageView,imgUrl);
+    public BaseImageLoaderStrategy loadGifImage(Context context, ImageView imageView, Object imgUrl) {
+        sImageLoaderStrategy.loadGifImage(context, imageView, imgUrl);
         return sImageLoaderStrategy;
     }
 
     /**
      * 清除内存
+     *
      * @param context
      */
-    public BaseImageLoaderStrategy clearMemory(Context context){
+    public BaseImageLoaderStrategy clearMemory(Context context) {
         sImageLoaderStrategy.clearMemory(context);
         return sImageLoaderStrategy;
     }
 
     /**
      * 获取Bitmap对象
+     *
      * @param context
      * @param imgUrl
      * @return
      */
-    public BaseImageLoaderStrategy getBitmap(Context context,  String imgUrl,OnWaitBitmapListener listener,int index){
-        sImageLoaderStrategy.getBitmap(context,imgUrl,listener,index);
+    public BaseImageLoaderStrategy getBitmap(Context context, String imgUrl, OnWaitBitmapListener listener, int index) {
+        sImageLoaderStrategy.getBitmap(context, imgUrl, listener, index);
         return sImageLoaderStrategy;
     }
 
