@@ -55,8 +55,8 @@ public class ShowToast {
     private static Toast getSingleToast(String text, int duration) {
         if (mToast == null) {
 //            mToast = Toast.makeText(AppUtils.getAppContext(), text, duration);
-            mToast =  custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(), R.mipmap.ic_tip),
-                     duration, true);
+            mToast = custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(), R.mipmap.ic_tip),
+                    duration, true);
         } else {
 //            mToast.setText(text);
             changeShowMessage(text);
@@ -133,26 +133,25 @@ public class ShowToast {
         }
     }
 
-    public static  void changeShowMessage( @NonNull CharSequence message){
+    public static void changeShowMessage(@NonNull CharSequence message) {
         mTvToast.setText(message);
     }
 
 
     @CheckResult
-    public static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon,
-                               int duration,
-                               boolean shouldTint) {
+    public static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon, int duration, boolean shouldTint) {
         final Toast currentToast = new Toast(context);
         final View toastLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.toast_layout, null);
         final ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.toast_icon);
-         mTvToast = (TextView) toastLayout.findViewById(R.id.toast_text);
+        mTvToast = (TextView) toastLayout.findViewById(R.id.toast_text);
         Drawable drawableFrame;
 
-        if (shouldTint)
+        if (shouldTint) {
             drawableFrame = tint9PatchDrawableFrame(context, INFO_COLOR);
-        else
+        } else {
             drawableFrame = getDrawable(context, R.drawable.toast_frame);
+        }
         setBackground(toastLayout, drawableFrame);
 
 //        if (withIcon) {

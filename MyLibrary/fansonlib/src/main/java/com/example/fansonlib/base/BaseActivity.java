@@ -33,6 +33,11 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
 
     protected Context mContext;
     protected D mBinding;
+    /**
+     * 标记是否内存不足被重建
+     */
+    protected boolean mIsRecreate = false;
+    protected static final String PARAM_RECREATE = "IS_RECREATE";
 
     /**
      * 监听网络连接状态的广播
@@ -46,6 +51,9 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState!=null){
+            mIsRecreate = savedInstanceState.getBoolean(PARAM_RECREATE);
+        }
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -54,6 +62,12 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         initView(savedInstanceState);
         initData();
         listenEvent();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(PARAM_RECREATE, true);
     }
 
     @Override
