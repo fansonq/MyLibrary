@@ -11,6 +11,7 @@ import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.ResourceSubscriber;
+import retrofit2.HttpException;
 
 /**
  * Created by：fanson
@@ -64,7 +65,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
             @Override
             public void onError(Throwable t) {
                 //TODO 最佳方案重写封装ResourceSubscriber
-                if (t instanceof UnknownHostException){
+                if (t instanceof UnknownHostException || t instanceof HttpException){
                     callback.onFailure("无法链接到服务器");
                 }else {
                     callback.onFailure(t.getMessage());
