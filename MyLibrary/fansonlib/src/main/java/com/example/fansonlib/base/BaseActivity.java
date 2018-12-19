@@ -45,13 +45,17 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     private BroadcastReceiver netStateBroadcastReceiver;
 
     /**
-     * 记录退出时间
+     * 记录点击返回按钮的时间
      */
-    private long exitTime;
+    protected long mClickBackTime;
+    /**
+     * 指定时间2秒内，双击了返回按钮则退出
+     */
+    protected static final long EXIT_TIME = 2000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState!=null){
+        if (savedInstanceState != null) {
             mIsRecreate = savedInstanceState.getBoolean(PARAM_RECREATE);
         }
         super.onCreate(savedInstanceState);
@@ -114,11 +118,15 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
 
     /**
      * 加载layout
+     *
+     * @return 布局ID
      */
     protected abstract int getContentView();
 
     /**
      * 初始化View
+     *
+     * @param savedInstanceState savedInstanceState
      */
     protected abstract void initView(Bundle savedInstanceState);
 
@@ -145,37 +153,41 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      * 初始化监听网络连接的广播
      */
     private void initNetStateBroadCastReceiver() {
-        netStateBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
-                    if (!NetWorkUtil.isNetWordConnected(mContext)) {
-                        MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
-                                .margins(0, DimensUtils.dipToPx(mContext,50),0,0).show();
-                        if (MySnackBarUtils.getSnackbarView() != null) {
-                            MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                                }
-                            });
+        try {
+            netStateBroadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
+                        if (!NetWorkUtil.isNetWordConnected(mContext)) {
+                            MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
+                                    .margins(0, DimensUtils.dipToPx(mContext, 25), 0, 0).show();
+                            if (MySnackBarUtils.getSnackbarView() != null) {
+                                MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                                    }
+                                });
+                            }
+                        } else {
+                            MySnackBarUtils.dismiss();
                         }
-                    } else {
-                        MySnackBarUtils.dismiss();
                     }
                 }
-            }
-        };
-        //注册广播
-        registerReceiver(netStateBroadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            };
+            //注册广播
+            registerReceiver(netStateBroadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * 此方法的目的是子类使用此方法findViewById不再需要强转，注意：接受类型一定不要写错
      *
-     * @param id
-     * @param <T>
-     * @return
+     * @param id 控件ID
+     * @param <T> 泛型
+     * @return 控件view
      */
     public <T> T findMyViewId(int id) {
         T view = (T) findViewById(id);
