@@ -254,7 +254,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     }
 
     private void testDialogFragment() {
-        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试")
+        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试.抱歉！暂时没有在线客服人员，请稍后再试")
                 .setConfirmListener(new IConfirmListener() {
                     @Override
                     public void onConfirm() {
