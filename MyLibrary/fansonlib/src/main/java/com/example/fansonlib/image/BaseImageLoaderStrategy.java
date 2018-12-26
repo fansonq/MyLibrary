@@ -80,6 +80,6 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     /**
      * 获取Bitmap对象
      */
-    void getBitmap( Context context, Object imgUrl,OnWaitBitmapListener listener,int index);
+    void getBitmap( Context context, Object imgUrl,OnWaitBitmapListener listener);
 
 }

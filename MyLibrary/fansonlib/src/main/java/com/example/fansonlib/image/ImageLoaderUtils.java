@@ -159,8 +159,8 @@ public class ImageLoaderUtils {
      * @param imgUrl
      * @return
      */
-    public BaseImageLoaderStrategy getBitmap(Context context, String imgUrl, OnWaitBitmapListener listener, int index) {
-        sImageLoaderStrategy.getBitmap(context, imgUrl, listener, index);
+    public BaseImageLoaderStrategy getBitmap(Context context, String imgUrl, OnWaitBitmapListener listener) {
+        sImageLoaderStrategy.getBitmap(context, imgUrl, listener);
         return sImageLoaderStrategy;
     }
 
