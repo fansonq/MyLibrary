@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -76,6 +77,25 @@
                 android:id="@+id/btn_load_image"
                 android:layout_width="wrap_content"
                 android:text="Load Image"
+                android:layout_height="wrap_content" />
+
+            <com.example.fansonlib.widget.textview.TextViewDrawable
+                android:layout_width="wrap_content"
+                app:cit_drawableTop="@mipmap/ic_launcher_round"
+                android:text="Test"
+                app:cit_iconHeight="60dp"
+                android:textColor="@color/grey_light"
+                app:cit_iconWidth="60dp"
+                android:layout_height="wrap_content" />
+
+            <com.example.fansonlib.widget.textview.TextViewDrawable
+                android:layout_width="wrap_content"
+                app:cit_drawableTop="@mipmap/ic_launcher_round"
+                android:text="Test"
+                app:cit_iconHeight="60dp"
+                android:textColor="@color/grey_light"
+                app:cit_iconColor="@color/grey_light"
+                app:cit_iconWidth="60dp"
                 android:layout_height="wrap_content" />
 
             <ImageView

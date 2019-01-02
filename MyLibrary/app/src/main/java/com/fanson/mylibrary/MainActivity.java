@@ -382,4 +382,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     public void showFailure(String errorMsg) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 }
