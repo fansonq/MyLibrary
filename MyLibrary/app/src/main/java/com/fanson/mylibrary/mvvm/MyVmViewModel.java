@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.fansonlib.base.BaseViewModel;
 import com.fanson.mylibrary.SimpleBean;
@@ -16,6 +17,8 @@ import com.fanson.mylibrary.mvp.TestCallback;
  * Describe：测试ViewModel
  */
 public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRepository,SimpleBean> implements TestCallback {
+
+    private static final String TAG = MyVmViewModel.class.getSimpleName();
 
     public MyVmViewModel(@NonNull Application application) {
         super(application);
@@ -37,6 +40,7 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
 
     @Override
     public void successful(SimpleBean bean) {
+        Log.d(TAG,"successful");
         mBean.setValue(bean);
         if (isViewAttached()){
             getBaseView().showTip(bean.getData().getName());
@@ -45,6 +49,7 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
 
     @Override
     public void failure(String errorMsg) {
+        Log.d(TAG,"failure");
         if (isViewAttached()){
             getBaseView().showFailure(errorMsg);
         }
@@ -52,6 +57,6 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
 
     @Override
     public void onAny(LifecycleOwner owner, Lifecycle.Event event) {
-
+        Log.d(TAG,"onAny event = "+event.name());
     }
 }
