@@ -32,7 +32,7 @@ public class LoadingStateView extends FrameLayout {
     private TextView mTvReload;
     private int mTextColor;
     private int mTextSize;
-    private int mDrawableColor;
+    private int mDrawableColor = 0;
     private LayoutInflater mInflater;
     private Drawable mErrorDrawable;
     private Drawable mNoDataDrawable;
@@ -140,7 +140,6 @@ public class LoadingStateView extends FrameLayout {
             } else {
                 mIvError.setImageResource(R.mipmap.ic_loading_error);
             }
-            mIvError.setColorFilter(mDrawableColor);
             addView(mErrorView);
         }
     }
@@ -161,7 +160,6 @@ public class LoadingStateView extends FrameLayout {
             } else {
                 mIvNoData.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.ic_no_data));
             }
-            mIvNoData.setColorFilter(mDrawableColor);
             addView(mNoDataView);
         }
     }
@@ -367,7 +365,7 @@ public class LoadingStateView extends FrameLayout {
     public void showLoadNoDataView(String msg) {
         onHideOtherView();
         initNoDataView();
-        if (mOnNoDataButtonClickListener!=null){
+        if (mOnNoDataButtonClickListener != null) {
             mNoDataView.setOnClickListener(mOnNoDataButtonClickListener);
         }
         if (!TextUtils.isEmpty(msg)) {
@@ -391,7 +389,7 @@ public class LoadingStateView extends FrameLayout {
     public void showLoadErrorView(String msg) {
         onHideOtherView();
         initErrorView();
-        if (mOnErrorButtonClickListener!=null){
+        if (mOnErrorButtonClickListener != null) {
             mErrorView.setOnClickListener(mOnErrorButtonClickListener);
         }
         if (msg != null) {
@@ -424,8 +422,8 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 隐藏错误的界面
      */
-    public void hideErrorView(){
-        if (mErrorView!=null){
+    public void hideErrorView() {
+        if (mErrorView != null) {
             mErrorView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
@@ -434,8 +432,8 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 隐藏暂无数据的界面
      */
-    public void hideNoDataView(){
-        if (mNoDataView!=null){
+    public void hideNoDataView() {
+        if (mNoDataView != null) {
             mNoDataView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
@@ -444,8 +442,8 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 隐藏加载中的界面
      */
-    public void hideLoadingView(){
-        if (mProgressView!=null){
+    public void hideLoadingView() {
+        if (mProgressView != null) {
             mProgressView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
@@ -457,9 +455,9 @@ public class LoadingStateView extends FrameLayout {
      * @param onErrorButtonClickListener
      */
     public void setErrorAction(final View.OnClickListener onErrorButtonClickListener) {
-        if (mErrorView==null){
+        if (mErrorView == null) {
             mOnErrorButtonClickListener = onErrorButtonClickListener;
-        }else {
+        } else {
             mErrorView.setOnClickListener(onErrorButtonClickListener);
         }
     }
@@ -470,9 +468,9 @@ public class LoadingStateView extends FrameLayout {
      * @param onNoDataButtonClickListener
      */
     public void setNoDataAction(final View.OnClickListener onNoDataButtonClickListener) {
-        if (mNoDataView==null){
+        if (mNoDataView == null) {
             mOnNoDataButtonClickListener = onNoDataButtonClickListener;
-        }else {
+        } else {
             mNoDataView.setOnClickListener(onNoDataButtonClickListener);
         }
     }

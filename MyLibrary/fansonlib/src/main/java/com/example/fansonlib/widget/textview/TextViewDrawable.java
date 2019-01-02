@@ -1,6 +1,7 @@
 package com.example.fansonlib.widget.textview;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -34,7 +35,7 @@ import java.util.Locale;
  * Describe：自定义带icon的TextView（可控制icon大小）
  */
 
-public class TextViewDrawable extends AppCompatTextView{
+public class TextViewDrawable extends AppCompatTextView {
 
     public static final int UNDEFINED_RESOURCE = -0x001;
 
@@ -220,22 +221,37 @@ public class TextViewDrawable extends AppCompatTextView{
     private Drawable resource2VectorDrawable(@DrawableRes final int resourceId, @ColorInt final int iconColor,
                                              final int iconWidth, final int iconHeight) {
         final Context context = getContext();
-        final Drawable drawable = AppCompatResources.getDrawable(context, resourceId);
+        Drawable drawable = AppCompatResources.getDrawable(context, resourceId);
 
         if (drawable == null) {
             throw new Resources.NotFoundException("Resource not found : %s." + resourceId);
+        }else {
+            drawable.mutate();
         }
 
         // See if we need to 'fix' the drawableLeft
         fixDrawable(drawable);
         // Set color
-        if (iconColor!=UNDEFINED_RESOURCE){
-            DrawableCompat.setTint(drawable, iconColor);
-            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
+        if (iconColor != UNDEFINED_RESOURCE) {
+            drawable = tintDrawable(drawable, ColorStateList.valueOf(iconColor));
+//            DrawableCompat.setTint(drawable, iconColor);
+//            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
         }
         // Resize Bitmap
         return new BitmapDrawable(context.getResources(),
                 Bitmap.createScaledBitmap(drawable2Bitmap(drawable, iconWidth, iconHeight), iconWidth, iconHeight, true));
+    }
+
+    /**
+     * 将drawable染色，此方法可向下兼容
+     * @param drawable Drawable
+     * @param colors 颜色
+     * @return Drawable
+     */
+    public Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
+        Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
     }
 
     /**

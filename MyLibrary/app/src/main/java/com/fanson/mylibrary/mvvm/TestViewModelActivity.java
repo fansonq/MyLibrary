@@ -76,6 +76,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
         });
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -118,5 +119,10 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     public void showTip(String tipContent) {
         MySnackBarUtils.showLong(getWindow().getDecorView(),tipContent).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

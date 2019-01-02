@@ -23,6 +23,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
         return  rootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
     /**
      * 创建ViewModel实例
      * @return ViewModel实例

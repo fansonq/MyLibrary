@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -21,18 +22,19 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     private static final String TAG = BaseViewModel.class.getSimpleName();
 
-    protected SoftReference<V> mBaseView;
+    private SoftReference<V> mBaseView;
     protected R mRepository;
     protected MutableLiveData<B> mBean;
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
         mRepository = createRepository();
-        if (mBean == null) {
-            mBean = new MutableLiveData<>();
-        }
     }
 
+    /**
+     * 创建Repository
+     * @return Repository实例
+     */
     protected abstract R createRepository();
 
     /**
@@ -40,6 +42,9 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * @return 实体类
      */
     public LiveData<B> getData() {
+        if (mBean == null) {
+            mBean = new MutableLiveData<>();
+        }
         return mBean;
     }
 
@@ -56,7 +61,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      *
      * @param baseView
      */
-    public void attachView(V baseView) {
+    protected void attachView(V baseView) {
         mBaseView = new SoftReference<>(baseView);
     }
 
@@ -65,16 +70,16 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      *
      * @return true or false
      */
-    public boolean isViewAttached() {
+    protected boolean isViewAttached() {
         return (mBaseView != null ? mBaseView : null) != null;
     }
 
     /**
      * 获取BaseView
      *
-     * @return
+     * @return BaseView
      */
-    public V getBaseView() {
+    protected V getBaseView() {
         if (mBaseView != null) {
             return this.mBaseView.get();
         } else {
@@ -92,10 +97,17 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     /**
      * 解除绑定的View
      */
-    public void detachView() {
+    public void detachView(@NonNull Observer observer) {
         if (mBaseView != null) {
             mBaseView.clear();
             mBaseView = null;
+        }
+        if (mRepository!=null){
+            mRepository.onDestroy();
+            mRepository = null;
+        }
+        if (mBean != null){
+            mBean.removeObserver(observer);
         }
     }
 
