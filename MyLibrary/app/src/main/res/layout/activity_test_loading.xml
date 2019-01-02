@@ -14,6 +14,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:drawableColor="@color/orange"
+        app:emptyDrawable="@mipmap/ic_app_no_data"
         app:tipTextColor="@color/orange" />
 
     <Button

@@ -57,17 +57,19 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected void dataSuccessObserver() {
-        mViewModel.getData().observe(this, new Observer<SimpleBean>() {
-            @Override
-            public void onChanged(@Nullable SimpleBean bean) {
-                Log.d(TAG, "请求数据成功，返回数据");
-                if (bean != null) {
-                    mBinding.tv.setText(bean.getData().getName());
-                    ShowToast.singleLong("请求数据成功");
-                }
-            }
-        });
+        mViewModel.getData().observe(this,simpleObserver);
     }
+
+    private Observer simpleObserver = new Observer<SimpleBean>() {
+        @Override
+        public void onChanged(@Nullable SimpleBean bean) {
+            Log.d(TAG, "请求数据成功，返回数据");
+            if (bean != null) {
+                mBinding.tv.setText(bean.getData().getName());
+                ShowToast.singleLong("请求数据成功");
+            }
+        }
+    };
 
     @Override
     public void showFailure(String errorMsg) {
@@ -87,5 +89,13 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     public void showTip(String tipContent) {
         MySnackBarUtils.showLong(getWindow().getDecorView(),tipContent).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null){
+            mViewModel.detachView(simpleObserver);
+        }
     }
 }

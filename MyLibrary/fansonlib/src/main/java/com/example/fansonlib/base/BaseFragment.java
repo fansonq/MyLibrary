@@ -135,7 +135,7 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment {
     }
 
     /**
-     * 获取宿主的Acitivity
+     * 获取宿主的Actiivity
      *
      * @return
      */
@@ -185,10 +185,11 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment {
 
     /**
      * onCreateView中初始化View
-     *
-     * @param rootView
-     * @param container
-     * @param savedInstanceState
+     * @param rootView rootView
+     * @param inflater inflater
+     * @param container container
+     * @param savedInstanceState savedInstanceState
+     * @return View
      */
     protected abstract View initView(View rootView,LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState);
 
@@ -200,14 +201,17 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment {
 
     /**
      * 通过Class跳转界面
-     **/
+     * @param targetActivity 目标Activity
+     */
     public void startMyActivity(Class<?> targetActivity) {
         startActivity(targetActivity, null);
     }
 
     /**
      * 含有Bundle通过Class跳转界面
-     **/
+     * @param targetActivity 目标Activity
+     * @param bundle 携带数据Bundle
+     */
     public void startActivity(Class<?> targetActivity, Bundle bundle) {
         Intent intent = new Intent(hostActivity, targetActivity);
         if (bundle != null) {
