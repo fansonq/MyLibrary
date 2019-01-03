@@ -3,6 +3,7 @@ package com.fanson.mylibrary.mvvm;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -50,26 +51,55 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
             @Override
             public void onClick(View v) {
                 showLoading();
-                mViewModel.getData(1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mViewModel.getData(1);
+                    }
+                },2000);
             }
         });
     }
 
     @Override
     protected void dataSuccessObserver() {
-        mViewModel.getData().observe(this,simpleObserver);
+        mViewModel.getData().observe(this, new Observer<SimpleBean>() {
+            @Override
+            public void onChanged(@Nullable SimpleBean bean) {
+                Log.d(TAG, "请求数据成功，返回数据");
+                if (bean != null) {
+                    mBinding.tv.setText(bean.getData().getName());
+                    ShowToast.singleLong("请求数据成功");
+                }
+                mViewModel.getData().removeObserver(this);
+            }
+        });
     }
 
-    private Observer simpleObserver = new Observer<SimpleBean>() {
-        @Override
-        public void onChanged(@Nullable SimpleBean bean) {
-            Log.d(TAG, "请求数据成功，返回数据");
-            if (bean != null) {
-                mBinding.tv.setText(bean.getData().getName());
-                ShowToast.singleLong("请求数据成功");
-            }
-        }
-    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG,"onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"onStop");
+    }
 
     @Override
     public void showFailure(String errorMsg) {
@@ -94,8 +124,5 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mViewModel != null){
-            mViewModel.detachView(simpleObserver);
-        }
     }
 }

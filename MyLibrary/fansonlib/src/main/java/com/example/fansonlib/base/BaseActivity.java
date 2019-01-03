@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
@@ -60,7 +59,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         }
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, getContentView());
         initNetStateBroadCastReceiver();
         initView(savedInstanceState);

@@ -141,4 +141,6 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     public void onDestroy() {
         Log.d(TAG,"生命周期onDestroy阶段");
     }
+
+
 }
