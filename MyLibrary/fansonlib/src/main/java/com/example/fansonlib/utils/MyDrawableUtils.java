@@ -1,4 +1,4 @@
-package com.example.fansonlib.utils.toast;
+package com.example.fansonlib.utils;
 
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
@@ -9,7 +9,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
  * Created Time: 2019/1/4 9:01
  * Describe：Drawable工具类
  */
-public class DrawableUtils {
+public class MyDrawableUtils {
 
     /**
      * 将drawable染色，此方法可向下兼容
