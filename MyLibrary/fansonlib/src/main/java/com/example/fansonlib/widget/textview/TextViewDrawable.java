@@ -30,14 +30,14 @@ import com.example.fansonlib.R;
 import java.util.Locale;
 
 /**
- * Created by：fanson
+ * @author：fanson
  * Created on：2017/9/29 10:40
  * Describe：自定义带icon的TextView（可控制icon大小）
  */
 
 public class TextViewDrawable extends AppCompatTextView {
 
-    public static final int UNDEFINED_RESOURCE = -0x001;
+    public static final int UNDEFINED_RESOURCE = -10;
 
     private static final int INDEX_LEFT = 0;
     private static final int INDEX_TOP = 1;
@@ -54,7 +54,10 @@ public class TextViewDrawable extends AppCompatTextView {
     private int iconHeight = UNDEFINED_RESOURCE;
     private int iconColor = UNDEFINED_RESOURCE;
     private Drawable[] drawables = new Drawable[4];
-    private int[] drawableResIds = new int[4]; // cache drawable resource ids
+    /**
+     * cache drawable resource ids
+     */
+    private int[] drawableResIds = new int[4];
 
     public TextViewDrawable(Context context) {
         this(context, null);
@@ -234,8 +237,6 @@ public class TextViewDrawable extends AppCompatTextView {
         // Set color
         if (iconColor != UNDEFINED_RESOURCE) {
             drawable = tintDrawable(drawable, ColorStateList.valueOf(iconColor));
-//            DrawableCompat.setTint(drawable, iconColor);
-//            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
         }
         // Resize Bitmap
         return new BitmapDrawable(context.getResources(),
