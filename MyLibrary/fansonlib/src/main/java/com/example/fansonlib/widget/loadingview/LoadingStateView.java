@@ -140,6 +140,9 @@ public class LoadingStateView extends FrameLayout {
             } else {
                 mIvError.setImageResource(R.mipmap.ic_loading_error);
             }
+            if (mDrawableColor != 0){
+                mIvError.setColorFilter(mDrawableColor);
+            }
             addView(mErrorView);
         }
     }
@@ -159,6 +162,9 @@ public class LoadingStateView extends FrameLayout {
                 mIvNoData.setImageDrawable(mNoDataDrawable);
             } else {
                 mIvNoData.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.ic_no_data));
+            }
+            if (mDrawableColor != 0){
+                mIvNoData.setColorFilter(mDrawableColor);
             }
             addView(mNoDataView);
         }
