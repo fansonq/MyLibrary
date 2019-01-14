@@ -90,11 +90,11 @@
 
             <com.example.fansonlib.widget.textview.TextViewDrawable
                 android:layout_width="wrap_content"
-                app:cit_drawableTop="@mipmap/ic_launcher_round"
+                app:cit_drawableTop="@mipmap/ic_no_data"
                 android:text="Test"
                 app:cit_iconHeight="60dp"
                 android:textColor="@color/grey_light"
-                app:cit_iconColor="@color/grey_light"
+                app:cit_iconColor="@color/white"
                 app:cit_iconWidth="60dp"
                 android:layout_height="wrap_content" />
 

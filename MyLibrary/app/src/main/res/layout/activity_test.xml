@@ -12,6 +12,12 @@
             android:layout_height="wrap_content"
             android:text="Go MainActivity" />
 
+        <Button
+            android:id="@+id/btn_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go TestViewActivity" />
+
         <TextView
             android:id="@+id/tv1"
             android:layout_width="match_parent"

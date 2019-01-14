@@ -105,6 +105,8 @@ public class PowerfulEditText extends TextInputEditText {
         eyeCloseResourceId = ta.getResourceId(R.styleable.PowerfulEditText_eyeClose, R.mipmap.ic_hide_password);
         eyeOpenResourceId = ta.getResourceId(R.styleable.PowerfulEditText_eyeOpen, R.mipmap.ic_show_password);
 
+        mRightDrawable = ta.getDrawable(R.styleable.PowerfulEditText_rightDrawable);
+
         init();
     }
 
@@ -112,7 +114,9 @@ public class PowerfulEditText extends TextInputEditText {
     private void init() {
         //获取EditText的DrawableRight,假如没有设置我们就使用默认的图片,左上右下
         Drawable leftDrawable = getCompoundDrawables()[0];
-        mRightDrawable = getCompoundDrawables()[2];
+        if (mRightDrawable == null){
+            mRightDrawable = getCompoundDrawables()[2];
+        }
 
         if (mRightDrawable == null) {
             //如果右侧没有图标

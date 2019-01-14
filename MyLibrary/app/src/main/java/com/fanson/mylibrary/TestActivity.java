@@ -55,6 +55,11 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
 
     @Override
     protected void listenEvent() {
-
+        mBinding.btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMyActivity(TestViewActivity.class);
+            }
+        });
     }
 }

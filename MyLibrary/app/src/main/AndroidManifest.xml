@@ -25,6 +25,8 @@
 
         <activity android:name=".TestLoadingActivity"/>
 
+        <activity android:name=".TestViewActivity"/>
+
         <activity android:name=".mvvm.TestViewModelActivity"
 
             />

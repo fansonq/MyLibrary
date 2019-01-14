@@ -248,6 +248,8 @@
         <attr name="leftDrawableWidth" format="dimension" />
         <!--左侧Drawable的高度-->
         <attr name="leftDrawableHeight" format="dimension" />
+        <!--右侧Drawable的图标-->
+        <attr name="rightDrawable" format="reference" />
         <!--右侧Drawable的宽度-->
         <attr name="rightDrawableWidth" format="dimension" />
         <!--右侧Drawable的高度-->
