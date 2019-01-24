@@ -1,7 +1,6 @@
 package com.example.fansonlib.image.glide;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -33,15 +32,17 @@ import static com.bumptech.glide.Glide.with;
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
- * Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/4/17 13:32
  * Describe：Glide的策略实现类
  */
 
 public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
+
+    private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
+
     private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
-    private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
     private ImageLoaderConfig mImageLoaderConfig;
 
@@ -52,10 +53,22 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      * 常量
      */
     static class Constants {
-        public static final int BLUR_VALUE = 20; //模糊
-        public static final int CORNER_RADIUS = 10; //圆角
-        public static final int MARGIN = 5;  //边距
-        public static final float THUMB_SIZE = 0.5f; //0-1之间  10%原图的大小
+        /**
+         *  模糊
+         */
+        public static final int BLUR_VALUE = 20;
+        /**
+         * 圆角
+         */
+        public static final int CORNER_RADIUS = 10;
+        /**
+         * 边距
+         */
+        public static final int MARGIN = 5;
+        /**
+         * 0-1之间  10%原图的大小
+         */
+        public static final float THUMB_SIZE = 0.5f;
     }
 
     /**
@@ -217,7 +230,6 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      *
      * @param context 上下文
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private boolean isValidContextForGlide(Context context) {
         boolean valid = true;
         if (context == null) {
@@ -225,7 +237,9 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         }
         if (context instanceof Activity) {
             final Activity activity = (Activity) context;
-            if (activity.isDestroyed() || activity.isFinishing()) {
+            if (activity.isFinishing()) {
+                valid = false;
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
                 valid = false;
             }
         }

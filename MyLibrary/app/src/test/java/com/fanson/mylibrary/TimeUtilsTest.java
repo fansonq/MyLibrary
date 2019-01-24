@@ -128,7 +128,7 @@ public class TimeUtilsTest {
 
     @Test
     public void getFriendlyTimeSpanByNow() {
-        assertEquals("刚刚", TimeUtils.getFriendlyTimeSpanByNow(TimeUtils.getNowString()));
+        assertEquals("刚刚", TimeUtils.getFriendlyTimeSpanByNow(1548230286691L ));
         assertEquals("刚刚", TimeUtils.getFriendlyTimeSpanByNow(TimeUtils.getNowString(mFormat), mFormat));
         assertEquals("刚刚", TimeUtils.getFriendlyTimeSpanByNow(TimeUtils.getNowDate()));
         assertEquals("刚刚", TimeUtils.getFriendlyTimeSpanByNow(TimeUtils.getNowMills()));
