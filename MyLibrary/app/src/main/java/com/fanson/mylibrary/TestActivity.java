@@ -80,6 +80,6 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
         LiteDataUtils.importFromSharedPreferences(SharePreferenceHelper.getSharedPreferences());
 
         Log.d(TAG,LiteDataUtils.getString("test"));
-        Log.d(TAG,"bool = "+ LiteDataUtils.getBoolean("test"));
+        Log.d(TAG,"bool = "+ LiteDataUtils.getBoolean("bool"));
     }
 }

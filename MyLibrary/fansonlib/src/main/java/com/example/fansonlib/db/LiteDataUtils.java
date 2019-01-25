@@ -21,6 +21,7 @@ public class LiteDataUtils {
 
     /**
      * 双重锁，获取单例
+     *
      * @param context 上下文
      * @return mLiteDataUtils
      */
@@ -37,6 +38,7 @@ public class LiteDataUtils {
 
     /**
      * 构造实例化
+     *
      * @param context 上下文
      */
     private LiteDataUtils(Context context) {
@@ -72,21 +74,23 @@ public class LiteDataUtils {
         mmkv.encode(key, value);
     }
 
-    public static  void put(String key, Parcelable value) {
-         mmkv.encode(key,value);
+    public static void put(String key, Parcelable value) {
+        mmkv.encode(key, value);
     }
 
     /**
      * 获取Parcelable数据
+     *
      * @param key Key
      * @return Parcelable数据
      */
-    public static  Parcelable getParcelable(String key ) {
-        return mmkv.decodeParcelable(key,null);
+    public static Parcelable getParcelable(String key) {
+        return mmkv.decodeParcelable(key, null);
     }
 
     /**
      * 获取字符串数据
+     *
      * @param key Key
      * @return 字符串数据
      */
@@ -96,6 +100,7 @@ public class LiteDataUtils {
 
     /**
      * 获取字符串数据
+     *
      * @param key Key
      * @param def 默认数据
      * @return 字符串数据
@@ -117,7 +122,7 @@ public class LiteDataUtils {
     }
 
     public static boolean getBoolean(String key) {
-        return mmkv.decodeBool(key,false);
+        return mmkv.decodeBool(key, false);
     }
 
     public static int getInt(String key) {
@@ -130,12 +135,18 @@ public class LiteDataUtils {
 
     /**
      * 将SharedPreferences的数据移植过来MMKV
+     *
      * @param sharedPreferences sharedPreferences
      */
-    public static void importFromSharedPreferences(SharedPreferences sharedPreferences){
+    public static void importFromSharedPreferences(SharedPreferences sharedPreferences) {
         mmkv.importFromSharedPreferences(sharedPreferences);
     }
 
+    /**
+     * 清除数据
+     *
+     * @param keys Key
+     */
     public static void remove(String... keys) {
         if (keys == null || keys.length == 0) {
             return;
@@ -143,6 +154,11 @@ public class LiteDataUtils {
         mmkv.removeValuesForKeys(keys);
     }
 
+    /**
+     * 清除数据（忽略指定数据）
+     *
+     * @param keys 指定数据Key
+     */
     public static void removeIgnore(String... keys) {
         if (keys == null || keys.length == 0) {
             return;
@@ -156,5 +172,11 @@ public class LiteDataUtils {
         }
     }
 
+    /**
+     * 清除所有数据
+     */
+    public static void removeAll() {
+        mmkv.clearAll();
+    }
 
 }
