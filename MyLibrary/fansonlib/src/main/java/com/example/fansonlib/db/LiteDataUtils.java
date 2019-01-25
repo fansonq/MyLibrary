@@ -110,23 +110,43 @@ public class LiteDataUtils {
     }
 
     public static long getLong(String key) {
-        return mmkv.decodeLong(key);
+        return mmkv.decodeLong(key,0);
+    }
+
+    public static long getLong(String key,long def) {
+        return mmkv.decodeLong(key,def);
     }
 
     public static float getFloat(String key) {
-        return mmkv.decodeFloat(key);
+        return mmkv.decodeFloat(key,0);
+    }
+
+    public static float getFloat(String key,float def) {
+        return mmkv.decodeFloat(key,def);
     }
 
     public static double getDouble(String key) {
-        return mmkv.decodeDouble(key);
+        return mmkv.decodeDouble(key,0);
+    }
+
+    public static double getDouble(String key,double def) {
+        return mmkv.decodeDouble(key,def);
     }
 
     public static boolean getBoolean(String key) {
         return mmkv.decodeBool(key, false);
     }
 
+    public static boolean getBoolean(String key,boolean def) {
+        return mmkv.decodeBool(key, def);
+    }
+
     public static int getInt(String key) {
-        return mmkv.decodeInt(key);
+        return mmkv.decodeInt(key,0);
+    }
+
+    public static int getInt(String key,int def) {
+        return mmkv.decodeInt(key,def);
     }
 
     public static byte[] getByte(String key) {
