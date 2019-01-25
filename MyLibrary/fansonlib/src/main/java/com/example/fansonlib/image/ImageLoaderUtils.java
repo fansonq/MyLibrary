@@ -7,7 +7,7 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.image.glide.GlideLoaderStrategy;
 
 /**
- * Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/4/14 17:24
  * Describe：图片加载框架的代理类
  */
@@ -139,6 +139,16 @@ public class ImageLoaderUtils {
      */
     public BaseImageLoaderStrategy loadGifImage(Context context, ImageView imageView, Object imgUrl) {
         sImageLoaderStrategy.loadGifImage(context, imageView, imgUrl);
+        return sImageLoaderStrategy;
+    }
+
+    /**
+     * 停止加载图片
+     * @param context 上下文
+     * @return 策略
+     */
+    public BaseImageLoaderStrategy onPauseRequest(Context context){
+        sImageLoaderStrategy.onPauseRequest(context);
         return sImageLoaderStrategy;
     }
 

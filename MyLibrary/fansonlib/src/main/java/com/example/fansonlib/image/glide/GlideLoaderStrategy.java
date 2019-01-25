@@ -203,6 +203,15 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
+    public void onPauseRequest(Context context) {
+        if (context == null) {
+            return;
+        }
+        Glide.with(context).pauseRequests();
+    }
+
+
+    @Override
     public void clearMemory(Context context) {
         if (context == null) {
             return;
