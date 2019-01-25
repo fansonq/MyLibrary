@@ -3,13 +3,16 @@ package com.fanson.mylibrary;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.fansonlib.base.BaseActivity;
+import com.example.fansonlib.db.LiteDataUtils;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.utils.SharePreferenceHelper;
 import com.example.fansonlib.utils.SpannableStringUtils;
 import com.fanson.mylibrary.databinding.ActivityTestBinding;
 
@@ -51,6 +54,8 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
     protected void initData() {
         mBinding.tv1.setText(SpannableStringUtils.getBuilder("测试").append("大号字体")
                 .setProportion(1.2f).setForegroundColor(ContextCompat.getColor(this,R.color.light_orange)).create());
+        testMmkv();
+
     }
 
     @Override
@@ -61,5 +66,20 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
                 startMyActivity(TestViewActivity.class);
             }
         });
+    }
+
+    /**
+     * 测试Mmkv
+     */
+    private void testMmkv(){
+        SharePreferenceHelper.getInstance(this);
+        SharePreferenceHelper.putString("test","我是来自SharePreferenceHelper");
+        SharePreferenceHelper.apply();
+
+        LiteDataUtils.getInstance(this);
+        LiteDataUtils.importFromSharedPreferences(SharePreferenceHelper.getSharedPreferences());
+
+        Log.d(TAG,LiteDataUtils.getString("test"));
+        Log.d(TAG,"bool = "+ LiteDataUtils.getBoolean("test"));
     }
 }

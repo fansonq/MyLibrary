@@ -1,6 +1,7 @@
 package com.example.fansonlib.db;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 
 import com.tencent.mmkv.MMKV;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * @author Created by：Fanson
  * Created Time: 2019/1/24 17:28
- * Describe：轻量级数据储存工具类（基于MMKV）
+ * Describe：轻量级数据储存（Key-Value）工具类（基于MMKV）
  */
 public class LiteDataUtils {
 
@@ -84,10 +85,21 @@ public class LiteDataUtils {
         return mmkv.decodeParcelable(key,null);
     }
 
+    /**
+     * 获取字符串数据
+     * @param key Key
+     * @return 字符串数据
+     */
     public static String getString(String key) {
         return mmkv.decodeString(key, "");
     }
 
+    /**
+     * 获取字符串数据
+     * @param key Key
+     * @param def 默认数据
+     * @return 字符串数据
+     */
     public static String getString(String key, String def) {
         return mmkv.decodeString(key, def);
     }
@@ -105,15 +117,23 @@ public class LiteDataUtils {
     }
 
     public static boolean getBoolean(String key) {
-        return mmkv.decodeBool(key);
+        return mmkv.decodeBool(key,false);
     }
 
-    public static int getInteger(String key) {
+    public static int getInt(String key) {
         return mmkv.decodeInt(key);
     }
 
     public static byte[] getByte(String key) {
         return mmkv.decodeBytes(key);
+    }
+
+    /**
+     * 将SharedPreferences的数据移植过来MMKV
+     * @param sharedPreferences sharedPreferences
+     */
+    public static void importFromSharedPreferences(SharedPreferences sharedPreferences){
+        mmkv.importFromSharedPreferences(sharedPreferences);
     }
 
     public static void remove(String... keys) {
