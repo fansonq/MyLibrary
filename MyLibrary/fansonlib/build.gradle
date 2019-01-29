@@ -109,9 +109,9 @@ dependencies {
     compile "android.arch.lifecycle:livedata:1.1.0"
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 
-
-//    compile 'com.facebook.stetho:stetho:1.5.0'
-//    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    // stetho
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'de.hdodenhof:circleimageview:2.2.0'  //圆形图片

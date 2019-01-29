@@ -1,6 +1,7 @@
 package com.example.fansonlib.http.retrofit;
 
 import com.example.fansonlib.base.AppUtils;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -147,6 +148,8 @@ public class RetrofitClient {
             //显示日志
             okHttpClientBuilder.addInterceptor( new LoggingInterceptor());
         }
+        //在Release build的时候Stetho自己会disable所有的功能，所以release包的网络请求和数据都是安全的
+        okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
         return okHttpClientBuilder.build();
     }
 

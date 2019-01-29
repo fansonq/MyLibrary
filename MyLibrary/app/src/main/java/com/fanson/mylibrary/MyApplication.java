@@ -19,7 +19,6 @@ public class MyApplication extends Application{
         super.onCreate();
         AppUtils.init(getApplicationContext());
 
-
         //图片框架使用方式，策略模式
         ImageLoaderConfig loaderConfig = new ImageLoaderConfig.Builder()
                 .setMaxDiskCache(1024 * 1024 * 50)
