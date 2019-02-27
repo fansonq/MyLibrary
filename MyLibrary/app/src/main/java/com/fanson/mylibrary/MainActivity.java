@@ -384,6 +384,12 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MyRxbus2.getInstance().unRegister(this);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();

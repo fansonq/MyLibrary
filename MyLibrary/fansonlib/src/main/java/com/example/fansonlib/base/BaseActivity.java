@@ -158,9 +158,9 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
-                        if (!NetWorkUtil.isNetWordConnected(mContext)) {
+                        if (!NetWorkUtil.isNetWordConnected(mContext.getApplicationContext())) {
                             MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
-                                    .margins(0, DimensUtils.dipToPx(mContext, 25), 0, 0).show();
+                                    .margins(0, DimensUtils.dipToPx(mContext.getApplicationContext(), 25), 0, 0).show();
                             if (MySnackBarUtils.getSnackbarView() != null) {
                                 MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -185,7 +185,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     /**
      * 此方法的目的是子类使用此方法findViewById不再需要强转，注意：接受类型一定不要写错
      *
-     * @param id 控件ID
+     * @param id  控件ID
      * @param <T> 泛型
      * @return 控件view
      */

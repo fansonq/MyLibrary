@@ -71,11 +71,9 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                     mBinding.tv.setText(bean.getData().getName());
                     ShowToast.singleLong("请求数据成功");
                 }
-                mViewModel.getData().removeObserver(this);
             }
         });
     }
-
 
     @Override
     protected void onStart() {

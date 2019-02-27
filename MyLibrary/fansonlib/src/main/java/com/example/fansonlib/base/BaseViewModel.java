@@ -18,13 +18,13 @@ import java.lang.ref.SoftReference;
  * Created Time: 2018/10/11 14:58
  * Describe：ViewModel基类
  */
-public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository,B extends BaseBean> extends AndroidViewModel implements IBaseViewModel {
+public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository, B extends BaseBean> extends AndroidViewModel implements IBaseViewModel {
 
     private static final String TAG = BaseViewModel.class.getSimpleName();
 
-    private SoftReference<V> mBaseView;
     protected R mRepository;
     protected MutableLiveData<B> mBean;
+    private SoftReference<V> mBaseView;
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -33,12 +33,14 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     /**
      * 创建Repository
+     *
      * @return Repository实例
      */
     protected abstract R createRepository();
 
     /**
      * 供观察者调用
+     *
      * @return 实体类
      */
     public LiveData<B> getData() {
@@ -50,6 +52,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     /**
      * 注册设置BaseView，用于回调到View层，如果不需要回调，则不用注册
+     *
      * @param baseView baseView
      */
     public void setBaseView(V baseView) {
@@ -102,11 +105,11 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
             mBaseView.clear();
             mBaseView = null;
         }
-        if (mRepository!=null){
+        if (mRepository != null) {
             mRepository.onDestroy();
             mRepository = null;
         }
-        if (mBean != null){
+        if (mBean != null) {
             mBean.removeObserver(observer);
         }
     }
@@ -114,32 +117,32 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     @Override
     public void onCreate() {
-        Log.d(TAG,"生命周期onCreate阶段");
+        Log.d(TAG, "生命周期onCreate阶段");
     }
 
     @Override
     public void onStart() {
-        Log.d(TAG,"生命周期onStart阶段");
+        Log.d(TAG, "生命周期onStart阶段");
     }
 
     @Override
     public void onResume() {
-        Log.d(TAG,"生命周期onResume阶段");
+        Log.d(TAG, "生命周期onResume阶段");
     }
 
     @Override
     public void onPause() {
-        Log.d(TAG,"生命周期onPause阶段");
+        Log.d(TAG, "生命周期onPause阶段");
     }
 
     @Override
     public void onStop() {
-        Log.d(TAG,"生命周期onStop阶段");
+        Log.d(TAG, "生命周期onStop阶段");
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG,"生命周期onDestroy阶段");
+        Log.d(TAG, "生命周期onDestroy阶段");
     }
 
 

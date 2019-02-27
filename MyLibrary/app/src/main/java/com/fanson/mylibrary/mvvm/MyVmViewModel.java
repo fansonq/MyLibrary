@@ -37,7 +37,6 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
         mRepository.getTestData(this);
     }
 
-
     @Override
     public void successful(SimpleBean bean) {
         Log.d(TAG,"successful");
@@ -59,4 +58,5 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
     public void onAny(LifecycleOwner owner, Lifecycle.Event event) {
         Log.d(TAG,"onAny event = "+event.name());
     }
+
 }

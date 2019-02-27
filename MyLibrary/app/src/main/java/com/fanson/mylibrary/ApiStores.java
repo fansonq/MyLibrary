@@ -27,7 +27,9 @@ import retrofit2.http.Url;
 
 public interface ApiStores {
 
-    //baseUrl
+    /**
+     * baseUrl
+     */
     String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
 
     @GET
