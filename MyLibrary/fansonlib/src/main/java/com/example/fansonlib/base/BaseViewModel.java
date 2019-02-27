@@ -100,7 +100,14 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     /**
      * 解除绑定的View
      */
-    public void detachView(@NonNull Observer observer) {
+    public void detachView() {
+        detachView(null);
+    }
+
+    /**
+     * 解除绑定的View
+     */
+    public void detachView( Observer observer) {
         if (mBaseView != null) {
             mBaseView.clear();
             mBaseView = null;
@@ -109,7 +116,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
             mRepository.onDestroy();
             mRepository = null;
         }
-        if (mBean != null) {
+        if (mBean != null && observer != null) {
             mBean.removeObserver(observer);
         }
     }
