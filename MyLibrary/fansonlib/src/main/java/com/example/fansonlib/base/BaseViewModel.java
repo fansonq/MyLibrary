@@ -11,7 +11,7 @@ import android.util.Log;
 import com.example.fansonlib.bean.BaseBean;
 import com.example.fansonlib.callback.IBaseViewModel;
 
-import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 
 /**
  * @author Created by：Fanson
@@ -24,7 +24,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     protected R mRepository;
     protected MutableLiveData<B> mBean;
-    private SoftReference<V> mBaseView;
+    private WeakReference<V> mBaseView;
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -65,7 +65,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * @param baseView
      */
     protected void attachView(V baseView) {
-        mBaseView = new SoftReference<>(baseView);
+        mBaseView = new WeakReference<>(baseView);
     }
 
     /**
