@@ -39,4 +39,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
      */
     protected abstract void dataSuccessObserver();
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null){
+            mViewModel.detachView();
+        }
+    }
 }
