@@ -29,4 +29,11 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
      */
     protected abstract void dataSuccessObserver();
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mViewModel != null){
+            mViewModel.detachView();
+        }
+    }
 }
