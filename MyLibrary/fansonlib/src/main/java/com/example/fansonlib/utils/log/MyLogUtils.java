@@ -5,10 +5,10 @@ package com.example.fansonlib.utils.log;
  * Created Time: 2019/3/11 11:30
  * Describe：日志框架的代理类
  */
-public class LogUtils {
+public class MyLogUtils {
 
-    private static final String TAG = LogUtils.class.getSimpleName();
-    private volatile static LogUtils mInstance;
+    private static final String TAG = MyLogUtils.class.getSimpleName();
+    private volatile static MyLogUtils mInstance;
     private static BaseLogStrategy mBaseLogStrategy;
 
 
@@ -40,11 +40,11 @@ public class LogUtils {
      *
      * @return mInstance
      */
-    public static LogUtils getInstance() {
+    public static MyLogUtils getInstance() {
         if (mInstance == null) {
-            synchronized (LogUtils.class) {
+            synchronized (MyLogUtils.class) {
                 if (mInstance == null) {
-                    mInstance = new LogUtils();
+                    mInstance = new MyLogUtils();
                 }
             }
         }

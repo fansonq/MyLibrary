@@ -6,7 +6,7 @@ import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.utils.log.LogConfig;
-import com.example.fansonlib.utils.log.LogUtils;
+import com.example.fansonlib.utils.log.MyLogUtils;
 
 /**
  * Created by：fanson
@@ -36,7 +36,7 @@ public class MyApplication extends Application{
                 .setIsLoggable(BuildConfig.DEBUG)
                 .setTag(TAG)
                 .build();
-        LogUtils.init(config);
+        MyLogUtils.init(config);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.fanson.mylibrary.mvp;
 import android.app.Activity;
 
 import com.example.fansonlib.base.BasePresenterRep;
-import com.example.fansonlib.utils.log.LogUtils;
+import com.example.fansonlib.utils.log.MyLogUtils;
 import com.fanson.mylibrary.SimpleBean;
 
 /**
@@ -25,7 +25,7 @@ public class TestPresenter extends BasePresenterRep<TestRepository,SimpleBean,Co
 
     @Override
     public void testPresenterMethod() {
-        LogUtils.getInstance().d("testMethod");
+        MyLogUtils.getInstance().d("testMethod");
         mBaseRepository.method(callback);
     }
 

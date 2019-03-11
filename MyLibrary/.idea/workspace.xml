@@ -11,9 +11,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="35a4e97c-fce4-46cc-9959-cb769cc5257d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="35a4e97c-fce4-46cc-9959-cb769cc5257d" name="Default" comment="" />
     <ignored path="MyLibrary.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -63,34 +61,35 @@
     <session id="307983607">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gradle" value="4" />
+          <entry key="gradle" value="5" />
           <entry key="java" value="15" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="4" />
+          <entry key="Groovy" value="5" />
           <entry key="JAVA" value="15" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="18" />
+          <entry key="gradle" value="21" />
           <entry key="java" value="1195" />
           <entry key="xml" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="18" />
+          <entry key="Groovy" value="21" />
           <entry key="JAVA" value="1195" />
           <entry key="XML" value="4" />
         </counts>
@@ -112,36 +111,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/log/LoggerStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#833#834#0" expanded="true" />
-                <element signature="e#882#883#0" expanded="true" />
-                <element signature="e#935#936#0" expanded="true" />
-                <element signature="e#967#968#0" expanded="true" />
-                <element signature="e#1036#1037#0" expanded="true" />
-                <element signature="e#1076#1077#0" expanded="true" />
-                <element signature="e#1145#1146#0" expanded="true" />
-                <element signature="e#1185#1186#0" expanded="true" />
-                <element signature="e#1254#1255#0" expanded="true" />
-                <element signature="e#1294#1295#0" expanded="true" />
-                <element signature="e#1363#1364#0" expanded="true" />
-                <element signature="e#1403#1404#0" expanded="true" />
-                <element signature="e#1472#1473#0" expanded="true" />
-                <element signature="e#1512#1513#0" expanded="true" />
-                <element signature="e#1566#1567#0" expanded="true" />
-                <element signature="e#1602#1603#0" expanded="true" />
-                <element signature="e#1654#1655#0" expanded="true" />
-                <element signature="e#1689#1690#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseVmFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="131">
@@ -150,11 +119,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="71" column="1" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="315">
-              <caret line="113" column="50" selection-start-line="112" selection-start-column="3" selection-end-line="113" selection-end-column="50" />
+              <caret line="45" column="53" lean-forward="true" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -3490,7 +3468,6 @@
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseVmActivity.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/base/BaseVmFragment.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/BaseImageLoaderStrategy.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/log/BaseLogLoaderStrategy.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/ImageLoaderConfig.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/image/ImageLoaderUtils.java" />
@@ -3501,6 +3478,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanson/mylibrary/mvp/TestPresenter.java" />
         <option value="$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/utils/log/LogUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/fansonlib/build.gradle" />
       </list>
     </option>
@@ -4159,7 +4137,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2238806" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2238806" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="3" />
@@ -4177,7 +4155,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32998884" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="7" weight="0.32924107" />
-      <window_info anchor="bottom" id="Logcat" order="8" visible="true" weight="0.38350055" />
+      <window_info anchor="bottom" id="Logcat" order="8" weight="0.38350055" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50373137" side_tool="true" weight="0.6688963" />
       <window_info anchor="bottom" id="Android Monitor" order="10" sideWeight="0.4967811" weight="0.5295429" />
       <window_info anchor="bottom" id="Statistic" order="11" />
@@ -4187,7 +4165,7 @@
       <window_info anchor="bottom" id="Freeline" order="15" />
       <window_info active="true" anchor="bottom" id="Messages" order="16" sideWeight="0.47974414" visible="true" weight="0.3247768" />
       <window_info anchor="bottom" id="Android Profiler" order="17" sideWeight="0.49626866" weight="0.66964287" />
-      <window_info anchor="bottom" id="Build" order="18" weight="0.32218507" />
+      <window_info active="true" anchor="bottom" id="Build" order="18" visible="true" weight="0.32218507" />
       <window_info anchor="bottom" id="Mirror" order="19" />
       <window_info anchor="bottom" id="CheckStyle" order="20" />
       <window_info anchor="right" id="Flutter Outline" />
@@ -4847,13 +4825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="42" column="6" lean-forward="true" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.orhanobut/logger/2.2.0/ab592e9d70f1f3ef6f9a62c2066b3d3ac08244e8/logger-2.2.0-sources.jar!/com/orhanobut/logger/PrettyFormatStrategy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1397">
@@ -5003,8 +4974,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="71" column="1" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
-          <caret line="113" column="50" selection-start-line="112" selection-start-column="3" selection-end-line="113" selection-end-column="50" />
+          <caret line="45" column="53" lean-forward="true" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
         </state>
       </provider>
     </entry>
