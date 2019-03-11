@@ -1,7 +1,7 @@
 package com.example.fansonlib.image;
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/4/14 17:31
  * Describe：加载图片框架的一些参数的配置；
  * 用到了Builder模式，一步一步的创建一个复杂对象的创建者模式，
@@ -67,8 +67,14 @@ public class ImageLoaderConfig {
     }
 
     public static class Builder {
-        private int mPlacePicRes;//占位图
-        private int mErrorPicRes;//错误图
+        /**
+         * 占位图
+         */
+        private int mPlacePicRes;
+        /**
+         * 错误图
+         */
+        private int mErrorPicRes;
         private String mImgUrl;
         private int maxDiskCache;
         private int maxMemoryCache;

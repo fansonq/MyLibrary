@@ -5,7 +5,7 @@ import android.widget.ImageView;
 
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/4/14 17:29
  * Describe：加载图片框架的策略接口
  */

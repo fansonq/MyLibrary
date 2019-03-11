@@ -1,9 +1,9 @@
 package com.fanson.mylibrary.mvp;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.example.fansonlib.base.BasePresenterRep;
+import com.example.fansonlib.utils.log.LogUtils;
 import com.fanson.mylibrary.SimpleBean;
 
 /**
@@ -25,7 +25,7 @@ public class TestPresenter extends BasePresenterRep<TestRepository,SimpleBean,Co
 
     @Override
     public void testPresenterMethod() {
-        Log.d("TTT","testMethod");
+        LogUtils.getInstance().d("testMethod");
         mBaseRepository.method(callback);
     }
 
@@ -37,7 +37,7 @@ public class TestPresenter extends BasePresenterRep<TestRepository,SimpleBean,Co
         public void successful(SimpleBean bean) {
             switch (bean.getCode()){
                 case 1:
-                    getSoftActivity();
+                    getWeakActivity();
                     setValue(bean);
                     break;
                 case 2:

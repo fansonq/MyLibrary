@@ -27,6 +27,7 @@ public class ImageLoaderUtils {
             .placePicRes(R.mipmap.default_image)
             .build();
 
+
     public static void init() {
         //默认使用Glide框架
         if (sImageLoaderStrategy == null) {
@@ -45,7 +46,6 @@ public class ImageLoaderUtils {
             synchronized (ImageLoaderUtils.class) {
                 if (mInstance == null) {
                     mInstance = new ImageLoaderUtils();
-                    return mInstance;
                 }
             }
         }
