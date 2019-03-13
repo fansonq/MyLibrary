@@ -20,12 +20,17 @@ public class ApiFactoryImpl implements IApiFactory {
     @Override
     public Flowable createApi(String url, Map params) {
         switch (url) {
+            case "postName":
+                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).postName(url, params);
+                break;
             case "getName":
-                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).getName(url, params);
+                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).getName(url);
                 break;
             case "post.php":
 //                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).uploadMulti(url,params);
                 break;
+                default:
+                    break;
         }
         return mFlowable;
     }

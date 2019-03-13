@@ -50,8 +50,30 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     }
 
     @Override
-    public void get(String url, HttpResponseCallback callback) {
+    public void get(String url,final HttpResponseCallback callback) {
+        mCurrentDisposable = RetrofitClient.startObservable(mFactory.createApi(url,null), new ResourceSubscriber<M>() {
+            @Override
+            public void onNext(M bean) {
+                callback.onSuccess(bean);
+            }
 
+            @Override
+            public void onError(Throwable t) {
+                //TODO 最佳方案重写封装ResourceSubscriber
+                if (t instanceof UnknownHostException || t instanceof HttpException){
+                    callback.onFailure("无法链接到服务器");
+                }else {
+                    callback.onFailure(t.getMessage());
+                }
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+        mDisposableMaps.put(url,mCurrentDisposable);
     }
 
     @Override

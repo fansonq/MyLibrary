@@ -25,6 +25,7 @@ import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
 import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
@@ -76,6 +77,8 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
         AppUtils.init(getApplicationContext());
         MyRxbus2.getInstance().register(this);
+
+        MyLogUtils.init(null);
 
         mBtnNet = findMyViewId(R.id.btn_net);
         mBtnRxBus = findMyViewId(R.id.btn_rxBus);

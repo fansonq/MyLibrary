@@ -35,8 +35,11 @@ public interface ApiStores {
     @GET
     Flowable<ResponseBody> update(@Url String url);
 
+    @GET
+    Flowable<SimpleBean> getName(@Url String url);
+
     @POST
-    Flowable<SimpleBean> getName(@Url String url, @QueryMap Map<String, Object> maps);
+    Flowable<SimpleBean> postName(@Url String url, @QueryMap Map<String, Object> maps);
 
     /**
      * 下载文件

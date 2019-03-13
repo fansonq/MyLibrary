@@ -33,7 +33,7 @@ public class TestRepository extends BaseRepository {
 //        AsyncHttpStrategy.init(ApiStores.API_SERVER_URL);
 //        HttpUtils.init(new AsyncHttpStrategy());
 
-        getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
+        getHttpUtils().get("getName", new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
                 Log.d("TTT","onSuccess");
