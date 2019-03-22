@@ -24,6 +24,7 @@ public class LoggerStrategy implements BaseLogStrategy{
      */
     public void initLogger(String tag,final boolean isLoggable){
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                .methodCount(4)
                 .tag(tag)
                 .build();
         Logger.addLogAdapter(new DiskLogAdapter(formatStrategy) {

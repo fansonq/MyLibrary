@@ -74,7 +74,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * @return true or false
      */
     protected boolean isViewAttached() {
-        return (mBaseView != null ? mBaseView : null) != null;
+        return (mBaseView.get()) != null;
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * @return BaseView
      */
     protected V getBaseView() {
-        if (mBaseView != null) {
+        if (mBaseView.get() != null) {
             return this.mBaseView.get();
         } else {
             throw new BaseViewNotAttachedException();

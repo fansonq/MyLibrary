@@ -66,6 +66,13 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
                 startMyActivity(TestViewActivity.class);
             }
         });
+
+        mBinding.td1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBinding.td1.setVectorDrawableTop(R.mipmap.close);
+            }
+        });
     }
 
     /**
