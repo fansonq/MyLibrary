@@ -62,10 +62,11 @@ public class ManifestUtils {
     /**
      * 获取渠道值
      *
-     * @param context 上下文
+     * @param context   上下文
+     * @param chanelKey 渠道Key
      * @return <meta-data>元素的值
      */
-    public static int getChannelData(Context context) {
+    public static int getChannelData(Context context, String chanelKey) {
         ApplicationInfo appInfo = null;
         int value = 0;
         try {
@@ -74,8 +75,8 @@ public class ManifestUtils {
             e.printStackTrace();
         }
         if (appInfo != null) {
-            value = appInfo.metaData.getInt("CHANNEL_NAME");
-            Log.d(TAG, "CHANNEL_NAME ：= " + value);
+            value = appInfo.metaData.getInt(chanelKey);
+            Log.d(TAG, chanelKey + " ：= " + value);
         }
         return value;
     }
