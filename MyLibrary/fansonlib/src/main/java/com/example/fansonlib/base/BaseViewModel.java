@@ -32,6 +32,17 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     }
 
     /**
+     * 获取Repository实例
+     * @return mRepository
+     */
+    protected R getRepository(){
+        if (mRepository == null){
+            mRepository = createRepository();
+        }
+        return mRepository;
+    }
+
+    /**
      * 创建Repository
      *
      * @return Repository实例
