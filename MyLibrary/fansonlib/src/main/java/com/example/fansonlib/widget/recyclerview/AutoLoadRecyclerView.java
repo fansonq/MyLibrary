@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.example.fansonlib.R;
 import com.example.fansonlib.callback.LoadFinishCallBack;
 import com.example.fansonlib.callback.LoadMoreListener;
+import com.example.fansonlib.image.ImageLoaderUtils;
 
 
 /**
@@ -141,24 +141,24 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                 switch (newState) {
                     case SCROLL_STATE_IDLE:
 //                        imageLoader.resumeRequests(mContext);
-                        Glide.with(mContext).resumeRequests();
+                        ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         break;
                     case SCROLL_STATE_DRAGGING:
                         if (pauseOnScroll) {
 //                            imageLoader.pauseRequests(mContext);
-                            Glide.with(mContext).pauseRequests();
+                            ImageLoaderUtils.getInstance().onPauseRequest(mContext);
                         } else {
 //                            imageLoader.resumeRequests(mContext);
-                            Glide.with(mContext).resumeRequests();
+                            ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;
                     case SCROLL_STATE_SETTLING:
                         if (pauseOnFling) {
-                            Glide.with(mContext).pauseRequests();
+                            ImageLoaderUtils.getInstance().onPauseRequest(mContext);
 //                            imageLoader.pauseRequests(mContext);
                         } else {
 //                            imageLoader.resumeRequests(mContext);
-                            Glide.with(mContext).resumeRequests();
+                            ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;
                     default:

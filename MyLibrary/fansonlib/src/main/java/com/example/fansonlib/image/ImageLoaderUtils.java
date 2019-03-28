@@ -143,6 +143,16 @@ public class ImageLoaderUtils {
     }
 
     /**
+     * 恢复加载图片
+     * @param context 上下文
+     * @return 策略
+     */
+    public BaseImageLoaderStrategy onResumeRequest(Context context){
+        sImageLoaderStrategy.onResumeRequest(context);
+        return sImageLoaderStrategy;
+    }
+
+    /**
      * 停止加载图片
      * @param context 上下文
      * @return 策略

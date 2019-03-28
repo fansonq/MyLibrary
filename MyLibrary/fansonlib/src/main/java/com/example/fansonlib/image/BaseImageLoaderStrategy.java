@@ -73,6 +73,12 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
     void loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius);
 
     /**
+     * 恢复加载图片
+     * @param context 上下文
+     */
+    void onResumeRequest(Context context);
+
+    /**
      * 停止加载图片
      * @param context 上下文
      */

@@ -203,12 +203,18 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     }
 
     @Override
+    public void onResumeRequest(Context context) {
+        if (isValidContextForGlide(context)) {
+            Glide.with(context).resumeRequests();
+        }
+    }
+
+    @Override
     public void onPauseRequest(Context context) {
         if (isValidContextForGlide(context)) {
             Glide.with(context).pauseRequests();
         }
     }
-
 
     @Override
     public void clearMemory(Context context) {
