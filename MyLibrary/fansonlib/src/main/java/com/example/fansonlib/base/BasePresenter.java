@@ -95,6 +95,9 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
      * @return true or false
      */
     public boolean isViewAttached() {
+        if(mBaseView == null){
+            return  false;
+        }
         return (mBaseView.get()) != null;
     }
 
