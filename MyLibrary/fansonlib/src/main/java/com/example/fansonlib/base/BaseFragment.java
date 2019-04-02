@@ -20,11 +20,11 @@ import com.example.fansonlib.manager.MyFragmentManager;
 
 
 /**
-* @author Created by：Fanson
-* Created on：2016/8/25.
-* Description：基类Fragment（带DataBinding）
-*/
-public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment implements  MyFragmentManager.OnBackClickListener,BaseView{
+ * @author Created by：Fanson
+ * Created on：2016/8/25.
+ * Description：基类Fragment（带DataBinding）
+ */
+public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment implements MyFragmentManager.OnBackClickListener, BaseView {
 
     /**
      * 宿主Activity
@@ -89,22 +89,23 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         rootView = mBinding.getRoot();
         mIsCreatedView = true;
-        initView(rootView,inflater,container, savedInstanceState);
+        initView(rootView, inflater, container, savedInstanceState);
         return rootView;
     }
 
     /**
      * onCreateView中初始化View
-     * @param rootView rootView
-     * @param inflater inflater
-     * @param container container
+     *
+     * @param rootView           rootView
+     * @param inflater           inflater
+     * @param container          container
      * @param savedInstanceState savedInstanceState
      * @return View
      */
-    protected abstract View initView(View rootView,LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState);
+    protected abstract View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     /**
      * 初始化数据
@@ -123,8 +124,8 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
 //        if (savedInstanceState == null) {
 //            if (!isHidden()) {
 //                isInited = true;
-                initData();
-                listenEvent();
+        initData();
+        listenEvent();
 //            }
 //        }
     }
@@ -203,13 +204,15 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
     /**
      * 第一次加载数据
      */
-    protected abstract void firstLoadData();
+    protected void firstLoadData() {
+    }
 
     /**
      * 获取DataBinding
+     *
      * @return DataBinding的绑定
      */
-    protected   D  getBinding(){
+    protected D getBinding() {
         return (D) mBinding;
     }
 
@@ -246,8 +249,8 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
     /**
      * 销毁hostActivity
      */
-    protected void finishHostActivity(){
-        if (hostActivity != null){
+    protected void finishHostActivity() {
+        if (hostActivity != null) {
             hostActivity.finish();
         }
     }
@@ -267,6 +270,10 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
     }
 
     @Override
+    public void showTip(String tipContent) {
+    }
+
+    @Override
     public boolean onBackClick() {
         if (getFragmentManager() == null) {
             return false;
@@ -279,6 +286,7 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
 
     /**
      * 通过Class跳转界面
+     *
      * @param targetActivity 目标Activity
      */
     public void startMyActivity(Class<?> targetActivity) {
@@ -287,8 +295,9 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
 
     /**
      * 含有Bundle通过Class跳转界面
+     *
      * @param targetActivity 目标Activity
-     * @param bundle 携带数据Bundle
+     * @param bundle         携带数据Bundle
      */
     public void startActivity(Class<?> targetActivity, Bundle bundle) {
         Intent intent = new Intent(hostActivity, targetActivity);

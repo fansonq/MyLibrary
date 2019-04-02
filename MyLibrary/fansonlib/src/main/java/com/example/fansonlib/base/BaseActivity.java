@@ -18,21 +18,43 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.callback.IFragmentListener;
+import com.example.fansonlib.constant.BaseConFragmentCode;
+import com.example.fansonlib.manager.MyFragmentManager;
 import com.example.fansonlib.utils.DimensUtils;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.NetWorkUtil;
+import com.example.fansonlib.view.LoadingDialog;
 
 /**
  * @author Created by：Fanson
  * Created on：2016/8/23
  * Description：Activity基类(带DataBinding)
  */
-public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity implements IFragmentListener {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
-
     protected Context mContext;
     protected D mBinding;
+    /**
+     * 当前生命周期状态
+     */
+    protected String mCurrentStatus = "";
+    protected static final String STATUS_CREATE = "onCreate";
+    protected static final String STATUS_START = "onStart";
+    protected static final String STATUS_RESUME = "onResume";
+    protected static final String STATUS_PAUSE = "onPause";
+    protected static final String STATUS_STOP = "onStop";
+    protected static final String STATUS_DESTROY = "onDestroy";
+
+    /**
+     * 加载动画框
+     */
+    private LoadingDialog mLoadingDialog;
+    /**
+     * Fragment的管理类
+     */
+    protected MyFragmentManager mFragmentManager;
     /**
      * 标记是否内存不足被重建
      */
@@ -42,7 +64,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     /**
      * 监听网络连接状态的广播
      */
-    private BroadcastReceiver netStateBroadcastReceiver;
+    private BroadcastReceiver mNetStateBroadcastReceiver;
 
     /**
      * 记录点击返回按钮的时间
@@ -53,6 +75,12 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      */
     protected static final long EXIT_TIME = 2000;
 
+
+    public BaseActivity() {
+        mContext = this;
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (savedInstanceState != null) {
@@ -62,7 +90,11 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mBinding = DataBindingUtil.setContentView(this, getContentView());
+        mCurrentStatus = STATUS_CREATE;
         initNetStateBroadCastReceiver();
+        if (mFragmentManager == null) {
+            mFragmentManager = new MyFragmentManager();
+        }
         initView(savedInstanceState);
         initData();
         listenEvent();
@@ -72,48 +104,6 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(PARAM_RECREATE, true);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //注销广播
-        if (netStateBroadcastReceiver != null) {
-            try {
-                unregisterReceiver(netStateBroadcastReceiver);
-            } catch (IllegalArgumentException ex) {
-                if (ex.getMessage().contains("Receiver not registered")) {
-                    //Ignore this exception
-                } else {
-                    throw ex;
-                }
-            }
-        }
-//        InputMethodUtils.fixInputMethodManagerLeak(this);
-    }
-
-    public BaseActivity() {
-        mContext = this;
     }
 
     /**
@@ -140,6 +130,59 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      */
     protected abstract void listenEvent();
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mCurrentStatus = STATUS_START;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mCurrentStatus = STATUS_RESUME;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mCurrentStatus = STATUS_PAUSE;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCurrentStatus = STATUS_STOP;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCurrentStatus = STATUS_DESTROY;
+        if (mFragmentManager != null) {
+            mFragmentManager.clearList();
+            mFragmentManager = null;
+        }
+        unregisterNetReceiver();
+    }
+
+    /**
+     * 注销监听网络状态的广播
+     */
+    private void unregisterNetReceiver(){
+        if (mNetStateBroadcastReceiver != null) {
+            try {
+                unregisterReceiver(mNetStateBroadcastReceiver);
+            } catch (IllegalArgumentException ex) {
+                if (ex.getMessage().contains("Receiver not registered")) {
+                    //Ignore this exception
+                } else {
+                    throw ex;
+                }
+            }
+        }
+    }
+
     /**
      * 获取DataBinding的绑定
      *
@@ -154,13 +197,13 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      */
     private void initNetStateBroadCastReceiver() {
         try {
-            netStateBroadcastReceiver = new BroadcastReceiver() {
+            mNetStateBroadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
                         if (!NetWorkUtil.isNetWordConnected(mContext.getApplicationContext())) {
                             MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
-                                    .margins(0, DimensUtils.dipToPx(mContext.getApplicationContext(), 25), 0, 0).show();
+                                    .margins(0, DimensUtils.dipToPx(mContext.getApplicationContext(), 50), 0, 0).show();
                             if (MySnackBarUtils.getSnackbarView() != null) {
                                 MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -176,7 +219,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
                 }
             };
             //注册广播
-            registerReceiver(netStateBroadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+            registerReceiver(mNetStateBroadcastReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -192,6 +235,61 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     public <T> T findMyViewId(int id) {
         T view = (T) findViewById(id);
         return view;
+    }
+
+    @Override
+    public void onFragmentCallback(Object... object) {
+        switch ((int) object[0]) {
+            case BaseConFragmentCode.FRAGMENT_BACK:
+                onBackPressed();
+                break;
+
+            case BaseConFragmentCode.POP_FRAGMENT:
+                mFragmentManager.popTopFragment(getSupportFragmentManager());
+                break;
+
+            case BaseConFragmentCode.SHOW_LOADING:
+                showLoading();
+                break;
+
+            case BaseConFragmentCode.HIDE_LOADING:
+                hideLoading();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mFragmentManager != null && mFragmentManager.handlerBackPress(getSupportFragmentManager()) && getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            return;
+        }
+        finish();
+    }
+
+    /**
+     * 显示加载框
+     */
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog();
+        }
+        mLoadingDialog.show(getSupportFragmentManager());
+    }
+
+    /**
+     * 隐藏加载框
+     */
+    public void hideLoading() {
+        if (mLoadingDialog != null) {
+            try {
+                mLoadingDialog.hideDialog(getSupportFragmentManager());
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            }
+            mLoadingDialog = null;
+        }
     }
 
     /**

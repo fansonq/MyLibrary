@@ -38,11 +38,12 @@ public class TestVmRepository extends BaseRepository{
 
         Map<String,Object> maps = new HashMap<>();
         maps.put("key","fanson");
-        getHttpUtils().post("getName",maps, new HttpResponseCallback<SimpleBean>() {
+        getHttpUtils().post("postName",maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
                 Log.d(TAG,"onSuccess");
-                mCallback.successful(bean);
+//                mCallback.successful(bean);
+                mCallback.failure(bean.getMessage());
             }
 
             @Override

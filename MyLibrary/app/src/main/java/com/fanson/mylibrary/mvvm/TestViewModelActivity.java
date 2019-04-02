@@ -107,16 +107,6 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     public void showTip(String tipContent) {
         MySnackBarUtils.showLong(getWindow().getDecorView(),tipContent).show();
     }

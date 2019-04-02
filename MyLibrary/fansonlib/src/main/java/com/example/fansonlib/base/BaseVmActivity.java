@@ -30,6 +30,11 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
     protected abstract void dataSuccessObserver();
 
     @Override
+    public void showTip(String tipContent) {
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mViewModel != null){
