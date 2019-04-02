@@ -14,6 +14,9 @@ import android.view.ViewGroup;
  */
 public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewDataBinding> extends BaseFragment<D> implements BaseView {
 
+    /**
+     * 泛型，ViewModel实例
+     */
     protected VM mViewModel;
 
     @Override
@@ -23,11 +26,6 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
         return  rootView;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
     /**
      * 创建ViewModel实例
      * @return ViewModel实例
@@ -35,9 +33,14 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
     protected abstract VM  createViewModel();
 
     /**
-     * 观察接收成功的数据
+     * 观察接收ViewModel返回的成功数据
      */
     protected abstract void dataSuccessObserver();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
     @Override
     public void onDestroy() {

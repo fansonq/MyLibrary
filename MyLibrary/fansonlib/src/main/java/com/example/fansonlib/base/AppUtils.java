@@ -1,10 +1,12 @@
 package com.example.fansonlib.base;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import java.util.List;
 
@@ -122,6 +124,24 @@ public class AppUtils {
      */
     public static String getString(int stringId) {
         return mApplication.getString(stringId);
+    }
+
+    /**
+     * 判断Activity是否可用
+     * @param activity Activity
+     * @return true/false
+     */
+    public boolean isValidActivity(Activity activity) {
+        boolean valid = true;
+        if (activity == null) {
+            return false;
+        }
+        if (activity.isFinishing()) {
+            valid = false;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
+            valid = false;
+        }
+        return valid;
     }
 
 }

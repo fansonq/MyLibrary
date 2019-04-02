@@ -6,19 +6,24 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by fansonq on 2017/6/28.
- * 管理App中Activity的工具类
- */
+* @author Created by：Fanson
+* Created on：2017/6/18
+* Description：管理App中Activity的工具类
+*/
 
 public class MyActivityManager {
 
-    public volatile static MyActivityManager mActivityManager;
+    private volatile static MyActivityManager mActivityManager;
 
     /**
-     * 装载Activity
+     * 装载Activity的List
      */
-    public static List<Activity> mActivities = new LinkedList<>();
+    private static List<Activity> mActivities = new LinkedList<>();
 
+    /**
+     * 获取MyActivityManager实例，Double Check
+     * @return MyActivityManager
+     */
     public static MyActivityManager getAppManager() {
         if (mActivityManager == null) {
             synchronized (MyActivityManager.class) {
@@ -63,9 +68,7 @@ public class MyActivityManager {
      * @param activity 指定Activity
      */
     public synchronized void removeActivity(Activity activity) {
-        if (mActivities.contains(activity)) {
-            mActivities.remove(activity);
-        }
+        mActivities.remove(activity);
     }
 
     /**

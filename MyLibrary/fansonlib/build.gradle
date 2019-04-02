@@ -119,4 +119,6 @@ dependencies {
 
     compile 'com.orhanobut:logger:2.2.0'
 
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+
 }
