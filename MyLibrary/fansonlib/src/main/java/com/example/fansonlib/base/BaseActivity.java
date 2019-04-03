@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.callback.IBackFragmentListener;
 import com.example.fansonlib.callback.IFragmentListener;
 import com.example.fansonlib.constant.BaseConFragmentCode;
 import com.example.fansonlib.manager.MyFragmentManager;
@@ -31,7 +32,7 @@ import com.example.fansonlib.view.LoadingDialog;
  * Created on：2016/8/23
  * Description：Activity基类(带DataBinding)
  */
-public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity implements IFragmentListener {
+public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatActivity implements IFragmentListener, IBackFragmentListener {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
     protected Context mContext;
