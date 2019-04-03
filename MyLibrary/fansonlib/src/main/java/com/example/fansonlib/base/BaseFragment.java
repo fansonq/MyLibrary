@@ -54,6 +54,10 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
      */
     protected boolean mIsCreatedView = false;
     /**
+     * 记录Fragment是否已onStart
+     */
+    protected boolean mIsStart = false;
+    /**
      * 记录Fragment是否可见，默认false
      */
     protected boolean mIsVisibleToUser = false;
@@ -138,6 +142,7 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
     @Override
     public void onStart() {
         super.onStart();
+        mIsStart = true;
         mIBackFragmentListener.currentFragmentBack(this);
     }
 
@@ -146,6 +151,12 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
         super.onResume();
         mIsOnResume = true;
         firstVisibleToUser();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mIsStart = false;
     }
 
     @Override
