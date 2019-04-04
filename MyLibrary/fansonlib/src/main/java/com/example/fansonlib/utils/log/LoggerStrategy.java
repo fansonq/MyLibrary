@@ -52,23 +52,23 @@ public class LoggerStrategy implements BaseLogStrategy{
     }
 
     @Override
-    public void i(String message, Object... object) {
-        Logger.i(message,object);
+    public void i(String message) {
+        Logger.i(message);
     }
 
     @Override
-    public void v(String message, Object... object) {
-        Logger.v(message,object);
+    public void v(String message) {
+        Logger.v(message);
     }
 
     @Override
-    public void e(String message, Object... object) {
-        Logger.e(message,object);
+    public void e(String message ) {
+        Logger.e(message);
     }
 
     @Override
-    public void w(String message, Object... object) {
-        Logger.w(message,object);
+    public void w(String message) {
+        Logger.w(message);
     }
 
     @Override

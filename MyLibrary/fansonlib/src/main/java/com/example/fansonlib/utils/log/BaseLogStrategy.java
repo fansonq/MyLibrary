@@ -30,30 +30,26 @@ public interface BaseLogStrategy {
     /**
      * 输出information日志
      * @param message message
-     * @param object object
      */
-    void i(String message,Object... object);
+    void i(String message);
 
     /**
      * 输出verbose日志
      * @param message message
-     * @param object object
      */
-    void v(String message,Object... object);
+    void v(String message);
 
     /**
      * 输出error日志
      * @param message message
-     * @param object object
      */
-    void e(String message,Object... object);
+    void e(String message);
 
     /**
      * 输出warning日志
      * @param message message
-     * @param object object
      */
-    void w(String message,Object... object);
+    void w(String message);
 
     /**
      * 输出json日志

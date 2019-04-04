@@ -5,12 +5,14 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
+import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseVmActivity;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.log.LogConfig;
+import com.example.fansonlib.utils.log.MyLogUtils;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.SimpleBean;
 import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
@@ -45,6 +47,11 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected void initData() {
+        LogConfig config = new LogConfig.Builder()
+                .setTag(TAG)
+                .setIsLoggable(AppUtils.isDebug())
+                .build();
+        MyLogUtils.init(config);
     }
 
     @Override
@@ -68,7 +75,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
         mViewModel.getData().observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
-                Log.d(TAG, "请求数据成功，返回数据");
+                MyLogUtils.getInstance().d( "请求数据成功，返回数据");
                 if (bean != null) {
                     mBinding.tv.setText(bean.getData().getName());
                     ShowToast.singleLong("请求数据成功");
@@ -80,29 +87,30 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG,"onStart");
+        MyLogUtils.getInstance().d("onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG,"onResume");
+        MyLogUtils.getInstance().d("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG,"onPause");
+        MyLogUtils.getInstance().d("onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG,"onStop");
+        MyLogUtils.getInstance().d("onStop");
     }
 
     @Override
     public void showFailure(String errorMsg) {
+        MyLogUtils.getInstance().e(errorMsg);
         mBinding.tv.setText(errorMsg);
     }
 
@@ -114,5 +122,6 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     protected void onDestroy() {
         super.onDestroy();
+       MyLogUtils.getInstance().d( MyLogUtils.loganFilesInfo());
     }
 }
