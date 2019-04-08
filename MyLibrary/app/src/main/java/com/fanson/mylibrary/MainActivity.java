@@ -1,11 +1,13 @@
 package com.fanson.mylibrary;
 
 import android.arch.lifecycle.Observer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -144,22 +146,16 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         });
 
         mBtnNotification.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 //                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
-                MyNotificationUtils.init(getApplicationContext());
-//                MyNotificationUtils.buildSimple(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
-//                        "通知栏内容", MyNotificationUtils.buildIntent(MainActivity.class)).show();
 
-                MyNotificationUtils.buildProgress(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
-                        1, 100).show();
-                for (int i = 0; i < 100; i++) {
-                    try {
-                        Thread.sleep(1000);
-                        MyNotificationUtils.updateProgress(i).show();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)){
+                    MyNotificationUtils.openNotificationSetting(MainActivity.this);
+                }else {
+                    MyNotificationUtils myNotificationUtils = new MyNotificationUtils(MainActivity.this);
+                    myNotificationUtils.sendNotification(1,"通知标题","通知栏内容",R.mipmap.ic_launcher_round);
                 }
             }
         });
