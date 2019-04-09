@@ -140,9 +140,9 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
         mBinding.btnToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)).apply();
+                ShowToast.Config.getInstance()
+                        .setBgColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)).apply();
                 ShowToast.singleShort("测试的数据提示 " + (int)(1+Math.random()*(10-1+1)));
-
             }
         });
 
