@@ -40,10 +40,10 @@ public class ShowToast {
     private static Typeface currentTypeface = LOADED_TOAST_TYPEFACE;
     private static int textSize = 12; // in SP
     private static boolean tintIcon = true;
+    private static boolean allowQueue = true;
+    private static Toast lastToast = null;
 
     private static Toast mToast;
-
-    private static TextView mTvToast;
 
     /**
      * 获取非连续的Toast实例
@@ -130,12 +130,12 @@ public class ShowToast {
 
 
     @CheckResult
-    public static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon, int duration, boolean shouldTint) {
-        final Toast currentToast = new Toast(context);
+    public static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon, int duration, boolean withIcon, boolean shouldTint) {
+        final Toast currentToast = Toast.makeText(context, "", duration);
         final View toastLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.toast_layout, null);
         final ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.toast_icon);
-        mTvToast = (TextView) toastLayout.findViewById(R.id.toast_text);
+        final TextView mTvToast = (TextView) toastLayout.findViewById(R.id.toast_text);
         Drawable drawableFrame;
 
         if (shouldTint) {
@@ -145,15 +145,14 @@ public class ShowToast {
         }
         setBackground(toastLayout, drawableFrame);
 
-//        if (withIcon) {
-        if (icon == null)
-            throw new IllegalArgumentException("Avoid passing 'icon' as null if 'withIcon' is set to true");
-        if (tintIcon)
-            icon = tintIcon(icon, DEFAULT_TEXT_COLOR);
-        setBackground(toastIcon, icon);
-//        } else {
-//            toastIcon.setVisibility(View.GONE);
-//        }
+        if (withIcon) {
+            if (icon == null) {
+                throw new IllegalArgumentException("Avoid passing 'icon' as null if 'withIcon' is set to true");
+            }
+            setBackground(toastIcon, tintIcon ? tintIcon(icon, DEFAULT_TEXT_COLOR) : icon);
+        } else {
+            toastIcon.setVisibility(View.GONE);
+        }
 
         mTvToast.setTextColor(DEFAULT_TEXT_COLOR);
         mTvToast.setText(message);
@@ -161,7 +160,13 @@ public class ShowToast {
         mTvToast.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
         currentToast.setView(toastLayout);
-        currentToast.setDuration(duration);
+
+        if (!allowQueue){
+            if (lastToast != null)
+                lastToast.cancel();
+            lastToast = currentToast;
+        }
+
         return currentToast;
     }
 
@@ -197,6 +202,7 @@ public class ShowToast {
         private Typeface typeface = ShowToast.currentTypeface;
         private int textSize = ShowToast.textSize;
         private boolean tintIcon = ShowToast.tintIcon;
+        private boolean allowQueue = true;
 
         @CheckResult
         public static Config getInstance() {
@@ -209,6 +215,7 @@ public class ShowToast {
             ShowToast.currentTypeface = LOADED_TOAST_TYPEFACE;
             ShowToast.textSize = 12;
             ShowToast.tintIcon = true;
+            ShowToast.allowQueue = true;
         }
 
         @CheckResult
@@ -241,12 +248,19 @@ public class ShowToast {
             return this;
         }
 
+        @CheckResult
+        public Config allowQueue(boolean allowQueue) {
+            this.allowQueue = allowQueue;
+            return this;
+        }
+
         public void apply() {
             ShowToast.DEFAULT_TEXT_COLOR = DEFAULT_TEXT_COLOR;
             ShowToast.INFO_COLOR = INFO_COLOR;
             ShowToast.currentTypeface = typeface;
             ShowToast.textSize = textSize;
             ShowToast.tintIcon = tintIcon;
+            ShowToast.allowQueue = allowQueue;
         }
     }
 
