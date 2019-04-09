@@ -53,14 +53,9 @@ public class ShowToast {
      * @return
      */
     private static Toast getSingleToast(String text, int duration) {
-        if (mToast == null) {
 //            mToast = Toast.makeText(AppUtils.getAppContext(), text, duration);
-            mToast = custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(), R.mipmap.ic_tip),
-                    duration, true);
-        } else {
-//            mToast.setText(text);
-            changeShowMessage(text);
-        }
+        mToast = custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(), R.mipmap.ic_tip),
+                duration, true);
         return mToast;
     }
 
@@ -131,10 +126,6 @@ public class ShowToast {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void changeShowMessage(@NonNull CharSequence message) {
-        mTvToast.setText(message);
     }
 
 

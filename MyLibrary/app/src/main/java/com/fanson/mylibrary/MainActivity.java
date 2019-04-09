@@ -49,7 +49,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBinding> implements ContractTest.TestView {
+public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBinding> implements ContractTest.TestView {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -106,7 +106,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                         AppUtils.getAppContext().getExternalCacheDir() + "/apk/", "Test.apk", new FileDownLoadObserver<File>() {
                             @Override
                             public void onDownLoadSuccess(File file) {
-                                Log.d(TAG,"onDownLoadSuccess");
+                                Log.d(TAG, "onDownLoadSuccess");
                             }
 
                             @Override
@@ -116,7 +116,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
                             @Override
                             public void onProgress(int progress, long total) {
-                                Log.d(TAG,"progress = "+(float) progress % total);
+                                Log.d(TAG, "progress = " + (float) progress % total);
                             }
                         });
             }
@@ -140,8 +140,9 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBinding.btnToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
-                ShowToast.Long("测试的数据提示");
+                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)).apply();
+                ShowToast.singleShort("测试的数据提示 " + (int)(1+Math.random()*(10-1+1)));
+
             }
         });
 
@@ -151,11 +152,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
             public void onClick(View v) {
 //                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
 
-                if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)){
+                if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)) {
                     MyNotificationUtils.openNotificationSetting(MainActivity.this);
-                }else {
+                } else {
                     MyNotificationUtils myNotificationUtils = new MyNotificationUtils(MainActivity.this);
-                    myNotificationUtils.sendNotification(1,"通知标题","通知栏内容",R.mipmap.ic_launcher_round);
+                    myNotificationUtils.sendNotification(1, "通知标题", "通知栏内容", R.mipmap.ic_launcher_round);
                 }
             }
         });
@@ -163,7 +164,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBinding.btnLoadingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startMyActivity(TestLoadingActivity.class);
+                startMyActivity(TestLoadingActivity.class);
             }
         });
 
@@ -275,7 +276,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         ImageLoaderUtils.init();
         ImageLoaderUtils.getInstance()
                 .setImageLoaderConfig(new ImageLoaderConfig.Builder().placePicRes(R.mipmap.default_image).build())
-                .loadImage(this,iv_pic,picUrl);
+                .loadImage(this, iv_pic, picUrl);
 
 //        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
