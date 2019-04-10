@@ -26,7 +26,6 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
-import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.utils.toast.MyToastUtils;
@@ -258,12 +257,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 .setConfirmListener(new IConfirmListener() {
                     @Override
                     public void onConfirm() {
-                        ShowToast.singleLong("onConfirm");
+                        MyToastUtils.init(null);
+                        MyToastUtils.getInstance().showShort("onConfirm");
                     }
                 }).setCancelListener(new ICancelListener() {
             @Override
             public void onCancel() {
-                ShowToast.singleLong("onCancel");
+                MyToastUtils.init(null);
+                MyToastUtils.getInstance().showShort("onCancel");
             }
         }).show(getSupportFragmentManager());
 
