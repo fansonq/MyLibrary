@@ -29,6 +29,8 @@ import com.example.fansonlib.rxbus.event.EventThread;
 import com.example.fansonlib.utils.ShowToast;
 import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
+import com.example.fansonlib.utils.toast.MyToastUtils;
+import com.example.fansonlib.utils.toast.ToastConfig;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -140,9 +142,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
         mBinding.btnToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowToast.Config.getInstance()
-                        .setBgColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent)).apply();
-                ShowToast.singleShort("测试的数据提示 " + (int)(1+Math.random()*(10-1+1)));
+                testToast();
             }
         });
 
@@ -266,6 +266,29 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 ShowToast.singleLong("onCancel");
             }
         }).show(getSupportFragmentManager());
+
+    }
+
+    /**
+     * 测试Toast功能
+     */
+    private void testToast(){
+        ToastConfig config = new ToastConfig.Builder()
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorPrimary))
+                .setTextSize(12)
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorWhite)).build();
+        MyToastUtils.init(config);
+
+        //更改配置
+        ToastConfig config2 = new ToastConfig.Builder()
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorAccent))
+                .setTextSize(12)
+                .setIconResource(R.mipmap.ic_no_data)
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorWhite)).build();
+
+        MyToastUtils.getInstance().changeConfig(config2);
+
+        MyToastUtils.getInstance().showShort("测试的数据提示 " + (int)(1+Math.random()*(10-1+1)));
 
     }
 
