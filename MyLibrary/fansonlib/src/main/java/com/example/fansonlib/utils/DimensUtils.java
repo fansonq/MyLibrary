@@ -10,8 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+
+import java.lang.reflect.Method;
 
 /**
  * @author Created by：fanson
@@ -135,6 +139,29 @@ public class DimensUtils {
         //statusBarHeight是上面所求的状态栏的高度
         int titleHeight = contentTop - getStatusHeight(activity);
         return titleHeight > 0 ? titleHeight : 0;
+    }
+
+    /**
+     * 获取虚拟导航键的高度
+     * @param context  上下文
+     * @return 虚拟导航键的高度
+     */
+    public static int getVirtualBarHeight(Context context) {
+        int vh = 0;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        try {
+            @SuppressWarnings("rawtypes")
+            Class c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            vh = dm.heightPixels - display.getHeight();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vh;
     }
 
     /**
