@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.example.fansonlib.widget.loadingview.FadeScaleViewAnimProvider;
 import com.example.fansonlib.widget.loadingview.LoadingStateView;
 
@@ -34,7 +34,8 @@ public class TestLoadingActivity extends AppCompatActivity {
         mLoadingStateView.setNoDataAction(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowToast.singleLong("hideNoDataView");
+                MyToastUtils.init(null);
+                MyToastUtils.getInstance().showLong("hideNoDataView");
                     mLoadingStateView.hideNoDataView();
 
             }

@@ -1,21 +1,29 @@
 package com.example.fansonlib.utils.toast;
 
 /**
- * Created by fansonq on 2017/10/21.
- * Toast的策略接口
- */
-
+* @author Created by：Fanson
+* Created on：2019/4/9 18:24
+* Description：Toast的策略接口
+*/
 public interface BaseToastStrategy {
 
     /**
-     * 长时间的显示
+     * 设置框架的配置参数
+     * @param config 配置参数
      */
-    void showLong();
+    void setToastConfig(ToastConfig config);
+
+    /**
+     * 长时间的显示
+     * @param message 提示语
+     */
+    void showLong(String message);
 
     /**
      * 短时间的显示
+     * @param message 提示语
      */
-    void showShort();
+    void showShort(String message);
 
 
 }

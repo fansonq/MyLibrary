@@ -1,4 +1,4 @@
-package com.example.fansonlib.utils;
+package com.example.fansonlib.utils.toast;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,12 +23,13 @@ import com.example.fansonlib.R;
 import com.example.fansonlib.base.AppUtils;
 
 /**
- * @author Created by：fanson
- * Created on：2017/8/2 14:40
- * Describe：Toast工具类
+ * @author Created by：Fanson
+ * Created Time: 2019/4/9 18:25
+ * Describe：Toast策略的实现
  */
+public class ToastStrategy implements BaseToastStrategy {
 
-public class ShowToast {
+    private static final String TAG = ToastStrategy.class.getSimpleName();
 
     /**
      * 文字颜色
@@ -40,15 +41,49 @@ public class ShowToast {
      */
     private static int sDefaultBgColor = Color.parseColor("#FFFFFF");
 
-    private static final Typeface LOADED_TOAST_TYPEFACE = Typeface.create("sans-serif-condensed", Typeface.NORMAL);
-    private static Typeface sCurrentTypeface = LOADED_TOAST_TYPEFACE;
+    /**
+     * 提示语的字体
+     */
+    private static Typeface sCurrentTypeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL);;
+
     /**
      * 提示语文字大小，默认12sp
      */
-    private static int textSize = 12;
-    private static boolean tintIcon = true;
-    private static boolean allowQueue = true;
+    private static int sTextSize = 12;
+
+    /**
+     * 图标资源id
+     */
+    private static int sIconResource = R.mipmap.ic_tip;
+
+    /**
+     * 绘色功能Tint是否可用
+     */
+    private static boolean sIsTintEnable = true;
+
+    /**
+     * 是否覆盖上一条toast
+     */
+    private static boolean sAllowQueue = false;
+
+    /**
+     * 暂存最后一个toast对象
+     */
     private static Toast lastToast = null;
+
+
+    public ToastStrategy(){
+    }
+
+    @Override
+    public void setToastConfig(ToastConfig config) {
+        ToastStrategy.Config.getInstance()
+                .setTextColor(config.getTextColor())
+                .setTextSize(config.getTextSize())
+                .setBgColor(config.getBgColor())
+                .setIconResource(config.getIconResource())
+                .apply();
+    }
 
     /**
      * 获取非连续的Toast实例
@@ -58,15 +93,21 @@ public class ShowToast {
      * @return toast对象
      */
     private static Toast getSingleToast(String text, int duration) {
-        return custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(), R.mipmap.ic_tip), duration, true, true);
+        return custom(AppUtils.getAppContext(), text, getDrawable(AppUtils.getAppContext(),sIconResource), duration, true, true);
     }
 
-    /**
-     * 非连续弹出的Toast（短）
-     *
-     * @param message 内容
-     */
-    public static void singleShort(String message) {
+    @Override
+    public void showLong(String message) {
+        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
+        try {
+            getSingleToast(message, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void showShort(String message) {
         // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
         try {
             getSingleToast(message, Toast.LENGTH_SHORT).show();
@@ -75,27 +116,14 @@ public class ShowToast {
         }
     }
 
-    /**
-     * 非连续弹出的Toast（长）
-     *
-     * @param text 内容
-     */
-    public static void singleLong(String text) {
-        // 被调用有时会出现android.view.ViewRootImpl$CalledFromWrongThreadException，初步这样捕捉异常处理
-        try {
-            getSingleToast(text, Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @CheckResult
-    public static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon, int duration, boolean withIcon, boolean shouldTint) {
+    private static Toast custom(@NonNull Context context, @NonNull CharSequence message, Drawable icon, int duration, boolean withIcon, boolean shouldTint) {
         @SuppressLint("ShowToast") final Toast currentToast = Toast.makeText(context, "", duration);
         final View toastLayout = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
-                .inflate(R.layout.toast_layout, null);
-        final ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.toast_icon);
-        final TextView mTvToast = (TextView) toastLayout.findViewById(R.id.toast_text);
+                .inflate(R.layout.layout_toast, null);
+        final ImageView toastIcon = (ImageView) toastLayout.findViewById(R.id.iv_toast);
+        final TextView mTvToast = (TextView) toastLayout.findViewById(R.id.tv_toast);
         Drawable drawableFrame;
 
         if (shouldTint) {
@@ -109,7 +137,7 @@ public class ShowToast {
             if (icon == null) {
                 throw new IllegalArgumentException("Avoid passing 'icon' as null if 'withIcon' is set to true");
             }
-            setBackground(toastIcon, tintIcon ? tintIcon(icon, sDefaultTextColor) : icon);
+            setBackground(toastIcon, sIsTintEnable ? tintIcon(icon, sDefaultTextColor) : icon);
         } else {
             toastIcon.setVisibility(View.GONE);
         }
@@ -117,11 +145,11 @@ public class ShowToast {
         mTvToast.setTextColor(sDefaultTextColor);
         mTvToast.setText(message);
         mTvToast.setTypeface(sCurrentTypeface);
-        mTvToast.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
+        mTvToast.setTextSize(TypedValue.COMPLEX_UNIT_SP, sTextSize);
 
         currentToast.setView(toastLayout);
 
-        if (!allowQueue) {
+        if (!sAllowQueue) {
             if (lastToast != null) {
                 lastToast.cancel();
             }
@@ -131,6 +159,12 @@ public class ShowToast {
         return currentToast;
     }
 
+    /**
+     * 将drawable变色
+     * @param drawable drawable
+     * @param tintColor 更改后的颜色
+     * @return drawable
+     */
     public static Drawable tintIcon(@NonNull Drawable drawable, @ColorInt int tintColor) {
         drawable.setColorFilter(tintColor, PorterDuff.Mode.SRC_IN);
         return drawable;
@@ -157,29 +191,37 @@ public class ShowToast {
         }
     }
 
+
+    /**
+     * 配置参数
+     */
     public static class Config {
-        private int mDefaultTextColor = ShowToast.sDefaultTextColor;
-        private int mDefaultBgColor = ShowToast.sDefaultBgColor;
-        private Typeface typeface = ShowToast.sCurrentTypeface;
-        private int textSize = ShowToast.textSize;
-        private boolean tintIcon = ShowToast.tintIcon;
-        private boolean allowQueue = true;
+        private int mDefaultTextColor = ToastStrategy.sDefaultTextColor;
+        private int mDefaultBgColor = ToastStrategy.sDefaultBgColor;
+        private Typeface typeface = ToastStrategy.sCurrentTypeface;
+        private int mTextSize = ToastStrategy.sTextSize;
+        private boolean mIsTintEnable = true;
+        private int mIconResource = R.mipmap.ic_tip;
 
         @CheckResult
         public static Config getInstance() {
             return new Config();
         }
 
+        /**
+         * 重置
+         */
         public static void reset() {
-            ShowToast.sDefaultTextColor = Color.parseColor("#FFFFFF");
-            ShowToast.sCurrentTypeface = LOADED_TOAST_TYPEFACE;
-            ShowToast.textSize = 12;
-            ShowToast.tintIcon = true;
-            ShowToast.allowQueue = true;
+            ToastStrategy.sDefaultTextColor = Color.parseColor("#FFFFFF");
+            ToastStrategy.sCurrentTypeface = Typeface.create("sans-serif-condensed", Typeface.NORMAL);;
+            ToastStrategy.sTextSize = 12;
+            ToastStrategy.sIsTintEnable = true;
+            ToastStrategy.sIconResource = R.mipmap.ic_tip;
         }
 
         /**
          * 设置文字颜色
+         *
          * @param textColor 文字颜色
          * @return Config
          */
@@ -190,6 +232,7 @@ public class ShowToast {
 
         /**
          * 设置背景颜色
+         *
          * @param bgColor 背景颜色
          * @return Config
          */
@@ -198,42 +241,58 @@ public class ShowToast {
             return this;
         }
 
-        @CheckResult
-        public Config setToastTypeface(@NonNull Typeface typeface) {
+        /**
+         * 设置文字字体
+         * @param typeface 文字字体
+         * @return Config
+         */
+        public Config setTextTypeface(@NonNull Typeface typeface) {
             this.typeface = typeface;
             return this;
         }
 
         /**
          * 设置文字大小
+         *
          * @param sizeInSp 文字大小sp
          * @return Config
          */
         public Config setTextSize(int sizeInSp) {
-            this.textSize = sizeInSp;
+            this.mTextSize = sizeInSp;
             return this;
         }
 
-        @CheckResult
-        public Config tintIcon(boolean tintIcon) {
-            this.tintIcon = tintIcon;
+        /**
+         * 设置绘色功能tint
+         *
+         * @param isEnable 是否支持
+         * @return Config
+         */
+        public Config setTintEnable(boolean isEnable) {
+            this.mIsTintEnable = isEnable;
             return this;
         }
 
-        @CheckResult
-        public Config allowQueue(boolean allowQueue) {
-            this.allowQueue = allowQueue;
+        /**
+         * 设置图标资源
+         *
+         * @param iconResource 图标资源
+         * @return Config
+         */
+        public Config setIconResource(int iconResource) {
+            this.mIconResource = iconResource;
             return this;
         }
 
         public void apply() {
-            ShowToast.sDefaultTextColor = mDefaultTextColor;
-            ShowToast.sDefaultBgColor = mDefaultBgColor;
-            ShowToast.sCurrentTypeface = typeface;
-            ShowToast.textSize = textSize;
-            ShowToast.tintIcon = tintIcon;
-            ShowToast.allowQueue = allowQueue;
+            ToastStrategy.sDefaultTextColor = mDefaultTextColor;
+            ToastStrategy.sDefaultBgColor = mDefaultBgColor;
+            ToastStrategy.sCurrentTypeface = typeface;
+            ToastStrategy.sTextSize = mTextSize;
+            ToastStrategy.sIsTintEnable = mIsTintEnable;
+            ToastStrategy.sIconResource = mIconResource;
         }
     }
+
 
 }
