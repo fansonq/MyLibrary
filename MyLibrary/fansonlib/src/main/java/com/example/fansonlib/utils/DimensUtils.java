@@ -42,6 +42,18 @@ public class DimensUtils {
     }
 
     /**
+     * 将px值转换为sp值，保证文字大小不变
+     *
+     * @param context 上下文
+     * @param pxValue px值
+     * @return sp值
+     */
+    public static int pxToSp(Context context, float pxValue) {
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
      * 将sp值转换为px值
      */
     public static int sp2px(Context context, float spValue) {
@@ -143,7 +155,8 @@ public class DimensUtils {
 
     /**
      * 获取虚拟导航键的高度
-     * @param context  上下文
+     *
+     * @param context 上下文
      * @return 虚拟导航键的高度
      */
     public static int getVirtualBarHeight(Context context) {

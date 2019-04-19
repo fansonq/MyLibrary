@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.utils.DimensUtils;
 import com.example.fansonlib.widget.loading.MyProgressWheel;
 
 /**
@@ -96,7 +97,7 @@ public class LoadingStateView extends FrameLayout {
             mErrorDrawable = a.getDrawable(R.styleable.LoadingStateView_errorDrawable);
             mNoDataDrawable = a.getDrawable(R.styleable.LoadingStateView_emptyDrawable);
             mProgressViewId = a.getResourceId(R.styleable.LoadingStateView_progressView, -1);
-            mTextSize = a.getDimensionPixelSize(R.styleable.LoadingStateView_tipTextSize, 16);
+            mTextSize = DimensUtils.pxToSp(mContext,a.getDimension(R.styleable.LoadingStateView_tipTextSize, 14));
             mTextColor = a.getColor(R.styleable.LoadingStateView_tipTextColor, Color.GRAY);
             mDrawableColor = a.getColor(R.styleable.LoadingStateView_drawableColor, 0);
         } finally {
@@ -284,12 +285,12 @@ public class LoadingStateView extends FrameLayout {
                     });
                     mHideAnimation.setFillAfter(false);
                     toBeHided.startAnimation(mHideAnimation);
-                } else
-                    toBeHided.setVisibility(GONE);
+                } else{
+                    toBeHided.setVisibility(GONE);}
             }
             if (toBeShown != null) {
-                if (toBeShown.getVisibility() != VISIBLE)
-                    toBeShown.setVisibility(VISIBLE);
+                if (toBeShown.getVisibility() != VISIBLE){
+                    toBeShown.setVisibility(VISIBLE);}
                 mCurrentShowingView = toBeShown;
                 if (mShowAnimation != null) {
                     mShowAnimation.setFillAfter(false);
@@ -341,8 +342,8 @@ public class LoadingStateView extends FrameLayout {
      * @param bottom
      */
     public void setProgressContentViewMargin(int left, int top, int right, int bottom) {
-        if (mProgressWheel != null)
-            ((LinearLayout.LayoutParams) mProgressWheel.getLayoutParams()).setMargins(left, top, right, bottom);
+        if (mProgressWheel != null){
+            ((LinearLayout.LayoutParams) mProgressWheel.getLayoutParams()).setMargins(left, top, right, bottom);}
     }
 
     public void setInfoContentViewMargin(int left, int top, int right, int bottom) {
