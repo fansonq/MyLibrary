@@ -32,7 +32,6 @@ import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.example.fansonlib.utils.toast.ToastConfig;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
-import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.adapter.RecyclerViewActivity;
 import com.fanson.mylibrary.constant.RxBusTag;
@@ -254,19 +253,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
 
     private void testDialogFragment() {
         DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试.抱歉！暂时没有在线客服人员，请稍后再试","取消按钮","确定按钮",false)
-                .setConfirmListener(new IConfirmListener() {
-                    @Override
-                    public void onConfirm() {
-                        MyToastUtils.init(null);
-                        MyToastUtils.getInstance().showShort("onConfirm");
-                    }
-                }).setCancelListener(new ICancelListener() {
+               .setCancelListener(new ICancelListener() {
             @Override
             public void onCancel() {
                 MyToastUtils.init(null);
                 MyToastUtils.getInstance().showShort("onCancel");
             }
-        }).show(getSupportFragmentManager());
+        }).setOutCancel(true).show(getSupportFragmentManager());
 
     }
 

@@ -9,6 +9,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,6 +78,12 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      */
     protected static final long EXIT_TIME = 2000;
 
+    /**
+     * 延迟加载的Handler
+     */
+    private Handler mDelayLoadHandler;
+    private Runnable mDelayLoadRunnable;
+
 
     public BaseActivity() {
         mContext = this;
@@ -100,6 +107,30 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
         initView(savedInstanceState);
         initData();
         listenEvent();
+    }
+
+    /**
+     * 初始化延迟加载数据的功能
+     *
+     * @param delayTime 延迟时间：毫秒
+     */
+    protected void initDelayLoadData(int delayTime) {
+        mDelayLoadHandler = new Handler();
+        mDelayLoadRunnable = new Runnable() {
+            @Override
+            public void run() {
+                startDelayLoad();
+            }
+        };
+        mDelayLoadHandler.postDelayed(mDelayLoadRunnable, delayTime);
+    }
+
+    /**
+     * 延迟加载数据
+     * <p>调用此方法之前，必须先调用initDelayLoadData方法
+     */
+    protected void startDelayLoad() {
+        //用户手动覆写
     }
 
     @Override
@@ -166,12 +197,23 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
             mFragmentManager = null;
         }
         unregisterNetReceiver();
+        releaseDelayHandler();
+    }
+
+    /**
+     * 释放延迟加载数据的Handler
+     */
+    private void releaseDelayHandler() {
+        if (mDelayLoadHandler != null) {
+            mDelayLoadHandler.removeCallbacks(mDelayLoadRunnable);
+            mDelayLoadHandler = null;
+        }
     }
 
     /**
      * 注销监听网络状态的广播
      */
-    private void unregisterNetReceiver(){
+    private void unregisterNetReceiver() {
         if (mNetStateBroadcastReceiver != null) {
             try {
                 unregisterReceiver(mNetStateBroadcastReceiver);

@@ -52,6 +52,14 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 .setIsLoggable(AppUtils.isDebug())
                 .build();
         MyLogUtils.init(config);
+
+        initDelayLoadData(20000);
+    }
+
+    @Override
+    protected void startDelayLoad() {
+        super.startDelayLoad();
+        mViewModel.getData(1);
     }
 
     @Override
