@@ -22,7 +22,7 @@ public class LoadingDialog extends BaseDialogFragment implements DialogInterface
     public LoadingDialog(){
         this.setWidth(120);
         this.setHeight(120);
-        this.setOutCancel(true);
+        this.setOutCancel(false);
     }
 
     @Override
@@ -34,6 +34,8 @@ public class LoadingDialog extends BaseDialogFragment implements DialogInterface
     public void convertView(ViewHolder holder, BaseDialogFragment baseDialogFragment) {
         mLoadingView = holder.getView(R.id.loadingView);
         mLoadingView.show();
+
+        this.getDialog().setOnKeyListener(this);
     }
 
     /**
