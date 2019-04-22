@@ -66,7 +66,7 @@ public class ManifestUtils {
      * @param chanelKey 渠道Key
      * @return <meta-data>元素的值
      */
-    public static int getChannelData(Context context, String chanelKey) {
+    public static Object getChannelData(Context context, String chanelKey) {
         ApplicationInfo appInfo = null;
         int value = 0;
         try {
