@@ -201,7 +201,6 @@ public class MyLogUtils {
                 .setEncryptIV16("0123456789012345".getBytes())
                 .build();
         Logan.init(config);
-        Logan.init(config);
         Logan.setDebug(true);
         Logan.setOnLoganProtocolStatus(new OnLoganProtocolStatus() {
             @Override
