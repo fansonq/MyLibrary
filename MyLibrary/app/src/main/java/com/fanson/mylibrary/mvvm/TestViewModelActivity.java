@@ -96,25 +96,21 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     protected void onStart() {
         super.onStart();
-        MyLogUtils.getInstance().d("onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MyLogUtils.getInstance().d("onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MyLogUtils.getInstance().d("onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        MyLogUtils.getInstance().d("onStop");
     }
 
     @Override

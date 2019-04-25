@@ -1,5 +1,7 @@
 package com.example.fansonlib.utils.log;
 
+import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,6 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class LoganParser {
 
+    private static final String TAG = LoganParser.class.getSimpleName();
     private static final String ALGORITHM = "AES";
     private static final String ALGORITHM_TYPE = "AES/CBC/NoPadding";
     private Cipher mDecryptCipher;
@@ -53,6 +56,11 @@ public class LoganParser {
         }
     }
 
+    /**
+     *  解析日志
+     * @param is 加密日志文件的输入流
+     * @param os 输出流就是解密明文
+     */
     public void parse(InputStream is, OutputStream os) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
@@ -105,6 +113,7 @@ public class LoganParser {
                         uncompressByte = uncompressBytesArray.toByteArray();
                         uncompressBytesArray.reset();
                         os.write(uncompressByte);
+
                         if (inflaterOs != null) {
                             inflaterOs.close();
                         }
@@ -118,6 +127,6 @@ public class LoganParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.d(TAG,os.toString());
     }
-
 }

@@ -26,12 +26,14 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
+import com.example.fansonlib.utils.log.LoganParser;
 import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.example.fansonlib.utils.toast.ToastConfig;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
+import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.adapter.RecyclerViewActivity;
 import com.fanson.mylibrary.constant.RxBusTag;
@@ -40,7 +42,10 @@ import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
 import com.fanson.mylibrary.mvvm.TestViewModelActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -134,6 +139,29 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             @Override
             public void onClick(View view) {
                 startMyActivity(RecyclerViewActivity.class);
+            }
+        });
+
+        mBinding.btnUploadLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Logan : " + MyLogUtils.loganFilesInfo());
+                MyLogUtils.getInstance().d("测试数据");
+                MyLogUtils.sendLoganToServer("http://test.zh248.core.zhangyixun.cn/upload/log");
+            }
+        });
+
+        mBinding.btnParserLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File logFile = new File("/storage/emulated/0/Android/data/com.fanson.mylibrary/files/logan_v1/1556121600000");
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                try {
+                    new LoganParser("0123456789012345".getBytes(), "0123456789012345".getBytes())
+                            .parse(new FileInputStream(logFile), outputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -252,12 +280,18 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
     }
 
     private void testDialogFragment() {
-        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试.抱歉！暂时没有在线客服人员，请稍后再试","取消按钮","确定按钮",false)
-               .setCancelListener(new ICancelListener() {
+        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试.抱歉！暂时没有在线客服人员，请稍后再试", "取消按钮", "确定按钮", false)
+                .setCancelListener(new ICancelListener() {
+                    @Override
+                    public void onCancel() {
+                        MyToastUtils.init(null);
+                        MyToastUtils.getInstance().showShort("onCancel");
+                    }
+                }).setConfirmListener(new IConfirmListener() {
             @Override
-            public void onCancel() {
+            public void onConfirm() {
                 MyToastUtils.init(null);
-                MyToastUtils.getInstance().showShort("onCancel");
+                MyToastUtils.getInstance().showShort("onConfirm");
             }
         }).setOutCancel(true).show(getSupportFragmentManager());
 
@@ -266,23 +300,23 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
     /**
      * 测试Toast功能
      */
-    private void testToast(){
+    private void testToast() {
         ToastConfig config = new ToastConfig.Builder()
-                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorPrimary))
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorPrimary))
                 .setTextSize(12)
-                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorWhite)).build();
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
         MyToastUtils.init(config);
 
         //更改配置
         ToastConfig config2 = new ToastConfig.Builder()
-                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorAccent))
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorAccent))
                 .setTextSize(12)
                 .setIconResource(R.mipmap.ic_no_data)
-                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(),R.color.colorWhite)).build();
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
 
         MyToastUtils.getInstance().changeConfig(config2);
 
-        MyToastUtils.getInstance().showShort("测试的数据提示 " + (int)(1+Math.random()*(10-1+1)));
+        MyToastUtils.getInstance().showShort("测试的数据提示 " + (int) (1 + Math.random() * (10 - 1 + 1)));
 
     }
 
@@ -367,21 +401,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
 
     @Override
     protected void initData() {
-
     }
 
     @Override
     protected void listenEvent() {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
 
     }
 

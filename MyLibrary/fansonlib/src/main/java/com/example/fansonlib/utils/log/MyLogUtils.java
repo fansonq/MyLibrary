@@ -53,6 +53,8 @@ public class MyLogUtils {
             } else {
                 setImageLoaderConfig(config);
             }
+            //初始化Logan
+            initLogan();
         }
     }
 
@@ -66,8 +68,6 @@ public class MyLogUtils {
             synchronized (MyLogUtils.class) {
                 if (mInstance == null) {
                     mInstance = new MyLogUtils();
-                    //初始化Logan
-                    initLogan();
                 }
             }
         }

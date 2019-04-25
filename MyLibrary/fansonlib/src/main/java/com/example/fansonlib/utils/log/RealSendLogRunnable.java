@@ -35,7 +35,7 @@ import javax.net.ssl.SSLSession;
 public class RealSendLogRunnable extends SendLogRunnable {
 
     private static final String TAG = RealSendLogRunnable.class.getSimpleName();
-    private String mUploadLogUrl ;
+    private String mUploadLogUrl;
 
     @Override
     public void sendLog(File logFile) {
@@ -50,6 +50,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     /**
      * 设置服务器IP地址
+     *
      * @param ip 服务器IP地址
      */
     public void setIp(String ip) {
@@ -58,6 +59,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     /**
      * 获取ActionHeader
+     *
      * @return
      */
     private HashMap<String, String> getActionHeader() {
@@ -85,10 +87,10 @@ public class RealSendLogRunnable extends SendLogRunnable {
         return isSuccess;
     }
 
-
     /**
      * post请求
-     * @param url url
+     *
+     * @param url       url
      * @param inputData 写入日期
      * @param headerMap headerMap
      * @return
@@ -172,6 +174,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     /**
      * 处理上传日志接口返回的数据
+     *
      * @param backData 返回数据
      * @return 是否成功
      * @throws JSONException
@@ -180,6 +183,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
         boolean isSuccess = false;
         if (backData != null) {
             String data = new String(backData);
+//            Log.d(TAG, "上传日志接口返回的数据：" + data);
             if (!TextUtils.isEmpty(data)) {
                 JSONObject jsonObj = new JSONObject(data);
                 if (jsonObj.optBoolean("success", false)) {
