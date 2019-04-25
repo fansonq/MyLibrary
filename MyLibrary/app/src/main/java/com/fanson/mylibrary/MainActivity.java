@@ -147,14 +147,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             public void onClick(View v) {
                 Log.d(TAG, "Logan : " + MyLogUtils.loganFilesInfo());
                 MyLogUtils.getInstance().d("测试数据");
-                MyLogUtils.sendLoganToServer("http://test.zh248.core.zhangyixun.cn/upload/log");
+                MyLogUtils.sendLoganToServer("http://test.zh248.core.zhangyixun.cn/upload/log?user_id=222");
             }
         });
 
         mBinding.btnParserLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File logFile = new File("/storage/emulated/0/Android/data/com.fanson.mylibrary/files/logan_v1/1556121600000");
+                File logFile = new File("/storage/emulated/0/Android/data/com.fanson.mylibrary/files/logan_v1/logan.txt");
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                 try {
                     new LoganParser("0123456789012345".getBytes(), "0123456789012345".getBytes())

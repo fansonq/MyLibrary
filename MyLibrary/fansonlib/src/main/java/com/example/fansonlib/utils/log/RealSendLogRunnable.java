@@ -10,8 +10,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -27,6 +25,13 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 /**
  * @author Created by：Fanson
  * Created Time: 2019/4/4 10:45
@@ -39,8 +44,7 @@ public class RealSendLogRunnable extends SendLogRunnable {
 
     @Override
     public void sendLog(File logFile) {
-        boolean success = doSendFileByAction(logFile);
-        Log.d(TAG, "日志上传测试结果：" + success);
+        doSendFileByAction(logFile);
         // Must Call finish after send log
         finish();
         if (logFile.getName().contains(".copy")) {
@@ -73,25 +77,52 @@ public class RealSendLogRunnable extends SendLogRunnable {
     /**
      * 主动上报
      */
-    private boolean doSendFileByAction(File logFile) {
-        boolean isSuccess = false;
-        try {
-            FileInputStream fileStream = new FileInputStream(logFile);
-            byte[] backData = doPostRequest(mUploadLogUrl, fileStream, getActionHeader());
-            isSuccess = handleSendLogBackData(backData);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return isSuccess;
+    private void doSendFileByAction(File logFile) {
+        uploadLogFileByOkHttp(mUploadLogUrl, logFile);
     }
 
     /**
-     * post请求
+     * 通过OkHttp上传日志文件到服务器
      *
-     * @param url       url
-     * @param inputData 写入日期
+     * @param url  URL地址
+     * @param file 日志文件
+     */
+    private void uploadLogFileByOkHttp(String url, File file) {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        //第一个参数要与Servlet中的一致
+        builder.addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
+        MultipartBody multipartBody = builder.build();
+
+        Request request = new Request.Builder().url(url).post(multipartBody).build();
+        okHttpClient.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onResponse(okhttp3.Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    try {
+                        Log.d(TAG, "日志上传测试结果 Successful：" + response.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.d(TAG, "日志上传测试结果 Failure ：" + response.toString());
+                }
+
+            }
+
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+                Log.d(TAG, "日志上传测试结果 Failure ：" + e.toString());
+            }
+        });
+    }
+
+    /**
+     * 通过OkHttp上传日志文件到服务器
+     *
+     * @param url       URL地址
+     * @param inputData InputStream
      * @param headerMap headerMap
      * @return
      */
@@ -183,7 +214,6 @@ public class RealSendLogRunnable extends SendLogRunnable {
         boolean isSuccess = false;
         if (backData != null) {
             String data = new String(backData);
-//            Log.d(TAG, "上传日志接口返回的数据：" + data);
             if (!TextUtils.isEmpty(data)) {
                 JSONObject jsonObj = new JSONObject(data);
                 if (jsonObj.optBoolean("success", false)) {
