@@ -18,5 +18,5 @@
 <alpha
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="@android:integer/config_mediumAnimTime"
-    android:fromAlpha="0.5"
+    android:fromAlpha="0.0"
     android:toAlpha="1.0" />

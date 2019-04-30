@@ -34,7 +34,7 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
      * @param id 字段ID
      */
     public void getData(int id){
-        mRepository.getTestData(this);
+        getRepository().getTestData(this);
     }
 
     @Override

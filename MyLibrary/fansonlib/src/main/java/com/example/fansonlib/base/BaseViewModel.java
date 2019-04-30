@@ -22,7 +22,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
 
     private static final String TAG = BaseViewModel.class.getSimpleName();
 
-    protected R mRepository;
+    private R mRepository;
     protected MutableLiveData<B> mBean;
     private WeakReference<V> mBaseView;
 

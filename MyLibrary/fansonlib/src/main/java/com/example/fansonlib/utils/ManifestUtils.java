@@ -66,16 +66,16 @@ public class ManifestUtils {
      * @param chanelKey 渠道Key
      * @return <meta-data>元素的值
      */
-    public static Object getChannelData(Context context, String chanelKey) {
+    public static String getChannelData(Context context, String chanelKey) {
         ApplicationInfo appInfo = null;
-        int value = 0;
+        String value = "unknown";
         try {
             appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
         if (appInfo != null) {
-            value = appInfo.metaData.getInt(chanelKey);
+            value = appInfo.metaData.getString(chanelKey);
             Log.d(TAG, chanelKey + " ：= " + value);
         }
         return value;
