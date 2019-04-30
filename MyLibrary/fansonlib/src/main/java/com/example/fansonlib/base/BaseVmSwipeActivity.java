@@ -104,7 +104,7 @@ public abstract class BaseVmSwipeActivity <VM extends BaseViewModel, D extends V
             }
         }, mRecyclerView);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
-        mAdapter.isFirstOnly(false);
+        mAdapter.isFirstOnly(true);
         mAdapter.setDuration(500);
         mRecyclerView.setAdapter(mAdapter);
     }
