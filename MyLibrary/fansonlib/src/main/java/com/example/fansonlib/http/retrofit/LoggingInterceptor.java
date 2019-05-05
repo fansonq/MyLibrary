@@ -1,6 +1,6 @@
 package com.example.fansonlib.http.retrofit;
 
-import android.util.Log;
+import com.example.fansonlib.utils.log.MyLogUtils;
 
 import java.io.IOException;
 
@@ -46,13 +46,13 @@ public class LoggingInterceptor implements Interceptor {
                         mStringBuilder.append(body.encodedName(i)).append("=").append(body.encodedValue(i)).append(",");
                     }
                     mStringBuilder.delete(mStringBuilder.length() - 1, mStringBuilder.length());
-                    Log.d(TAG, String.format("发送请求 %s on %s %n%s %nRequestParams:【%s】",
+                    MyLogUtils.getInstance().d(String.format("发送请求 %s on %s %n%s %nRequestParams:【%s】",
                             request.url(), chain.connection(), request.headers(), mStringBuilder.toString()));
                 }
             }
         } else {
             //"GET"方式
-            Log.d(TAG, String.format("发送请求 %s on %s%n%s",
+            MyLogUtils.getInstance().d( String.format("发送请求 %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
         }
         response = chain.proceed(request);
@@ -61,8 +61,7 @@ public class LoggingInterceptor implements Interceptor {
         //因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一
         //个新的response给应用层处理
         ResponseBody responseBody = response.peekBody(1024 * 1024);
-        Log.d(TAG,
-                String.format("接收响应: [%s] %n返回json:【%s】 %.1fms %n%s",
+        MyLogUtils.getInstance().d(String.format("接收响应: [%s] %n返回json:【%s】 %.1fms %n%s",
                         response.request().url(),
                         responseBody.string(),
                         (t2 - t1) / 1e6d,
