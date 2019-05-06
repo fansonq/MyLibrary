@@ -671,7 +671,7 @@ public class TimeUtils {
         long span = now - millis;
         if (span < 0) {
             // U can read http://www.apihome.cn/api/java/Formatter.html to understand it.
-            return String.format("%tc", millis);
+            return "刚刚";
         }
         if (span < 1000) {
             return "刚刚";
