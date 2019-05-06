@@ -60,7 +60,7 @@ public class LoggingInterceptor implements Interceptor {
         //这里不能直接使用response.body().string()的方式输出日志
         //因为response.body().string()之后，response中的流会被关闭，程序会报错，我们需要创建出一
         //个新的response给应用层处理
-        ResponseBody responseBody = response.peekBody(1024 * 1024);
+        ResponseBody responseBody = response.peekBody(1024 * 1024 * 10);
         MyLogUtils.getInstance().d(String.format("接收响应: [%s] %n返回json:【%s】 %.1fms %n%s",
                         response.request().url(),
                         responseBody.string(),
