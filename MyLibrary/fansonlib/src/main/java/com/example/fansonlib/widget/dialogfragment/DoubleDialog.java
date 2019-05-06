@@ -1,5 +1,6 @@
 package com.example.fansonlib.widget.dialogfragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -147,4 +148,12 @@ public class DoubleDialog extends BaseDialogFragment {
             }
         });
     }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mDialog.dismiss();
+        mDialog = null;
+    }
+
 }
