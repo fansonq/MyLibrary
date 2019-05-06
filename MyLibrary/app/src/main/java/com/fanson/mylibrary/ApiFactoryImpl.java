@@ -2,6 +2,7 @@ package com.fanson.mylibrary;
 
 import com.example.fansonlib.http.retrofit.IApiFactory;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
+import com.fanson.mylibrary.constant.ConHttp;
 
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class ApiFactoryImpl implements IApiFactory {
     @Override
     public Flowable createApi(String url, Map params) {
         switch (url) {
-            case "postName":
+            case ConHttp.BASE_MOCK + ConHttp.REQUEST_POST:
                 mFlowable = RetrofitClient.getRetrofit(ApiStores.class).postName(url, params);
                 break;
             case "getName":
@@ -29,8 +30,8 @@ public class ApiFactoryImpl implements IApiFactory {
             case "post.php":
 //                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).uploadMulti(url,params);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
         return mFlowable;
     }

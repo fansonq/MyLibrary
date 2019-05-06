@@ -10,6 +10,7 @@ import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.fanson.mylibrary.ApiFactoryImpl;
 import com.fanson.mylibrary.ApiStores;
 import com.fanson.mylibrary.SimpleBean;
+import com.fanson.mylibrary.constant.ConHttp;
 import com.fanson.mylibrary.mvp.TestCallback;
 
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public class TestVmRepository extends BaseRepository{
 
         Map<String,Object> maps = new HashMap<>();
         maps.put("key","fanson");
-        getHttpUtils().post("postName",maps, new HttpResponseCallback<SimpleBean>() {
+        getHttpUtils().post(ConHttp.BASE_MOCK+ConHttp.REQUEST_POST,maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
                 Log.d(TAG,"onSuccess");

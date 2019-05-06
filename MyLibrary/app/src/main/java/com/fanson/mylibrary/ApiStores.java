@@ -1,6 +1,8 @@
 package com.fanson.mylibrary;
 
 
+import com.fanson.mylibrary.constant.ConHttp;
+
 import java.util.Map;
 
 import io.reactivex.Flowable;
@@ -30,7 +32,7 @@ public interface ApiStores {
     /**
      * baseUrl
      */
-    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
+    String API_SERVER_URL = ConHttp.BASE_URL;
 
     @GET
     Flowable<ResponseBody> update(@Url String url);

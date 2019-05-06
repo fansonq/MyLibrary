@@ -20,7 +20,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * @author  Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/7/26 14:28
  * Description：Retrofit实例
  */
@@ -31,38 +31,39 @@ public class RetrofitClient {
     /**
      * 基础的Url
      */
-    private static String BASE_URL ;
+    private static String BASE_URL;
 
     /**
      * 超时的时间
      */
     private static final int DEFAULT_TIMEOUT = 10;
 
-    private static Retrofit.Builder retrofitBuilder;
+    /**
+     * 记录：是否改变了BaseUrl
+     */
+    private static boolean mIsChangeBaseUrl = false;
+
+    private static Retrofit.Builder mRetrofitBuilder;
 
     /**
      * 初始化，设置基础URL
+     *
      * @param url 基础URL
      */
-    public static void init(String url){
+    public static void init(String url) {
         BASE_URL = url;
     }
 
-
     /**
      * 获取Retrofit实例
+     *
      * @return Retrofit
      */
-    public static Retrofit getRetrofit( ) {
+    public static Retrofit getRetrofit() {
         if (mRetrofit == null) {
-            synchronized (RetrofitClient.class){
-                if (mRetrofit == null){
-                    mRetrofit = new Retrofit.Builder()
-                            .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .client(getOkHttpClient())
-                            .build();
+            synchronized (RetrofitClient.class) {
+                if (mRetrofit == null) {
+                    mRetrofit = createRetrofitBuilder().build();
                 }
             }
         }
@@ -71,20 +72,16 @@ public class RetrofitClient {
 
     /**
      * 获取Retrofit实例
+     *
      * @param serviceClass API服务类
      * @param <S>
      * @return
      */
     public static <S> S getRetrofit(Class<S> serviceClass) {
         if (mRetrofit == null) {
-            synchronized (RetrofitClient.class){
-                if (mRetrofit == null){
-                    mRetrofit = new Retrofit.Builder()
-                            .baseUrl(BASE_URL)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                            .client(getOkHttpClient())
-                            .build();
+            synchronized (RetrofitClient.class) {
+                if (mRetrofit == null) {
+                    mRetrofit = createRetrofitBuilder() .build();
                 }
             }
         }
@@ -93,27 +90,29 @@ public class RetrofitClient {
 
     /**
      * 获取带进度条的Retrofit
+     *
      * @param progressListener 进度监听
      * @return
      */
-    public static <S> S  getRetrofitProgress(Class<S> serviceClass,final ProgressListener progressListener) {
-        if (mRetrofit == null) {
-            mRetrofit = new Retrofit.Builder()
+    public static <S> S getRetrofitProgress(Class<S> serviceClass, final ProgressListener progressListener) {
+        if (mRetrofitBuilder == null) {
+            mRetrofitBuilder = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(getOkHttpClientProgress(progressListener))
-                    .build();
+                    .client(getOkHttpClientProgress(progressListener));
         }
+        mRetrofit = mRetrofitBuilder.build();
         return mRetrofit.create(serviceClass);
     }
 
     /**
      * 获取OkHttp实例
      * 带进度条
+     *
      * @return
      */
-    public static OkHttpClient getOkHttpClientProgress(final ProgressListener progressListener){
+    public static OkHttpClient getOkHttpClientProgress(final ProgressListener progressListener) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(
                 new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -136,24 +135,25 @@ public class RetrofitClient {
 
     /**
      * 获取OkHttp实例
+     *
      * @return
      */
-    public static OkHttpClient getOkHttpClient(){
+    public static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 // 这里你可以根据自己的机型设置同时连接的个数和时间，我这里8个，和每个保持时间为20s
                 .connectionPool(new ConnectionPool(8, 20, TimeUnit.SECONDS));
-        if(AppUtils.isDebug()){
+        if (AppUtils.isDebug()) {
             //显示日志
-            okHttpClientBuilder.addInterceptor( new LoggingInterceptor());
+            okHttpClientBuilder.addInterceptor(new LoggingInterceptor());
         }
         //在Release build的时候Stetho自己会disable所有的功能，所以release包的网络请求和数据都是安全的
         okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
         return okHttpClientBuilder.build();
     }
 
-    public  <S> S createService(Class<S> serviceClass) {
+    public <S> S createService(Class<S> serviceClass) {
         return mRetrofit.create(serviceClass);
     }
 
@@ -164,25 +164,33 @@ public class RetrofitClient {
      */
     public static void changeBaseUrl(String newBaseUrl) {
         BASE_URL = newBaseUrl;
-        retrofitBuilder = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL);
+        mRetrofit = createRetrofitBuilder().baseUrl(BASE_URL).build();
     }
 
-    public static Retrofit.Builder createRetrofitBuilder(){
-        return  new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(BASE_URL);
+    /**
+     * 创建RetrofitBuilder
+     *
+     * @return Retrofit.Builder
+     */
+    public static Retrofit.Builder createRetrofitBuilder() {
+        if (mRetrofitBuilder == null) {
+            mRetrofitBuilder = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(getOkHttpClient());
+        }
+        return mRetrofitBuilder;
     }
 
 
     /**
      * 初始化通用的观察者
+     *
      * @param observable 观察者
      */
     public static ResourceSubscriber startObservable(Flowable observable, ResourceSubscriber subscriber) {
-        return (ResourceSubscriber)observable.subscribeOn(Schedulers.io())
+        return (ResourceSubscriber) observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //订阅后可以进行取消订阅
 //                .doOnLifecycle(new Consumer<Subscription>() {
