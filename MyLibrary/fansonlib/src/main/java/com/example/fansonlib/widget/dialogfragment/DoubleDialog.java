@@ -62,7 +62,7 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return
      */
     public static DoubleDialog newInstance(String title, String content, boolean cancelNotDismiss) {
-        return newInstance(title, content, null, null, false);
+        return newInstance(title, content, null, null, cancelNotDismiss);
     }
 
     /**
