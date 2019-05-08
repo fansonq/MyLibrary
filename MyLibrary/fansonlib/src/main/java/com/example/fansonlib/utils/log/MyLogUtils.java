@@ -215,9 +215,9 @@ public class MyLogUtils {
      *
      * @param ip 服务器IP
      */
-    public static void sendLoganToServer(String ip) {
+    public static void sendLoganToServer(String ip,SendLogListener listener) {
         if (mRealSendLogRunnable == null) {
-            mRealSendLogRunnable = new RealSendLogRunnable();
+            mRealSendLogRunnable = new RealSendLogRunnable(listener);
         }
         SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
         String d = dataFormat.format(new Date(System.currentTimeMillis()));
@@ -227,6 +227,13 @@ public class MyLogUtils {
             mRealSendLogRunnable.setIp(ip);
         }
         Logan.s(temp, mRealSendLogRunnable);
+    }
+
+    /**
+     * 置空SendLogRunnable
+     */
+    public static void destroySendLogRunnable(){
+        mRealSendLogRunnable = null;
     }
 
     /**
@@ -246,6 +253,8 @@ public class MyLogUtils {
         }
         return info == null ? "" : info.toString();
     }
+
+
 }
 
 
