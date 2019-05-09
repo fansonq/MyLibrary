@@ -21,7 +21,7 @@ public class ApiFactoryImpl implements IApiFactory {
     @Override
     public Flowable createApi(String url, Map params) {
         switch (url) {
-            case ConHttp.BASE_MOCK + ConHttp.REQUEST_POST:
+            case ConHttp.BASE_URL + ConHttp.REQUEST_POST:
                 mFlowable = RetrofitClient.getRetrofit(ApiStores.class).postName(url, params);
                 break;
             case "getName":

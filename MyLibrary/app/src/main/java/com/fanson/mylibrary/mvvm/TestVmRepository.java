@@ -39,7 +39,7 @@ public class TestVmRepository extends BaseRepository{
 
         Map<String,Object> maps = new HashMap<>();
         maps.put("key","fanson");
-        getHttpUtils().post(ConHttp.BASE_MOCK+ConHttp.REQUEST_POST,maps, new HttpResponseCallback<SimpleBean>() {
+        getHttpUtils().post(ConHttp.BASE_URL+ConHttp.REQUEST_POST,maps, new HttpResponseCallback<SimpleBean>() {
             @Override
             public void onSuccess(SimpleBean bean) {
                 Log.d(TAG,"onSuccess");
