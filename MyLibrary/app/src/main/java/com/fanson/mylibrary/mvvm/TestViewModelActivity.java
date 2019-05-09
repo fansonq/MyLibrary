@@ -88,6 +88,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                     mBinding.tv.setText(bean.getData().getName());
                     MyToastUtils.init(null);
                     MyToastUtils.getInstance().showLong("请求数据成功");
+                    hideLoading();
                 }
             }
         });
