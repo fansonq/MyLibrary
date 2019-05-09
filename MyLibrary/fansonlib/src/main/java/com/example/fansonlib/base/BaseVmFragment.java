@@ -17,7 +17,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
     /**
      * 泛型，ViewModel实例
      */
-    protected VM mViewModel;
+    private VM mViewModel;
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,6 +31,17 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
      * @return ViewModel实例
      */
     protected abstract VM  createViewModel();
+
+    /**
+     * 获取ViewModel实例
+     * @return ViewModel实例
+     */
+    protected VM getViewModel(){
+        if (mViewModel == null){
+            mViewModel = createViewModel();
+        }
+        return mViewModel;
+    }
 
     /**
      * 观察接收ViewModel返回的成功数据

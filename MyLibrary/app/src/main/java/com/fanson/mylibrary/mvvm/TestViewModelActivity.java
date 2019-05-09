@@ -59,7 +59,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     @Override
     protected void startDelayLoad() {
         super.startDelayLoad();
-        mViewModel.getData(1);
+        getViewModel().getData(1);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mViewModel.getData(1);
+                        getViewModel().getData(1);
                     }
                 },2000);
             }
@@ -80,7 +80,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected void dataSuccessObserver() {
-        mViewModel.getData().observe(this, new Observer<SimpleBean>() {
+        getViewModel().getData().observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
                 MyLogUtils.getInstance().d( "请求数据成功，返回数据");
