@@ -62,7 +62,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
             public void onError(Throwable t) {
                 //TODO 最佳方案重写封装ResourceSubscriber
                 if (t instanceof UnknownHostException || t instanceof HttpException){
-                    callback.onFailure("无法链接到服务器："+t.getMessage());
+                    callback.onFailure("无法链接到服务器：");
                 }else {
                     callback.onFailure("链接服务器出错："+t.getMessage());
                 }
