@@ -28,6 +28,7 @@ import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
 import com.example.fansonlib.utils.log.LoganParser;
 import com.example.fansonlib.utils.log.MyLogUtils;
+import com.example.fansonlib.utils.log.SendLogListener;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
 import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.example.fansonlib.utils.toast.ToastConfig;
@@ -86,6 +87,14 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
         MyRxbus2.getInstance().register(this);
 
         MyLogUtils.init(null);
+
+        ToastConfig config = new ToastConfig.Builder()
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorPrimary))
+                .setTextSize(12)
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
+        MyToastUtils.init(config);
+
+
 
         mBtnNet = findMyViewId(R.id.btn_net);
         mBtnRxBus = findMyViewId(R.id.btn_rxBus);
@@ -147,7 +156,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             public void onClick(View v) {
                 Log.d(TAG, "Logan : " + MyLogUtils.loganFilesInfo());
                 MyLogUtils.getInstance().d("测试数据");
-                MyLogUtils.sendLoganToServer("http://test.zh248.core.zhangyixun.cn/upload/log?user_id=222");
+                MyLogUtils.sendLoganToServer("https://app.zhangyixun.cn/upload/log?user_id=222", new SendLogListener() {
+                    @Override
+                    public void onSendLogSuccessful() {
+                        MyLogUtils.getInstance().d("上传日志成功的回调 Thread = "+(Looper.getMainLooper() == Looper.myLooper()));
+                        MyLogUtils.destroySendLogRunnable();
+                    }
+                });
             }
         });
 
@@ -177,7 +192,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             @Override
             public void onClick(View v) {
 //                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
-
                 if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)) {
                     MyNotificationUtils.openNotificationSetting(MainActivity.this);
                 } else {
@@ -301,12 +315,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
      * 测试Toast功能
      */
     private void testToast() {
-        ToastConfig config = new ToastConfig.Builder()
-                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorPrimary))
-                .setTextSize(12)
-                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
-        MyToastUtils.init(config);
-
         //更改配置
         ToastConfig config2 = new ToastConfig.Builder()
                 .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorAccent))
@@ -433,5 +441,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 }

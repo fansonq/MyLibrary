@@ -4,6 +4,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.IHttpStrategy;
+import com.example.fansonlib.utils.log.MyLogUtils;
 
 import java.net.UnknownHostException;
 import java.util.Iterator;
@@ -61,11 +62,11 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
             public void onError(Throwable t) {
                 //TODO 最佳方案重写封装ResourceSubscriber
                 if (t instanceof UnknownHostException || t instanceof HttpException){
-                    callback.onFailure("无法链接到服务器");
+                    callback.onFailure("无法链接到服务器："+t.getMessage());
                 }else {
-                    callback.onFailure(t.getMessage());
+                    callback.onFailure("链接服务器出错："+t.getMessage());
                 }
-
+                MyLogUtils.getInstance().d("链接服务器出错："+t.getMessage());
             }
 
             @Override

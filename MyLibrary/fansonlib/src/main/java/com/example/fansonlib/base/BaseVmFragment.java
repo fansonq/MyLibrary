@@ -17,7 +17,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel,D extends ViewData
     /**
      * 泛型，ViewModel实例
      */
-    private VM mViewModel;
+    protected VM mViewModel;
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

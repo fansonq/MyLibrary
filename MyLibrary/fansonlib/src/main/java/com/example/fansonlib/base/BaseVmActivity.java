@@ -10,7 +10,7 @@ import android.os.Bundle;
  */
 public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView {
 
-    private VM mViewModel;
+    protected VM mViewModel;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
