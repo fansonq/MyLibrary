@@ -10,13 +10,10 @@ import android.databinding.ViewDataBinding;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 
 import com.example.fansonlib.R;
@@ -24,10 +21,11 @@ import com.example.fansonlib.callback.IBackFragmentListener;
 import com.example.fansonlib.callback.IFragmentListener;
 import com.example.fansonlib.constant.BaseConFragmentCode;
 import com.example.fansonlib.manager.MyFragmentManager;
-import com.example.fansonlib.utils.DimensUtils;
-import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.NetWorkUtil;
+import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.view.LoadingDialog;
+
+import org.aviran.cookiebar2.CookieBar;
 
 /**
  * @author Created by：Fanson
@@ -245,19 +243,18 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     if ((ConnectivityManager.CONNECTIVITY_ACTION).equals(intent.getAction())) {
-                        if (!NetWorkUtil.isNetWordConnected(mContext.getApplicationContext())) {
-                            MySnackBarUtils.showIndefinite(getWindow().getDecorView(), getResources().getString(R.string.no_net)).setGravityFrameLayout(Gravity.TOP)
-                                    .margins(0, DimensUtils.dipToPx(mContext.getApplicationContext(), 50), 0, 0).show();
-                            if (MySnackBarUtils.getSnackbarView() != null) {
-                                MySnackBarUtils.getSnackbarView().setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                                    }
-                                });
-                            }
+                        if (NetWorkUtil.isNetWordConnected(mContext)) {
+                            MyLogUtils.getInstance().d("BaseActivity - 恢复网络链接");
+                            CookieBar.dismiss(BaseActivity.this);
                         } else {
-                            MySnackBarUtils.dismiss();
+                            MyLogUtils.getInstance().d("BaseActivity - 失去网络链接");
+                            CookieBar.build(BaseActivity.this)
+                                    .setTitle(getResources().getString(R.string.no_net))
+                                    .setBackgroundColor(R.color.black)
+                                    .setEnableAutoDismiss(false)
+                                    .setSwipeToDismiss(false)
+                                    .setAnimationIn(R.anim.slide_from_top, R.anim.slide_to_top)
+                                    .show();
                         }
                     }
                 }

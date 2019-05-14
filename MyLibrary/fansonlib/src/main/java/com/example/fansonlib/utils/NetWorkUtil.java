@@ -42,11 +42,14 @@ public class NetWorkUtil {
     /**
      * 判断手机有没联网
      *
-     * @param context
-     * @return
+     * @param context 上下文
+     * @return true/false
      */
     public static boolean isNetWordConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager == null){
+            return false;
+        }
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnected();
     }
