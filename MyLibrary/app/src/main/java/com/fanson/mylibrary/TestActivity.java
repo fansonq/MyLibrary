@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.fansonlib.base.BaseActivity;
-import com.example.fansonlib.db.LiteDataUtils;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
-import com.example.fansonlib.utils.SharePreferenceHelper;
 import com.example.fansonlib.utils.SpannableStringUtils;
+import com.example.fansonlib.utils.storage.MyKvStorageUtils;
+import com.example.fansonlib.utils.storage.StorageConfig;
 import com.fanson.mylibrary.databinding.ActivityTestBinding;
 
 /**
@@ -40,6 +40,10 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
         RetrofitStrategy strategy = new RetrofitStrategy();
         strategy.setApi(new ApiFactoryImpl());
         HttpUtils.init(strategy);
+
+        StorageConfig config = new StorageConfig.Builder().setFileName("FansonLib").build();
+        MyKvStorageUtils.init(config);
+
         mBtn = findViewById(R.id.btn_go);
 
         mBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,17 +80,12 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
     }
 
     /**
-     * 测试Mmkv
+     * 测试存储框架功能
      */
     private void testMmkv(){
-        SharePreferenceHelper.getInstance(this);
-        SharePreferenceHelper.putString("test","我是来自SharePreferenceHelper");
-        SharePreferenceHelper.apply();
+        MyKvStorageUtils.getInstance().put("test","我是来自测试存储框架功能");
 
-        LiteDataUtils.getInstance(this);
-        LiteDataUtils.importFromSharedPreferences(SharePreferenceHelper.getSharedPreferences());
-
-        Log.d(TAG,LiteDataUtils.getString("test"));
-        Log.d(TAG,"bool = "+ LiteDataUtils.getBoolean("bool"));
+        Log.d(TAG, MyKvStorageUtils.getInstance().getString("test"));
+        Log.d(TAG,"bool = "+ MyKvStorageUtils.getInstance().getBoolean("bool"));
     }
 }
