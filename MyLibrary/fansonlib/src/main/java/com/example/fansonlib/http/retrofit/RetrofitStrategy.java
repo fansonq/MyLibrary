@@ -91,9 +91,9 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
                 if (t instanceof UnknownHostException || t instanceof HttpException){
                     callback.onFailure("无法链接到服务器");
                 }else {
-                    callback.onFailure(t.getMessage());
+                    callback.onFailure("链接到服务器失败");
                 }
-
+                MyLogUtils.getInstance().e("无法链接到服务器："+t.getMessage());
             }
 
             @Override
