@@ -252,7 +252,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
                                     .setTitle(getResources().getString(R.string.no_net))
                                     .setBackgroundColor(R.color.black)
                                     .setEnableAutoDismiss(false)
-                                    .setSwipeToDismiss(false)
+                                    .setSwipeToDismiss(true)
                                     .setAnimationIn(R.anim.slide_from_top, R.anim.slide_to_top)
                                     .show();
                         }
