@@ -1,5 +1,6 @@
 package com.example.fansonlib.utils.log;
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -193,10 +194,15 @@ public class MyLogUtils {
      * 初始化Logan框架
      */
     private static void initLogan() {
+        String filePath;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) && AppUtils.getAppContext().getExternalFilesDir(null) != null) {
+            filePath = AppUtils.getAppContext().getExternalFilesDir(null).getAbsolutePath();
+        } else {
+            filePath = AppUtils.getAppContext().getFilesDir().getAbsolutePath();
+        }
         LoganConfig config = new LoganConfig.Builder()
                 .setCachePath(AppUtils.getAppContext().getFilesDir().getAbsolutePath())
-                .setPath(AppUtils.getAppContext().getExternalFilesDir(null).getAbsolutePath()
-                        + File.separator + "logan_v1")
+                .setPath(filePath + File.separator + "logan_v1")
                 .setEncryptKey16("0123456789012345".getBytes())
                 .setEncryptIV16("0123456789012345".getBytes())
                 .build();
@@ -215,7 +221,7 @@ public class MyLogUtils {
      *
      * @param ip 服务器IP
      */
-    public static void sendLoganToServer(String ip,SendLogListener listener) {
+    public static void sendLoganToServer(String ip, SendLogListener listener) {
         if (mRealSendLogRunnable == null) {
             mRealSendLogRunnable = new RealSendLogRunnable(listener);
         }
@@ -232,7 +238,7 @@ public class MyLogUtils {
     /**
      * 置空SendLogRunnable
      */
-    public static void destroySendLogRunnable(){
+    public static void destroySendLogRunnable() {
         mRealSendLogRunnable = null;
     }
 
