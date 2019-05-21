@@ -7,8 +7,8 @@ import android.telephony.TelephonyManager;
 
 /**
  * @author Created by：Fanson
- *         Created on：2016/8/25.
- *         Description：网络工具类
+ * Created on：2016/8/25.
+ * Description：网络工具类
  */
 public class NetWorkUtil {
 
@@ -38,7 +38,6 @@ public class NetWorkUtil {
     public static final int NETWORK_MOBILE = 5;
 
 
-
     /**
      * 判断手机有没联网
      *
@@ -47,11 +46,11 @@ public class NetWorkUtil {
      */
     public static boolean isNetWordConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager == null){
+        if (connectivityManager == null) {
             return false;
         }
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnected();
+        return networkInfo != null && networkInfo.isAvailable();
     }
 
     /**
@@ -62,8 +61,11 @@ public class NetWorkUtil {
      */
     public static boolean isWifiConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        return networkInfo.isConnected();
+        if (connectivityManager == null) {
+            return false;
+        }
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     /**
@@ -85,8 +87,10 @@ public class NetWorkUtil {
      * @return int
      */
     public static int getNetworkState(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE); // 获取网络服务
-        if (null == connManager) { // 为空则认为无网络
+        // 获取网络服务
+        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // 为空则认为无网络
+        if (null == connManager) {
             return NETWORK_NONE;
         }
         // 获取网络类型，如果为空，返回无网络
@@ -94,18 +98,14 @@ public class NetWorkUtil {
         if (activeNetInfo == null || !activeNetInfo.isAvailable()) {
             return NETWORK_NONE;
         }
-        // 判断是否为WIFI
-        NetworkInfo wifiInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        if (null != wifiInfo) {
-            NetworkInfo.State state = wifiInfo.getState();
-            if (null != state) {
-                if (state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.CONNECTING) {
-                    return NETWORK_WIFI;
-                }
-            }
+        if (activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+            return NETWORK_WIFI;
         }
         // 若不是WIFI，则去判断是2G、3G、4G网
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (telephonyManager == null){
+            return NETWORK_NONE;
+        }
         int networkType = telephonyManager.getNetworkType();
         switch (networkType) {
             /*
