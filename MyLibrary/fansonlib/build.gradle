@@ -119,7 +119,7 @@ dependencies {
 
     compile 'com.orhanobut:logger:2.2.0'
 
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
     compile 'com.wang.avi:library:2.1.3'
     //美团日志框架Logan
     compile 'com.dianping.android.sdk:logan:1.2.1'
