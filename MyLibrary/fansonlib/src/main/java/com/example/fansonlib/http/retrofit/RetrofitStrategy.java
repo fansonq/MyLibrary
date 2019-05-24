@@ -6,6 +6,8 @@ import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.IHttpStrategy;
 import com.example.fansonlib.utils.log.MyLogUtils;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,7 +17,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/9/12 14:56
  * Describe：Retrofit的策略实现
  */
@@ -25,7 +27,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     /**
      * 记录所有的网络请求的处理
      */
-    private ArrayMap<Object, Disposable> mDisposableMaps ;
+    private ArrayMap<Object, Disposable> mDisposableMaps;
     /**
      * 当前网络的Disposable
      */
@@ -51,8 +53,8 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
     }
 
     @Override
-    public void get(String url,final HttpResponseCallback callback) {
-        mCurrentDisposable = RetrofitClient.startObservable(mFactory.createApi(url,null), new ResourceSubscriber<M>() {
+    public void get(String url, final HttpResponseCallback callback) {
+        mCurrentDisposable = RetrofitClient.startObservable(mFactory.createApi(url, null), new ResourceSubscriber<M>() {
             @Override
             public void onNext(M bean) {
                 callback.onSuccess(bean);
@@ -61,12 +63,12 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
             @Override
             public void onError(Throwable t) {
                 //TODO 最佳方案重写封装ResourceSubscriber
-                if (t instanceof UnknownHostException || t instanceof HttpException){
+                if (t instanceof UnknownHostException || t instanceof HttpException) {
                     callback.onFailure("无法链接到服务器");
-                }else {
+                } else {
                     callback.onFailure("链接服务器出错");
                 }
-                MyLogUtils.getInstance().d("链接服务器出错："+t.getMessage());
+                MyLogUtils.getInstance().d("链接服务器出错：" + t.getMessage());
             }
 
             @Override
@@ -74,7 +76,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             }
         });
-        mDisposableMaps.put(url,mCurrentDisposable);
+        mDisposableMaps.put(url, mCurrentDisposable);
     }
 
     @Override
@@ -88,12 +90,14 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
             @Override
             public void onError(Throwable t) {
                 //TODO 最佳方案重写封装ResourceSubscriber
-                if (t instanceof UnknownHostException || t instanceof HttpException){
+                if (t instanceof UnknownHostException || t instanceof HttpException || t instanceof ConnectException) {
                     callback.onFailure("无法链接到服务器");
-                }else {
-                    callback.onFailure("链接到服务器失败");
+                } else if (t instanceof SocketTimeoutException) {
+                    callback.onFailure("服务器响应超时");
+                } else {
+                    callback.onFailure("未知错误");
                 }
-                MyLogUtils.getInstance().e("无法链接到服务器："+t.getMessage());
+                MyLogUtils.getInstance().e("链接到服务器异常：" + t.getMessage());
             }
 
             @Override
@@ -101,7 +105,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
             }
         });
-        mDisposableMaps.put(url,mCurrentDisposable);
+        mDisposableMaps.put(url, mCurrentDisposable);
     }
 
     @Override
@@ -111,27 +115,27 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
     @Override
     public void cancelCurrent(String url) {
-        if (mDisposableMaps.isEmpty()){
+        if (mDisposableMaps.isEmpty()) {
             return;
         }
         mCurrentDisposable = mDisposableMaps.get(url);
         mDisposableMaps.remove(url);
-        if (mCurrentDisposable!=null){
+        if (mCurrentDisposable != null) {
             mCurrentDisposable.dispose();
-            mCurrentDisposable=null;
+            mCurrentDisposable = null;
         }
     }
 
     @Override
     public void cancelAll() {
-        if (mDisposableMaps.isEmpty()){
+        if (mDisposableMaps.isEmpty()) {
             return;
         }
         Iterator<Object> iterator = mDisposableMaps.keySet().iterator();
-        while (iterator.hasNext()){
-            Object key =  iterator.next();
+        while (iterator.hasNext()) {
+            Object key = iterator.next();
             mCurrentDisposable = mDisposableMaps.get(key);
-            if (mCurrentDisposable!=null){
+            if (mCurrentDisposable != null) {
                 mCurrentDisposable.dispose();
                 mCurrentDisposable = null;
             }
