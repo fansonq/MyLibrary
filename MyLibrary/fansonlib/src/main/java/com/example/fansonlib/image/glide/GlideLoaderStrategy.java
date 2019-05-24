@@ -22,6 +22,7 @@ import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
 import com.example.fansonlib.image.OnProgressListener;
 import com.example.fansonlib.image.OnWaitBitmapListener;
+import com.example.fansonlib.utils.log.MyLogUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -133,14 +134,19 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadImage(Context context, ImageView view, Object imgUrl) {
-        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
-            with(context)
-                    .load(imgUrl)
-                    .apply(getOptions1(mImageLoaderConfig))
-                    //先加载缩略图 然后在加载全图
-                    .thumbnail(Constants.THUMB_SIZE)
-//                .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(view);
+        try {
+            if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
+                with(context)
+                        .load(imgUrl)
+                        .apply(getOptions1(mImageLoaderConfig))
+                        //先加载缩略图 然后在加载全图
+                        .thumbnail(Constants.THUMB_SIZE)
+    //                .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(view);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            MyLogUtils.getInstance().e("GlideLoaderStrategy - 图片框架引用的上下文已被销毁");
         }
 
     }
@@ -167,38 +173,53 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void loadCircleImage(Context context, ImageView view, String imgUrl) {
-        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
-            with(context)
-                    .load(imgUrl)
-                    .apply(getOptionsCircle())
-                    .apply(bitmapTransform(new CropCircleTransformation()))
-//                .transition(DrawableTransitionOptions.withCrossFade())
-//                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
-                    .into(view);
+        try {
+            if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
+                with(context)
+                        .load(imgUrl)
+                        .apply(getOptionsCircle())
+                        .apply(bitmapTransform(new CropCircleTransformation()))
+    //                .transition(DrawableTransitionOptions.withCrossFade())
+    //                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
+                        .into(view);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            MyLogUtils.getInstance().e("GlideLoaderStrategy - 图片框架引用的上下文已被销毁");
         }
     }
 
     @Override
     public void loadGifImage(Context context, ImageView view, Object imgUrl) {
-        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
-            with(context)
-                    .load(imgUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .apply(getGifOptions(mImageLoaderConfig))
-                    .into(view);
+        try {
+            if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
+                with(context)
+                        .load(imgUrl)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .apply(getGifOptions(mImageLoaderConfig))
+                        .into(view);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            MyLogUtils.getInstance().e("GlideLoaderStrategy - 图片框架引用的上下文已被销毁");
         }
     }
 
     @Override
     public void loadCornerImage(Context context, ImageView view, String imgUrl, int radius) {
-        if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
-            with(context)
-                    .load(imgUrl)
-                    .thumbnail(Constants.THUMB_SIZE)
-                    .apply(getOptions1(mImageLoaderConfig))
-                    .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
-//                .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(view);
+        try {
+            if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
+                with(context)
+                        .load(imgUrl)
+                        .thumbnail(Constants.THUMB_SIZE)
+                        .apply(getOptions1(mImageLoaderConfig))
+                        .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
+    //                .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(view);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            MyLogUtils.getInstance().e("GlideLoaderStrategy - 图片框架引用的上下文已被销毁");
         }
     }
 
