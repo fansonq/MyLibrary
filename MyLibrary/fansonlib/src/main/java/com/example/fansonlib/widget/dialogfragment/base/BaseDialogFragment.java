@@ -39,8 +39,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private FragmentManager mFragmentManager;
 
     private int margin = 60;//左右边距,默认60dp
-    private int width;//宽度
-    private int height;//高度
+    private int width = 0;//宽度
+    private int height = 0;//高度
     private float dimAmount = 0.5f;//灰度深浅
     private boolean showBottom;//是否底部显示
     private boolean outCancel = false;//是否点击外部取消
@@ -124,7 +124,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             if (width == 0) {
                 lp.width = Utils.getScreenWidth(getContext()) - 2 * Utils.dp2px(getContext(), margin);
             } else if (width == -1) {
-                lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
             } else {
                 lp.width = Utils.dp2px(getContext(), width);
             }
@@ -132,6 +132,8 @@ public abstract class BaseDialogFragment extends DialogFragment {
             //设置dialog高度
             if (height == 0) {
                 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            } else if (height == -1) {
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
             } else {
                 lp.height = Utils.dp2px(getContext(), height);
             }
