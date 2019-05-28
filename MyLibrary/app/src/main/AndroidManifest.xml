@@ -3,6 +3,7 @@
     package="com.fanson.mylibrary">
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -33,6 +34,7 @@
 
         <activity android:name=".example.ExampleActivity"/>
 
+        <activity android:name=".recyclerview.RecyclerViewActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

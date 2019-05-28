@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fansonlib.R;
-import com.example.fansonlib.callback.LoadFinishCallBack;
-import com.example.fansonlib.callback.LoadMoreListener;
 import com.example.fansonlib.image.ImageLoaderUtils;
 
 
@@ -21,10 +19,10 @@ import com.example.fansonlib.image.ImageLoaderUtils;
  * Created on：2016/12/17 17:58
  * Describe：自定义的RecyclerView
  */
-public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCallBack {
+public class AutoLoadRecyclerView extends RecyclerView implements RvLoadFinishListener {
 
     private static final String TAG = AutoLoadRecyclerView.class.getSimpleName();
-    private LoadMoreListener loadMoreListener;
+    private RvLoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
     /**
@@ -93,12 +91,12 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         addOnScrollListener(new AutoLoadScrollListener( pauseOnScroll, pauseOnFling));
     }
 
-    public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
+    public void setLoadMoreListener(RvLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
     }
 
     @Override
-    public void loadFinish(Object obj) {
+    public void onRvLoadFinish( ) {
         isLoadingMore = false;
     }
 
@@ -131,7 +129,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                 if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount -
                         2 && dy > 0) {
                     isLoadingMore = true;
-                    loadMoreListener.loadMore();
+                    loadMoreListener.onRvLoadMore();
                 }
             }
         }
@@ -140,24 +138,19 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 switch (newState) {
                     case SCROLL_STATE_IDLE:
-//                        imageLoader.resumeRequests(mContext);
                         ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         break;
                     case SCROLL_STATE_DRAGGING:
                         if (pauseOnScroll) {
-//                            imageLoader.pauseRequests(mContext);
                             ImageLoaderUtils.getInstance().onPauseRequest(mContext);
                         } else {
-//                            imageLoader.resumeRequests(mContext);
                             ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;
                     case SCROLL_STATE_SETTLING:
                         if (pauseOnFling) {
                             ImageLoaderUtils.getInstance().onPauseRequest(mContext);
-//                            imageLoader.pauseRequests(mContext);
                         } else {
-//                            imageLoader.resumeRequests(mContext);
                             ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;

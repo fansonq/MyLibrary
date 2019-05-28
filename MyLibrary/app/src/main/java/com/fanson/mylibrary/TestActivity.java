@@ -12,9 +12,11 @@ import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.utils.SpannableStringUtils;
+import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.storage.MyKvStorageUtils;
 import com.example.fansonlib.utils.storage.StorageConfig;
 import com.fanson.mylibrary.databinding.ActivityTestBinding;
+import com.fanson.mylibrary.recyclerview.RecyclerViewActivity;
 
 /**
  * @author Created by：Fanson
@@ -41,8 +43,7 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
         strategy.setApi(new ApiFactoryImpl());
         HttpUtils.init(strategy);
 
-        StorageConfig config = new StorageConfig.Builder().setFileName("FansonLib").build();
-        MyKvStorageUtils.init(config);
+        MyLogUtils.getInstance().d("HHHH");
 
         mBtn = findViewById(R.id.btn_go);
 
@@ -58,8 +59,8 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
     protected void initData() {
         mBinding.tv1.setText(SpannableStringUtils.getBuilder("测试").append("大号字体")
                 .setProportion(1.2f).setForegroundColor(ContextCompat.getColor(this,R.color.light_orange)).create());
-        testMmkv();
 
+        testMmkv();
     }
 
     @Override
@@ -77,12 +78,22 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
                 mBinding.td1.setVectorDrawableTop(R.mipmap.close);
             }
         });
+
+        mBinding.btnRv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMyActivity(RecyclerViewActivity.class);
+            }
+        });
     }
 
     /**
      * 测试存储框架功能
      */
     private void testMmkv(){
+        StorageConfig config = new StorageConfig.Builder().setFileName("FansonLib").build();
+        MyKvStorageUtils.init(config);
+
         MyKvStorageUtils.getInstance().put("test","我是来自测试存储框架功能");
 
         Log.d(TAG, MyKvStorageUtils.getInstance().getString("test"));
