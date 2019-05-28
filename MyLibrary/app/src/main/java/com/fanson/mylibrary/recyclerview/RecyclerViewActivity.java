@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.fansonlib.base.BaseActivity;
+import com.example.fansonlib.widget.recyclerview.IRvLoadMoreListener;
 import com.example.fansonlib.widget.recyclerview.MyRecyclerView;
-import com.example.fansonlib.widget.recyclerview.RvLoadMoreListener;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.databinding.ActivityRecyclerviewBinding;
 
@@ -19,7 +19,7 @@ import java.util.List;
  * Created Time: 2019/5/25 9:38
  * Describe：测试RecyclerView
  */
-public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBinding> implements RvLoadMoreListener {
+public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBinding> implements IRvLoadMoreListener {
 
     private static final String TAG = RecyclerViewActivity.class.getSimpleName();
 
@@ -37,7 +37,6 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
         myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setRvAdapter(new RecyclerViewAdapter());
         myRecyclerView.setLoadMoreListener(this);
-        myRecyclerView.setRefreshListener(this);
     }
 
     @Override
@@ -65,7 +64,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     }
 
     @Override
-    public void onRvLoadMore() {
+    public void onRvLoadMore(int pageNum) {
         Log.d(TAG, "onRvLoadMore");
         myRecyclerView.getRvAdapter().loadMoreEnd();
         List<RecyclerViewBean.ListBean> listBeans = new ArrayList<>();
@@ -76,4 +75,5 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
         }
         myRecyclerView.addList(listBeans);
     }
+
 }

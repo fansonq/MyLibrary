@@ -19,10 +19,10 @@ import com.example.fansonlib.image.ImageLoaderUtils;
  * Created on：2016/12/17 17:58
  * Describe：自定义的RecyclerView
  */
-public class AutoLoadRecyclerView extends RecyclerView implements RvLoadFinishListener {
+public class AutoLoadRecyclerView extends RecyclerView implements IRvLoadFinishListener {
 
     private static final String TAG = AutoLoadRecyclerView.class.getSimpleName();
-    private RvLoadMoreListener loadMoreListener;
+    private IRvLoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
     /**
@@ -91,7 +91,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements RvLoadFinishLi
         addOnScrollListener(new AutoLoadScrollListener( pauseOnScroll, pauseOnFling));
     }
 
-    public void setLoadMoreListener(RvLoadMoreListener loadMoreListener) {
+    public void setLoadMoreListener(IRvLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
     }
 
@@ -126,10 +126,9 @@ public class AutoLoadRecyclerView extends RecyclerView implements RvLoadFinishLi
                 int totalItemCount = AutoLoadRecyclerView.this.getAdapter().getItemCount();
 
                 //有回调接口，并且不是加载状态，并且剩下2个item，并且向下滑动，则自动加载
-                if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount -
-                        2 && dy > 0) {
+                if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount - 2 && dy > 0) {
                     isLoadingMore = true;
-                    loadMoreListener.onRvLoadMore();
+                    loadMoreListener.onRvLoadMore(0);
                 }
             }
         }

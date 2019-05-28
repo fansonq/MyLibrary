@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.fansonlib.R;
-import com.example.fansonlib.widget.recyclerview.RvLoadMoreListener;
+import com.example.fansonlib.widget.recyclerview.IRvLoadMoreListener;
 import com.example.fansonlib.impl.CustomLoadMoreView;
 import com.example.fansonlib.widget.loadingview.FadeScaleViewAnimProvider;
 import com.example.fansonlib.widget.loadingview.LoadingStateView;
@@ -19,7 +19,7 @@ import com.example.fansonlib.widget.recyclerview.AutoLoadRecyclerView;
  * Created Time: 2019/4/2 11:30
  * Describe：带下拉刷新的BaseVmActivity（Id：swipeRefresh）
  */
-public abstract class BaseVmSwipeActivity <VM extends BaseViewModel, D extends ViewDataBinding, A extends BaseQuickAdapter> extends BaseVmActivity<VM, D> implements SwipeRefreshLayout.OnRefreshListener, RvLoadMoreListener {
+public abstract class BaseVmSwipeActivity <VM extends BaseViewModel, D extends ViewDataBinding, A extends BaseQuickAdapter> extends BaseVmActivity<VM, D> implements SwipeRefreshLayout.OnRefreshListener, IRvLoadMoreListener {
 
     protected A mAdapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -100,7 +100,7 @@ public abstract class BaseVmSwipeActivity <VM extends BaseViewModel, D extends V
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                onRvLoadMore();
+                onRvLoadMore(mRequestPageNum);
             }
         }, mRecyclerView);
         mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_BOTTOM);
@@ -190,7 +190,7 @@ public abstract class BaseVmSwipeActivity <VM extends BaseViewModel, D extends V
     protected abstract void scrollLoadMoreData(int requestPageNum);
 
     @Override
-    public void onRvLoadMore() {
+    public void onRvLoadMore(int pageNum) {
         if (mRequestPageNum>1){
             scrollLoadMoreData(mRequestPageNum);
         }else {

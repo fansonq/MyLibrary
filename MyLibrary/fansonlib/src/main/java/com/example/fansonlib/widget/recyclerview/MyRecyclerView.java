@@ -23,7 +23,7 @@ import java.util.List;
  * Describe：自定义RecyclerView，继承RecyclerView
  * 泛型B是实体类，泛型A是适配器
  */
-public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> extends RecyclerView implements RvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> extends RecyclerView implements IRvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     private static final String TAG = MyRecyclerView.class.getSimpleName();
 
@@ -53,7 +53,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     /**
      * 加载更多的监听
      */
-    private RvLoadMoreListener mRvLoadMoreListener;
+    private IRvLoadMoreListener mRvLoadMoreListener;
 
     /**
      * 下拉刷新的监听
@@ -108,7 +108,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      *
      * @param listener 加载更多的监听接口
      */
-    public void setLoadMoreListener(RvLoadMoreListener listener) {
+    public void setLoadMoreListener(IRvLoadMoreListener listener) {
         mRvLoadMoreListener = listener;
     }
 
@@ -444,7 +444,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     public void onLoadMoreRequested() {
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
-            mRvLoadMoreListener.onRvLoadMore();
+            mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
         }
     }
 }
