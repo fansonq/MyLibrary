@@ -94,11 +94,12 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      */
     private void setRecyclerView() {
         if (mAdapter != null) {
-            mRvScrollListener = new MyRvScrollListener(getContext(), this);
+            mRvScrollListener = new MyRvScrollListener(getContext());
             addOnScrollListener(mRvScrollListener);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
-//            mAdapter.setOnLoadMoreListener(this, this);
+            mAdapter.setPreLoadNumber(2);
+            mAdapter.setOnLoadMoreListener(this, this);
             setAdapter(mAdapter);
         }
     }

@@ -24,9 +24,8 @@ public class MyRvScrollListener extends RecyclerView.OnScrollListener {
      */
     private BaseQuickAdapter.RequestLoadMoreListener mLoadMoreListener;
 
-    public MyRvScrollListener(Context context, BaseQuickAdapter.RequestLoadMoreListener loadMoreListener){
+    public MyRvScrollListener(Context context){
         mContext = context;
-        mLoadMoreListener = loadMoreListener;
     }
 
     /**
