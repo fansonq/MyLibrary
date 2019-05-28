@@ -34,7 +34,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     /**
      * 默认页码为1
      */
-    private static final int DEFAULT_PAGE_NUM = 1;
+    public static final int DEFAULT_PAGE_NUM = 1;
     /**
      * 请求加载的页码
      */
@@ -300,6 +300,9 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     private void setDataToAdapter(boolean isRefresh,List<B> list){
         if (isRefresh){
             mAdapter.setNewData(list);
+            if (mIRvRefreshListener!=null){
+                mIRvRefreshListener.onCompleteRefresh();
+            }
         } else {
             mAdapter.addData(list);
         }
