@@ -98,7 +98,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             addOnScrollListener(mRvScrollListener);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
-            mAdapter.setOnLoadMoreListener(this, this);
+//            mAdapter.setOnLoadMoreListener(this, this);
             setAdapter(mAdapter);
         }
     }
@@ -445,6 +445,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     @Override
     public void onLoadMoreRequested() {
+        Log.d("TTT","onLoadMoreRequested = "+mRequestPageNum);
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
