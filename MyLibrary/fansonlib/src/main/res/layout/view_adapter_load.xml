@@ -16,9 +16,9 @@
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/loadingView"
             style="@style/AVLoadingIndicatorView"
-            android:layout_width="40dp"
+            android:layout_width="32dp"
             android:layout_height="match_parent"
-            app:indicatorColor="@color/orange"
+            app:indicatorColor="@color/gray_dark1"
             app:indicatorName="BallBeatIndicator"
             />
     </LinearLayout>

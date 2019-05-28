@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.example.fansonlib.R;
 import com.example.fansonlib.impl.CustomLoadMoreView;
 
@@ -101,6 +102,17 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mAdapter.setPreLoadNumber(2);
             mAdapter.setOnLoadMoreListener(this, this);
             setAdapter(mAdapter);
+        }
+    }
+
+    /**
+     * 设置RecyclerView
+     * @param loadingView 设置加载状态的视图（加载中，加载出错，加载完成）
+     */
+    private void setRecyclerView(LoadMoreView loadingView) {
+        setRecyclerView();
+        if (mAdapter != null) {
+            mAdapter.setLoadMoreView(loadingView);
         }
     }
 
