@@ -266,7 +266,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements IRvLoadFinishL
      * @param retryView 传入重试视图布局Layout；若传入为null则使用默认视图
      * @param listener  监听重试
      */
-    public void setRetryView(View retryView, final IRetryListener listener) {
+    public void setRetryView(View retryView, final IRvRetryListener listener) {
         if (mRetryView == null) {
             mRetryView = LayoutInflater.from(getContext()).inflate(R.layout.layout_retry, AutoLoadRecyclerView.this, false);
         }
@@ -275,7 +275,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements IRvLoadFinishL
         (mRetryView.findViewById(R.id.td_retry)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onClickRetry();
+                listener.onRvRetryLoad();
             }
         });
     }

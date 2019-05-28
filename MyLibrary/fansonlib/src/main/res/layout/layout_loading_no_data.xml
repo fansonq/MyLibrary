@@ -29,12 +29,4 @@
         android:textColor="@color/gray_dark1"
         android:textSize="16sp" />
 
-   <!-- <TextView
-        android:id="@+id/tv_reload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/retry_loading"
-        android:textColor="#727272"
-        android:textSize="12sp" />-->
 </LinearLayout>

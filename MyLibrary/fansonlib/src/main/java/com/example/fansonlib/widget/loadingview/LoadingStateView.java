@@ -87,6 +87,8 @@ public class LoadingStateView extends FrameLayout {
 //        mErrorView.setVisibility(View.GONE);
 //        mProgressView.setVisibility(View.GONE);
         mCurrentShowingView = contentView;
+
+        setViewSwitchAnimProvider(new FadeScaleViewAnimProvider());
     }
 
     private void parseAttrs(Context context, AttributeSet attrs) {
