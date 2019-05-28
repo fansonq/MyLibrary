@@ -445,7 +445,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     @Override
     public void onLoadMoreRequested() {
-        Log.d("TTT","onLoadMoreRequested = "+mRequestPageNum);
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
