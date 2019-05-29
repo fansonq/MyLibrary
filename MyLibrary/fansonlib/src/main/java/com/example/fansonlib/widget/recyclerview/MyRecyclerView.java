@@ -46,9 +46,17 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      */
     private boolean mIsRefresh = false;
     /**
-     * 界面是否显示完成
+     * 界面是否绘制完成
      */
-    private boolean mHasShow = false;
+    private boolean mInited = false;
+
+    /**
+     * 记录：界面没初始化之前，需要显示的状态视图
+     */
+    private int mNeedShowStatus = 0;
+    private static final int STATUS_LOADING = 1;
+    private static final int STATUS_NO_DATA = 2;
+    private static final int STATUS_ERROR = 3;
 
     /**
      * 滑动监听接口
@@ -319,6 +327,10 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 显示无数据页面，如果想自定义，覆写此方法
      */
     private void showNoDataView() {
+        if (!mInited) {
+            mNeedShowStatus = STATUS_NO_DATA;
+            return;
+        }
         if (mAdapter == null) {
             return;
         }
@@ -391,6 +403,10 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 显示错误View
      */
     public void showErrorView() {
+        if (!mInited) {
+            mNeedShowStatus = STATUS_ERROR;
+            return;
+        }
         if (mAdapter == null) {
             return;
         }
@@ -436,7 +452,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param layoutId 用户自定义的错误数据视图layout
      */
     public void setErrorView(int layoutId) {
-        mErrorView  = LayoutInflater.from(getContext()).inflate(layoutId, null);
+        mErrorView = LayoutInflater.from(getContext()).inflate(layoutId, null);
     }
 
     /**
@@ -486,14 +502,17 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 显示加载中的视图
      */
     public void showLoadingView() {
+        if (!mInited) {
+            mNeedShowStatus = STATUS_LOADING;
+            return;
+        }
         if (mAdapter == null) {
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
-            if (getHeight() == 0){
+            if (getHeight() == 0) {
                 return;
             }
-            mHasShow = true;
             mAdapter.setFooterView(getLoadingView());
             ViewGroup.LayoutParams layoutParams = getLoadingView().getLayoutParams();
             layoutParams.height = getHeight();
@@ -538,10 +557,24 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
-        if (!mHasShow){
-            mHasShow = true;
-            showLoadingView();
+        mInited = true;
+        if (mNeedShowStatus == 0) {
+            return;
         }
+        switch (mNeedShowStatus) {
+            case STATUS_LOADING:
+                showLoadingView();
+                break;
+            case STATUS_NO_DATA:
+                showNoDataView();
+                break;
+            case STATUS_ERROR:
+                showErrorView();
+                break;
+            default:
+                break;
+        }
+        mNeedShowStatus = 0;
     }
 
     /**

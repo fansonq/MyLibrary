@@ -43,6 +43,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
 
     @Override
     protected void initData() {
+        myRecyclerView.showLoadingView();
         testLoadError();
     }
 
