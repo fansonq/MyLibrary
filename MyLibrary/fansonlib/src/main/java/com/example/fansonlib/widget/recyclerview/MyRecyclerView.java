@@ -629,4 +629,12 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     public void setRetryLoadViewEnable(boolean enable){
         mNeedRetryLoadView = enable;
     }
+
+    /**
+     * 设置重新加载的配置
+     */
+    public void setRefreshOpinion(){
+        mRequestPageNum = 1;
+        mIsRefresh = true;
+    }
 }
