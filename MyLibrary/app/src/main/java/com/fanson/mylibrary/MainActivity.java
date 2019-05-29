@@ -79,7 +79,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
         mBtnRxBus.setText(content + " 线程：" + (getMainLooper() == Looper.myLooper()));
     }
 
-
     @Override
     protected void initView(Bundle savedInstanceState) {
 
@@ -93,8 +92,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 .setTextSize(12)
                 .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
         MyToastUtils.init(config);
-
-
 
         mBtnNet = findMyViewId(R.id.btn_net);
         mBtnRxBus = findMyViewId(R.id.btn_rxBus);
@@ -308,7 +305,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 MyToastUtils.getInstance().showShort("onConfirm");
             }
         }).setOutCancel(true).show(getSupportFragmentManager());
-
     }
 
     /**

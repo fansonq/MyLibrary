@@ -38,6 +38,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
         myRecyclerView = findMyViewId(R.id.recyclerView);
         myRecyclerView.setRvAdapter(new RecyclerViewAdapter());
         myRecyclerView.setLoadMoreListener(this);
+        myRecyclerView.setRetryLoadViewEnable(false);
         myRecyclerView.setLoadingView(R.layout.layout_loading_progress);
     }
 
@@ -85,14 +86,18 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     @Override
     public void onRvLoadMore(int pageNum) {
         Log.d(TAG, "onRvLoadMore");
-        myRecyclerView.getRvAdapter().loadMoreEnd();
-        List<RecyclerViewBean.ListBean> listBeans = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            RecyclerViewBean.ListBean listBean = new RecyclerViewBean.ListBean();
-            listBean.setName("loadMore" + i);
-            listBeans.add(listBean);
-        }
-        myRecyclerView.addList(listBeans);
+       new Handler().postDelayed(new Runnable() {
+           @Override
+           public void run() {
+               List<RecyclerViewBean.ListBean> listBeans = new ArrayList<>();
+               for (int i = 0; i < 10; i++) {
+                   RecyclerViewBean.ListBean listBean = new RecyclerViewBean.ListBean();
+                   listBean.setName("loadMore" + i);
+                   listBeans.add(listBean);
+               }
+               myRecyclerView.addList(listBeans);
+           }
+       },3000);
     }
 
     /**

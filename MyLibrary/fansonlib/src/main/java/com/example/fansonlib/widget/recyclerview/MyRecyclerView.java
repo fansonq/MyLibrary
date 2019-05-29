@@ -61,6 +61,10 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 点击空数据视图，可以重试加载，默认支持
      */
     private boolean mClickEmptyLoadEnable = true;
+    /**
+     * 重试加载，是否需要LoadingView，如果不需要，则交给用户处理
+     */
+    private boolean mNeedRetryLoadView = true;
 
     /**
      * 滑动监听接口
@@ -264,7 +268,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             }
             return;
         }
-
 //        //判断是否为多类型布局
 //        int ignoreSize = 0;
 //        if (isMultiItem) {
@@ -370,7 +373,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
                 @Override
                 public void onClick(View v) {
                     if (mClickEmptyLoadEnable){
-                        showLoadingView();
                         retryLoad();
                     }
                 }
@@ -482,7 +484,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mErrorView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showLoadingView();
                     retryLoad();
                 }
             });
@@ -588,22 +589,14 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 重试加载
      */
     private void retryLoad() {
-        if (mLoadingStateView != null) {
-            mLoadingStateView.showLoadingView();
+        if (mNeedRetryLoadView) {
+            showLoadingView();
         }
         if (mIRvRetryListener != null) {
             mIsRefresh = true;
             mRequestPageNum = 1;
             mIRvRetryListener.onRvRetryLoad();
         }
-    }
-
-    /**
-     * 设置点击空数据视图，可以重试加载的功能
-     * @param enable true/false
-     */
-    public void setClickEmptyLoadEnable(boolean enable){
-        mClickEmptyLoadEnable = enable;
     }
 
     @Override
@@ -619,5 +612,21 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
         }
+    }
+
+    /**
+     * 设置点击空数据视图，可以重试加载的功能
+     * @param enable true/false
+     */
+    public void setClickEmptyLoadEnable(boolean enable){
+        mClickEmptyLoadEnable = enable;
+    }
+
+    /**
+     * 设置点击重试，是否出现LoadingView
+     * @param enable true/false
+     */
+    public void setRetryLoadViewEnable(boolean enable){
+        mNeedRetryLoadView = enable;
     }
 }
