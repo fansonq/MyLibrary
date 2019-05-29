@@ -49,7 +49,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 界面是否绘制完成
      */
     private boolean mInited = false;
-
     /**
      * 记录：界面没初始化之前，需要显示的状态视图
      */
@@ -57,6 +56,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     private static final int STATUS_LOADING = 1;
     private static final int STATUS_NO_DATA = 2;
     private static final int STATUS_ERROR = 3;
+
+    /**
+     * 点击空数据视图，可以重试加载，默认支持
+     */
+    private boolean mClickEmptyLoadEnable = true;
 
     /**
      * 滑动监听接口
@@ -357,15 +361,19 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mLoadingStateView.setNoDataAction(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    retryLoad();
+                    if (mClickEmptyLoadEnable){
+                        retryLoad();
+                    }
                 }
             });
         } else {
             mNoDataView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showLoadingView();
-                    retryLoad();
+                    if (mClickEmptyLoadEnable){
+                        showLoadingView();
+                        retryLoad();
+                    }
                 }
             });
         }
@@ -589,6 +597,14 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mRequestPageNum = 1;
             mIRvRetryListener.onRvRetryLoad();
         }
+    }
+
+    /**
+     * 设置点击空数据视图，可以重试加载的功能
+     * @param enable true/false
+     */
+    public void setClickEmptyLoadEnable(boolean enable){
+        mClickEmptyLoadEnable = enable;
     }
 
     @Override
