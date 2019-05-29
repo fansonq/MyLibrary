@@ -133,12 +133,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
-     * 设置RecyclerView
+     * 设置RecyclerView加载状态，底部view
      *
      * @param loadingView 设置加载状态的视图（加载中，加载出错，加载完成）
      */
-    private void setRecyclerView(LoadMoreView loadingView) {
-        setRecyclerView();
+    public void setLoadStateBottomView(LoadMoreView loadingView) {
         if (mAdapter != null) {
             mAdapter.setLoadMoreView(loadingView);
         }
