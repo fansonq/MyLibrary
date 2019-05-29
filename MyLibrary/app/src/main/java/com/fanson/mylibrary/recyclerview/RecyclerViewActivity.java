@@ -36,10 +36,9 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     protected void initView(Bundle savedInstanceState) {
         myRecyclerView = new MyRecyclerView<>(this);
         myRecyclerView = findMyViewId(R.id.recyclerView);
-        myRecyclerView.setHasFixedSize(true);
         myRecyclerView.setRvAdapter(new RecyclerViewAdapter());
         myRecyclerView.setLoadMoreListener(this);
-        setCustomLoadingView();
+        myRecyclerView.setLoadingView(R.layout.layout_loading_progress);
     }
 
     @Override
@@ -50,14 +49,6 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     @Override
     protected void listenEvent() {
 
-    }
-
-    /**
-     * 设置加载中的界面
-     */
-    private void setCustomLoadingView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_loading_progress, null);
-        myRecyclerView.setLoadingView(view);
     }
 
     /**

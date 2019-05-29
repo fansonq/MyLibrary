@@ -62,19 +62,20 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 下拉刷新的监听
      */
     private IRvRefreshListener mIRvRefreshListener;
-
-    private IRvRetryListener mIRvRetryListener;
-
     /**
-     * 加载状态的视图View
+     * 重试加载的监听
      */
-    private LoadingStateView mLoadingStateView;
+    private IRvRetryListener mIRvRetryListener;
 
     /**
      * 适配器
      */
     private A mAdapter;
 
+    /**
+     * 默认加载状态的视图View
+     */
+    private LoadingStateView mLoadingStateView;
     /**
      * 加载中的View
      */
@@ -89,6 +90,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     private View mErrorView = null;
 
     private View mErrorWithHeadView = null;
+
 
     public MyRecyclerView(Context context) {
         super(context, null);
@@ -109,6 +111,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         if (mAdapter != null) {
             mRvScrollListener = new MyRvScrollListener(getContext());
             addOnScrollListener(mRvScrollListener);
+            setHasFixedSize(true);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
             mAdapter.setPreLoadNumber(2);
@@ -330,6 +333,52 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
+     * 获取默认的空数据视图
+     *
+     * @return 空数据视图
+     */
+    public View getNoDataView() {
+        if (mNoDataView == null) {
+            mNoDataView = LayoutInflater.from(getContext()).inflate(R.layout.layout_loading_status, null);
+            mLoadingStateView = mNoDataView.findViewById(R.id.loadingStateView);
+            mLoadingStateView.showLoadNoDataView();
+            mLoadingStateView.setNoDataAction(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    retryLoad();
+                }
+            });
+        } else {
+            mNoDataView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showLoadingView();
+                    retryLoad();
+                }
+            });
+        }
+        return mNoDataView;
+    }
+
+    /**
+     * 设置空数据视图（p：需要在加载数据前调用）
+     *
+     * @param view 用户自定义的空数据视图
+     */
+    public void setNoDataView(View view) {
+        mNoDataView = view;
+    }
+
+    /**
+     * 设置空数据视图layoutId（p：需要在加载数据前调用）
+     *
+     * @param layoutId 用户自定义的空数据视图
+     */
+    public void setNoDataView(int layoutId) {
+        mNoDataView = LayoutInflater.from(getContext()).inflate(layoutId, null);
+    }
+
+    /**
      * 隐藏无数据view
      */
     private void hideNoDataView() {
@@ -373,101 +422,21 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
-     * 显示加载中的视图
-     */
-    public void showLoadingView() {
-        if (mAdapter == null) {
-            return;
-        }
-        if (mAdapter.getHeaderLayoutCount() == 0) {
-            if (getHeight() == 0){
-                return;
-            }
-            mHasShow = true;
-            mAdapter.setFooterView(getLoadingView());
-            ViewGroup.LayoutParams layoutParams = getLoadingView().getLayoutParams();
-            layoutParams.height = getHeight();
-            getLoadingView().setLayoutParams(layoutParams);
-        } else if (mAdapter.getHeaderLayoutCount() > 0) {
-            mAdapter.setFooterView(getErrorWithHeadView());
-        }
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        if (!mHasShow){
-            mHasShow = true;
-            showLoadingView();
-        }
-    }
-
-    /**
-     * 获取加载中的视图
-     *
-     * @return 加载中的视图
-     */
-    public View getLoadingView() {
-        if (mLoadingView == null) {
-            mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.layout_loading_status, null);
-            mLoadingStateView = mLoadingView.findViewById(R.id.loadingStateView);
-            mLoadingStateView.showLoadingView();
-        }
-        return mLoadingView;
-    }
-
-    /**
-     * 获取默认的空数据视图
-     *
-     * @return 空数据视图
-     */
-    public View getNoDataView() {
-        if (mNoDataView == null) {
-            mNoDataView = LayoutInflater.from(getContext()).inflate(R.layout.layout_loading_status, null);
-            mLoadingStateView = mNoDataView.findViewById(R.id.loadingStateView);
-            mLoadingStateView.showLoadNoDataView();
-            mLoadingStateView.setNoDataAction(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    retryLoad();
-                }
-            });
-        } else {
-            mNoDataView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    retryLoad();
-                }
-            });
-        }
-        return mNoDataView;
-    }
-
-    /**
-     * 设置空数据视图（p：需要在加载数据前调用）
-     *
-     * @param view 用户自定义的空数据视图
-     */
-    public void setNoDataView(View view) {
-        mNoDataView = view;
-    }
-
-    /**
-     * 设置加载中视图
-     *
-     * @param view 用户自定义的加载中视图
-     */
-    public void setLoadingView(View view) {
-        mLoadingView = view;
-    }
-
-    /**
      * 设置错误数据视图（p：需要在加载数据前调用）
      *
      * @param view 用户自定义的错误数据视图
      */
     public void setErrorView(View view) {
         mErrorView = view;
+    }
+
+    /**
+     * 设置错误数据视图layout（p：需要在加载数据前调用）
+     *
+     * @param layoutId 用户自定义的错误数据视图layout
+     */
+    public void setErrorView(int layoutId) {
+        mErrorView  = LayoutInflater.from(getContext()).inflate(layoutId, null);
     }
 
     /**
@@ -490,6 +459,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mErrorView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    showLoadingView();
                     retryLoad();
                 }
             });
@@ -510,6 +480,68 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             });
         }
         return mErrorWithHeadView;
+    }
+
+    /**
+     * 显示加载中的视图
+     */
+    public void showLoadingView() {
+        if (mAdapter == null) {
+            return;
+        }
+        if (mAdapter.getHeaderLayoutCount() == 0) {
+            if (getHeight() == 0){
+                return;
+            }
+            mHasShow = true;
+            mAdapter.setFooterView(getLoadingView());
+            ViewGroup.LayoutParams layoutParams = getLoadingView().getLayoutParams();
+            layoutParams.height = getHeight();
+            getLoadingView().setLayoutParams(layoutParams);
+        } else if (mAdapter.getHeaderLayoutCount() > 0) {
+            mAdapter.setFooterView(getErrorWithHeadView());
+        }
+    }
+
+    /**
+     * 获取加载中的视图
+     *
+     * @return 加载中的视图
+     */
+    public View getLoadingView() {
+        if (mLoadingView == null) {
+            mLoadingView = LayoutInflater.from(getContext()).inflate(R.layout.layout_loading_status, null);
+            mLoadingStateView = mLoadingView.findViewById(R.id.loadingStateView);
+            mLoadingStateView.showLoadingView();
+        }
+        return mLoadingView;
+    }
+
+    /**
+     * 设置加载中视图layout
+     *
+     * @param view 用户自定义的加载中视图layout
+     */
+    public void setLoadingView(View view) {
+        mLoadingView = view;
+    }
+
+    /**
+     * 设置加载中视图layout
+     *
+     * @param layoutId 用户自定义的加载中视图layout
+     */
+    public void setLoadingView(int layoutId) {
+        mLoadingView = LayoutInflater.from(getContext()).inflate(layoutId, null);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if (!mHasShow){
+            mHasShow = true;
+            showLoadingView();
+        }
     }
 
     /**
