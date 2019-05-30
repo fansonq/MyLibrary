@@ -39,7 +39,7 @@ public abstract  class BaseDataBindingAdapter <T, D extends ViewDataBinding, V e
     public V onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType != LOADING_VIEW && viewType != HEADER_VIEW && viewType != EMPTY_VIEW && viewType != FOOTER_VIEW) {
             mContext = parent.getContext();
-            D d = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), this.mLayoutResId, parent,true);
+            D d = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), this.mLayoutResId, parent,false);
             d.executePendingBindings();
             DataBindingViewHolder mvViewHolder = new DataBindingViewHolder(d);
             bindViewClickListener(mvViewHolder);
