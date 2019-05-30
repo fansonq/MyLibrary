@@ -303,7 +303,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      */
     private void setDataToAdapter(boolean isRefresh, List<B> list) {
         if (isRefresh) {
-            mAdapter.setNewData(list);
+            mAdapter.addData(list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
