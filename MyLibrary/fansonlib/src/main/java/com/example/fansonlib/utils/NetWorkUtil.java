@@ -65,6 +65,9 @@ public class NetWorkUtil {
             return false;
         }
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null){
+            return false;
+        }
         return networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
