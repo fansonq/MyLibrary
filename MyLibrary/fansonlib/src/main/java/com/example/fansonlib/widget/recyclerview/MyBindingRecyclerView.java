@@ -305,7 +305,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      */
     private void setDataToAdapter(boolean isRefresh, List<B> list) {
         if (isRefresh) {
-            mAdapter.setNewData(list);
+            mAdapter.addData(0,list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
