@@ -16,7 +16,6 @@ public class DataBindingViewHolder<T extends ViewDataBinding> extends BaseViewHo
 
     public DataBindingViewHolder(T binding) {
         super(binding.getRoot());
-//        binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         this.binding = binding;
     }
 
