@@ -1,7 +1,6 @@
 package com.example.fansonlib.impl.adapter;
 
 import android.databinding.ViewDataBinding;
-import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -17,7 +16,7 @@ public class DataBindingViewHolder<T extends ViewDataBinding> extends BaseViewHo
 
     public DataBindingViewHolder(T binding) {
         super(binding.getRoot());
-        binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        binding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         this.binding = binding;
     }
 
