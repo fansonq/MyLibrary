@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.fansonlib.base.BaseViewModel;
+import com.example.fansonlib.constant.ConstMvvmLoadState;
+import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.fanson.mylibrary.SimpleBean;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestCallback;
@@ -49,9 +51,11 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
     @Override
     public void failure(String errorMsg) {
         Log.d(TAG,"failure");
-        if (isViewAttached()){
-            getBaseView().showFailure(errorMsg);
-        }
+        MyToastUtils.getInstance().showShort(errorMsg);
+        postState(ConstMvvmLoadState.COMPLETE_STATE);
+//        if (isViewAttached()){
+//            getBaseView().showFailure(errorMsg);
+//        }
     }
 
     @Override

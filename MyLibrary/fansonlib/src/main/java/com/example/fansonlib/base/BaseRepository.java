@@ -1,7 +1,8 @@
 package com.example.fansonlib.base;
 
 /**
- * Created by fansonq on 2017/9/2.
+ * @author fansonq
+ * @date 2017/9/2
  * 数据层处理的BaseRepository
  */
 
@@ -13,6 +14,7 @@ public abstract class BaseRepository implements IBaseRepository {
 
     public BaseRepository() {
     }
+
 
     /**
      * RxJava取消注册，以避免内存泄露

@@ -1,7 +1,12 @@
 package com.example.fansonlib.base;
 
+import android.arch.lifecycle.Observer;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
+import com.example.fansonlib.constant.ConstMvvmLoadState;
 
 /**
  * @author Created by：Fanson
@@ -15,6 +20,7 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
     @Override
     protected void initView(Bundle savedInstanceState) {
         mViewModel = createViewModel();
+        handlerLoadState();
         dataSuccessObserver();
     }
 
@@ -33,6 +39,34 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
             mViewModel = createViewModel();
         }
         return mViewModel;
+    }
+
+    /**
+     * 处理请求网络时的状态
+     */
+    private void handlerLoadState(){
+        if (mViewModel != null) {
+            mViewModel.mLoadState.observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(@Nullable String state) {
+                    if (TextUtils.isEmpty(state)){
+                        return;
+                    }
+                    switch (state) {
+                        case ConstMvvmLoadState.SUCCESS_STATE:
+                            hideLoading();
+                            break;
+                        case ConstMvvmLoadState.ERROR_STATE:
+                            hideLoading();
+                            break;
+                        case ConstMvvmLoadState.COMPLETE_STATE:
+                            hideLoading();
+                        default:
+                            break;
+                    }
+                }
+            });
+        }
     }
 
     /**
