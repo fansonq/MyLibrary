@@ -55,25 +55,23 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState(){
-        if (mViewModel != null) {
-            mViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
-                @Override
-                public void onChanged(@Nullable LoadStateBean stateBean) {
-                    handlerLoadState(stateBean);
-                }
-            });
-        }
+    private void registerLoadState() {
+        getViewModel().mLoadState.observe(this, new Observer<LoadStateBean>() {
+            @Override
+            public void onChanged(@Nullable LoadStateBean stateBean) {
+                handlerLoadState(stateBean);
+            }
+        });
     }
 
     /**
      * 处理请求网络时的状态
      */
-    protected void handlerLoadState( LoadStateBean stateBean){
-        if (stateBean == null){
+    protected void handlerLoadState(LoadStateBean stateBean) {
+        if (stateBean == null) {
             return;
         }
-        if (TextUtils.isEmpty(stateBean.getState())){
+        if (TextUtils.isEmpty(stateBean.getState())) {
             return;
         }
         switch (stateBean.getState()) {

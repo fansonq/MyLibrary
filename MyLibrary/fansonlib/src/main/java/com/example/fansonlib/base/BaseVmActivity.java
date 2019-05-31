@@ -11,10 +11,10 @@ import com.example.fansonlib.constant.ConstLoadState;
 
 /**
  * @author Created by：Fanson
- * Created Time: 2018/10/11 16:39
- * Describe：集成ViewModel的BaseActivity
+ *         Created Time: 2018/10/11 16:39
+ *         Describe：集成ViewModel的BaseActivity
  */
-public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewDataBinding> extends BaseActivity<D> implements BaseView {
+public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDataBinding> extends BaseActivity<D> implements BaseView {
 
     protected VM mViewModel;
 
@@ -27,16 +27,18 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
 
     /**
      * 创建ViewModel实例
+     *
      * @return ViewModel实例
      */
-    protected abstract VM  createViewModel();
+    protected abstract VM createViewModel();
 
     /**
      * 获取ViewModel实例
+     *
      * @return ViewModel实例
      */
-    protected VM getViewModel(){
-        if (mViewModel == null){
+    protected VM getViewModel() {
+        if (mViewModel == null) {
             mViewModel = createViewModel();
         }
         return mViewModel;
@@ -45,25 +47,23 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState(){
-        if (mViewModel != null) {
-            mViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
-                @Override
-                public void onChanged(@Nullable LoadStateBean stateBean) {
-                    handlerLoadState(stateBean);
-                }
-            });
-        }
+    private void registerLoadState() {
+        getViewModel().mLoadState.observe(this, new Observer<LoadStateBean>() {
+            @Override
+            public void onChanged(@Nullable LoadStateBean stateBean) {
+                handlerLoadState(stateBean);
+            }
+        });
     }
 
     /**
      * 处理请求网络时的状态
      */
-    protected void handlerLoadState( LoadStateBean stateBean){
-        if (stateBean == null){
+    protected void handlerLoadState(LoadStateBean stateBean) {
+        if (stateBean == null) {
             return;
         }
-        if (TextUtils.isEmpty(stateBean.getState())){
+        if (TextUtils.isEmpty(stateBean.getState())) {
             return;
         }
         switch (stateBean.getState()) {
@@ -98,7 +98,7 @@ public abstract class BaseVmActivity<VM extends BaseViewModel,D extends ViewData
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mViewModel != null){
+        if (mViewModel != null) {
             mViewModel.detachView();
         }
     }
