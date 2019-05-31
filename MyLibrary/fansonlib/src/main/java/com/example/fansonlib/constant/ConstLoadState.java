@@ -6,13 +6,17 @@ package com.example.fansonlib.constant;
  *         Describe：MVVM网络请求，状态值
  */
 
-public class ConstMvvmLoadState {
-
+public class ConstLoadState {
 
     /**
      * 异常失败
      */
     public static final String ERROR_STATE = "error";
+
+    /**
+     * 无数据
+     */
+    public static final String EMPTY_STATE = "empty";
 
     /**
      * 加载中

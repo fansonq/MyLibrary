@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fansonlib.constant.ConstMvvmLoadState;
+import com.example.fansonlib.bean.LoadStateBean;
+import com.example.fansonlib.constant.ConstLoadState;
 
 
 /**
@@ -27,7 +28,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = createViewModel();
-        handlerLoadState();
+        registerLoadState();
         dataSuccessObserver();
         return rootView;
     }
@@ -52,33 +53,47 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     }
 
     /**
-     * 处理请求网络时的状态
+     * 注册请求网络时的状态监听
      */
-    private void handlerLoadState(){
+    private void registerLoadState(){
         if (mViewModel != null) {
-            mViewModel.mLoadState.observe(this, new Observer<String>() {
+            mViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
                 @Override
-                public void onChanged(@Nullable String state) {
-                    if (TextUtils.isEmpty(state)){
-                        return;
-                    }
-                    switch (state) {
-                        case ConstMvvmLoadState.SUCCESS_STATE:
-                            hideLoading();
-                            break;
-                        case ConstMvvmLoadState.ERROR_STATE:
-                            hideLoading();
-                            break;
-                        case ConstMvvmLoadState.COMPLETE_STATE:
-                            hideLoading();
-                            break;
-                        default:
-                            break;
-                    }
+                public void onChanged(@Nullable LoadStateBean stateBean) {
+                    handlerLoadState(stateBean);
                 }
             });
         }
     }
+
+    /**
+     * 处理请求网络时的状态
+     */
+    protected void handlerLoadState( LoadStateBean stateBean){
+        if (stateBean == null){
+            return;
+        }
+        if (TextUtils.isEmpty(stateBean.getState())){
+            return;
+        }
+        switch (stateBean.getState()) {
+            case ConstLoadState.SUCCESS_STATE:
+                hideLoading();
+                break;
+            case ConstLoadState.ERROR_STATE:
+                hideLoading();
+                break;
+            case ConstLoadState.EMPTY_STATE:
+                hideLoading();
+                break;
+            case ConstLoadState.COMPLETE_STATE:
+                hideLoading();
+                break;
+            default:
+                break;
+        }
+    }
+
 
     /**
      * 观察接收ViewModel返回的成功数据

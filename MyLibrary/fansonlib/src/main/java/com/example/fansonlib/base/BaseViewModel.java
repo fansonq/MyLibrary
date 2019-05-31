@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.fansonlib.bean.BaseBean;
+import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.callback.IBaseViewModel;
 
 import java.lang.ref.WeakReference;
@@ -29,7 +30,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
     /**
      * 处理网络请求时的状态
      */
-    public MutableLiveData<String> mLoadState;
+    public MutableLiveData<LoadStateBean> mLoadState;
 
     public BaseViewModel(@NonNull Application application) {
         super(application);
@@ -71,7 +72,7 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
      * 发送请求状态到ViewModel层
      * @param state 网络请求时的状态
      */
-    protected void postState(String state) {
+    protected void postState(LoadStateBean state) {
         if (mLoadState != null) {
             mLoadState.postValue(state);
         }

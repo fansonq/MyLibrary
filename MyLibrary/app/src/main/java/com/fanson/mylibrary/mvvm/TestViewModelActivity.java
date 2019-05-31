@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseVmActivity;
+import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.log.LogConfig;
 import com.example.fansonlib.utils.log.MyLogUtils;
@@ -92,6 +93,12 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 }
             }
         });
+    }
+
+    @Override
+    protected void handlerLoadState(LoadStateBean stateBean) {
+        super.handlerLoadState(stateBean);
+        mBinding.tv.setText(stateBean.getContent());
     }
 
     @Override
