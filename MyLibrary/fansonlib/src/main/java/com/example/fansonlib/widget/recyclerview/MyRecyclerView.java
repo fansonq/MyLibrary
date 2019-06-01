@@ -268,18 +268,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             }
             return;
         }
-//        //判断是否为多类型布局
-//        int ignoreSize = 0;
-//        if (isMultiItem) {
-//            for (int i = 0; i < list.size(); i++) {
-//                if (list.get(i) instanceof MultiItemEntity) {
-//                    if (((MultiItemEntity) list.get(i)).getItemType() == 0) {
-//                        ignoreSize++;
-//                    }
-//                }
-//            }
-//        }
-//        int size = list.size() - ignoreSize;
 
         if (list.size() > 0) {
             hideNoDataView();
@@ -293,6 +281,19 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         } else {
             mAdapter.loadMoreEnd();
         }
+
+//        //判断是否为多类型布局
+//        int ignoreSize = 0;
+//        if (isMultiItem) {
+//            for (int i = 0; i < list.size(); i++) {
+//                if (list.get(i) instanceof MultiItemEntity) {
+//                    if (((MultiItemEntity) list.get(i)).getItemType() == 0) {
+//                        ignoreSize++;
+//                    }
+//                }
+//            }
+//        }
+//        int size = list.size() - ignoreSize;
     }
 
     /**

@@ -17,7 +17,6 @@ import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.SimpleBean;
 import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
-import com.fanson.mylibrary.mvp.ContractTest;
 
 
 /**
@@ -25,7 +24,7 @@ import com.fanson.mylibrary.mvp.ContractTest;
  * Created Time: 2018/10/11 16:49
  * Describe：测试ViewModel的Activity
  */
-public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding> implements ContractTest.TestView {
+public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding>  {
 
     private static final String TAG = TestViewModelActivity.class.getSimpleName();
 
@@ -36,9 +35,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected MyVmViewModel createViewModel() {
-        MyVmViewModel viewModel =  ViewModelProviders.of(this).get(MyVmViewModel.class);
-        viewModel.setBaseView(this);
-        return viewModel;
+        return ViewModelProviders.of(this).get(MyVmViewModel.class);
     }
 
     @Override
@@ -122,7 +119,8 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     }
 
     @Override
-    public void showFailure(String errorMsg) {
+    protected void showFailureState(String errorMsg) {
+        super.showFailureState(errorMsg);
         MyLogUtils.getInstance().e(errorMsg);
         mBinding.tv.setText(errorMsg);
     }

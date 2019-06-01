@@ -72,6 +72,7 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
                 break;
             case ConstLoadState.ERROR_STATE:
                 hideLoading();
+                showFailureState(stateBean.getContent());
                 break;
             case ConstLoadState.EMPTY_STATE:
                 hideLoading();
@@ -84,6 +85,12 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
         }
     }
 
+    /**
+     * 显示失败的状态
+     * @param errorMsg 出错原因
+     */
+    protected  void showFailureState(String errorMsg){
+    }
 
     /**
      * 观察接收成功的数据
