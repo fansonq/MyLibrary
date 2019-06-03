@@ -72,10 +72,11 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
                 break;
             case ConstLoadState.ERROR_STATE:
                 hideLoading();
-                showFailureState(stateBean.getContent());
+                showErrorState(stateBean.getContent());
                 break;
             case ConstLoadState.EMPTY_STATE:
                 hideLoading();
+                showNoDataState();
                 break;
             case ConstLoadState.COMPLETE_STATE:
                 hideLoading();
@@ -89,7 +90,13 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
      * 显示失败的状态
      * @param errorMsg 出错原因
      */
-    protected  void showFailureState(String errorMsg){
+    protected  void showErrorState(String errorMsg){
+    }
+
+    /**
+     * 显示空数据的状态
+     */
+    protected void showNoDataState() {
     }
 
     /**
