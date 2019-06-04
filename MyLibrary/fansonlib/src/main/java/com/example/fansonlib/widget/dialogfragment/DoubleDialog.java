@@ -76,16 +76,16 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return
      */
     public static DoubleDialog newInstance(String title, String content, String cancelTip, String confirmTip, boolean cancelNotDismiss) {
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        bundle.putString("content", content);
-        bundle.putString("cancelTip", cancelTip);
-        bundle.putString("confirmTip", confirmTip);
-        bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
         if (mDialog == null) {
             mDialog = new DoubleDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("title", title);
+            bundle.putString("content", content);
+            bundle.putString("cancelTip", cancelTip);
+            bundle.putString("confirmTip", confirmTip);
+            bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
+            mDialog.setArguments(bundle);
         }
-        mDialog.setArguments(bundle);
         return mDialog;
     }
 

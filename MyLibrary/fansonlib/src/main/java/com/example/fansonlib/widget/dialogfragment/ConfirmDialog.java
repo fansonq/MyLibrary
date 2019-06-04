@@ -57,14 +57,14 @@ public class ConfirmDialog extends BaseDialogFragment {
      * @return
      */
     public static ConfirmDialog newInstance(String title, String content,String confirmTip) {
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        bundle.putString("content", content);
-        bundle.putString("confirmTip", confirmTip);
         if (mDialog==null){
             mDialog = new ConfirmDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("title", title);
+            bundle.putString("content", content);
+            bundle.putString("confirmTip", confirmTip);
+            mDialog.setArguments(bundle);
         }
-        mDialog.setArguments(bundle);
         return mDialog;
     }
 

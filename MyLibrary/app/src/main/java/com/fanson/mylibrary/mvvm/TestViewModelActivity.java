@@ -119,8 +119,8 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     }
 
     @Override
-    protected void showFailureState(String errorMsg) {
-        super.showFailureState(errorMsg);
+    protected void showErrorState(String errorMsg) {
+        super.showErrorState(errorMsg);
         MyLogUtils.getInstance().e(errorMsg);
         mBinding.tv.setText(errorMsg);
     }

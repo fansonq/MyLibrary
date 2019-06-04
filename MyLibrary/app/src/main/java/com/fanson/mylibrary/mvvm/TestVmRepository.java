@@ -43,8 +43,7 @@ public class TestVmRepository extends BaseRepository{
             @Override
             public void onSuccess(SimpleBean bean) {
                 Log.d(TAG,"onSuccess");
-//                mCallback.successful(bean);
-                mCallback.failure("onFailure");
+                mCallback.successful(bean);
             }
 
             @Override
