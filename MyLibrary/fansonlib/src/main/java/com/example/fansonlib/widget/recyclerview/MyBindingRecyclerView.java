@@ -51,6 +51,12 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 界面是否绘制完成
      */
     private boolean mInited = false;
+
+    /**
+     * 标记：是否加载完毕（避免重复请求）
+     */
+    private boolean mLoadOver = false;
+
     /**
      * 记录：界面没初始化之前，需要显示的状态视图
      */
@@ -265,10 +271,26 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
         }
         if (mRequestPageNum == 1 && list.size() == 0) {
             showNoDataView();
+            mLoadOver = true;
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
             return;
+        }
+
+        if (list.size() > 0) {
+            hideNoDataView();
+            onRvLoadFinish();
+            setDataToAdapter(mIsRefresh, list);
+            mAdapter.loadMoreComplete();
+            mRequestPageNum++;
+            if (list.size() < DEFAULT_PAGE_SIZE) {
+                mLoadOver = true;
+                mAdapter.loadMoreEnd();
+            }
+        } else {
+            mLoadOver = true;
+            mAdapter.loadMoreEnd();
         }
 //        //判断是否为多类型布局
 //        int ignoreSize = 0;
@@ -282,19 +304,6 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 //            }
 //        }
 //        int size = list.size() - ignoreSize;
-
-        if (list.size() > 0) {
-            hideNoDataView();
-            onRvLoadFinish();
-            setDataToAdapter(mIsRefresh, list);
-            mAdapter.loadMoreComplete();
-            mRequestPageNum++;
-            if (list.size() < DEFAULT_PAGE_SIZE) {
-                mAdapter.loadMoreEnd();
-            }
-        } else {
-            mAdapter.loadMoreEnd();
-        }
     }
 
     /**
@@ -595,8 +604,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             showLoadingView();
         }
         if (mIRvRetryListener != null) {
-            mIsRefresh = true;
-            mRequestPageNum = 1;
+            setRefreshOpinion();
             mIRvRetryListener.onRvRetryLoad();
         }
     }
@@ -638,5 +646,6 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
     public void setRefreshOpinion(){
         mRequestPageNum = 1;
         mIsRefresh = true;
+        mLoadOver = false;
     }
 }

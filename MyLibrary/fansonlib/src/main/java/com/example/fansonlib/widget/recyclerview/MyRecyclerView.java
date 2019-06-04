@@ -49,6 +49,12 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 界面是否绘制完成
      */
     private boolean mInited = false;
+
+    /**
+     * 标记：是否加载完毕（避免重复请求）
+     */
+    private boolean mLoadOver = false;
+
     /**
      * 记录：界面没初始化之前，需要显示的状态视图
      */
@@ -263,6 +269,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         }
         if (mRequestPageNum == 1 && list.size() == 0) {
             showNoDataView();
+            mLoadOver = true;
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
@@ -275,9 +282,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
+                mLoadOver = true;
                 mAdapter.loadMoreEnd();
             }
         } else {
+            mLoadOver = true;
             mAdapter.loadMoreEnd();
         }
 //        //判断是否为多类型布局
@@ -592,8 +601,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             showLoadingView();
         }
         if (mIRvRetryListener != null) {
-            mIsRefresh = true;
-            mRequestPageNum = 1;
+            setRefreshOpinion();
             mIRvRetryListener.onRvRetryLoad();
         }
     }
@@ -607,7 +615,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     @Override
     public void onLoadMoreRequested() {
-        if (mRvLoadMoreListener != null) {
+        if (!mLoadOver && mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
         }
@@ -635,5 +643,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     public void setRefreshOpinion(){
         mRequestPageNum = 1;
         mIsRefresh = true;
+        mLoadOver = false;
     }
 }
