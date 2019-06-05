@@ -89,12 +89,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyRecyclerView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyRecyclerView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="617" column="8" lean-forward="false" selection-start-line="617" selection-start-column="8" selection-end-line="620" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="244">
+              <caret line="223" column="5" lean-forward="true" selection-start-line="215" selection-start-column="2" selection-end-line="223" selection-end-column="5" />
+              <folding>
+                <element signature="e#5099#5100#0" expanded="true" />
+                <element signature="e#5145#5146#0" expanded="true" />
+                <element signature="e#16303#16304#0" expanded="true" />
+                <element signature="e#16349#16350#0" expanded="true" />
+                <element signature="e#16492#16493#0" expanded="true" />
+                <element signature="e#16535#16536#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,12 +119,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyBindingRecyclerView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MyBindingRecyclerView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyBindingRecyclerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="623" column="9" lean-forward="false" selection-start-line="623" selection-start-column="9" selection-end-line="623" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="238">
+              <caret line="222" column="7" lean-forward="true" selection-start-line="222" selection-start-column="7" selection-end-line="222" selection-end-column="7" />
+              <folding>
+                <element signature="e#5316#5317#0" expanded="true" />
+                <element signature="e#5362#5363#0" expanded="true" />
+                <element signature="e#16519#16520#0" expanded="true" />
+                <element signature="e#16565#16566#0" expanded="true" />
+                <element signature="e#16708#16709#0" expanded="true" />
+                <element signature="e#16751#16752#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -3720,7 +3734,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17110874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -3754,7 +3768,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java</url>
-          <line>426</line>
+          <line>438</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -4176,19 +4190,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyBindingRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="617" column="8" lean-forward="false" selection-start-line="617" selection-start-column="8" selection-end-line="620" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="238">
+          <caret line="222" column="7" lean-forward="true" selection-start-line="222" selection-start-column="7" selection-end-line="222" selection-end-column="7" />
+          <folding>
+            <element signature="e#5316#5317#0" expanded="true" />
+            <element signature="e#5362#5363#0" expanded="true" />
+            <element signature="e#16519#16520#0" expanded="true" />
+            <element signature="e#16565#16566#0" expanded="true" />
+            <element signature="e#16708#16709#0" expanded="true" />
+            <element signature="e#16751#16752#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyBindingRecyclerView.java">
+    <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="623" column="9" lean-forward="false" selection-start-line="623" selection-start-column="9" selection-end-line="623" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="244">
+          <caret line="223" column="5" lean-forward="true" selection-start-line="215" selection-start-column="2" selection-end-line="223" selection-end-column="5" />
+          <folding>
+            <element signature="e#5099#5100#0" expanded="true" />
+            <element signature="e#5145#5146#0" expanded="true" />
+            <element signature="e#16303#16304#0" expanded="true" />
+            <element signature="e#16349#16350#0" expanded="true" />
+            <element signature="e#16492#16493#0" expanded="true" />
+            <element signature="e#16535#16536#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

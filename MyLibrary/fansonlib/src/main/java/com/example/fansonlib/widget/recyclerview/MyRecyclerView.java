@@ -216,10 +216,20 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     /**
      * 添加单类型布局的数据集（不删除原有数据）
      *
+     * @param position 插入位置
+     * @param list     数据集
+     */
+    public void addList(int position, List<B> list) {
+        setList(position, list, false);
+    }
+
+    /**
+     * 添加单类型布局的数据集（不删除原有数据）
+     *
      * @param list 数据集
      */
     public void addList(List<B> list) {
-        setList(list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -228,7 +238,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void addMultiList(List<B> list) {
-        setList(list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -237,7 +247,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void setList(List<B> list) {
-        setList(list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -246,7 +256,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void setMultiList(List<B> list) {
-        setList(list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -254,10 +264,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 如果刷新停止刷新并设置数据
      * 否则判空设置数据，根据返回数据调试设置加载结束、加载完成
      *
+     * @param position    插入位置
      * @param list        数据
      * @param isMultiItem true:多类型布局，false：单类型布局
      */
-    private void setList(List<B> list, boolean isMultiItem) {
+    private void setList(int position, List<B> list, boolean isMultiItem) {
         if (mAdapter == null) {
             Log.e(TAG, "适配器没有初始化");
             return;
@@ -278,7 +289,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         if (list.size() > 0) {
             hideNoDataView();
             onRvLoadFinish();
-            setDataToAdapter(mIsRefresh, list);
+            setDataToAdapter(mIsRefresh,position, list);
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
@@ -307,16 +318,17 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 装载数据到适配器
      *
      * @param isRefresh 是否下拉刷新
+     * @param position  插入位置
      * @param list      数据集
      */
-    private void setDataToAdapter(boolean isRefresh, List<B> list) {
+    private void setDataToAdapter(boolean isRefresh, int position, List<B> list) {
         if (isRefresh) {
             mAdapter.setNewData(list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(list);
+            mAdapter.addData(position, list);
         }
     }
 
@@ -371,7 +383,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mLoadingStateView.setNoDataAction(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -380,7 +392,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mNoDataView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -615,11 +627,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     @Override
     public void onLoadMoreRequested() {
-        if (mLoadOver){
+        if (mLoadOver) {
             mAdapter.loadMoreEnd();
             return;
         }
-        if ( mRvLoadMoreListener != null) {
+        if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
         }
@@ -627,24 +639,26 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 设置点击空数据视图，可以重试加载的功能
+     *
      * @param enable true/false
      */
-    public void setClickEmptyLoadEnable(boolean enable){
+    public void setClickEmptyLoadEnable(boolean enable) {
         mClickEmptyLoadEnable = enable;
     }
 
     /**
      * 设置点击重试，是否出现LoadingView
+     *
      * @param enable true/false
      */
-    public void setRetryLoadViewEnable(boolean enable){
+    public void setRetryLoadViewEnable(boolean enable) {
         mNeedRetryLoadView = enable;
     }
 
     /**
      * 设置重新加载的配置
      */
-    public void setRefreshOpinion(){
+    public void setRefreshOpinion() {
         mRequestPageNum = 1;
         mIsRefresh = true;
         mLoadOver = false;

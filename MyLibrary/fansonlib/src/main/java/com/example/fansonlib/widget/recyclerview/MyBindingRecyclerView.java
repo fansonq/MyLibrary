@@ -27,7 +27,7 @@ import java.util.List;
  * Describe：自定义RecyclerView（支持DataBinding），继承RecyclerView
  * 泛型B是实体类，泛型A是适配器
  */
-public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDataBindingAdapter<B, D, DataBindingViewHolder<D>>> extends RecyclerView implements IRvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseDataBindingAdapter<B, D, DataBindingViewHolder<D>>> extends RecyclerView implements IRvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     private static final String TAG = MyBindingRecyclerView.class.getSimpleName();
 
@@ -218,10 +218,20 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
     /**
      * 添加单类型布局的数据集（不删除原有数据）
      *
+     * @param position 插入位置
+     * @param list     数据集
+     */
+    public void addList(int position, List<B> list) {
+        setList(position, list, false);
+    }
+
+    /**
+     * 添加单类型布局的数据集（不删除原有数据）
+     *
      * @param list 数据集
      */
     public void addList(List<B> list) {
-        setList(list, false);
+        setList(0,list, false);
     }
 
     /**
@@ -230,7 +240,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void addMultiList(List<B> list) {
-        setList(list, true);
+        setList(0,list, true);
     }
 
     /**
@@ -239,7 +249,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void setList(List<B> list) {
-        setList(list, false);
+        setList(0,list, false);
     }
 
     /**
@@ -248,7 +258,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void setMultiList(List<B> list) {
-        setList(list, true);
+        setList(0,list, true);
     }
 
     /**
@@ -256,10 +266,11 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 如果刷新停止刷新并设置数据
      * 否则判空设置数据，根据返回数据调试设置加载结束、加载完成
      *
+     * @param position    插入位置
      * @param list        数据
      * @param isMultiItem true:多类型布局，false：单类型布局
      */
-    private void setList(List<B> list, boolean isMultiItem) {
+    private void setList(int position, List<B> list, boolean isMultiItem) {
         if (mAdapter == null) {
             Log.e(TAG, "适配器没有初始化");
             return;
@@ -281,7 +292,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
         if (list.size() > 0) {
             hideNoDataView();
             onRvLoadFinish();
-            setDataToAdapter(mIsRefresh, list);
+            setDataToAdapter(mIsRefresh,position, list);
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
@@ -310,16 +321,17 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 装载数据到适配器
      *
      * @param isRefresh 是否下拉刷新
+     * @param position 插入位置
      * @param list      数据集
      */
-    private void setDataToAdapter(boolean isRefresh, List<B> list) {
+    private void setDataToAdapter(boolean isRefresh,int position, List<B> list) {
         if (isRefresh) {
-            mAdapter.addData(0,list);
+            mAdapter.addData(0, list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(list);
+            mAdapter.addData(position,list);
         }
     }
 
@@ -374,7 +386,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             mLoadingStateView.setNoDataAction(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -383,7 +395,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             mNoDataView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -618,7 +630,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 
     @Override
     public void onLoadMoreRequested() {
-        if (mLoadOver){
+        if (mLoadOver) {
             mAdapter.loadMoreEnd();
             return;
         }
@@ -630,24 +642,26 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 
     /**
      * 设置点击空数据视图，可以重试加载的功能
+     *
      * @param enable true/false
      */
-    public void setClickEmptyLoadEnable(boolean enable){
+    public void setClickEmptyLoadEnable(boolean enable) {
         mClickEmptyLoadEnable = enable;
     }
 
     /**
      * 设置点击重试，是否出现LoadingView
+     *
      * @param enable true/false
      */
-    public void setRetryLoadViewEnable(boolean enable){
+    public void setRetryLoadViewEnable(boolean enable) {
         mNeedRetryLoadView = enable;
     }
 
     /**
      * 设置重新加载的配置
      */
-    public void setRefreshOpinion(){
+    public void setRefreshOpinion() {
         mRequestPageNum = 1;
         mIsRefresh = true;
         mLoadOver = false;
