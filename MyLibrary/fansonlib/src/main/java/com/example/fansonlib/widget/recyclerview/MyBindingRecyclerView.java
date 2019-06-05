@@ -332,7 +332,11 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(position,list);
+            if (position == 0) {
+                mAdapter.addData(list);
+            } else {
+                mAdapter.addData(position, list);
+            }
         }
     }
 

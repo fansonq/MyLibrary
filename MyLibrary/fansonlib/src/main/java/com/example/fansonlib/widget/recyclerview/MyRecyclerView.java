@@ -182,6 +182,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 设置当前为刷新状态
+     *
      * @param isRefresh true/false
      */
     public void setRefresh(boolean isRefresh) {
@@ -290,7 +291,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         if (list.size() > 0) {
             hideNoDataView();
             onRvLoadFinish();
-            setDataToAdapter(mIsRefresh,position, list);
+            setDataToAdapter(mIsRefresh, position, list);
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
@@ -329,7 +330,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(position, list);
+            if (position == 0) {
+                mAdapter.addData(list);
+            } else {
+                mAdapter.addData(position, list);
+            }
         }
     }
 
