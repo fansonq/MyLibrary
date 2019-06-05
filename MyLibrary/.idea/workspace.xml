@@ -92,15 +92,27 @@
       <file leaf-file-name="MyRecyclerView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="223" column="5" lean-forward="true" selection-start-line="215" selection-start-column="2" selection-end-line="223" selection-end-column="5" />
+            <state relative-caret-position="274">
+              <caret line="188" column="5" lean-forward="true" selection-start-line="188" selection-start-column="5" selection-end-line="188" selection-end-column="5" />
               <folding>
-                <element signature="e#5099#5100#0" expanded="true" />
-                <element signature="e#5145#5146#0" expanded="true" />
-                <element signature="e#16303#16304#0" expanded="true" />
-                <element signature="e#16349#16350#0" expanded="true" />
-                <element signature="e#16492#16493#0" expanded="true" />
-                <element signature="e#16535#16536#0" expanded="true" />
+                <element signature="e#4574#4575#0" expanded="true" />
+                <element signature="e#4612#4613#0" expanded="true" />
+                <element signature="e#5158#5159#0" expanded="true" />
+                <element signature="e#5204#5205#0" expanded="true" />
+                <element signature="e#9321#9556#0" expanded="true" />
+                <element signature="e#9555#9556#0" expanded="true" />
+                <element signature="e#9619#9854#0" expanded="true" />
+                <element signature="e#9853#9854#0" expanded="true" />
+                <element signature="e#12344#12504#0" expanded="true" />
+                <element signature="e#12503#12504#0" expanded="true" />
+                <element signature="e#12566#12726#0" expanded="true" />
+                <element signature="e#12725#12726#0" expanded="true" />
+                <element signature="e#13019#13291#0" expanded="true" />
+                <element signature="e#13290#13291#0" expanded="true" />
+                <element signature="e#16362#16363#0" expanded="true" />
+                <element signature="e#16408#16409#0" expanded="true" />
+                <element signature="e#16551#16552#0" expanded="true" />
+                <element signature="e#16594#16595#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,15 +134,17 @@
       <file leaf-file-name="MyBindingRecyclerView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyBindingRecyclerView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="222" column="7" lean-forward="true" selection-start-line="222" selection-start-column="7" selection-end-line="222" selection-end-column="7" />
+            <state relative-caret-position="184">
+              <caret line="184" column="4" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="190" selection-end-column="5" />
               <folding>
-                <element signature="e#5316#5317#0" expanded="true" />
-                <element signature="e#5362#5363#0" expanded="true" />
-                <element signature="e#16519#16520#0" expanded="true" />
-                <element signature="e#16565#16566#0" expanded="true" />
-                <element signature="e#16708#16709#0" expanded="true" />
-                <element signature="e#16751#16752#0" expanded="true" />
+                <element signature="e#4791#4792#0" expanded="true" />
+                <element signature="e#4829#4830#0" expanded="true" />
+                <element signature="e#5375#5376#0" expanded="true" />
+                <element signature="e#5421#5422#0" expanded="true" />
+                <element signature="e#16578#16579#0" expanded="true" />
+                <element signature="e#16624#16625#0" expanded="true" />
+                <element signature="e#16767#16768#0" expanded="true" />
+                <element signature="e#16810#16811#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3768,7 +3782,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java</url>
-          <line>438</line>
+          <line>439</line>
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
@@ -4192,30 +4206,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyBindingRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="222" column="7" lean-forward="true" selection-start-line="222" selection-start-column="7" selection-end-line="222" selection-end-column="7" />
+        <state relative-caret-position="184">
+          <caret line="184" column="4" lean-forward="false" selection-start-line="184" selection-start-column="4" selection-end-line="190" selection-end-column="5" />
           <folding>
-            <element signature="e#5316#5317#0" expanded="true" />
-            <element signature="e#5362#5363#0" expanded="true" />
-            <element signature="e#16519#16520#0" expanded="true" />
-            <element signature="e#16565#16566#0" expanded="true" />
-            <element signature="e#16708#16709#0" expanded="true" />
-            <element signature="e#16751#16752#0" expanded="true" />
+            <element signature="e#4791#4792#0" expanded="true" />
+            <element signature="e#4829#4830#0" expanded="true" />
+            <element signature="e#5375#5376#0" expanded="true" />
+            <element signature="e#5421#5422#0" expanded="true" />
+            <element signature="e#16578#16579#0" expanded="true" />
+            <element signature="e#16624#16625#0" expanded="true" />
+            <element signature="e#16767#16768#0" expanded="true" />
+            <element signature="e#16810#16811#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fansonlib/src/main/java/com/example/fansonlib/widget/recyclerview/MyRecyclerView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="223" column="5" lean-forward="true" selection-start-line="215" selection-start-column="2" selection-end-line="223" selection-end-column="5" />
+        <state relative-caret-position="274">
+          <caret line="188" column="5" lean-forward="true" selection-start-line="188" selection-start-column="5" selection-end-line="188" selection-end-column="5" />
           <folding>
-            <element signature="e#5099#5100#0" expanded="true" />
-            <element signature="e#5145#5146#0" expanded="true" />
-            <element signature="e#16303#16304#0" expanded="true" />
-            <element signature="e#16349#16350#0" expanded="true" />
-            <element signature="e#16492#16493#0" expanded="true" />
-            <element signature="e#16535#16536#0" expanded="true" />
+            <element signature="e#4574#4575#0" expanded="true" />
+            <element signature="e#4612#4613#0" expanded="true" />
+            <element signature="e#5158#5159#0" expanded="true" />
+            <element signature="e#5204#5205#0" expanded="true" />
+            <element signature="e#9321#9556#0" expanded="true" />
+            <element signature="e#9555#9556#0" expanded="true" />
+            <element signature="e#9619#9854#0" expanded="true" />
+            <element signature="e#9853#9854#0" expanded="true" />
+            <element signature="e#12344#12504#0" expanded="true" />
+            <element signature="e#12503#12504#0" expanded="true" />
+            <element signature="e#12566#12726#0" expanded="true" />
+            <element signature="e#12725#12726#0" expanded="true" />
+            <element signature="e#13019#13291#0" expanded="true" />
+            <element signature="e#13290#13291#0" expanded="true" />
+            <element signature="e#16362#16363#0" expanded="true" />
+            <element signature="e#16408#16409#0" expanded="true" />
+            <element signature="e#16551#16552#0" expanded="true" />
+            <element signature="e#16594#16595#0" expanded="true" />
           </folding>
         </state>
       </provider>

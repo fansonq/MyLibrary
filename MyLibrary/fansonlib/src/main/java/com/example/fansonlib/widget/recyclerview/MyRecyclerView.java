@@ -181,10 +181,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
-     * 设置当前为刷新
+     * 设置当前为刷新状态
+     * @param isRefresh true/false
      */
-    public void setRefresh() {
-        mIsRefresh = true;
+    public void setRefresh(boolean isRefresh) {
+        mIsRefresh = isRefresh;
     }
 
     /**

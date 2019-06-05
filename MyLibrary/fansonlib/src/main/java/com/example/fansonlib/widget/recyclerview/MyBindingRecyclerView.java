@@ -183,10 +183,11 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
     }
 
     /**
-     * 设置当前为刷新
+     * 设置当前为刷新状态
+     * @param isRefresh true/false
      */
-    public void setRefresh() {
-        mIsRefresh = true;
+    public void setRefresh(boolean isRefresh) {
+        mIsRefresh = isRefresh;
     }
 
     /**
