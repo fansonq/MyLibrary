@@ -618,6 +618,10 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 
     @Override
     public void onLoadMoreRequested() {
+        if (mLoadOver){
+            mAdapter.loadMoreEnd();
+            return;
+        }
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
