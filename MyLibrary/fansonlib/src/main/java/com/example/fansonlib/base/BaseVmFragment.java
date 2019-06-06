@@ -27,8 +27,8 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mViewModel = createViewModel();
         registerLoadState();
+        mViewModel = createViewModel();
         dataSuccessObserver();
         return rootView;
     }

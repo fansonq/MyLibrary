@@ -20,8 +20,8 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        mViewModel = createViewModel();
         registerLoadState();
+        mViewModel = createViewModel();
         dataSuccessObserver();
     }
 
