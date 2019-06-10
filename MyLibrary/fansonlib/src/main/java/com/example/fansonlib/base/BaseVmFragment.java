@@ -55,7 +55,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState(BaseViewModel baseViewModel) {
+    protected void registerLoadState(BaseViewModel baseViewModel) {
         if (baseViewModel == null){
             return;
         }
