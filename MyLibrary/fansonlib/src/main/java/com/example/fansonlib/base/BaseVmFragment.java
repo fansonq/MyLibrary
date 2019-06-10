@@ -27,8 +27,8 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        registerLoadState();
         mViewModel = createViewModel();
+        registerLoadState(mViewModel);
         dataSuccessObserver();
         return rootView;
     }
@@ -55,8 +55,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState() {
-        getViewModel().mLoadState.observe(this, new Observer<LoadStateBean>() {
+    private void registerLoadState(BaseViewModel baseViewModel) {
+        if (baseViewModel == null){
+            return;
+        }
+        baseViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
             @Override
             public void onChanged(@Nullable LoadStateBean stateBean) {
                 handlerLoadState(stateBean);

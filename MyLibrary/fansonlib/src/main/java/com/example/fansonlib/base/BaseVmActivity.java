@@ -20,8 +20,8 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        registerLoadState();
         mViewModel = createViewModel();
+        registerLoadState(mViewModel);
         dataSuccessObserver();
     }
 
@@ -47,8 +47,11 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState() {
-        getViewModel().mLoadState.observe(this, new Observer<LoadStateBean>() {
+    protected void registerLoadState(BaseViewModel baseViewModel) {
+        if (baseViewModel == null){
+            return;
+        }
+        baseViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
             @Override
             public void onChanged(@Nullable LoadStateBean stateBean) {
                 handlerLoadState(stateBean);

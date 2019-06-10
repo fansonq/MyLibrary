@@ -51,7 +51,7 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
     @Override
     public void failure(String errorMsg) {
         Log.d(TAG,"failure");
-        postState(new LoadStateBean(ConstLoadState.COMPLETE_STATE,"400failure"));
+        postState(new LoadStateBean(ConstLoadState.COMPLETE_STATE));
 //        if (isViewAttached()){
 //            getBaseView().showFailure(errorMsg);
 //        }
