@@ -15,6 +15,7 @@
         android:id="@+id/loadingStateView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="16dp"
         app:drawableColor="@color/gray_dark1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
