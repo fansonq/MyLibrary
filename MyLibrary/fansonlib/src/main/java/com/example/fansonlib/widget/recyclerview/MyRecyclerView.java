@@ -174,6 +174,14 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
+     * 设置请求页码
+     * @param pageNum 页码
+     */
+    public void setRequestPageNum(int pageNum){
+        mRequestPageNum = pageNum;
+    }
+
+    /**
      * 设置RecyclerView加载状态，底部view
      *
      * @param loadingView 设置加载状态的视图（加载中，加载出错，加载完成）
