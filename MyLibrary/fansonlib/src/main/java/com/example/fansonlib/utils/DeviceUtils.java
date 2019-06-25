@@ -3,6 +3,8 @@ package com.example.fansonlib.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
@@ -15,16 +17,22 @@ import android.text.TextUtils;
 
 import com.example.fansonlib.base.AppUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.regex.Pattern;
 
 import static android.Manifest.permission.ACCESS_WIFI_STATE;
 import static android.Manifest.permission.INTERNET;
-import static android.content.Context.BATTERY_SERVICE;
 import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
@@ -127,7 +135,9 @@ public class DeviceUtils {
             WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (wifi != null) {
                 WifiInfo info = wifi.getConnectionInfo();
-                if (info != null) return info.getMacAddress();
+                if (info != null) {
+                    return info.getMacAddress();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,7 +150,9 @@ public class DeviceUtils {
             Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
             while (nis.hasMoreElements()) {
                 NetworkInterface ni = nis.nextElement();
-                if (ni == null || !ni.getName().equalsIgnoreCase("wlan0")) continue;
+                if (ni == null || !ni.getName().equalsIgnoreCase("wlan0")) {
+                    continue;
+                }
                 byte[] macBytes = ni.getHardwareAddress();
                 if (macBytes != null && macBytes.length > 0) {
                     StringBuilder sb = new StringBuilder();
@@ -184,13 +196,17 @@ public class DeviceUtils {
             while (nis.hasMoreElements()) {
                 NetworkInterface ni = nis.nextElement();
                 // To prevent phone of xiaomi return "10.0.2.15"
-                if (!ni.isUp()) continue;
+                if (!ni.isUp()) {
+                    continue;
+                }
                 Enumeration<InetAddress> addresses = ni.getInetAddresses();
                 while (addresses.hasMoreElements()) {
                     InetAddress inetAddress = addresses.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
                         String hostAddress = inetAddress.getHostAddress();
-                        if (hostAddress.indexOf(':') < 0) return inetAddress;
+                        if (hostAddress.indexOf(':') < 0) {
+                            return inetAddress;
+                        }
                     }
                 }
             }
@@ -286,10 +302,13 @@ public class DeviceUtils {
      */
     public static String getMachineImei(Context context) {
         TelephonyManager manager = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
+        if (manager == null) {
+            return "";
+        }
         Class clazz = manager.getClass();
         String imei = "";
         try {
-            Method getImei = clazz.getDeclaredMethod("getImei", int.class);//(int slotId)
+            Method getImei = clazz.getDeclaredMethod("getImei", int.class);
             getImei.setAccessible(true);
             imei = (String) getImei.invoke(manager);
         } catch (Exception e) {
@@ -338,7 +357,9 @@ public class DeviceUtils {
         PowerManager mPowerManager =
                 (PowerManager) AppUtils.getAppContext().getSystemService(Context.POWER_SERVICE);
         try {
-            if (mPowerManager == null) return;
+            if (mPowerManager == null) {
+                return;
+            }
             mPowerManager.reboot(reason);
         } catch (Exception e) {
             e.printStackTrace();
@@ -349,16 +370,276 @@ public class DeviceUtils {
      * 获取电量信息
      *
      * @param context 上下文
-     * @return 电量（int类型）
+     * @return 电量(int类型)
      */
     public static int getBattery(Context context) {
-        BatteryManager batteryManager = (BatteryManager) context.getApplicationContext().getSystemService(BATTERY_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE);
-        }
-        return 0;
+        Intent batteryInfoIntent = context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryInfoIntent == null ? 0 : batteryInfoIntent.getIntExtra("level", 0);
     }
 
+    /**
+     * 获取温度
+     *
+     * @param context 上下文
+     * @return 温度(int类型)
+     */
+    public static int getTemperature(Context context) {
+        Intent batteryInfoIntent = context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryInfoIntent == null ? 0 : batteryInfoIntent.getIntExtra("temperature", 0);
+    }
+
+    /**
+     * 获取电压
+     *
+     * @param context 上下文
+     * @return 电压(int类型)
+     */
+    public static int getVoltage(Context context) {
+        Intent batteryInfoIntent = context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return batteryInfoIntent == null ? 0 : batteryInfoIntent.getIntExtra("voltage", 0);
+    }
+
+    /**
+     * 获取电池健康状态
+     *
+     * @param context 上下文
+     * @return 电池健康状态
+     */
+    public static String getBatteryHealth(Context context) {
+        Intent batteryInfoIntent = context.getApplicationContext()
+                .registerReceiver(null,
+                        new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        String batteryTemp = "1";
+        if (batteryInfoIntent == null) {
+            return batteryTemp;
+        }
+        int health = batteryInfoIntent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN);
+        switch (health) {
+            case BatteryManager.BATTERY_HEALTH_UNKNOWN:
+                // 未知错误
+                batteryTemp = "1";
+                break;
+            case BatteryManager.BATTERY_HEALTH_GOOD:
+                // 状态良好
+                batteryTemp = "2";
+                break;
+            case BatteryManager.BATTERY_HEALTH_OVERHEAT:
+                // 电池过热
+                batteryTemp = "3";
+                break;
+            case BatteryManager.BATTERY_HEALTH_DEAD:
+                // 电池没有电
+                batteryTemp = "4";
+                break;
+            case BatteryManager.BATTERY_HEALTH_OVER_VOLTAGE:
+                // 电池电压过高
+                batteryTemp = "5";
+                break;
+            case BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE:
+                // 电池健康未指明的失败
+                batteryTemp = "6";
+                break;
+            case BatteryManager.BATTERY_HEALTH_COLD:
+                // 电池冷
+                batteryTemp = "7";
+                break;
+            default:
+                break;
+        }
+        return batteryTemp;
+    }
+
+    /**
+     * 获取电池状态
+     *
+     * @param context 上下文
+     * @return 电池状态
+     */
+    public static String getBatteryStatus(Context context) {
+        String batteryStatus = "1";
+        Intent batteryInfoIntent = context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (batteryInfoIntent == null) {
+            return batteryStatus;
+        }
+        int status = batteryInfoIntent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+        switch (status) {
+            case BatteryManager.BATTERY_STATUS_UNKNOWN:
+                //  未知道状态
+                batteryStatus = "1";
+                break;
+            case BatteryManager.BATTERY_STATUS_CHARGING:
+                // 充电状态
+                batteryStatus = "2";
+                break;
+            case BatteryManager.BATTERY_STATUS_DISCHARGING:
+                // 放电状态
+                batteryStatus = "3";
+                break;
+            case BatteryManager.BATTERY_STATUS_NOT_CHARGING:
+                // 未充电
+                batteryStatus = "4";
+                break;
+            case BatteryManager.BATTERY_STATUS_FULL:
+                // 充满电
+                batteryStatus = "5";
+                break;
+            default:
+                break;
+        }
+        return batteryStatus;
+    }
+
+    /**
+     * 获取Cpu最高频
+     *
+     * @return Cpu最高频
+     */
+    public static String getCpuMaxFreq() {
+        StringBuilder result = new StringBuilder();
+        ProcessBuilder cmd;
+        try {
+            String[] args = {"/system/bin/cat", "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq"};
+            cmd = new ProcessBuilder(args);
+            Process process = cmd.start();
+            InputStream in = process.getInputStream();
+            byte[] re = new byte[24];
+            while (in.read(re) != -1) {
+                result.append(new String(re));
+            }
+            in.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            result = new StringBuilder("N/A");
+        }
+        return result.toString().trim();
+    }
+
+    /**
+     * 获取Cpu名称
+     *
+     * @return Cpu名称
+     */
+    public static String getCpuName() {
+        try {
+            FileReader fr = new FileReader("/proc/cpuinfo");
+            BufferedReader br = new BufferedReader(fr);
+            String text = br.readLine();
+            String[] array = text.split(":\\s+", 2);
+            return array[1];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 获取Cpu数量
+     *
+     * @return Cpu数量
+     */
+    public static int getCpuNum() {
+        class CpuFilter implements FileFilter {
+            @Override
+            public boolean accept(File pathname) {
+                //Check if filename is "cpu", followed by a single digit number
+                if (Pattern.matches("cpu[0-9]", pathname.getName())) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        try {
+            File dir = new File("/sys/devices/system/cpu/");
+            //Filter to only list the devices we care about
+            File[] files = dir.listFiles(new CpuFilter());
+            return files.length;
+        } catch (Exception e) {
+            e.printStackTrace();
+            //Default to return 1 core
+            return 1;
+        }
+    }
+
+    /**
+     * 是否单Sim卡
+     *
+     * @param context 上下文
+     * @return 是否单Sim卡
+     */
+    public static boolean hasSimCard(Context context) {
+        TelephonyManager telMgr = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        if (telMgr == null){
+            return false;
+        }
+        int simState = telMgr.getSimState();
+        boolean result = true;
+        switch (simState) {
+            case TelephonyManager.SIM_STATE_ABSENT:
+                result = false;
+                break;
+            case TelephonyManager.SIM_STATE_UNKNOWN:
+                result = false;
+                break;
+            default:
+                break;
+        }
+        return result ;
+    }
+
+    /**
+     * 是否是模拟器
+     * @param context 上下文
+     * @return true/false
+     */
+    public static boolean isEmulator(Context context) {
+        String url = "tel:" + "123456";
+        Intent intent = new Intent();
+        intent.setData(Uri.parse(url));
+        // 是否可以处理跳转到拨号的 Intent
+        intent.setAction(Intent.ACTION_DIAL);
+        boolean canResolveIntent = intent.resolveActivity(context.getPackageManager()) != null;
+        boolean result = Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.toLowerCase().contains("vbox")
+                || Build.FINGERPRINT.toLowerCase().contains("test-keys")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.SERIAL.equalsIgnoreCase("unknown")
+                || Build.SERIAL.equalsIgnoreCase("android")
+                || Build.MODEL.contains("Android SDK built for x86")
+                || Build.MANUFACTURER.contains("Genymotion")
+                || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
+                || "google_sdk".equals(Build.PRODUCT)
+                || !canResolveIntent;
+        TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+        if ( telephonyManager != null){
+            result = result|| ("android").equals(telephonyManager.getNetworkOperatorName().toLowerCase());
+        }
+        return result;
+    }
+
+    /**
+     * 获取Cpu信息
+     * @return Cpu信息
+     */
+    public static String getCpuInfo() {
+        String result = "";
+        try {
+            String[] args = {"/system/bin/cat", "/proc/cpuinfo"};
+            ProcessBuilder cmd = new ProcessBuilder(args);
+            Process process = cmd.start();
+            StringBuilder strBuffer = new StringBuilder();
+            String readLine ;
+            BufferedReader responseReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "utf-8"));
+            while ((readLine = responseReader.readLine()) != null) {
+                strBuffer.append(readLine);
+            }
+            responseReader.close();
+            result = strBuffer.toString().toLowerCase();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 
 }
 
