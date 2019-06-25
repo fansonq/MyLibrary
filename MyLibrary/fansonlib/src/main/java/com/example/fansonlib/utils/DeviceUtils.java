@@ -11,7 +11,6 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
@@ -31,8 +30,6 @@ import java.net.SocketException;
 import java.util.Enumeration;
 import java.util.regex.Pattern;
 
-import static android.Manifest.permission.ACCESS_WIFI_STATE;
-import static android.Manifest.permission.INTERNET;
 import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
@@ -107,37 +104,33 @@ public class DeviceUtils {
      *
      * @return MAC 地址
      */
-    @RequiresPermission(allOf = {ACCESS_WIFI_STATE, INTERNET})
-    public static String getMacAddress() {
-        String macAddress = getMacAddressByWifiInfo();
+    public static String getMacAddress(Context context) {
+        String macAddress = getMacAddressByWifiInfo(context);
         if (!"02:00:00:00:00:00".equals(macAddress)) {
-            return macAddress;
+            return TextUtils.isEmpty(macAddress) ? "" : macAddress;
         }
         macAddress = getMacAddressByNetworkInterface();
         if (!"02:00:00:00:00:00".equals(macAddress)) {
-            return macAddress;
+            return TextUtils.isEmpty(macAddress) ? "" : macAddress;
         }
         macAddress = getMacAddressByInetAddress();
         if (!"02:00:00:00:00:00".equals(macAddress)) {
-            return macAddress;
+            return TextUtils.isEmpty(macAddress) ? "" : macAddress;
         }
         macAddress = getMacAddressByFile();
         if (!"02:00:00:00:00:00".equals(macAddress)) {
-            return macAddress;
+            return TextUtils.isEmpty(macAddress) ? "" : macAddress;
         }
-        return "please open wifi";
+        return TextUtils.isEmpty(macAddress) ? "" : macAddress;
     }
 
     @SuppressLint({"HardwareIds", "MissingPermission"})
-    private static String getMacAddressByWifiInfo() {
+    private static String getMacAddressByWifiInfo(Context context) {
         try {
-            Context context = AppUtils.getAppContext().getApplicationContext();
-            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            WifiManager wifi = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (wifi != null) {
                 WifiInfo info = wifi.getConnectionInfo();
-                if (info != null) {
-                    return info.getMacAddress();
-                }
+                if (info != null) {return info.getMacAddress();}
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,19 +251,12 @@ public class DeviceUtils {
     }
 
     /**
-     * 获取设备 ABIs
+     * 获取设备指令集名称（CPU的类型）
      *
-     * @return 设备 ABIs
+     * @return CPU的类型
      */
-    public static String[] getABIs() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return Build.SUPPORTED_ABIS;
-        } else {
-            if (!TextUtils.isEmpty(Build.CPU_ABI2)) {
-                return new String[]{Build.CPU_ABI, Build.CPU_ABI2};
-            }
-            return new String[]{Build.CPU_ABI};
-        }
+    public static String getCpuABIs() {
+        return Build.CPU_ABI;
     }
 
     /**
@@ -568,7 +554,7 @@ public class DeviceUtils {
      */
     public static boolean hasSimCard(Context context) {
         TelephonyManager telMgr = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if (telMgr == null){
+        if (telMgr == null) {
             return false;
         }
         int simState = telMgr.getSimState();
@@ -583,11 +569,12 @@ public class DeviceUtils {
             default:
                 break;
         }
-        return result ;
+        return result;
     }
 
     /**
      * 是否是模拟器
+     *
      * @param context 上下文
      * @return true/false
      */
@@ -611,14 +598,15 @@ public class DeviceUtils {
                 || "google_sdk".equals(Build.PRODUCT)
                 || !canResolveIntent;
         TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
-        if ( telephonyManager != null){
-            result = result|| ("android").equals(telephonyManager.getNetworkOperatorName().toLowerCase());
+        if (telephonyManager != null) {
+            result = result || ("android").equals(telephonyManager.getNetworkOperatorName().toLowerCase());
         }
         return result;
     }
 
     /**
      * 获取Cpu信息
+     *
      * @return Cpu信息
      */
     public static String getCpuInfo() {
@@ -628,7 +616,7 @@ public class DeviceUtils {
             ProcessBuilder cmd = new ProcessBuilder(args);
             Process process = cmd.start();
             StringBuilder strBuffer = new StringBuilder();
-            String readLine ;
+            String readLine;
             BufferedReader responseReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "utf-8"));
             while ((readLine = responseReader.readLine()) != null) {
                 strBuffer.append(readLine);
