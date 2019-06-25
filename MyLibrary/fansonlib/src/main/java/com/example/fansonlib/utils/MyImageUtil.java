@@ -270,7 +270,8 @@ public class MyImageUtil {
      */
     public  boolean saveImageToGallery(Context context, Bitmap bmp,String saveFileDir) {
         boolean result = true;
-        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();//注意小米手机必须这样获得public绝对路径
+        //注意小米手机必须这样获得public绝对路径
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();
         File appDir = new File(file ,saveFileDir);
         if (!appDir.exists()) {
             appDir.mkdirs();
