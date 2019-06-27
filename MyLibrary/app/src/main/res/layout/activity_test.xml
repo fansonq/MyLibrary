@@ -12,17 +12,29 @@
             android:layout_height="wrap_content"
             android:text="Go MainActivity" />
 
+        <Button
+            android:id="@+id/btn_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go RecyclerView" />
+
+        <Button
+            android:id="@+id/btn_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go TestViewActivity" />
 
         <TextView
             android:id="@+id/tv1"
-            android:text="@string/confirm"
-            android:textSize="18sp"
-            android:layout_margin="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/confirm"
+            android:textSize="18sp" />
 
         <com.example.fansonlib.widget.textview.TextViewDrawable
             android:layout_width="200dp"
+            android:id="@+id/td1"
             android:layout_height="180dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"

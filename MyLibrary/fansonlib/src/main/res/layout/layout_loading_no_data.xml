@@ -7,6 +7,7 @@
     android:layout_gravity="center"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
+    android:focusable="true"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -14,8 +15,8 @@
         android:id="@+id/iv_no_data"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="-56dp"
-        tools:src="@mipmap/ic_no_data" />
+        android:tint="@color/gray_dark1"
+        android:src="@mipmap/ic_no_data" />
 
     <TextView
         android:id="@+id/tv_empty"
@@ -24,18 +25,8 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
         android:text="@string/no_data"
-        android:textColor="#33475f"
+        android:textColor="@color/gray_dark1"
         android:textSize="16sp" />
 
-   <!-- <TextView
-        android:id="@+id/tv_reload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/retry_loading"
-        android:textColor="#727272"
-        android:textSize="12sp" />-->
 </LinearLayout>

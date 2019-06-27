@@ -11,10 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fansonlib.R;
-import com.example.fansonlib.callback.LoadFinishCallBack;
-import com.example.fansonlib.callback.LoadMoreListener;
-import com.example.fansonlib.utils.ImageLoaderProxy;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.example.fansonlib.image.ImageLoaderUtils;
 
 
 /**
@@ -22,10 +19,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created on：2016/12/17 17:58
  * Describe：自定义的RecyclerView
  */
-public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCallBack {
+public class AutoLoadRecyclerView extends RecyclerView implements IRvLoadFinishListener {
 
     private static final String TAG = AutoLoadRecyclerView.class.getSimpleName();
-    private LoadMoreListener loadMoreListener;
+    private IRvLoadMoreListener loadMoreListener;
     private boolean isLoadingMore;
     private Context mContext;
     /**
@@ -61,7 +58,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         super(context, attrs, defStyle);
         isLoadingMore = false;
         mContext = context;
-        addOnScrollListener(new AutoLoadScrollListener(null, true, true));
+        addOnScrollListener(new AutoLoadScrollListener( true, true));
 
         init();
     }
@@ -90,16 +87,16 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      * @param pauseOnFling
      */
     public void setOnPauseListenerParams(boolean pauseOnScroll, boolean pauseOnFling) {
-        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
-//        addOnScrollListener(new AutoLoadScrollListener(MyGlideUtils.getInstance(), pauseOnScroll, pauseOnFling));
+//        addOnScrollListener(new AutoLoadScrollListener(ImageLoaderProxy.getImageLoader(), pauseOnScroll, pauseOnFling));
+        addOnScrollListener(new AutoLoadScrollListener( pauseOnScroll, pauseOnFling));
     }
 
-    public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
+    public void setLoadMoreListener(IRvLoadMoreListener loadMoreListener) {
         this.loadMoreListener = loadMoreListener;
     }
 
     @Override
-    public void loadFinish(Object obj) {
+    public void onRvLoadFinish( ) {
         isLoadingMore = false;
     }
 
@@ -108,15 +105,15 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      */
     private class AutoLoadScrollListener extends OnScrollListener {
 
-        private ImageLoader imageLoader;
+//        private ImageLoader imageLoader;
         private final boolean pauseOnScroll;
         private final boolean pauseOnFling;
 
-        public AutoLoadScrollListener(ImageLoader imageLoader, boolean pauseOnScroll, boolean pauseOnFling) {
+        public AutoLoadScrollListener( boolean pauseOnScroll, boolean pauseOnFling) {
             super();
             this.pauseOnScroll = pauseOnScroll;
             this.pauseOnFling = pauseOnFling;
-            this.imageLoader = imageLoader;
+//            this.imageLoader = imageLoader;
         }
 
         @Override
@@ -129,45 +126,36 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
                 int totalItemCount = AutoLoadRecyclerView.this.getAdapter().getItemCount();
 
                 //有回调接口，并且不是加载状态，并且剩下2个item，并且向下滑动，则自动加载
-                if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount -
-                        2 && dy > 0) {
+                if (loadMoreListener != null && !isLoadingMore && lastVisibleItem >= totalItemCount - 2 && dy > 0) {
                     isLoadingMore = true;
-                    loadMoreListener.loadMore();
+                    loadMoreListener.onRvLoadMore(0);
                 }
             }
         }
 
         @Override
         public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-            if (imageLoader != null) {
                 switch (newState) {
                     case SCROLL_STATE_IDLE:
-//                        imageLoader.resumeRequests(mContext);
-                        imageLoader.resume();
+                        ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         break;
                     case SCROLL_STATE_DRAGGING:
                         if (pauseOnScroll) {
-//                            imageLoader.pauseRequests(mContext);
-                            imageLoader.pause();
+                            ImageLoaderUtils.getInstance().onPauseRequest(mContext);
                         } else {
-//                            imageLoader.resumeRequests(mContext);
-                            imageLoader.resume();
+                            ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;
                     case SCROLL_STATE_SETTLING:
                         if (pauseOnFling) {
-//                            imageLoader.pauseRequests(mContext);
-                            imageLoader.pause();
+                            ImageLoaderUtils.getInstance().onPauseRequest(mContext);
                         } else {
-//                            imageLoader.resumeRequests(mContext);
-                            imageLoader.resume();
+                            ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                         }
                         break;
                     default:
                         break;
                 }
-            }
         }
     }
 
@@ -278,7 +266,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
      * @param retryView 传入重试视图布局Layout；若传入为null则使用默认视图
      * @param listener  监听重试
      */
-    public void setRetryView(View retryView, final IRetryListener listener) {
+    public void setRetryView(View retryView, final IRvRetryListener listener) {
         if (mRetryView == null) {
             mRetryView = LayoutInflater.from(getContext()).inflate(R.layout.layout_retry, AutoLoadRecyclerView.this, false);
         }
@@ -287,7 +275,7 @@ public class AutoLoadRecyclerView extends RecyclerView implements LoadFinishCall
         (mRetryView.findViewById(R.id.td_retry)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onClickRetry();
+                listener.onRvRetryLoad();
             }
         });
     }

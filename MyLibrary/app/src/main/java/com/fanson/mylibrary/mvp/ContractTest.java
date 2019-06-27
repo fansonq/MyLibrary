@@ -12,8 +12,6 @@ public class ContractTest {
 
     public interface TestView extends BaseView {
 
-        void showCode102(String message);
-
         void showFailure(String errorMsg);
     }
 

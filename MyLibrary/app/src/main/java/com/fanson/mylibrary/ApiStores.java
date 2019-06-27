@@ -1,6 +1,8 @@
 package com.fanson.mylibrary;
 
 
+import com.fanson.mylibrary.constant.ConHttp;
+
 import java.util.Map;
 
 import io.reactivex.Flowable;
@@ -27,14 +29,19 @@ import retrofit2.http.Url;
 
 public interface ApiStores {
 
-    //baseUrl
-    String API_SERVER_URL = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
+    /**
+     * baseUrl
+     */
+    String API_SERVER_URL = ConHttp.BASE_URL;
 
     @GET
     Flowable<ResponseBody> update(@Url String url);
 
+    @GET
+    Flowable<SimpleBean> getName(@Url String url);
+
     @POST
-    Flowable<SimpleBean> getName(@Url String url, @QueryMap Map<String, Object> maps);
+    Flowable<SimpleBean> postName(@Url String url, @QueryMap Map<String, Object> maps);
 
     /**
      * 下载文件

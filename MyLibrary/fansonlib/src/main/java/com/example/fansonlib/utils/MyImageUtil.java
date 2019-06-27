@@ -1,7 +1,11 @@
 package com.example.fansonlib.utils;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -17,10 +21,10 @@ import com.example.fansonlib.utils.io.FileUtils;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
@@ -38,7 +42,7 @@ public class MyImageUtil {
     private Context mContext;
 
     public MyImageUtil(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
     }
 
     public static MyImageUtil getImageUtil(Context context) {
@@ -74,9 +78,9 @@ public class MyImageUtil {
     /**
      * Drawable转换成byte[]
      */
-    public byte[] Drawable2Bytes(Drawable d) {
+    public byte[] drawable2Bytes(Drawable d) {
         Bitmap bitmap = this.drawable2Bitmap(d);
-        return this.Bitmap2Bytes(bitmap);
+        return this.bitmap2Bytes(bitmap);
     }
 
     /**
@@ -106,7 +110,7 @@ public class MyImageUtil {
      * @param bm
      * @return
      */
-    public byte[] Bitmap2Bytes(Bitmap bm) {
+    public byte[] bitmap2Bytes(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
@@ -118,8 +122,8 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public Drawable Bytes2Drawable(byte[] b) {
-        Bitmap bitmap = this.Bytes2Bitmap(b);
+    public Drawable bytes2Drawable(byte[] b) {
+        Bitmap bitmap = this.bytes2Bitmap(b);
         return this.bitmap2Drawable(bitmap);
     }
 
@@ -129,7 +133,7 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public Bitmap Bytes2Bitmap(byte[] b) {
+    public Bitmap bytes2Bitmap(byte[] b) {
         if (b.length != 0) {
             return BitmapFactory.decodeByteArray(b, 0, b.length);
         }
@@ -154,7 +158,7 @@ public class MyImageUtil {
      * @param b
      * @return
      */
-    public InputStream Byte2InputStream(byte[] b) {
+    public InputStream byte2InputStream(byte[] b) {
         ByteArrayInputStream bais = new ByteArrayInputStream(b);
         return bais;
     }
@@ -165,7 +169,7 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public byte[] InputStream2Bytes(InputStream is) {
+    public byte[] inputStream2Bytes(InputStream is) {
         String str = "";
         byte[] readByte = new byte[1024];
         int readCount = -1;
@@ -186,7 +190,7 @@ public class MyImageUtil {
      * @param bm
      * @return
      */
-    public InputStream Bitmap2InputStream(Bitmap bm) {
+    public InputStream bitmap2InputStream(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         InputStream is = new ByteArrayInputStream(baos.toByteArray());
@@ -199,7 +203,7 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public Bitmap InputStream2Bitmap(InputStream is) {
+    public Bitmap inputStream2Bitmap(InputStream is) {
         return BitmapFactory.decodeStream(is);
     }
 
@@ -209,9 +213,9 @@ public class MyImageUtil {
      * @param d
      * @return
      */
-    public InputStream Drawable2InputStream(Drawable d) {
+    public InputStream drawable2InputStream(Drawable d) {
         Bitmap bitmap = this.drawable2Bitmap(d);
-        return this.Bitmap2InputStream(bitmap);
+        return this.bitmap2InputStream(bitmap);
     }
 
     /**
@@ -220,12 +224,13 @@ public class MyImageUtil {
      * @param is
      * @return
      */
-    public Drawable InputStream2Drawable(InputStream is) {
-        Bitmap bitmap = this.InputStream2Bitmap(is);
+    public Drawable inputStream2Drawable(InputStream is) {
+        Bitmap bitmap = this.inputStream2Bitmap(is);
         return this.bitmap2Drawable(bitmap);
     }
 
     /**
+<<<<<<< HEAD
      * 设置图片保存的位置
      * @param dir 路径
      */
@@ -280,6 +285,96 @@ public class MyImageUtil {
         // 通知图库更新
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + imagePath)));
         return true;
+    }
+
+    /**
+     * 通过Uri获取图片的path路径
+     * @param context 上下文
+     * @param path 路径
+     * @return 图片的path路径
+     */
+    public Uri getImageContentUri(Context context,String path) {
+        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Images.Media._ID},
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[]{path}, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            ContentValues contentValues = new ContentValues(1);
+            contentValues.put(MediaStore.Images.Media.DATA, path);
+            return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+        }
+    }
+
+    /**
+     * 获取资源文件中图片的Uri
+     * @param context 上下文
+     * @param resourceId 资源ID
+     * @return 资源文件中图片的Uri
+     */
+    public String getResourceUri(Context context,int resourceId){
+        Resources resources = context.getResources();
+        return ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                resources.getResourcePackageName(resourceId) + "/" +
+                resources.getResourceTypeName(resourceId) + "/" +
+                resources.getResourceEntryName(resourceId);
+    }
+
+    /**
+     * 保存图片资源Bitmap到相册
+     * @param context 上下文
+     * @param bmp 图片资源Bitmap
+     * @param saveFileDir 图片存放路径名
+     * @return 是否保存成功，true/false
+     */
+    public  boolean saveImageToGallery(Context context, Bitmap bmp,String saveFileDir) {
+        boolean result = true;
+        //注意小米手机必须这样获得public绝对路径
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();
+        File appDir = new File(file ,saveFileDir);
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File currentFile = new File(appDir, fileName);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(currentFile);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            result = false;
+            e.printStackTrace();
+        } catch (IOException e) {
+            result = false;
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                result = false;
+                e.printStackTrace();
+            }
+        }
+
+        // 其次把文件插入到系统图库
+//        try {
+//            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+//                    currentFile.getAbsolutePath(), fileName, null);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                Uri.fromFile(new File(currentFile.getPath()))));
+        return result;
     }
 
 }

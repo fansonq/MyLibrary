@@ -1,7 +1,9 @@
 package com.example.fansonlib.widget.dialogfragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.fansonlib.R;
@@ -17,7 +19,7 @@ import com.example.fansonlib.widget.dialogfragment.base.ViewHolder;
 
 public class DoubleDialog extends BaseDialogFragment {
 
-    private String title, content;
+    private String mTitle, mContent, mCancelTip, mConfirmTip;
     private boolean mCancelNotDismiss = false;
     private static DoubleDialog mDialog = null;
 
@@ -60,16 +62,33 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return
      */
     public static DoubleDialog newInstance(String title, String content, boolean cancelNotDismiss) {
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        bundle.putString("content", content);
-        bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
+        return newInstance(title, content, null, null, cancelNotDismiss);
+    }
+
+    /**
+     * 传值
+     *
+     * @param title            标题
+     * @param content          内容
+     * @param cancelTip 取消按钮的文字
+     * @param confirmTip 确认按钮的文字
+     * @param cancelNotDismiss 点击取消按钮不消失对话框
+     * @return
+     */
+    public static DoubleDialog newInstance(String title, String content, String cancelTip, String confirmTip, boolean cancelNotDismiss) {
         if (mDialog == null) {
             mDialog = new DoubleDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("title", title);
+            bundle.putString("content", content);
+            bundle.putString("cancelTip", cancelTip);
+            bundle.putString("confirmTip", confirmTip);
+            bundle.putBoolean("cancelNotDismiss", cancelNotDismiss);
+            mDialog.setArguments(bundle);
         }
-        mDialog.setArguments(bundle);
         return mDialog;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,8 +97,10 @@ public class DoubleDialog extends BaseDialogFragment {
         if (bundle == null) {
             return;
         }
-        title = bundle.getString("title");
-        content = bundle.getString("content");
+        mTitle = bundle.getString("title");
+        mContent = bundle.getString("content");
+        mCancelTip = bundle.getString("cancelTip");
+        mConfirmTip = bundle.getString("confirmTip");
         mCancelNotDismiss = bundle.getBoolean("cancelNotDismiss");
     }
 
@@ -89,7 +110,7 @@ public class DoubleDialog extends BaseDialogFragment {
      * @return true/false
      */
     public boolean isShowing() {
-        if (mDialog==null){
+        if (mDialog == null) {
             return false;
         }
         return mDialog.isResumed();
@@ -97,8 +118,12 @@ public class DoubleDialog extends BaseDialogFragment {
 
     @Override
     public void convertView(ViewHolder holder, final BaseDialogFragment dialog) {
-        holder.setText(R.id.title, title);
-        holder.setText(R.id.message, content);
+        holder.setText(R.id.title, mTitle);
+        holder.setText(R.id.message, mContent);
+        if (!TextUtils.isEmpty(mCancelTip)) {
+            holder.setText(R.id.cancel, mCancelTip);
+            holder.setText(R.id.ok, mConfirmTip);
+        }
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,4 +148,12 @@ public class DoubleDialog extends BaseDialogFragment {
             }
         });
     }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+        mDialog.dismiss();
+        mDialog = null;
+    }
+
 }

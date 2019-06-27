@@ -1,7 +1,7 @@
 package com.example.fansonlib.image;
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/4/14 17:31
  * Describe：加载图片框架的一些参数的配置；
  * 用到了Builder模式，一步一步的创建一个复杂对象的创建者模式，
@@ -10,10 +10,6 @@ package com.example.fansonlib.image;
 
 public class ImageLoaderConfig {
 
-    /**
-     * 具体加载器
-     */
-    private BaseImageLoaderStrategy mClient;
     /**
      * 占位图
      */
@@ -39,16 +35,11 @@ public class ImageLoaderConfig {
     private int maxMemoryCache;
 
     public ImageLoaderConfig(Builder builder) {
-        this.mClient = builder.mClient;
         this.mPlacePicRes = builder.mPlacePicRes;
         this.mErrorPicRes = builder.mErrorPicRes;
         this.mImgUrl = builder.mImgUrl;
         this.maxDishCache = builder.maxDiskCache;
         this.maxMemoryCache = builder.maxMemoryCache;
-    }
-
-    public BaseImageLoaderStrategy getClient() {
-        return mClient;
     }
 
     public int getPlacePicRes() {
@@ -76,19 +67,19 @@ public class ImageLoaderConfig {
     }
 
     public static class Builder {
-        private BaseImageLoaderStrategy mClient;//具体加载器
-        private int mPlacePicRes;//占位图
-        private int mErrorPicRes;//错误图
+        /**
+         * 占位图
+         */
+        private int mPlacePicRes;
+        /**
+         * 错误图
+         */
+        private int mErrorPicRes;
         private String mImgUrl;
         private int maxDiskCache;
         private int maxMemoryCache;
 
         public Builder() {
-        }
-
-        public Builder client(BaseImageLoaderStrategy provider) {
-            this.mClient = provider;
-            return this;
         }
 
         public Builder errorPicRes(int res) {

@@ -1,10 +1,14 @@
 package com.fanson.mylibrary;
 
 import android.arch.lifecycle.Observer;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +19,19 @@ import com.example.fansonlib.base.BaseMvpActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
 import com.example.fansonlib.http.retrofit.RetrofitStrategy;
+import com.example.fansonlib.http.retrofit.download.FileDownLoadObserver;
+import com.example.fansonlib.http.retrofit.download.MyDownLoadManager;
+import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
-import com.example.fansonlib.utils.ShowToast;
+import com.example.fansonlib.utils.log.LoganParser;
+import com.example.fansonlib.utils.log.MyLogUtils;
+import com.example.fansonlib.utils.log.SendLogListener;
 import com.example.fansonlib.utils.notification.MyNotificationUtils;
+import com.example.fansonlib.utils.toast.MyToastUtils;
+import com.example.fansonlib.utils.toast.ToastConfig;
 import com.example.fansonlib.widget.dialogfragment.DoubleDialog;
 import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
@@ -30,21 +41,21 @@ import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestPresenter;
+import com.fanson.mylibrary.mvvm.TestViewModelActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 
-public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBinding> implements ContractTest.TestView {
+public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBinding> implements ContractTest.TestView {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -68,12 +79,19 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBtnRxBus.setText(content + " 线程：" + (getMainLooper() == Looper.myLooper()));
     }
 
-
     @Override
-    protected void initView() {
+    protected void initView(Bundle savedInstanceState) {
 
         AppUtils.init(getApplicationContext());
         MyRxbus2.getInstance().register(this);
+
+        MyLogUtils.init(null);
+
+        ToastConfig config = new ToastConfig.Builder()
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorPrimary))
+                .setTextSize(12)
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
+        MyToastUtils.init(config);
 
         mBtnNet = findMyViewId(R.id.btn_net);
         mBtnRxBus = findMyViewId(R.id.btn_rxBus);
@@ -89,15 +107,29 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 testBaseModel();
 //                testImageLoader();
 //                testLoadingView();
-//                ShowToast.Config.getInstance().setInfoColor(ContextCompat.getColor(MainActivity.this,R.color.colorAccent)).apply();
-//                ShowToast.Long("QQQQ");
             }
         });
 
         mBtnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DownLoadManager.downloadFile()
+                MyDownLoadManager.downloadFile("http://p.gdown.baidu.com/f2db1156581f17f40fa491c9ef82e14e3e94b33d48fe2815156ff454b02fdb429d2dc99a926495e2aa1d9d90683e825e8d5853beab866f64a9498d23cf9e5c7582fddefa770767c812d0fd36d771e944677ad1a8b12fbf832d08dd1279d3e0d9f40b3e93d357373a98ab9162535fec522093102d7e6c0d3e362af2a3ae9b2f662e403a4bd66b45fcd92f4332ea90b831dd5538c47c7f39703b15856488028ecc6aaa028bd1797736cbb37d2d4b64148a2d25c17fe2804a56631b6938747e707344f8802c06dfe467",
+                        AppUtils.getAppContext().getExternalCacheDir() + "/apk/", "Test.apk", new FileDownLoadObserver<File>() {
+                            @Override
+                            public void onDownLoadSuccess(File file) {
+                                Log.d(TAG, "onDownLoadSuccess");
+                            }
+
+                            @Override
+                            public void onDownLoadFail(Throwable throwable) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int progress, long total) {
+                                Log.d(TAG, "progress = " + (float) progress % total);
+                            }
+                        });
             }
         });
 
@@ -116,23 +148,52 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
             }
         });
 
+        mBinding.btnUploadLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Logan : " + MyLogUtils.loganFilesInfo());
+                MyLogUtils.getInstance().d("测试数据");
+                MyLogUtils.sendLoganToServer("https://app.zhangyixun.cn/upload/log?user_id=222", new SendLogListener() {
+                    @Override
+                    public void onSendLogSuccessful() {
+                        MyLogUtils.getInstance().d("上传日志成功的回调 Thread = "+(Looper.getMainLooper() == Looper.myLooper()));
+                        MyLogUtils.destroySendLogRunnable();
+                    }
+                });
+            }
+        });
+
+        mBinding.btnParserLog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File logFile = new File("/storage/emulated/0/Android/data/com.fanson.mylibrary/files/logan_v1/logan.txt");
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                try {
+                    new LoganParser("0123456789012345".getBytes(), "0123456789012345".getBytes())
+                            .parse(new FileInputStream(logFile), outputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mBinding.btnToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testToast();
+            }
+        });
+
         mBtnNotification.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 //                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
-                MyNotificationUtils.init(getApplicationContext());
-//                MyNotificationUtils.buildSimple(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
-//                        "通知栏内容", MyNotificationUtils.buildIntent(MainActivity.class)).show();
-
-                MyNotificationUtils.buildProgress(1, MyNotificationUtils.CHANNEL_ID_SERVICE, R.mipmap.default_image, "通知栏标题",
-                        1, 100).show();
-                for (int i = 0; i < 100; i++) {
-                    try {
-                        Thread.sleep(1000);
-                        MyNotificationUtils.updateProgress(i).show();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)) {
+                    MyNotificationUtils.openNotificationSetting(MainActivity.this);
+                } else {
+                    MyNotificationUtils myNotificationUtils = new MyNotificationUtils(MainActivity.this);
+                    myNotificationUtils.sendNotification(1, "通知标题", "通知栏内容", R.mipmap.ic_launcher_round);
                 }
             }
         });
@@ -140,7 +201,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
         mBinding.btnLoadingView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startMyActivity(TestLoadingActivity.class);
+                startMyActivity(TestLoadingActivity.class);
             }
         });
 
@@ -177,13 +238,13 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
                 MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 //                bodyMap.put("part",part);
 
-                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test", part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<ResponseBody>() {
-                            @Override
-                            public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
-                                Log.d("TAG", responseBody.string());
-                            }
-                        });
+//                RetrofitClient.getRetrofit(ApiStores.class).uploadMulti("app/file/test", part).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Consumer<ResponseBody>() {
+//                            @Override
+//                            public void accept(@io.reactivex.annotations.NonNull ResponseBody responseBody) throws Exception {
+//                                Log.d("TAG", responseBody.string());
+//                            }
+//                        });
 
 //                HttpUtils.getHttpUtils().post("post.php", bodyMap, new HttpResponseCallback<TestBean>() {
 //                    @Override
@@ -212,29 +273,67 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 //
 //            }
 //        }, Manifest.permission.CAMERA);
+
+        mBinding.btnViewModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMyActivity(TestViewModelActivity.class);
+            }
+        });
+
+        mBinding.btnLoadImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testImageLoader();
+            }
+        });
+
     }
 
     private void testDialogFragment() {
-        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试")
-                .setConfirmListener(new IConfirmListener() {
+        DoubleDialog.newInstance("提示", "抱歉！暂时没有在线客服人员，请稍后再试.抱歉！暂时没有在线客服人员，请稍后再试", "取消按钮", "确定按钮", false)
+                .setCancelListener(new ICancelListener() {
                     @Override
-                    public void onConfirm() {
-                        ShowToast.singleLong("onConfirm");
+                    public void onCancel() {
+                        MyToastUtils.init(null);
+                        MyToastUtils.getInstance().showShort("onCancel");
                     }
-                }).setCancelListener(new ICancelListener() {
+                }).setConfirmListener(new IConfirmListener() {
             @Override
-            public void onCancel() {
-                ShowToast.singleLong("onCancel");
+            public void onConfirm() {
+                MyToastUtils.init(null);
+                MyToastUtils.getInstance().showShort("onConfirm");
             }
-        }).show(getSupportFragmentManager());
+        }).setOutCancel(true).show(getSupportFragmentManager());
+    }
+
+    /**
+     * 测试Toast功能
+     */
+    private void testToast() {
+        //更改配置
+        ToastConfig config2 = new ToastConfig.Builder()
+                .setBgColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorAccent))
+                .setTextSize(12)
+                .setIconResource(R.mipmap.ic_no_data)
+                .setTextColor(ContextCompat.getColor(AppUtils.getAppContext(), R.color.colorWhite)).build();
+
+        MyToastUtils.getInstance().changeConfig(config2);
+
+        MyToastUtils.getInstance().showShort("测试的数据提示 " + (int) (1 + Math.random() * (10 - 1 + 1)));
 
     }
 
 
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        String picUrl = "http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
-        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
+        String picUrl = "http://guolin.tech/book.png";
+        ImageLoaderUtils.init();
+        ImageLoaderUtils.getInstance()
+                .setImageLoaderConfig(new ImageLoaderConfig.Builder().placePicRes(R.mipmap.default_image).build())
+                .loadImage(this, iv_pic, picUrl);
+
+//        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {
 //            @Override
 //            public void loadStart() {
@@ -306,7 +405,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
 
     @Override
     protected void initData() {
-
     }
 
     @Override
@@ -315,12 +413,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
+    public void showTip(String tipContent) {
 
     }
 
@@ -330,12 +423,20 @@ public class MainActivity extends BaseMvpActivity<TestPresenter,ActivityMainBind
     }
 
     @Override
-    public void showCode102(String message) {
+    public void showFailure(String errorMsg) {
 
     }
 
     @Override
-    public void showFailure(String errorMsg) {
+    protected void onDestroy() {
+        super.onDestroy();
+        MyRxbus2.getInstance().unRegister(this);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 }

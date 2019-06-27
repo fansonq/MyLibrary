@@ -300,7 +300,7 @@ public class CustomEditor extends ScrollView {
     public void addImageViewAtIndex(final int index, String imagePath) {
         final RelativeLayout imageLayout = createImageLayout();
         ImageEditor imageView = (ImageEditor) imageLayout.findViewById(R.id.custom_edit_iv);
-        ImageLoaderUtils.loadImage(getContext(),imageView,imagePath);
+        ImageLoaderUtils.getInstance().loadImage(getContext(),imageView,imagePath);
         imageView.setAbsolutePath(imagePath);//保留这句，后面保存数据会用
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);//裁剪剧中
 

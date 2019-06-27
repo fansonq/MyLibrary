@@ -9,7 +9,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.util.Log;
 
-import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 
 /**
  * @author Created by：fanson
@@ -20,16 +20,16 @@ import java.lang.ref.SoftReference;
 public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> implements LifecycleObserver {
 
     private static final String TAG = BasePresenter.class.getSimpleName();
-    protected SoftReference<V> mBaseView;
+    protected WeakReference<V> mBaseView;
     protected B mBaseBean;
     protected BasePresenter presenter;
-    private SoftReference<Activity> mSoftActivity;
+    private WeakReference<Activity> mSoftActivity;
 
     /**
-     * 获取软引用持有的Activity
-     * @return Activity软引用
+     * 获取弱引用持有的Activity
+     * @return Activity弱引用
      */
-    public Activity getSoftActivity(){
+    public Activity getWeakActivity(){
         if (mSoftActivity!=null){
             return mSoftActivity.get();
         }else {
@@ -42,7 +42,7 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
     }
 
     public BasePresenter(Activity activity, V baseView) {
-        mSoftActivity  = new SoftReference<>(activity);
+        mSoftActivity  = new WeakReference<>(activity);
         initPresenter(baseView);
     }
 
@@ -66,7 +66,7 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
      * @param
      */
     public void attachView(V baseView) {
-        mBaseView = new SoftReference<V>(baseView);
+        mBaseView = new WeakReference<V>(baseView);
     }
 
     /**
@@ -95,7 +95,10 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
      * @return true or false
      */
     public boolean isViewAttached() {
-        return (mBaseView != null ? mBaseView : null) != null;
+        if(mBaseView == null){
+            return  false;
+        }
+        return (mBaseView.get()) != null;
     }
 
     /**
@@ -104,7 +107,7 @@ public abstract class BasePresenter<B, V extends BaseView> extends LiveData<B> i
      * @return
      */
     public V getBaseView() {
-        if (mBaseView != null) {
+        if (mBaseView.get() != null) {
             return this.mBaseView.get();
         } else {
             throw new BaseViewNotAttachedException();

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,6 +19,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="测试网络框架" />
+            <Button
+                android:id="@+id/btn_toast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Toast" />
 
             <Button
                 android:id="@+id/btn_download"
@@ -39,7 +45,7 @@
 
             <Button
                 android:id="@+id/btn_rxBus"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="Rx分发" />
 
@@ -61,6 +67,48 @@
                 android:layout_height="wrap_content"
                 android:text="LoadingView" />
 
+            <Button
+                android:id="@+id/btn_viewModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ViewModel" />
+
+            <Button
+                android:id="@+id/btn_upload_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Log" />
+
+            <Button
+                android:id="@+id/btn_parser_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parser Log" />
+
+            <Button
+                android:id="@+id/btn_load_image"
+                android:layout_width="wrap_content"
+                android:text="Load Image"
+                android:layout_height="wrap_content" />
+
+            <com.example.fansonlib.widget.textview.TextViewDrawable
+                android:layout_width="wrap_content"
+                app:cit_drawableTop="@mipmap/ic_launcher_round"
+                android:text="Test"
+                app:cit_iconHeight="60dp"
+                android:textColor="@color/grey_light"
+                app:cit_iconWidth="60dp"
+                android:layout_height="wrap_content" />
+
+            <com.example.fansonlib.widget.textview.TextViewDrawable
+                android:layout_width="wrap_content"
+                app:cit_drawableTop="@mipmap/ic_no_data"
+                android:text="Test"
+                app:cit_iconHeight="60dp"
+                android:textColor="@color/grey_light"
+                app:cit_iconColor="@color/white"
+                app:cit_iconWidth="60dp"
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/iv_pic"

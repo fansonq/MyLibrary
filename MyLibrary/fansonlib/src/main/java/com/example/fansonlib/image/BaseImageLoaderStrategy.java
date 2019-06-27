@@ -5,24 +5,35 @@ import android.widget.ImageView;
 
 
 /**
- * Created by：fanson
+ * @author  Created by：fanson
  * Created on：2017/4/14 17:29
  * Describe：加载图片框架的策略接口
  */
 
 public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends OnProgressListener> {
 
-    void loadImage(ImageLoaderConfig config,Context context, ImageView view, Object imgUrl);
+    /**
+     * 设置图片加载的配置参数
+     * @param config 配置参数
+     */
+    void setLoaderConfig(ImageLoaderConfig config);
+
+    /**
+     * 默认方式加载图片
+     * @param context
+     * @param view
+     * @param imgUrl
+     */
+    void loadImage(Context context, ImageView view, Object imgUrl);
 
     /**
      * 加载图片带监听
-     * @param config
      * @param context
      * @param view
      * @param imgUrl
      * @param listener1
      */
-    void loadImageWithListener(ImageLoaderConfig config, Context context, ImageView view, Object imgUrl, L1 listener1,L2 listener2);
+    void loadImageWithListener( Context context, ImageView view, Object imgUrl, L1 listener1,L2 listener2);
 
     /**
      * 从drawable中异步加载本地图片
@@ -30,7 +41,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageId
      * @param imageView
      */
-    void displayFromDrawable(ImageLoaderConfig config,Context context,int imageId, ImageView imageView);
+    void displayFromDrawable(Context context,int imageId, ImageView imageView);
 
     /**
      * 从内存卡中异步加载本地图片
@@ -38,12 +49,12 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param uri
      * @param imageView
      */
-    void displayFromSDCard(ImageLoaderConfig config,String uri, ImageView imageView);
+    void displayFromSDCard(String uri, ImageView imageView);
 
     /**
      * 加载圆角图片
      */
-    void loadCircleImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl );
+    void loadCircleImage(Context context, ImageView imageView, String imgUrl );
 
     /**
      * 加载Gif
@@ -51,7 +62,7 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadGifImage(ImageLoaderConfig config,Context context, ImageView imageView, Object imgUrl);
+    void loadGifImage(Context context, ImageView imageView, Object imgUrl);
 
     /**
      * 加载圆角图片
@@ -59,16 +70,29 @@ public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends
      * @param imageView
      * @param imgUrl
      */
-    void loadCornerImage(ImageLoaderConfig config,Context context, ImageView imageView, String imgUrl,int radius);
+    void loadCornerImage(Context context, ImageView imageView, String imgUrl,int radius);
+
+    /**
+     * 恢复加载图片
+     * @param context 上下文
+     */
+    void onResumeRequest(Context context);
+
+    /**
+     * 停止加载图片
+     * @param context 上下文
+     */
+    void onPauseRequest(Context context);
 
     /**
      * 清除内存
+     * @param context 上下文
      */
     void clearMemory(Context context);
 
     /**
      * 获取Bitmap对象
      */
-    void getBitmap(ImageLoaderConfig config, Context context, Object imgUrl,OnWaitBitmapListener listener,int index);
+    void getBitmap( Context context, Object imgUrl,OnWaitBitmapListener listener);
 
 }

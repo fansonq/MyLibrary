@@ -1,6 +1,7 @@
 package com.example.fansonlib.widget.textview;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -29,13 +30,14 @@ import com.example.fansonlib.R;
 import java.util.Locale;
 
 /**
- * Created by：fanson
+ * @author：fanson
  * Created on：2017/9/29 10:40
- * Describe：自定义带icon的Textview（可控制icon大小）
+ * Describe：自定义带icon的TextView（可控制icon大小）
  */
 
-public class TextViewDrawable extends AppCompatTextView{
-    public static final int UNDEFINED_RESOURCE = -0x001;
+public class TextViewDrawable extends AppCompatTextView {
+
+    public static final int UNDEFINED_RESOURCE = -10;
 
     private static final int INDEX_LEFT = 0;
     private static final int INDEX_TOP = 1;
@@ -52,7 +54,10 @@ public class TextViewDrawable extends AppCompatTextView{
     private int iconHeight = UNDEFINED_RESOURCE;
     private int iconColor = UNDEFINED_RESOURCE;
     private Drawable[] drawables = new Drawable[4];
-    private int[] drawableResIds = new int[4]; // cache drawable resource ids
+    /**
+     * cache drawable resource ids
+     */
+    private int[] drawableResIds = new int[4];
 
     public TextViewDrawable(Context context) {
         this(context, null);
@@ -219,22 +224,35 @@ public class TextViewDrawable extends AppCompatTextView{
     private Drawable resource2VectorDrawable(@DrawableRes final int resourceId, @ColorInt final int iconColor,
                                              final int iconWidth, final int iconHeight) {
         final Context context = getContext();
-        final Drawable drawable = AppCompatResources.getDrawable(context, resourceId);
+        Drawable drawable = AppCompatResources.getDrawable(context, resourceId);
 
         if (drawable == null) {
             throw new Resources.NotFoundException("Resource not found : %s." + resourceId);
+        }else {
+            drawable.mutate();
         }
 
         // See if we need to 'fix' the drawableLeft
         fixDrawable(drawable);
         // Set color
-        if (iconColor!=UNDEFINED_RESOURCE){
-            DrawableCompat.setTint(drawable, iconColor);
-            DrawableCompat.setTintMode(drawable, PorterDuff.Mode.SRC_IN);
+        if (iconColor != UNDEFINED_RESOURCE) {
+            drawable = tintDrawable(drawable, ColorStateList.valueOf(iconColor));
         }
         // Resize Bitmap
         return new BitmapDrawable(context.getResources(),
                 Bitmap.createScaledBitmap(drawable2Bitmap(drawable, iconWidth, iconHeight), iconWidth, iconHeight, true));
+    }
+
+    /**
+     * 将drawable染色，此方法可向下兼容
+     * @param drawable Drawable
+     * @param colors 颜色
+     * @return Drawable
+     */
+    public Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
+        Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
     }
 
     /**

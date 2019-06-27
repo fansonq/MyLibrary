@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import com.example.fansonlib.R;
  * Describe：DialogFragment的基类
  */
 
-public  abstract class BaseDialogFragment extends DialogFragment {
+public abstract class BaseDialogFragment extends DialogFragment {
 
     private static final String TAG = BaseDialogFragment.class.getSimpleName();
     private static final String MARGIN = "margin";
@@ -35,9 +36,11 @@ public  abstract class BaseDialogFragment extends DialogFragment {
     private static final String ANIM = "anim_style";
     private static final String LAYOUT = "layout_id";
 
+    private FragmentManager mFragmentManager;
+
     private int margin = 60;//左右边距,默认60dp
-    private int width;//宽度
-    private int height;//高度
+    private int width = 0;//宽度
+    private int height = 0;//高度
     private float dimAmount = 0.5f;//灰度深浅
     private boolean showBottom;//是否底部显示
     private boolean outCancel = false;//是否点击外部取消
@@ -121,7 +124,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
             if (width == 0) {
                 lp.width = Utils.getScreenWidth(getContext()) - 2 * Utils.dp2px(getContext(), margin);
             } else if (width == -1) {
-                lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.width = WindowManager.LayoutParams.MATCH_PARENT;
             } else {
                 lp.width = Utils.dp2px(getContext(), width);
             }
@@ -129,6 +132,8 @@ public  abstract class BaseDialogFragment extends DialogFragment {
             //设置dialog高度
             if (height == 0) {
                 lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            } else if (height == -1) {
+                lp.height = WindowManager.LayoutParams.MATCH_PARENT;
             } else {
                 lp.height = Utils.dp2px(getContext(), height);
             }
@@ -142,6 +147,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * dialog左右两边到屏幕边缘的距离（单位：dp），默认0dp
+     *
      * @param margin
      * @return
      */
@@ -152,6 +158,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * dialog宽度（单位：dp），默认为屏幕宽度
+     *
      * @param width
      * @return
      */
@@ -162,6 +169,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * dialog高度（单位：dp），默认为WRAP_CONTENT
+     *
      * @param height
      * @return
      */
@@ -172,6 +180,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 调节灰色背景透明度[0-1]，默认0.5f
+     *
      * @param dimAmount
      * @return
      */
@@ -182,6 +191,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 是否在底部显示dialog，默认flase
+     *
      * @param showBottom
      * @return
      */
@@ -192,6 +202,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 点击dialog外是否可取消，false
+     *
      * @param outCancel
      * @return
      */
@@ -202,6 +213,7 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 设置dialog进入、退出的动画style(底部显示的dialog有默认动画)
+     *
      * @param animStyle
      * @return
      */
@@ -234,12 +246,28 @@ public  abstract class BaseDialogFragment extends DialogFragment {
 
     public BaseDialogFragment show(FragmentManager manager) {
         try {
-            super.show(manager, String.valueOf(System.currentTimeMillis()));
+            mFragmentManager = manager;
+            FragmentTransaction ft = manager.beginTransaction();
+            if (this.isAdded()) {
+                ft.remove(this).commit();
+            }
+            ft.add(this, String.valueOf(System.currentTimeMillis()));
+            ft.commitAllowingStateLoss();
         } catch (IllegalStateException e) {
             e.printStackTrace();
-            Log.e(TAG,"Show Dialogfragment IllegalStateException");
+            Log.e(TAG, "Show DialogFragment IllegalStateException");
         }
         return this;
+    }
+
+    @Override
+    public void dismiss() {
+        try {
+            super.dismiss();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Log.e(TAG, "dismiss DialogFragment IllegalStateException");
+        }
     }
 
     @Override
@@ -251,5 +279,6 @@ public  abstract class BaseDialogFragment extends DialogFragment {
         if (mICancelListener != null) {
             mICancelListener = null;
         }
+        mFragmentManager = null;
     }
 }

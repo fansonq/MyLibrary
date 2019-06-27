@@ -13,6 +13,9 @@ import android.view.View;
 
 public abstract class BaseMvpFragment<P extends BasePresenter,D extends ViewDataBinding> extends BaseFragment<D> implements BaseView {
 
+    /**
+     * 泛型，Presenter实例
+     */
     protected P mPresenter;
 
     @Override
@@ -41,7 +44,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter,D extends ViewData
 
     /**
      * 实例化Presenter
-     * @return
+     * @return Presenter实例
      */
     protected abstract P createPresenter();
 }

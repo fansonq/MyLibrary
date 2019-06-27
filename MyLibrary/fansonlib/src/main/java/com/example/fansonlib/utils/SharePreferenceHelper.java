@@ -1,5 +1,6 @@
 package com.example.fansonlib.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -19,13 +20,11 @@ public class SharePreferenceHelper {
 
     private static SharedPreferences.Editor editor;
 
-    public SharePreferenceHelper(Context context) {
-        mSharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-        editor = mSharedPreferences.edit();
-    }
-
-
-    //双重锁定
+    /**
+     * 双重锁定，获取SharePreferenceHelper实例
+     * @param context 上下文
+     * @return SharePreferenceHelper实例
+     */
     public static SharePreferenceHelper getInstance(Context context) {
         if (sharePreferenceHelper == null) {
             synchronized (SharePreferenceHelper.class) {
@@ -35,6 +34,16 @@ public class SharePreferenceHelper {
             }
         }
         return sharePreferenceHelper;
+    }
+
+    /**
+     * 构造函数，初始化SharePreference
+     * @param context 上下文
+     */
+    @SuppressLint("CommitPrefEdits")
+    private SharePreferenceHelper(Context context) {
+        mSharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
     }
 
     /**
@@ -130,6 +139,14 @@ public class SharePreferenceHelper {
      */
     public static long getLong(String key, long defValue) {
         return mSharedPreferences.getLong(key, defValue);
+    }
+
+    /**
+     * 获取SharedPreferences实例
+     * @return SharedPreferences实例
+     */
+    public static SharedPreferences getSharedPreferences(){
+        return mSharedPreferences;
     }
 
     /**

@@ -26,6 +26,17 @@ public abstract class BasePresenterRep<R extends IBaseRepository, B, T extends B
     }
 
     /**
+     * 获取mBaseRepository
+     * @return mBaseRepository
+     */
+    protected R getBaseRepository(){
+        if (mBaseRepository==null){
+            mBaseRepository = createRepository();
+        }
+        return mBaseRepository;
+    }
+
+    /**
      * 创建Repository对象
      *
      * @return Repository对象

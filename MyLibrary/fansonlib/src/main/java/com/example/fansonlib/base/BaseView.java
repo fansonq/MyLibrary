@@ -17,4 +17,10 @@ public interface BaseView {
      */
     void hideLoading();
 
+    /**
+     * 显示提示语，为了传给View层的SnackBar使用
+     * @param tipContent 提示语
+     */
+    void showTip(String tipContent);
+
 }

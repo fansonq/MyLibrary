@@ -17,12 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.fansonlib.R;
+import com.example.fansonlib.utils.DimensUtils;
 import com.example.fansonlib.widget.loading.MyProgressWheel;
 
 /**
  * @author Created by：Fanson
- * Created Time: 2018/7/13 10:45
- * Describe：加载页面（加载中，加载失败，无数据）
+ *         Created Time: 2018/7/13 10:45
+ *         Describe：加载页面（加载中，加载失败，无数据）
  */
 public class LoadingStateView extends FrameLayout {
 
@@ -32,7 +33,7 @@ public class LoadingStateView extends FrameLayout {
     private TextView mTvReload;
     private int mTextColor;
     private int mTextSize;
-    private int mDrawableColor;
+    private int mDrawableColor = 0;
     private LayoutInflater mInflater;
     private Drawable mErrorDrawable;
     private Drawable mNoDataDrawable;
@@ -41,23 +42,22 @@ public class LoadingStateView extends FrameLayout {
 
     //加载数据为空的界面控件
     private View mNoDataView = null;
-    private View mNoDataContentView = null;
     private TextView mTvNoData;
     private ImageView mIvNoData;
 
     //加载出错的界面控件
     private View mErrorView = null;
-    private View mErrorContentView;
     private TextView mTvError;
     private ImageView mIvError;
 
     //加载中的界面控件
-    private View mProgressView = null;
-    private View mProgressContentView;
+    private View mLoadingView = null;
     private TextView mTvProgress;
     private MyProgressWheel mProgressWheel;
 
-    //当前显示的View
+    /**
+     * 当前显示的View
+     */
     private View mCurrentShowingView;
 
     private boolean mShouldPlayAnim = true;
@@ -86,6 +86,8 @@ public class LoadingStateView extends FrameLayout {
 //        mErrorView.setVisibility(View.GONE);
 //        mProgressView.setVisibility(View.GONE);
         mCurrentShowingView = contentView;
+
+        setViewSwitchAnimProvider(new FadeScaleViewAnimProvider());
     }
 
     private void parseAttrs(Context context, AttributeSet attrs) {
@@ -96,7 +98,7 @@ public class LoadingStateView extends FrameLayout {
             mErrorDrawable = a.getDrawable(R.styleable.LoadingStateView_errorDrawable);
             mNoDataDrawable = a.getDrawable(R.styleable.LoadingStateView_emptyDrawable);
             mProgressViewId = a.getResourceId(R.styleable.LoadingStateView_progressView, -1);
-            mTextSize = a.getDimensionPixelSize(R.styleable.LoadingStateView_tipTextSize, 16);
+            mTextSize = DimensUtils.pxToSp(mContext, a.getDimension(R.styleable.LoadingStateView_tipTextSize, 14));
             mTextColor = a.getColor(R.styleable.LoadingStateView_tipTextColor, Color.GRAY);
             mDrawableColor = a.getColor(R.styleable.LoadingStateView_drawableColor, 0);
         } finally {
@@ -109,16 +111,15 @@ public class LoadingStateView extends FrameLayout {
      */
     private void initLoadingView() {
         if (mProgressViewId != -1) {
-            mProgressView = mInflater.inflate(mProgressViewId, this, false);
+            mLoadingView = mInflater.inflate(mProgressViewId, this, false);
         } else {
-            mProgressView = mInflater.inflate(R.layout.layout_loading_progress, this, false);
-            mProgressWheel = (MyProgressWheel) mProgressView.findViewById(R.id.progressWheel);
+            mLoadingView = mInflater.inflate(R.layout.layout_loading_progress, this, false);
+            mProgressWheel = (MyProgressWheel) mLoadingView.findViewById(R.id.progressWheel);
             mProgressWheel.setBarColor(mDrawableColor);
-            mTvProgress = (TextView) mProgressView.findViewById(R.id.tv_progress);
+            mTvProgress = (TextView) mLoadingView.findViewById(R.id.tv_progress);
             mTvProgress.setTextSize(mTextSize);
             mTvProgress.setTextColor(mTextColor);
-            mProgressContentView = mProgressView.findViewById(R.id.progress_content);
-            addView(mProgressView);
+            addView(mLoadingView);
         }
     }
 
@@ -128,7 +129,6 @@ public class LoadingStateView extends FrameLayout {
     private void initErrorView() {
         if (mErrorView == null) {
             mErrorView = mInflater.inflate(R.layout.layout_loading_error, this, false);
-            mErrorContentView = mErrorView.findViewById(R.id.error_content);
             mTvError = (TextView) mErrorView.findViewById(R.id.tv_error);
             mTvReload = mErrorView.findViewById(R.id.tv_reload);
             mTvError.setTextSize(mTextSize);
@@ -140,7 +140,9 @@ public class LoadingStateView extends FrameLayout {
             } else {
                 mIvError.setImageResource(R.mipmap.ic_loading_error);
             }
-            mIvError.setColorFilter(mDrawableColor);
+            if (mDrawableColor != 0) {
+                mIvError.setColorFilter(mDrawableColor);
+            }
             addView(mErrorView);
         }
     }
@@ -151,7 +153,6 @@ public class LoadingStateView extends FrameLayout {
     private void initNoDataView() {
         if (mNoDataView == null) {
             mNoDataView = mInflater.inflate(R.layout.layout_loading_no_data, this, false);
-            mNoDataContentView = mNoDataView.findViewById(R.id.empty_content);
             mTvNoData = (TextView) mNoDataView.findViewById(R.id.tv_empty);
             mTvNoData.setTextSize(mTextSize);
             mTvNoData.setTextColor(mTextColor);
@@ -161,13 +162,15 @@ public class LoadingStateView extends FrameLayout {
             } else {
                 mIvNoData.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.ic_no_data));
             }
-            mIvNoData.setColorFilter(mDrawableColor);
+            if (mDrawableColor != 0) {
+                mIvNoData.setColorFilter(mDrawableColor);
+            }
             addView(mNoDataView);
         }
     }
 
     private void checkIsContentView(View view) {
-        if (contentView == null && view != mErrorView && view != mProgressView && view != mNoDataView) {
+        if (contentView == null && view != mErrorView && view != mLoadingView && view != mNoDataView) {
             contentView = view;
             mCurrentShowingView = contentView;
         }
@@ -257,8 +260,9 @@ public class LoadingStateView extends FrameLayout {
 
     private void switchWithAnimation(final View toBeShown) {
         final View toBeHided = mCurrentShowingView;
-        if (toBeHided == toBeShown)
+        if (toBeHided == toBeShown) {
             return;
+        }
         if (mShouldPlayAnim) {
             if (toBeHided != null) {
                 if (mHideAnimation != null) {
@@ -280,12 +284,14 @@ public class LoadingStateView extends FrameLayout {
                     });
                     mHideAnimation.setFillAfter(false);
                     toBeHided.startAnimation(mHideAnimation);
-                } else
+                } else {
                     toBeHided.setVisibility(GONE);
+                }
             }
             if (toBeShown != null) {
-                if (toBeShown.getVisibility() != VISIBLE)
+                if (toBeShown.getVisibility() != VISIBLE) {
                     toBeShown.setVisibility(VISIBLE);
+                }
                 mCurrentShowingView = toBeShown;
                 if (mShowAnimation != null) {
                     mShowAnimation.setFillAfter(false);
@@ -337,8 +343,9 @@ public class LoadingStateView extends FrameLayout {
      * @param bottom
      */
     public void setProgressContentViewMargin(int left, int top, int right, int bottom) {
-        if (mProgressWheel != null)
+        if (mProgressWheel != null) {
             ((LinearLayout.LayoutParams) mProgressWheel.getLayoutParams()).setMargins(left, top, right, bottom);
+        }
     }
 
     public void setInfoContentViewMargin(int left, int top, int right, int bottom) {
@@ -367,13 +374,14 @@ public class LoadingStateView extends FrameLayout {
     public void showLoadNoDataView(String msg) {
         onHideOtherView();
         initNoDataView();
-        if (mOnNoDataButtonClickListener!=null){
+        if (mOnNoDataButtonClickListener != null) {
             mNoDataView.setOnClickListener(mOnNoDataButtonClickListener);
         }
         if (!TextUtils.isEmpty(msg)) {
             mTvNoData.setText(msg);
         }
         switchWithAnimation(mNoDataView);
+        mCurrentShowingView = mNoDataView;
     }
 
     /**
@@ -391,13 +399,14 @@ public class LoadingStateView extends FrameLayout {
     public void showLoadErrorView(String msg) {
         onHideOtherView();
         initErrorView();
-        if (mOnErrorButtonClickListener!=null){
+        if (mOnErrorButtonClickListener != null) {
             mErrorView.setOnClickListener(mOnErrorButtonClickListener);
         }
         if (msg != null) {
             mTvError.setText(msg);
         }
         switchWithAnimation(mErrorView);
+        mCurrentShowingView = mErrorView;
     }
 
     /**
@@ -418,14 +427,15 @@ public class LoadingStateView extends FrameLayout {
         if (msg != null) {
             mTvProgress.setText(msg);
         }
-        switchWithAnimation(mProgressView);
+        switchWithAnimation(mLoadingView);
+        mCurrentShowingView = mLoadingView;
     }
 
     /**
      * 隐藏错误的界面
      */
-    public void hideErrorView(){
-        if (mErrorView!=null){
+    public void hideErrorView() {
+        if (mErrorView != null) {
             mErrorView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
@@ -434,8 +444,8 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 隐藏暂无数据的界面
      */
-    public void hideNoDataView(){
-        if (mNoDataView!=null){
+    public void hideNoDataView() {
+        if (mNoDataView != null) {
             mNoDataView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
@@ -444,9 +454,9 @@ public class LoadingStateView extends FrameLayout {
     /**
      * 隐藏加载中的界面
      */
-    public void hideLoadingView(){
-        if (mProgressView!=null){
-            mProgressView.setVisibility(GONE);
+    public void hideLoadingView() {
+        if (mLoadingView != null) {
+            mLoadingView.setVisibility(GONE);
             mCurrentShowingView = contentView;
         }
     }
@@ -457,9 +467,9 @@ public class LoadingStateView extends FrameLayout {
      * @param onErrorButtonClickListener
      */
     public void setErrorAction(final View.OnClickListener onErrorButtonClickListener) {
-        if (mErrorView==null){
+        if (mErrorView == null) {
             mOnErrorButtonClickListener = onErrorButtonClickListener;
-        }else {
+        } else {
             mErrorView.setOnClickListener(onErrorButtonClickListener);
         }
     }
@@ -470,9 +480,9 @@ public class LoadingStateView extends FrameLayout {
      * @param onNoDataButtonClickListener
      */
     public void setNoDataAction(final View.OnClickListener onNoDataButtonClickListener) {
-        if (mNoDataView==null){
+        if (mNoDataView == null) {
             mOnNoDataButtonClickListener = onNoDataButtonClickListener;
-        }else {
+        } else {
             mNoDataView.setOnClickListener(onNoDataButtonClickListener);
         }
     }
@@ -483,7 +493,7 @@ public class LoadingStateView extends FrameLayout {
      * @param errorAndNoDataAction
      */
     public void setErrorAndNoDataAction(final View.OnClickListener errorAndNoDataAction) {
-        mProgressView.setOnClickListener(errorAndNoDataAction);
+        mLoadingView.setOnClickListener(errorAndNoDataAction);
         mNoDataView.setOnClickListener(errorAndNoDataAction);
     }
 
@@ -491,10 +501,17 @@ public class LoadingStateView extends FrameLayout {
      * 隐藏其他正在显示的View
      */
     public void onHideOtherView() {
-        //TODO 懒得判断，全体隐藏
-        hideErrorView();
-        hideNoDataView();
-        hideLoadingView();
+        if (mLoadingView != null && mLoadingView.getVisibility() == VISIBLE) {
+            hideLoadingView();
+            return;
+        }
+        if (mNoDataView != null && mNoDataView.getVisibility() == VISIBLE) {
+            hideNoDataView();
+            return;
+        }
+        if (mErrorView != null && mErrorView.getVisibility() == VISIBLE) {
+            hideNoDataView();
+        }
     }
 
     /**

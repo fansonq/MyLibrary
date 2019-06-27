@@ -30,7 +30,7 @@ public class MyFragmentManager {
     private final int NO_ANIM = 0x11;
 
     /**
-     * 获取Fragment的个数
+     * 获取Fragment的个数（使用switch切换Fragment后，统计的数量不正确）
      *
      * @return Fragment的个数
      */
@@ -44,7 +44,13 @@ public class MyFragmentManager {
      * @param fragment 指定Fragment
      */
     public synchronized void addToList(Fragment fragment) {
-        mFragmentList.add(fragment);
+        //如果要装载的fragment已经存在，则删除，重新装载
+//        if (mFragmentList.contains(fragment)){
+//            mFragmentList.remove(fragment);
+//            mFragmentList.add(fragment);
+//        }else {
+            mFragmentList.add(fragment);
+//        }
     }
 
     /**
@@ -358,6 +364,7 @@ public class MyFragmentManager {
                 transaction.setCustomAnimations(enter, exit);
             }
             transaction.show(toFragment).hide(fromFragment).commitAllowingStateLoss();
+            addToList(toFragment);
         } else {
             if (popEnter != NO_ANIM) {
                 transaction.setCustomAnimations(enter, exit, popEnter, popExit);
