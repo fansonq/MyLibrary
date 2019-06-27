@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.example.fansonlib.R;
 import com.example.fansonlib.impl.CustomLoadMoreView;
+import com.example.fansonlib.impl.WeakHandler;
 import com.example.fansonlib.impl.adapter.BaseDataBindingAdapter;
 import com.example.fansonlib.impl.adapter.DataBindingViewHolder;
 import com.example.fansonlib.widget.loadingview.LoadingStateView;
@@ -27,7 +28,7 @@ import java.util.List;
  * Describe：自定义RecyclerView（支持DataBinding），继承RecyclerView
  * 泛型B是实体类，泛型A是适配器
  */
-public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDataBindingAdapter<B, D, DataBindingViewHolder<D>>> extends RecyclerView implements IRvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseDataBindingAdapter<B, D, DataBindingViewHolder<D>>> extends RecyclerView implements IRvLoadFinishListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     private static final String TAG = MyBindingRecyclerView.class.getSimpleName();
 
@@ -47,17 +48,11 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 是否刷新（True：重头刷新、False：加载更多）
      */
     private boolean mIsRefresh = false;
+
     /**
-     * 界面是否绘制完成
+     * 标记：是否加载完毕（避免重复请求）
      */
-    private boolean mInited = false;
-    /**
-     * 记录：界面没初始化之前，需要显示的状态视图
-     */
-    private int mNeedShowStatus = 0;
-    private static final int STATUS_LOADING = 1;
-    private static final int STATUS_NO_DATA = 2;
-    private static final int STATUS_ERROR = 3;
+    private boolean mLoadOver = false;
 
     /**
      * 点击空数据视图，可以重试加载，默认支持
@@ -84,6 +79,11 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 重试加载的监听
      */
     private IRvRetryListener mIRvRetryListener;
+
+    /**
+     * 用于有时界面尚未绘制成功，延迟加载视图
+     */
+    private WeakHandler mDelayHandler;
 
     /**
      * 适配器
@@ -177,10 +177,11 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
     }
 
     /**
-     * 设置当前为刷新
+     * 设置当前为刷新状态
+     * @param isRefresh true/false
      */
-    public void setRefresh() {
-        mIsRefresh = true;
+    public void setRefresh(boolean isRefresh) {
+        mIsRefresh = isRefresh;
     }
 
     /**
@@ -212,10 +213,20 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
     /**
      * 添加单类型布局的数据集（不删除原有数据）
      *
+     * @param position 插入位置
+     * @param list     数据集
+     */
+    public void addList(int position, List<B> list) {
+        setList(position, list, false);
+    }
+
+    /**
+     * 添加单类型布局的数据集（不删除原有数据）
+     *
      * @param list 数据集
      */
     public void addList(List<B> list) {
-        setList(list, false);
+        setList(0,list, false);
     }
 
     /**
@@ -224,7 +235,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void addMultiList(List<B> list) {
-        setList(list, true);
+        setList(0,list, true);
     }
 
     /**
@@ -233,7 +244,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void setList(List<B> list) {
-        setList(list, false);
+        setList(0,list, false);
     }
 
     /**
@@ -242,7 +253,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * @param list 数据集
      */
     public void setMultiList(List<B> list) {
-        setList(list, true);
+        setList(0,list, true);
     }
 
     /**
@@ -250,10 +261,11 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 如果刷新停止刷新并设置数据
      * 否则判空设置数据，根据返回数据调试设置加载结束、加载完成
      *
+     * @param position    插入位置
      * @param list        数据
      * @param isMultiItem true:多类型布局，false：单类型布局
      */
-    private void setList(List<B> list, boolean isMultiItem) {
+    private void setList(int position, List<B> list, boolean isMultiItem) {
         if (mAdapter == null) {
             Log.e(TAG, "适配器没有初始化");
             return;
@@ -265,10 +277,26 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
         }
         if (mRequestPageNum == 1 && list.size() == 0) {
             showNoDataView();
+            mLoadOver = true;
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
             return;
+        }
+
+        if (list.size() > 0) {
+            hideNoDataView();
+            onRvLoadFinish();
+            setDataToAdapter(mIsRefresh,position, list);
+            mAdapter.loadMoreComplete();
+            mRequestPageNum++;
+            if (list.size() < DEFAULT_PAGE_SIZE) {
+                mLoadOver = true;
+                mAdapter.loadMoreEnd();
+            }
+        } else {
+            mLoadOver = true;
+            mAdapter.loadMoreEnd();
         }
 //        //判断是否为多类型布局
 //        int ignoreSize = 0;
@@ -282,35 +310,27 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 //            }
 //        }
 //        int size = list.size() - ignoreSize;
-
-        if (list.size() > 0) {
-            hideNoDataView();
-            onRvLoadFinish();
-            setDataToAdapter(mIsRefresh, list);
-            mAdapter.loadMoreComplete();
-            mRequestPageNum++;
-            if (list.size() < DEFAULT_PAGE_SIZE) {
-                mAdapter.loadMoreEnd();
-            }
-        } else {
-            mAdapter.loadMoreEnd();
-        }
     }
 
     /**
      * 装载数据到适配器
      *
      * @param isRefresh 是否下拉刷新
+     * @param position 插入位置
      * @param list      数据集
      */
-    private void setDataToAdapter(boolean isRefresh, List<B> list) {
+    private void setDataToAdapter(boolean isRefresh,int position, List<B> list) {
         if (isRefresh) {
-            mAdapter.addData(0,list);
+            mAdapter.addData(0, list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(list);
+            if (position == 0) {
+                mAdapter.addData(list);
+            } else {
+                mAdapter.addData(position, list);
+            }
         }
     }
 
@@ -335,14 +355,14 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 显示无数据页面，如果想自定义，覆写此方法
      */
     private void showNoDataView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_NO_DATA;
-            return;
-        }
         if (mAdapter == null) {
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
+            if (getHeight() == 0){
+                getWeakHandler().postDelayed(noDataRunnable,50);
+                return;
+            }
             mAdapter.setFooterView(getNoDataView());
             ViewGroup.LayoutParams layoutParams = getNoDataView().getLayoutParams();
             layoutParams.height = getHeight();
@@ -365,7 +385,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             mLoadingStateView.setNoDataAction(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -374,7 +394,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             mNoDataView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -414,10 +434,6 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 显示错误View
      */
     public void showErrorView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_ERROR;
-            return;
-        }
         if (mAdapter == null) {
             return;
         }
@@ -512,15 +528,12 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
      * 显示加载中的视图
      */
     public void showLoadingView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_LOADING;
-            return;
-        }
         if (mAdapter == null) {
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
             if (getHeight() == 0) {
+                getWeakHandler().postDelayed(loadingRunnable,50);
                 return;
             }
             mAdapter.setFooterView(getLoadingView());
@@ -564,29 +577,6 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
         mLoadingView = LayoutInflater.from(getContext()).inflate(layoutId, null);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        mInited = true;
-        if (mNeedShowStatus == 0) {
-            return;
-        }
-        switch (mNeedShowStatus) {
-            case STATUS_LOADING:
-                showLoadingView();
-                break;
-            case STATUS_NO_DATA:
-                showNoDataView();
-                break;
-            case STATUS_ERROR:
-                showErrorView();
-                break;
-            default:
-                break;
-        }
-        mNeedShowStatus = 0;
-    }
-
     /**
      * 重试加载
      */
@@ -595,8 +585,7 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
             showLoadingView();
         }
         if (mIRvRetryListener != null) {
-            mIsRefresh = true;
-            mRequestPageNum = 1;
+            setRefreshOpinion();
             mIRvRetryListener.onRvRetryLoad();
         }
     }
@@ -610,6 +599,10 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 
     @Override
     public void onLoadMoreRequested() {
+        if (mLoadOver) {
+            mAdapter.loadMoreEnd();
+            return;
+        }
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
@@ -618,25 +611,59 @@ public class MyBindingRecyclerView<B,D extends ViewDataBinding, A extends BaseDa
 
     /**
      * 设置点击空数据视图，可以重试加载的功能
+     *
      * @param enable true/false
      */
-    public void setClickEmptyLoadEnable(boolean enable){
+    public void setClickEmptyLoadEnable(boolean enable) {
         mClickEmptyLoadEnable = enable;
     }
 
     /**
      * 设置点击重试，是否出现LoadingView
+     *
      * @param enable true/false
      */
-    public void setRetryLoadViewEnable(boolean enable){
+    public void setRetryLoadViewEnable(boolean enable) {
         mNeedRetryLoadView = enable;
     }
 
     /**
      * 设置重新加载的配置
      */
-    public void setRefreshOpinion(){
+    public void setRefreshOpinion() {
         mRequestPageNum = 1;
         mIsRefresh = true;
+        mLoadOver = false;
     }
+
+    /**
+     * 获取弱引用的Handler
+     * @return mDelayHandler
+     */
+    private WeakHandler getWeakHandler(){
+        if (mDelayHandler == null){
+            mDelayHandler = new WeakHandler();
+        }
+        return mDelayHandler;
+    }
+
+    /**
+     * 加载中视图Runnable
+     */
+    private Runnable loadingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showLoadingView();
+        }
+    };
+
+    /**
+     * 空数据视图Runnable
+     */
+    private Runnable noDataRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setEmptyView();
+        }
+    };
 }

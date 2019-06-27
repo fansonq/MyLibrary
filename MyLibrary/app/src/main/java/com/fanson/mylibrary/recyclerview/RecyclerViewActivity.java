@@ -10,6 +10,7 @@ import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.widget.recyclerview.IRvLoadMoreListener;
 import com.example.fansonlib.widget.recyclerview.IRvRetryListener;
 import com.example.fansonlib.widget.recyclerview.MyRecyclerView;
+import com.example.fansonlib.widget.recyclerview.RvConfig;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.databinding.ActivityRecyclerviewBinding;
 
@@ -36,7 +37,8 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     protected void initView(Bundle savedInstanceState) {
         myRecyclerView = new MyRecyclerView<>(this);
         myRecyclerView = findMyViewId(R.id.recyclerView);
-        myRecyclerView.setRvAdapter(new RecyclerViewAdapter());
+        RvConfig config = new RvConfig.Builder().build();
+        myRecyclerView.setRvAdapter(new RecyclerViewAdapter(),config);
         myRecyclerView.setLoadMoreListener(this);
         myRecyclerView.setRetryLoadViewEnable(false);
         myRecyclerView.setLoadingView(R.layout.layout_loading_progress);

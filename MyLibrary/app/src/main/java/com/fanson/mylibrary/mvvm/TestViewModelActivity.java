@@ -69,16 +69,16 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getViewModel().getData(1);
+                        mViewModel.getData(1);
                     }
-                },2000);
+                },100);
             }
         });
     }
 
     @Override
     protected void dataSuccessObserver() {
-        getViewModel().getData().observe(this, new Observer<SimpleBean>() {
+        mViewModel.getData().observe(this, new Observer<SimpleBean>() {
             @Override
             public void onChanged(@Nullable SimpleBean bean) {
                 MyLogUtils.getInstance().d( "请求数据成功，返回数据");
@@ -119,8 +119,8 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     }
 
     @Override
-    protected void showFailureState(String errorMsg) {
-        super.showFailureState(errorMsg);
+    protected void showErrorState(String errorMsg) {
+        super.showErrorState(errorMsg);
         MyLogUtils.getInstance().e(errorMsg);
         mBinding.tv.setText(errorMsg);
     }

@@ -265,12 +265,14 @@ public class MyImageUtil {
      * 保存图片资源Bitmap到相册
      * @param context 上下文
      * @param bmp 图片资源Bitmap
+     * @param saveFileDir 图片存放路径名
      * @return 是否保存成功，true/false
      */
-    public  boolean saveImageToGallery(Context context, Bitmap bmp) {
+    public  boolean saveImageToGallery(Context context, Bitmap bmp,String saveFileDir) {
         boolean result = true;
-        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();//注意小米手机必须这样获得public绝对路径
-        File appDir = new File(file ,"ytl_picture");
+        //注意小米手机必须这样获得public绝对路径
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();
+        File appDir = new File(file ,saveFileDir);
         if (!appDir.exists()) {
             appDir.mkdirs();
         }

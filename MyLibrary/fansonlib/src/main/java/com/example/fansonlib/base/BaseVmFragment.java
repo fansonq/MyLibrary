@@ -15,8 +15,8 @@ import com.example.fansonlib.constant.ConstLoadState;
 
 /**
  * @author Created by：Fanson
- *         Created Time: 2018/10/11 16:07
- *         Describe：集成ViewModel的BaseMvpFragment
+ * Created Time: 2018/10/11 16:07
+ * Describe：集成ViewModel的BaseMvpFragment
  */
 public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDataBinding> extends BaseFragment<D> implements BaseView {
 
@@ -29,7 +29,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = createViewModel();
         getLifecycle().addObserver(mViewModel);
-        registerLoadState();
+        registerLoadState(mViewModel);
         dataSuccessObserver();
         return rootView;
     }
@@ -56,8 +56,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     /**
      * 注册请求网络时的状态监听
      */
-    private void registerLoadState() {
-        getViewModel().mLoadState.observe(this, new Observer<LoadStateBean>() {
+    protected void registerLoadState(BaseViewModel baseViewModel) {
+        if (baseViewModel == null){
+            return;
+        }
+        baseViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
             @Override
             public void onChanged(@Nullable LoadStateBean stateBean) {
                 handlerLoadState(stateBean);
@@ -81,10 +84,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
                 break;
             case ConstLoadState.ERROR_STATE:
                 hideLoading();
-                showFailureState(stateBean.getContent());
+                showErrorState(stateBean.getContent());
                 break;
             case ConstLoadState.EMPTY_STATE:
                 hideLoading();
+                showNoDataState();
                 break;
             case ConstLoadState.COMPLETE_STATE:
                 hideLoading();
@@ -96,9 +100,16 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
 
     /**
      * 显示失败的状态
+     *
      * @param errorMsg 出错原因
      */
-    protected  void showFailureState(String errorMsg){
+    protected void showErrorState(String errorMsg) {
+    }
+
+    /**
+     * 显示空数据的状态
+     */
+    protected void showNoDataState() {
     }
 
 

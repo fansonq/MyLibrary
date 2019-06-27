@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.example.fansonlib.R;
 import com.example.fansonlib.impl.CustomLoadMoreView;
+import com.example.fansonlib.impl.WeakHandler;
 import com.example.fansonlib.widget.loadingview.LoadingStateView;
 
 import java.util.List;
@@ -45,17 +46,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 是否刷新（True：重头刷新、False：加载更多）
      */
     private boolean mIsRefresh = false;
+
     /**
-     * 界面是否绘制完成
+     * 标记：是否加载完毕（避免重复请求）
      */
-    private boolean mInited = false;
-    /**
-     * 记录：界面没初始化之前，需要显示的状态视图
-     */
-    private int mNeedShowStatus = 0;
-    private static final int STATUS_LOADING = 1;
-    private static final int STATUS_NO_DATA = 2;
-    private static final int STATUS_ERROR = 3;
+    private boolean mLoadOver = false;
 
     /**
      * 点击空数据视图，可以重试加载，默认支持
@@ -82,6 +77,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 重试加载的监听
      */
     private IRvRetryListener mIRvRetryListener;
+
+    /**
+     * 用于有时界面尚未绘制成功，延迟加载视图
+     */
+    private WeakHandler mDelayHandler;
 
     /**
      * 适配器
@@ -122,18 +122,63 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 设置RecyclerView
+     *
+     * @param config 关于MyRecyclerView的配置参数
      */
-    private void setRecyclerView() {
-        if (mAdapter != null) {
-            mRvScrollListener = new MyRvScrollListener(getContext());
-            addOnScrollListener(mRvScrollListener);
-            setHasFixedSize(true);
+    private void setRecyclerView(RvConfig config) {
+        if (mAdapter == null) {
+           return;
+        }
+        if (config == null){
+            setScrollLoadEnable(false);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
             mAdapter.setPreLoadNumber(2);
-            mAdapter.setOnLoadMoreListener(this, this);
-            setAdapter(mAdapter);
+        }else {
+            loadConfig(config);
         }
+        setHasFixedSize(true);
+        mAdapter.setOnLoadMoreListener(this, this);
+        setAdapter(mAdapter);
+    }
+
+    /**
+     * 加载配置
+     * @param config 配置
+     */
+    private void loadConfig(RvConfig config){
+        setScrollLoadEnable(config.getScrollLoadEnable());
+        if (config.getLayoutManager() == null){
+            setLayoutManager(new LinearLayoutManager(getContext()));
+        }else {
+            setLayoutManager(config.getLayoutManager());
+        }
+        if (config.getLoadMoreView() == null){
+            mAdapter.setLoadMoreView(new CustomLoadMoreView());
+        }else {
+            mAdapter.setLoadMoreView(config.getLoadMoreView());
+        }
+        mAdapter.setPreLoadNumber(config.getPreLoadNumber());
+    }
+
+    /**
+     * 设置滑动中加载图片
+     *
+     * @param enable true/false
+     */
+    private void setScrollLoadEnable(boolean enable) {
+        if (!enable) {
+            mRvScrollListener = new MyRvScrollListener(getContext());
+            addOnScrollListener(mRvScrollListener);
+        }
+    }
+
+    /**
+     * 设置请求页码
+     * @param pageNum 页码
+     */
+    public void setRequestPageNum(int pageNum){
+        mRequestPageNum = pageNum;
     }
 
     /**
@@ -175,10 +220,12 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     }
 
     /**
-     * 设置当前为刷新
+     * 设置当前为刷新状态
+     *
+     * @param isRefresh true/false
      */
-    public void setRefresh() {
-        mIsRefresh = true;
+    public void setRefresh(boolean isRefresh) {
+        mIsRefresh = isRefresh;
     }
 
     /**
@@ -204,7 +251,28 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      */
     public void setRvAdapter(A adapter) {
         mAdapter = adapter;
-        setRecyclerView();
+        setRecyclerView(null);
+    }
+
+    /**
+     * 设置适配器
+     *
+     * @param adapter 适配器
+     * @param config  关于MyRecyclerView的配置参数
+     */
+    public void setRvAdapter(A adapter, RvConfig config) {
+        mAdapter = adapter;
+        setRecyclerView(config);
+    }
+
+    /**
+     * 添加单类型布局的数据集（不删除原有数据）
+     *
+     * @param position 插入位置
+     * @param list     数据集
+     */
+    public void addList(int position, List<B> list) {
+        setList(position, list, false);
     }
 
     /**
@@ -213,7 +281,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void addList(List<B> list) {
-        setList(list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -222,7 +290,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void addMultiList(List<B> list) {
-        setList(list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -231,7 +299,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void setList(List<B> list) {
-        setList(list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -240,7 +308,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * @param list 数据集
      */
     public void setMultiList(List<B> list) {
-        setList(list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -248,10 +316,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 如果刷新停止刷新并设置数据
      * 否则判空设置数据，根据返回数据调试设置加载结束、加载完成
      *
+     * @param position    插入位置
      * @param list        数据
      * @param isMultiItem true:多类型布局，false：单类型布局
      */
-    private void setList(List<B> list, boolean isMultiItem) {
+    private void setList(int position, List<B> list, boolean isMultiItem) {
         if (mAdapter == null) {
             Log.e(TAG, "适配器没有初始化");
             return;
@@ -263,25 +332,26 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         }
         if (mRequestPageNum == 1 && list.size() == 0) {
             showNoDataView();
+            mLoadOver = true;
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
             return;
         }
-
         if (list.size() > 0) {
             hideNoDataView();
             onRvLoadFinish();
-            setDataToAdapter(mIsRefresh, list);
+            setDataToAdapter(mIsRefresh, position, list);
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
+                mLoadOver = true;
                 mAdapter.loadMoreEnd();
             }
         } else {
+            mLoadOver = true;
             mAdapter.loadMoreEnd();
         }
-
 //        //判断是否为多类型布局
 //        int ignoreSize = 0;
 //        if (isMultiItem) {
@@ -300,16 +370,21 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 装载数据到适配器
      *
      * @param isRefresh 是否下拉刷新
+     * @param position  插入位置
      * @param list      数据集
      */
-    private void setDataToAdapter(boolean isRefresh, List<B> list) {
+    private void setDataToAdapter(boolean isRefresh, int position, List<B> list) {
         if (isRefresh) {
-            mAdapter.addData(0,list);
+            mAdapter.setNewData(list);
             if (mIRvRefreshListener != null) {
                 mIRvRefreshListener.onCompleteRefresh();
             }
         } else {
-            mAdapter.addData(list);
+            if (position == 0) {
+                mAdapter.addData(list);
+            } else {
+                mAdapter.addData(position, list);
+            }
         }
     }
 
@@ -333,15 +408,15 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     /**
      * 显示无数据页面，如果想自定义，覆写此方法
      */
-    private void showNoDataView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_NO_DATA;
-            return;
-        }
+    public void showNoDataView() {
         if (mAdapter == null) {
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
+            if (getHeight() == 0) {
+                getWeakHandler().postDelayed(noDataRunnable, 50);
+                return;
+            }
             mAdapter.setFooterView(getNoDataView());
             ViewGroup.LayoutParams layoutParams = getNoDataView().getLayoutParams();
             layoutParams.height = getHeight();
@@ -364,7 +439,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mLoadingStateView.setNoDataAction(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -373,7 +448,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             mNoDataView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mClickEmptyLoadEnable){
+                    if (mClickEmptyLoadEnable) {
                         retryLoad();
                     }
                 }
@@ -413,10 +488,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 显示错误View
      */
     public void showErrorView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_ERROR;
-            return;
-        }
         if (mAdapter == null) {
             return;
         }
@@ -511,15 +582,12 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      * 显示加载中的视图
      */
     public void showLoadingView() {
-        if (!mInited) {
-            mNeedShowStatus = STATUS_LOADING;
-            return;
-        }
         if (mAdapter == null) {
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
             if (getHeight() == 0) {
+                getWeakHandler().postDelayed(loadingRunnable, 50);
                 return;
             }
             mAdapter.setFooterView(getLoadingView());
@@ -563,29 +631,6 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         mLoadingView = LayoutInflater.from(getContext()).inflate(layoutId, null);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        mInited = true;
-        if (mNeedShowStatus == 0) {
-            return;
-        }
-        switch (mNeedShowStatus) {
-            case STATUS_LOADING:
-                showLoadingView();
-                break;
-            case STATUS_NO_DATA:
-                showNoDataView();
-                break;
-            case STATUS_ERROR:
-                showErrorView();
-                break;
-            default:
-                break;
-        }
-        mNeedShowStatus = 0;
-    }
-
     /**
      * 重试加载
      */
@@ -594,8 +639,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             showLoadingView();
         }
         if (mIRvRetryListener != null) {
-            mIsRefresh = true;
-            mRequestPageNum = 1;
+            setRefreshOpinion();
             mIRvRetryListener.onRvRetryLoad();
         }
     }
@@ -609,6 +653,10 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     @Override
     public void onLoadMoreRequested() {
+        if (mLoadOver) {
+            mAdapter.loadMoreEnd();
+            return;
+        }
         if (mRvLoadMoreListener != null) {
             mIsRefresh = false;
             mRvLoadMoreListener.onRvLoadMore(mRequestPageNum);
@@ -617,25 +665,60 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 设置点击空数据视图，可以重试加载的功能
+     *
      * @param enable true/false
      */
-    public void setClickEmptyLoadEnable(boolean enable){
+    public void setClickEmptyLoadEnable(boolean enable) {
         mClickEmptyLoadEnable = enable;
     }
 
     /**
      * 设置点击重试，是否出现LoadingView
+     *
      * @param enable true/false
      */
-    public void setRetryLoadViewEnable(boolean enable){
+    public void setRetryLoadViewEnable(boolean enable) {
         mNeedRetryLoadView = enable;
     }
 
     /**
      * 设置重新加载的配置
      */
-    public void setRefreshOpinion(){
+    public void setRefreshOpinion() {
         mRequestPageNum = 1;
         mIsRefresh = true;
+        mLoadOver = false;
     }
+
+    /**
+     * 获取弱引用的Handler
+     *
+     * @return mDelayHandler
+     */
+    private WeakHandler getWeakHandler() {
+        if (mDelayHandler == null) {
+            mDelayHandler = new WeakHandler();
+        }
+        return mDelayHandler;
+    }
+
+    /**
+     * 加载中视图Runnable
+     */
+    private Runnable loadingRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showLoadingView();
+        }
+    };
+
+    /**
+     * 空数据视图Runnable
+     */
+    private Runnable noDataRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setEmptyView();
+        }
+    };
 }
