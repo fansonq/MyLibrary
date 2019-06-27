@@ -28,6 +28,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = createViewModel();
+        getLifecycle().addObserver(mViewModel);
         registerLoadState();
         dataSuccessObserver();
         return rootView;
@@ -115,6 +116,7 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     public void onDestroy() {
         super.onDestroy();
         if (mViewModel != null) {
+            getLifecycle().removeObserver(mViewModel);
             mViewModel.detachView();
         }
     }

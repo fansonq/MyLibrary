@@ -21,6 +21,7 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
     @Override
     protected void initView(Bundle savedInstanceState) {
         mViewModel = createViewModel();
+        getLifecycle().addObserver(mViewModel);
         registerLoadState();
         dataSuccessObserver();
     }
@@ -106,7 +107,10 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
     protected void onDestroy() {
         super.onDestroy();
         if (mViewModel != null) {
+            getLifecycle().removeObserver(mViewModel);
             mViewModel.detachView();
         }
     }
+
+
 }

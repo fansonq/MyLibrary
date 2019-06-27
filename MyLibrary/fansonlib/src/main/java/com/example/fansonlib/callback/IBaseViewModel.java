@@ -11,7 +11,7 @@ import android.arch.lifecycle.OnLifecycleEvent;
  *         Describe：ViewModel基类的接口
  */
 
-public interface IBaseViewModel extends LifecycleObserver{
+public interface IBaseViewModel extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
     void onAny(LifecycleOwner owner, Lifecycle.Event event);
@@ -51,7 +51,5 @@ public interface IBaseViewModel extends LifecycleObserver{
      */
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy();
-
-
 
 }

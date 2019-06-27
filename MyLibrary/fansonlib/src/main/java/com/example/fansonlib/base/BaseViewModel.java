@@ -2,6 +2,8 @@ package com.example.fansonlib.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
@@ -152,6 +154,11 @@ public abstract class BaseViewModel<V extends BaseView, R extends BaseRepository
         }
     }
 
+
+    @Override
+    public void onAny(LifecycleOwner owner, Lifecycle.Event event) {
+        Log.d(TAG,"onAny event = "+event.name());
+    }
 
     @Override
     public void onCreate() {

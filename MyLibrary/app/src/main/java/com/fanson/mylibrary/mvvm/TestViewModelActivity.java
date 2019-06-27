@@ -35,7 +35,7 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     protected MyVmViewModel createViewModel() {
-        return ViewModelProviders.of(this).get(MyVmViewModel.class);
+        return  ViewModelProviders.of(this).get(MyVmViewModel.class);
     }
 
     @Override
