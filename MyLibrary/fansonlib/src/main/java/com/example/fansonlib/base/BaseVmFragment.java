@@ -1,6 +1,7 @@
 package com.example.fansonlib.base;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,9 @@ import android.view.ViewGroup;
 
 import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.constant.ConstLoadState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,6 +28,10 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
      * 泛型，ViewModel实例
      */
     protected VM mViewModel;
+    /**
+     * ViewModel集合，不包含类的泛型VM
+     */
+    private List<BaseViewModel> mViewModelList;
 
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,10 +62,34 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     }
 
     /**
+     * 获取ViewModel集合
+     *
+     * @return mViewModelList
+     */
+    public List<BaseViewModel> getViewModelList() {
+        return mViewModelList;
+    }
+
+    /**
+     * 添加ViewModel实例到集合，统一初始化并管理
+     *
+     * @param vmClass ViewModel类
+     * @param <M>     继承BaseViewModel的ViewModel实例
+     */
+    protected <M extends BaseViewModel> void addViewModel(Class<M> vmClass) {
+        if (mViewModelList == null) {
+            mViewModelList = new ArrayList<>();
+        }
+        mViewModelList.add(ViewModelProviders.of(this).get(vmClass));
+        getLifecycle().addObserver(mViewModelList.get(mViewModelList.size() - 1));
+        registerLoadState(mViewModelList.get(mViewModelList.size() - 1));
+    }
+
+    /**
      * 注册请求网络时的状态监听
      */
     protected void registerLoadState(BaseViewModel baseViewModel) {
-        if (baseViewModel == null){
+        if (baseViewModel == null) {
             return;
         }
         baseViewModel.mLoadState.observe(this, new Observer<LoadStateBean>() {
@@ -128,7 +160,14 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
         super.onDestroy();
         if (mViewModel != null) {
             getLifecycle().removeObserver(mViewModel);
-            mViewModel.detachView();
+            mViewModel.destroy();
+        }
+        if (mViewModelList != null) {
+            for (int i = 0; i < mViewModelList.size(); i++) {
+                getLifecycle().removeObserver(mViewModelList.get(i));
+            }
+            mViewModelList.clear();
+            mViewModelList = null;
         }
     }
 }

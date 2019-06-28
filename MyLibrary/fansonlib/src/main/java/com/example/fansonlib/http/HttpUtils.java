@@ -5,14 +5,17 @@ import java.util.Map;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/9/12 14:39
  * Describe：网络框架的代理类
  */
 
 public class HttpUtils implements IHttpStrategy {
 
-    private static IHttpStrategy mStrategy; //被代理的对象
+    /**
+     * 被代理的对象
+     */
+    private static IHttpStrategy mStrategy;
 
     private volatile static HttpUtils instance;
 
@@ -51,8 +54,8 @@ public class HttpUtils implements IHttpStrategy {
     }
 
     @Override
-    public void cancelCurrent(String type) {
-        mStrategy.cancelCurrent(type);
+    public void cancelCurrent(String url) {
+        mStrategy.cancelCurrent(url);
     }
 
     @Override

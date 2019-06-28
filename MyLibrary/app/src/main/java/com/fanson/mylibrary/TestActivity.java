@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.fansonlib.animation.rx.RxAnimations;
 import com.example.fansonlib.base.BaseActivity;
 import com.example.fansonlib.http.HttpUtils;
 import com.example.fansonlib.http.retrofit.RetrofitClient;
@@ -87,6 +88,12 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        testRxAnim();
+    }
+
     /**
      * 测试存储框架功能
      */
@@ -98,5 +105,14 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
 
         Log.d(TAG, MyKvStorageUtils.getInstance().getString("test"));
         Log.d(TAG,"bool = "+ MyKvStorageUtils.getInstance().getBoolean("bool"));
+    }
+
+    /**
+     * 测试Rx封装的动画
+     */
+    private void testRxAnim(){
+//        RxAnimations.enterTogether(10,500,mBtn,mBinding.td1).subscribe();
+
+        RxAnimations.enter(mBtn,10,500).andThen(RxAnimations.fadeIn(mBinding.td1,500)).subscribe();
     }
 }

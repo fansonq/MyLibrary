@@ -3,6 +3,9 @@ package com.fanson.mylibrary;
 import android.app.Application;
 
 import com.example.fansonlib.base.AppUtils;
+import com.example.fansonlib.http.HttpUtils;
+import com.example.fansonlib.http.retrofit.RetrofitClient;
+import com.example.fansonlib.http.retrofit.RetrofitStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.utils.log.LogConfig;
@@ -25,6 +28,12 @@ public class MyApplication extends Application{
 
         initImageLoader();
         initLog();
+
+        //这段代码放Application初始化即可
+        RetrofitClient.init(ApiStores.API_SERVER_URL);
+        RetrofitStrategy strategy = new RetrofitStrategy();
+        strategy.setApi(new ApiFactoryImpl());
+        HttpUtils.init(strategy);
 
     }
 

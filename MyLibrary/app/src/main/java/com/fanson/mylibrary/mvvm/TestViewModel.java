@@ -1,6 +1,7 @@
 package com.fanson.mylibrary.mvvm;
 
 import android.app.Application;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -8,7 +9,6 @@ import com.example.fansonlib.base.BaseViewModel;
 import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.constant.ConstLoadState;
 import com.fanson.mylibrary.SimpleBean;
-import com.fanson.mylibrary.mvp.ContractTest;
 import com.fanson.mylibrary.mvp.TestCallback;
 
 /**
@@ -16,11 +16,11 @@ import com.fanson.mylibrary.mvp.TestCallback;
  * Created Time: 2018/10/11 17:05
  * Describe：测试ViewModel
  */
-public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRepository,SimpleBean> implements TestCallback {
+public class TestViewModel extends BaseViewModel<TestVmRepository,SimpleBean> implements TestCallback {
 
-    private static final String TAG = MyVmViewModel.class.getSimpleName();
+    private static final String TAG = TestViewModel.class.getSimpleName();
 
-    public MyVmViewModel(@NonNull Application application) {
+    public TestViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -33,14 +33,15 @@ public class MyVmViewModel extends BaseViewModel<ContractTest.TestView,TestVmRep
      * 请求网络加载数据
      * @param id 字段ID
      */
-    public void getData(int id){
+    public void getDataFromR(int id){
         getRepository().getTestData(this);
     }
 
     @Override
     public void successful(SimpleBean bean) {
         Log.d(TAG,"successful");
-        mBean.setValue(bean);
+        MutableLiveData<SimpleBean> liveData = ((MutableLiveData<SimpleBean>)getData());
+        liveData.setValue(bean);
 //        if (isViewAttached()){
 //            getBaseView().showTip(bean.getData().getName());
 //        }

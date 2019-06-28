@@ -10,4 +10,6 @@ public class ConHttp {
     public static final String BASE_URL  = "https://easy-mock.com/mock/59aa96c7e0dc663341997dcc/fansonq/test/";
 
     public static final String REQUEST_POST  = "postName";
+
+    public static final String REQUEST_POST2  = "postContent";
 }

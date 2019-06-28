@@ -11,7 +11,9 @@ import android.os.Build;
 import java.util.List;
 
 /**
- * Created by fansonq on 2017/6/29.
+ *
+ * @author fansonq
+ * @date 2017/6/29
  * 获取自定义的Application实例
  */
 

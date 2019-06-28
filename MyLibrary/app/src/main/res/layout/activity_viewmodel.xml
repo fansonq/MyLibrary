@@ -12,20 +12,40 @@
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="100dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="asdfa" />
 
         <Button
             android:id="@+id/btn"
-            android:text="获取数据"
+            android:text="Vm1-获取数据"
             app:layout_constraintTop_toBottomOf="@+id/tv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="20dp"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+        <Button
+            android:id="@+id/btn2"
+            android:text="Vm2-获取数据1R"
+            app:layout_constraintTop_toBottomOf="@+id/btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+        <Button
+            android:id="@+id/btn3"
+            android:text="Vm2-获取数据2R"
+            app:layout_constraintTop_toBottomOf="@+id/btn2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
             android:layout_height="40dp" />
 
     </android.support.constraint.ConstraintLayout>

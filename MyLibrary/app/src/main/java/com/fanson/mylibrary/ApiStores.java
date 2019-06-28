@@ -1,6 +1,7 @@
 package com.fanson.mylibrary;
 
 
+import com.fanson.mylibrary.bean.TestVmBean;
 import com.fanson.mylibrary.constant.ConHttp;
 
 import java.util.Map;
@@ -42,6 +43,9 @@ public interface ApiStores {
 
     @POST
     Flowable<SimpleBean> postName(@Url String url, @QueryMap Map<String, Object> maps);
+
+    @POST
+    Flowable<TestVmBean> postContent(@Url String url, @QueryMap Map<String, Object> maps);
 
     /**
      * 下载文件

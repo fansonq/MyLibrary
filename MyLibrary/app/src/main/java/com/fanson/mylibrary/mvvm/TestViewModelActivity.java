@@ -1,5 +1,6 @@
 package com.fanson.mylibrary.mvvm;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseVmActivity;
+import com.example.fansonlib.bean.BaseBean;
 import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.log.LogConfig;
@@ -16,6 +18,7 @@ import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.toast.MyToastUtils;
 import com.fanson.mylibrary.R;
 import com.fanson.mylibrary.SimpleBean;
+import com.fanson.mylibrary.bean.TestVmBean;
 import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
 
 
@@ -24,7 +27,7 @@ import com.fanson.mylibrary.databinding.ActivityViewmodelBinding;
  * Created Time: 2018/10/11 16:49
  * Describe：测试ViewModel的Activity
  */
-public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, ActivityViewmodelBinding>  {
+public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, ActivityViewmodelBinding> {
 
     private static final String TAG = TestViewModelActivity.class.getSimpleName();
 
@@ -34,8 +37,8 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
     }
 
     @Override
-    protected MyVmViewModel createViewModel() {
-        return  ViewModelProviders.of(this).get(MyVmViewModel.class);
+    protected Test2ViewModel createViewModel() {
+        return ViewModelProviders.of(this).get(Test2ViewModel.class);
     }
 
     @Override
@@ -51,17 +54,22 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 .build();
         MyLogUtils.init(config);
 
-        initDelayLoadData(20000);
+        initDelayLoadData(4000);
+
+        //添加第二个ViewModel
+        addViewModel(Test2ViewModel.class);
     }
 
     @Override
     protected void startDelayLoad() {
         super.startDelayLoad();
-        getViewModel().getData(1);
+        MyLogUtils.getInstance().d("开始延迟加载");
+        getViewModel().getDataFromR(1);
     }
 
     @Override
     protected void listenEvent() {
+        //触发第一个ViewModel
         mBinding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,25 +77,61 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mViewModel.getData(1);
+                        getViewModel().getDataFromR(1);
                     }
-                },100);
+                }, 5000);
+            }
+        });
+
+        //触发第二个ViewModel的Repository-1
+        mBinding.btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLoading();
+                ((Test2ViewModel)getViewModelList().get(0)).getDataFromR(1);
+                ((Test2ViewModel)getViewModelList().get(0)).getData().observe(TestViewModelActivity.this, new Observer<TestVmBean>() {
+                    @Override
+                    public void onChanged(@Nullable TestVmBean testVmBean) {
+                        hideLoading();
+                        if (testVmBean != null) {
+                            mBinding.btn2.setText(testVmBean.getData().getName());
+                        }
+                    }
+                });
+            }
+        });
+
+        //触发第二个ViewModel的Repository-2
+        mBinding.btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLoading();
+                ((Test2ViewModel)getViewModelList().get(0)).getDataFromR2();
+                ((MutableLiveData<BaseBean>)getViewModelList().get(0).getBeanList().get(0)).observe(TestViewModelActivity.this, new Observer<BaseBean>() {
+                    @Override
+                    public void onChanged(@Nullable BaseBean baseBean) {
+                        if (baseBean instanceof SimpleBean) {
+                            hideLoading();
+                            mBinding.btn3.setText(((SimpleBean) baseBean).getData().getName());
+                        }
+                    }
+                });
             }
         });
     }
 
     @Override
     protected void dataSuccessObserver() {
-        mViewModel.getData().observe(this, new Observer<SimpleBean>() {
+        getViewModel().getData().observe(this, new Observer<TestVmBean>() {
             @Override
-            public void onChanged(@Nullable SimpleBean bean) {
-                MyLogUtils.getInstance().d( "请求数据成功，返回数据");
+            public void onChanged(@Nullable TestVmBean bean) {
+                MyLogUtils.getInstance().d("请求数据成功，返回数据");
                 if (bean != null) {
                     mBinding.tv.setText(bean.getData().getName());
                     MyToastUtils.init(null);
                     MyToastUtils.getInstance().showLong("请求数据成功");
-                    hideLoading();
                 }
+                hideLoading();
             }
         });
     }
@@ -127,12 +171,12 @@ public class TestViewModelActivity extends BaseVmActivity<MyVmViewModel, Activit
 
     @Override
     public void showTip(String tipContent) {
-        MySnackBarUtils.showLong(getWindow().getDecorView(),tipContent).show();
+        MySnackBarUtils.showLong(getWindow().getDecorView(), tipContent).show();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       MyLogUtils.getInstance().d( MyLogUtils.loganFilesInfo());
+        MyLogUtils.getInstance().d(MyLogUtils.loganFilesInfo());
     }
 }

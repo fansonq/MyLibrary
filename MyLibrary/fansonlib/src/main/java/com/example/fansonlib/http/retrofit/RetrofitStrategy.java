@@ -1,6 +1,7 @@
 package com.example.fansonlib.http.retrofit;
 
 import android.support.v4.util.ArrayMap;
+import android.text.TextUtils;
 
 import com.example.fansonlib.http.HttpResponseCallback;
 import com.example.fansonlib.http.IHttpStrategy;
@@ -17,7 +18,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
 import retrofit2.HttpException;
 
 /**
- * @author  Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/9/12 14:56
  * Describe：Retrofit的策略实现
  */
@@ -115,11 +116,17 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
     @Override
     public void cancelCurrent(String url) {
+        MyLogUtils.getInstance().d("取消网络订阅：" + url);
         if (mDisposableMaps.isEmpty()) {
             return;
         }
-        mCurrentDisposable = mDisposableMaps.get(url);
-        mDisposableMaps.remove(url);
+        if (TextUtils.isEmpty(url)){
+            mCurrentDisposable =  mDisposableMaps.valueAt(mDisposableMaps.size()-1);
+            mDisposableMaps.removeAt(mDisposableMaps.size()-1);
+        }else {
+            mCurrentDisposable = mDisposableMaps.get(url);
+            mDisposableMaps.remove(url);
+        }
         if (mCurrentDisposable != null) {
             mCurrentDisposable.dispose();
             mCurrentDisposable = null;
@@ -128,6 +135,7 @@ public class RetrofitStrategy<M> implements IHttpStrategy {
 
     @Override
     public void cancelAll() {
+        MyLogUtils.getInstance().d("取消所有网络订阅");
         if (mDisposableMaps.isEmpty()) {
             return;
         }

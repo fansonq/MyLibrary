@@ -24,6 +24,9 @@ public class ApiFactoryImpl implements IApiFactory {
             case ConHttp.BASE_URL + ConHttp.REQUEST_POST:
                 mFlowable = RetrofitClient.getRetrofit(ApiStores.class).postName(url, params);
                 break;
+            case ConHttp.BASE_URL + ConHttp.REQUEST_POST2:
+                mFlowable = RetrofitClient.getRetrofit(ApiStores.class).postContent(url, params);
+                break;
             case "getName":
                 mFlowable = RetrofitClient.getRetrofit(ApiStores.class).getName(url);
                 break;
