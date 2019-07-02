@@ -75,20 +75,22 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
      *
      * @param vmClass ViewModel类
      * @param <M>     继承BaseViewModel的ViewModel实例
+     * @return true：添加成功；false：添加失败
      */
-    protected <M extends BaseViewModel> void addViewModel(Class<M> vmClass) {
+    protected <M extends BaseViewModel> boolean addViewModel(Class<M> vmClass) {
         if (mViewModelList == null) {
             mViewModelList = new ArrayList<>();
         }
         //判断已经添加过的ViewModel，则不再添加
         for (int i= 0;i<mViewModelList.size();i++){
             if (mViewModelList.get(i).getClass().equals(vmClass)){
-                return;
+                return false;
             }
         }
         mViewModelList.add(ViewModelProviders.of(this).get(vmClass));
         getLifecycle().addObserver(mViewModelList.get(mViewModelList.size() - 1));
         registerLoadState(mViewModelList.get(mViewModelList.size() - 1));
+        return true;
     }
 
     /**
