@@ -73,6 +73,12 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
         if (mViewModelList == null) {
             mViewModelList = new ArrayList<>();
         }
+        //判断已经添加过的ViewModel，则不再添加
+        for (int i= 0;i<mViewModelList.size();i++){
+            if (mViewModelList.get(i).getClass().equals(vmClass)){
+                return;
+            }
+        }
         mViewModelList.add(ViewModelProviders.of(this).get(vmClass));
         getLifecycle().addObserver(mViewModelList.get(mViewModelList.size() - 1));
         registerLoadState(mViewModelList.get(mViewModelList.size() - 1));

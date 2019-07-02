@@ -56,8 +56,6 @@ public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, Activi
 
         initDelayLoadData(4000);
 
-        //添加第二个ViewModel
-        addViewModel(Test2ViewModel.class);
     }
 
     @Override
@@ -88,6 +86,8 @@ public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, Activi
             @Override
             public void onClick(View v) {
                 showLoading();
+                //添加第二个ViewModel
+                addViewModel(Test2ViewModel.class);
                 ((Test2ViewModel)getViewModelList().get(0)).getDataFromR(1);
                 ((Test2ViewModel)getViewModelList().get(0)).getData().observe(TestViewModelActivity.this, new Observer<TestVmBean>() {
                     @Override
@@ -106,6 +106,8 @@ public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, Activi
             @Override
             public void onClick(View v) {
                 showLoading();
+                //添加第二个ViewModel
+                addViewModel(Test2ViewModel.class);
                 ((Test2ViewModel)getViewModelList().get(0)).getDataFromR2();
                 ((MutableLiveData<BaseBean>)getViewModelList().get(0).getBeanList().get(0)).observe(TestViewModelActivity.this, new Observer<BaseBean>() {
                     @Override
