@@ -34,11 +34,6 @@ public abstract class BaseViewModel<R extends BaseRepository, B extends BaseBean
     private List<BaseRepository> mRepositoryList;
 
     /**
-     * LiveData实体类集合
-     */
-    private List<MutableLiveData<BaseBean>> mBeanList;
-
-    /**
      * 处理网络请求时的状态
      */
     public MutableLiveData<LoadStateBean> mLoadState;
@@ -78,37 +73,30 @@ public abstract class BaseViewModel<R extends BaseRepository, B extends BaseBean
     }
 
     /**
-     * 获取LiveData的实体
-     *
-     * @return mBeanList
-     */
-    public List<MutableLiveData<BaseBean>> getBeanList() {
-        return mBeanList;
-    }
-
-    /**
      * 添加Repository实例到集合，统一初始化并管理
      *
      * @param rClass Repository类
      * @param <Y>    继承BaseRepository的Repository实例
-     * @param <X>    继承BaseBean的实体
      */
-    protected <Y extends BaseRepository, X extends BaseBean> void addRepository(Class<Y> rClass, Class<X> bean) {
+    protected <Y extends BaseRepository> BaseRepository getRepository(Class<Y> rClass) {
         if (mRepositoryList == null) {
             mRepositoryList = new ArrayList<>();
         }
-        if (mBeanList == null) {
-            mBeanList = new ArrayList<>();
-        }
         try {
-            MutableLiveData<X> bean1 = new MutableLiveData<>();
-            mBeanList.add((MutableLiveData<BaseBean>) bean1);
+            //判断已经添加过的Repository，若存在则返回
+            for (int i = 0; i < mRepositoryList.size(); i++) {
+                if (mRepositoryList.get(i).getClass().equals(rClass)) {
+                    return mRepositoryList.get(i);
+                }
+            }
             mRepositoryList.add(rClass.newInstance());
+            return mRepositoryList.get(mRepositoryList.size()-1);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -148,10 +136,6 @@ public abstract class BaseViewModel<R extends BaseRepository, B extends BaseBean
             }
             mRepositoryList.clear();
             mRepositoryList = null;
-        }
-        if (mBeanList != null) {
-            mBeanList.clear();
-            mBeanList = null;
         }
     }
 

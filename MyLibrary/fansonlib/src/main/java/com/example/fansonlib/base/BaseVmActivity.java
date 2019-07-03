@@ -66,24 +66,45 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
     /**
      * 添加ViewModel实例到集合，统一初始化并管理
      *
-     * @param vmClass ViewModel类
      * @param <M>     继承BaseViewModel的ViewModel实例
-     * @return true：添加成功；false：添加失败
+     * @param vmClass ViewModel类
+     * @return 创建的ViewModel实例
      */
-    protected <M extends BaseViewModel> boolean addViewModel(Class<M> vmClass) {
+    protected <M extends BaseViewModel> BaseViewModel addViewModel(Class<M> vmClass) {
         if (mViewModelList == null) {
             mViewModelList = new ArrayList<>();
         }
-        //判断已经添加过的ViewModel，则不再添加
+        //判断已经添加过的ViewModel，若存在则返回
         for (int i = 0; i < mViewModelList.size(); i++) {
             if (mViewModelList.get(i).getClass().equals(vmClass)) {
-                return false;
+                return mViewModelList.get(i);
             }
         }
-        mViewModelList.add(ViewModelProviders.of(this).get(vmClass));
-        getLifecycle().addObserver(mViewModelList.get(mViewModelList.size() - 1));
-        registerLoadState(mViewModelList.get(mViewModelList.size() - 1));
-        return true;
+        BaseViewModel vm = ViewModelProviders.of(this).get(vmClass);
+        mViewModelList.add(vm);
+        getLifecycle().addObserver(vm);
+        registerLoadState(vm);
+        return vm;
+    }
+
+    /**
+     * 获取ViewModel实例
+     *
+     * @param vmClass 想要的ViewModel
+     * @param <M>     泛型ViewModel
+     * @return 想要的ViewModel实例
+     */
+    protected <M extends BaseViewModel> BaseViewModel getViewModel(Class<M> vmClass) {
+        if (mViewModelList == null) {
+            return null;
+        }
+        //判断已经添加过的ViewModel，若存在则返回
+        for (int i = 0; i < mViewModelList.size(); i++) {
+            if (mViewModelList.get(i).getClass().equals(vmClass)) {
+                return mViewModelList.get(i);
+            }
+        }
+        return null;
     }
 
     /**

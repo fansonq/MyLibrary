@@ -97,7 +97,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
                    listBean.setName("loadMore" + i);
                    listBeans.add(listBean);
                }
-               myRecyclerView.addList(listBeans);
+               myRecyclerView.addList(null);
            }
        },3000);
     }

@@ -1,6 +1,5 @@
 package com.fanson.mylibrary.mvvm;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.base.BaseVmActivity;
-import com.example.fansonlib.bean.BaseBean;
 import com.example.fansonlib.bean.LoadStateBean;
 import com.example.fansonlib.utils.MySnackBarUtils;
 import com.example.fansonlib.utils.log.LogConfig;
@@ -87,17 +85,8 @@ public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, Activi
             public void onClick(View v) {
                 showLoading();
                 //添加第二个ViewModel
-                addViewModel(Test2ViewModel.class);
-                ((Test2ViewModel)getViewModelList().get(0)).getDataFromR(1);
-                ((Test2ViewModel)getViewModelList().get(0)).getData().observe(TestViewModelActivity.this, new Observer<TestVmBean>() {
-                    @Override
-                    public void onChanged(@Nullable TestVmBean testVmBean) {
-                        hideLoading();
-                        if (testVmBean != null) {
-                            mBinding.btn2.setText(testVmBean.getData().getName());
-                        }
-                    }
-                });
+                observerTest2ViewModel();
+                ((Test2ViewModel) getViewModel(Test2ViewModel.class)).getDataFromR(1);
             }
         });
 
@@ -107,17 +96,37 @@ public class TestViewModelActivity extends BaseVmActivity<Test2ViewModel, Activi
             public void onClick(View v) {
                 showLoading();
                 //添加第二个ViewModel
-                addViewModel(Test2ViewModel.class);
-                ((Test2ViewModel)getViewModelList().get(0)).getDataFromR2();
-                ((MutableLiveData<BaseBean>)getViewModelList().get(0).getBeanList().get(0)).observe(TestViewModelActivity.this, new Observer<BaseBean>() {
-                    @Override
-                    public void onChanged(@Nullable BaseBean baseBean) {
-                        if (baseBean instanceof SimpleBean) {
-                            hideLoading();
-                            mBinding.btn3.setText(((SimpleBean) baseBean).getData().getName());
-                        }
-                    }
-                });
+                observerTest2ViewModel();
+                ((Test2ViewModel) getViewModel(Test2ViewModel.class)).getDataFromR2();
+            }
+        });
+    }
+
+    /**
+     * 注册观察Test2ViewModel
+     */
+    private void observerTest2ViewModel() {
+        if (getViewModel(Test2ViewModel.class) != null) {
+            return;
+        }
+
+        ((Test2ViewModel) addViewModel(Test2ViewModel.class)).getData().observe(TestViewModelActivity.this, new Observer<TestVmBean>() {
+            @Override
+            public void onChanged(@Nullable TestVmBean testVmBean) {
+                MyLogUtils.getInstance().d("mBinding.btn2 onChanged");
+                hideLoading();
+                if (testVmBean != null) {
+                    mBinding.btn2.setText(testVmBean.getData().getName());
+                }
+            }
+        });
+
+        (((Test2ViewModel) addViewModel(Test2ViewModel.class)).getBean2()).observe(TestViewModelActivity.this, new Observer<SimpleBean>() {
+            @Override
+            public void onChanged(@Nullable SimpleBean baseBean) {
+                MyLogUtils.getInstance().d("mBinding.btn3 onChanged");
+                hideLoading();
+                mBinding.btn3.setText(((SimpleBean) baseBean).getData().getName());
             }
         });
     }

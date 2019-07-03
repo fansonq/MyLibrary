@@ -8,7 +8,7 @@ import java.io.Serializable;
 * Description：实体类Bean的基类
 */
 
-public class BaseBean implements Serializable{
+public class BaseBean  implements Serializable{
 
     private static final long serialVersionUID = 407724677531788876L;
 

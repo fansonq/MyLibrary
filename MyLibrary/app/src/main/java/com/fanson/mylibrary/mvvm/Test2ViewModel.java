@@ -21,6 +21,15 @@ public class Test2ViewModel extends BaseViewModel<Test2VmRepository,TestVmBean> 
 
     private static final String TAG = Test2ViewModel.class.getSimpleName();
 
+    protected MutableLiveData<SimpleBean> mBean2;
+
+    protected MutableLiveData<SimpleBean> getBean2(){
+        if (mBean2 == null){
+            mBean2 = new MutableLiveData<>();
+        }
+        return mBean2;
+    }
+
     public Test2ViewModel(@NonNull Application application) {
         super(application);
     }
@@ -42,8 +51,7 @@ public class Test2ViewModel extends BaseViewModel<Test2VmRepository,TestVmBean> 
      * 使用Repository-2 请求网络加载数据2
      */
     public void getDataFromR2(){
-        addRepository(TestVmRepository.class,SimpleBean.class);
-        ((TestVmRepository)getRepositoryList().get(0)).getTestData(this);
+        ((TestVmRepository)getRepository(TestVmRepository.class)).getTestData(this);
     }
 
     @Override
@@ -61,7 +69,7 @@ public class Test2ViewModel extends BaseViewModel<Test2VmRepository,TestVmBean> 
     @Override
     public void successful(SimpleBean bean) {
         Log.d(TAG,"Test 1 Vm successful");
-        (getBeanList().get(0)).setValue(bean);
+        mBean2.setValue(bean);
     }
 
     @Override
