@@ -95,8 +95,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
 
     // ViewModel and LiveData
     compile "android.arch.lifecycle:extensions:1.1.0"
@@ -107,8 +107,8 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
 
     // stetho
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.facebook.stetho:stetho:1.5.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'de.hdodenhof:circleimageview:2.2.0'  //圆形图片

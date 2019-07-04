@@ -16,6 +16,7 @@ import com.example.fansonlib.utils.SpannableStringUtils;
 import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.storage.MyKvStorageUtils;
 import com.example.fansonlib.utils.storage.StorageConfig;
+import com.example.fansonlib.callback.OnMyClickListener;
 import com.fanson.mylibrary.databinding.ActivityTestBinding;
 import com.fanson.mylibrary.recyclerview.RecyclerViewActivity;
 
@@ -48,9 +49,9 @@ public class TestActivity extends BaseActivity<ActivityTestBinding>{
 
         mBtn = findViewById(R.id.btn_go);
 
-        mBtn.setOnClickListener(new View.OnClickListener() {
+        mBtn.setOnClickListener(new OnMyClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onMyClick(View v) {
                 startMyActivity(MainActivity.class);
             }
         });
