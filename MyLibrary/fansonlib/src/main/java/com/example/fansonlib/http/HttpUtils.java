@@ -1,5 +1,8 @@
 package com.example.fansonlib.http;
 
+import com.example.fansonlib.base.AppUtils;
+import com.example.fansonlib.utils.NetWorkUtil;
+
 import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
@@ -19,10 +22,10 @@ public class HttpUtils implements IHttpStrategy {
 
     private volatile static HttpUtils instance;
 
-    public static HttpUtils getHttpUtils(){
-        if (instance == null){
-            synchronized (HttpUtils.class){
-                if (instance == null){
+    public static HttpUtils getHttpUtils() {
+        if (instance == null) {
+            synchronized (HttpUtils.class) {
+                if (instance == null) {
                     instance = new HttpUtils();
                 }
             }
@@ -34,18 +37,26 @@ public class HttpUtils implements IHttpStrategy {
      * 初始化立即启动
      * 传入被代理的对象，Volley实现类 okHttp实现类 等等
      */
-    public static void init(IHttpStrategy strategy){
+    public static void init(IHttpStrategy strategy) {
         mStrategy = strategy;
     }
 
     @Override
-    public void get(String url,  HttpResponseCallback callback) {
-        mStrategy.get(url,callback);
+    public void get(String url, HttpResponseCallback callback) {
+        if (!NetWorkUtil.isNetWordConnected(AppUtils.getAppContext()) && callback != null) {
+            callback.onFailure("网络未连接");
+            return;
+        }
+        mStrategy.get(url, callback);
     }
 
     @Override
     public void post(String url, Map params, HttpResponseCallback callback) {
-        mStrategy.post(url,params,callback);
+        if (!NetWorkUtil.isNetWordConnected(AppUtils.getAppContext()) && callback != null) {
+            callback.onFailure("网络未连接");
+            return;
+        }
+        mStrategy.post(url, params, callback);
     }
 
     @Override
