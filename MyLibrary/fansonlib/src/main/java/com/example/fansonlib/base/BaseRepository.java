@@ -1,7 +1,5 @@
 package com.example.fansonlib.base;
 
-import com.example.fansonlib.http.HttpUtils;
-
 /**
  * @author fansonq
  * @date 2017/9/2
@@ -19,7 +17,7 @@ public abstract class BaseRepository implements IBaseRepository {
 
     @Override
     public void onDestroy() {
-        HttpUtils.getHttpUtils().cancelCurrent(null);
+//        HttpUtils.getHttpUtils().cancelCurrent(null);
     }
 
 }
