@@ -44,8 +44,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     private static final String TAG = GlideLoaderStrategy.class.getSimpleName();
 
-    private static int MAX_DISK_CACHE = 1024 * 1024 * 50;
-    private static int MAX_MEMORY_CACHE = 1024 * 1024 * 10;
+    private static int MAX_DISK_CACHE = 1024 * 1024 * 200;
+    private static int MAX_MEMORY_CACHE = 1024 * 1024 * 20;
 
     private ImageLoaderConfig mImageLoaderConfig;
 
@@ -71,7 +71,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         /**
          * 0-1之间  10%原图的大小
          */
-        public static final float THUMB_SIZE = 0.5f;
+        public static final float THUMB_SIZE = 0.3f;
     }
 
     /**
