@@ -1,6 +1,7 @@
 package com.example.fansonlib.image;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 /**
  * @author Created by：fanson
@@ -13,6 +14,13 @@ public interface OnWaitBitmapListener {
     /**
      * 得到Bitmap对象
      * @param bitmap Bitmap对象
+     * @param imgUrl 请求的图片地址
      */
     void getBitmap(Bitmap bitmap,  Object imgUrl);
+
+    /**
+     * 获取Bitmap失败
+     * @param errorDrawable 错误图标
+     */
+    void onLoadFailed(Drawable errorDrawable);
 }

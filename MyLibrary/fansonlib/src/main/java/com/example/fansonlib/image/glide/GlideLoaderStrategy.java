@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
@@ -85,6 +87,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
+                    .format(DecodeFormat.PREFER_RGB_565)
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
         }
@@ -102,6 +105,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     .error(R.mipmap.ic_person)
                     //下载的优先级
                     .priority(Priority.NORMAL)
+                    .format(DecodeFormat.PREFER_RGB_565)
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
         }
@@ -121,6 +125,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
+                    .format(DecodeFormat.PREFER_RGB_565)
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.NONE);
         }
@@ -256,6 +261,11 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     @Override
                     public void onResourceReady(@NonNull Bitmap bitmap, @Nullable Transition<? super Bitmap> transition) {
                         listener.getBitmap(bitmap, imgUrl);
+                    }
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        super.onLoadFailed(errorDrawable);
+                        listener.onLoadFailed(errorDrawable);
                     }
                 });
     }
