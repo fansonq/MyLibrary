@@ -95,8 +95,8 @@ public abstract class BaseFragment<D extends ViewDataBinding> extends Fragment i
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         rootView = mBinding.getRoot();
-        mIsCreatedView = true;
         initView(rootView, inflater, container, savedInstanceState);
+        mIsCreatedView = true;
         return rootView;
     }
 
