@@ -12,7 +12,6 @@ public class MyKvStorageUtils {
     private volatile static MyKvStorageUtils mInstance;
     private static BaseStorageStrategy mBaseStorageStrategy;
 
-
     /**
      * 初始化
      * @param config 参数配置
@@ -109,16 +108,32 @@ public class MyKvStorageUtils {
         return mBaseStorageStrategy.getString(key);
     }
 
+    public String getString(String key,String defValue) {
+        return mBaseStorageStrategy.getString(key,defValue);
+    }
+
     public boolean getBoolean(String key) {
         return mBaseStorageStrategy.getBoolean(key);
+    }
+
+    public boolean getBoolean(String key,boolean defValue) {
+        return mBaseStorageStrategy.getBoolean(key,defValue);
     }
 
     public int getInt(String key) {
         return mBaseStorageStrategy.getInt(key);
     }
 
+    public int getInt(String key,int defValue) {
+        return mBaseStorageStrategy.getInt(key,defValue);
+    }
+
     public long getLong(String key) {
         return mBaseStorageStrategy.getLong(key);
+    }
+
+    public long getLong(String key,long defValue) {
+        return mBaseStorageStrategy.getLong(key,defValue);
     }
 
     public float getFloat(String key) {

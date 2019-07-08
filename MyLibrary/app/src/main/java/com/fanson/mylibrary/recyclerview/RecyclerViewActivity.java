@@ -41,7 +41,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
         myRecyclerView.setRvAdapter(new RecyclerViewAdapter(),config);
         myRecyclerView.setLoadMoreListener(this);
         myRecyclerView.setRetryLoadViewEnable(false);
-        myRecyclerView.setLoadingView(R.layout.layout_loading_progress);
+//        myRecyclerView.setLoadingView(R.layout.layout_loading_progress);
     }
 
     @Override
@@ -67,8 +67,8 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
      * 设置错误界面
      */
     private void setCustomErrorView() {
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_no_data, null);
-        myRecyclerView.setErrorView(view);
+//        View view = LayoutInflater.from(this).inflate(R.layout.layout_no_data, null);
+//        myRecyclerView.setErrorView(view);
     }
 
     /**
@@ -82,7 +82,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
                 myRecyclerView.setRetryListener(RecyclerViewActivity.this);
                 myRecyclerView.setList(null);
             }
-        }, 5000);
+        }, 10);
     }
 
     @Override
@@ -108,6 +108,7 @@ public class RecyclerViewActivity extends BaseActivity<ActivityRecyclerviewBindi
     @Override
     public void onRvRetryLoad() {
         Log.d(TAG, "onRvRetryLoad");
+        myRecyclerView.showLoadingView();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

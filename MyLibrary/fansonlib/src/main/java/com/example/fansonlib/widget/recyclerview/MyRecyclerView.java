@@ -30,6 +30,8 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     private static final String TAG = MyRecyclerView.class.getSimpleName();
 
+    private static final long DELAY_TIME = 50;
+
     /**
      * 默认一页的数量为10
      */
@@ -127,14 +129,14 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
      */
     private void setRecyclerView(RvConfig config) {
         if (mAdapter == null) {
-           return;
+            return;
         }
-        if (config == null){
+        if (config == null) {
             setScrollLoadEnable(false);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
             mAdapter.setPreLoadNumber(2);
-        }else {
+        } else {
             loadConfig(config);
         }
         setHasFixedSize(true);
@@ -144,18 +146,19 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 加载配置
+     *
      * @param config 配置
      */
-    private void loadConfig(RvConfig config){
+    private void loadConfig(RvConfig config) {
         setScrollLoadEnable(config.getScrollLoadEnable());
-        if (config.getLayoutManager() == null){
+        if (config.getLayoutManager() == null) {
             setLayoutManager(new LinearLayoutManager(getContext()));
-        }else {
+        } else {
             setLayoutManager(config.getLayoutManager());
         }
-        if (config.getLoadMoreView() == null){
+        if (config.getLoadMoreView() == null) {
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
-        }else {
+        } else {
             mAdapter.setLoadMoreView(config.getLoadMoreView());
         }
         mAdapter.setPreLoadNumber(config.getPreLoadNumber());
@@ -175,9 +178,10 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
 
     /**
      * 设置请求页码
+     *
      * @param pageNum 页码
      */
-    public void setRequestPageNum(int pageNum){
+    public void setRequestPageNum(int pageNum) {
         mRequestPageNum = pageNum;
     }
 
@@ -414,14 +418,16 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
             if (getHeight() == 0) {
-                getWeakHandler().postDelayed(noDataRunnable, 50);
+                getWeakHandler().postDelayed(noDataRunnable, DELAY_TIME);
                 return;
             }
+            mDelayHandler.removeCallbacks(loadingRunnable);
             mAdapter.setFooterView(getNoDataView());
             ViewGroup.LayoutParams layoutParams = getNoDataView().getLayoutParams();
             layoutParams.height = getHeight();
             getNoDataView().setLayoutParams(layoutParams);
         } else if (mAdapter.getHeaderLayoutCount() > 0) {
+            mDelayHandler.removeCallbacks(loadingRunnable);
             mAdapter.setFooterView(getNoDataView());
         }
     }
@@ -495,6 +501,11 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             if (mAdapter.getData().size() > 0) {
                 mAdapter.loadMoreFail();
             } else {
+                if (getHeight() == 0) {
+                    getWeakHandler().postDelayed(errorRunnable, DELAY_TIME);
+                    return;
+                }
+                mDelayHandler.removeCallbacks(loadingRunnable);
                 mAdapter.setFooterView(getErrorView());
                 ViewGroup.LayoutParams layoutParams = getErrorView().getLayoutParams();
                 layoutParams.height = getHeight();
@@ -504,6 +515,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             if (mAdapter.getData().size() > 0) {
                 mAdapter.loadMoreFail();
             } else {
+                mDelayHandler.removeCallbacks(loadingRunnable);
                 mAdapter.setFooterView(getErrorWithHeadView());
             }
         }
@@ -587,7 +599,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
             if (getHeight() == 0) {
-                getWeakHandler().postDelayed(loadingRunnable, 50);
+                getWeakHandler().postDelayed(loadingRunnable, DELAY_TIME);
                 return;
             }
             mAdapter.setFooterView(getLoadingView());
@@ -595,7 +607,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             layoutParams.height = getHeight();
             getLoadingView().setLayoutParams(layoutParams);
         } else if (mAdapter.getHeaderLayoutCount() > 0) {
-            mAdapter.setFooterView(getErrorWithHeadView());
+            mAdapter.setFooterView(getLoadingView());
         }
     }
 
@@ -709,6 +721,16 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         @Override
         public void run() {
             showLoadingView();
+        }
+    };
+
+    /**
+     * 加载出错视图Runnable
+     */
+    private Runnable errorRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showErrorView();
         }
     };
 
