@@ -80,18 +80,42 @@ public interface BaseStorageStrategy {
     String getString(String key);
 
     /**
+     * 获取String类型的值
+     * @param key key值
+     * @param defValue value默认值
+     * @return String类型的值
+     */
+    String getString(String key,String defValue);
+
+    /**
      * 获取boolean类型的值
      * @param key key值
      * @return boolean类型的值
      */
-    boolean getBoolean(String key);
+    boolean getBoolean(String key );
 
-     /**
+    /**
+     * 获取boolean类型的值
+     * @param key key值
+     * @param defValue value默认值
+     * @return boolean类型的值
+     */
+    boolean getBoolean(String key,boolean defValue);
+
+    /**
      * 获取int类型的值
      * @param key key值
      * @return int类型的值
      */
-     int getInt(String key);
+    int getInt(String key);
+
+     /**
+     * 获取int类型的值
+     * @param key key值
+      * @param defValue value默认值
+     * @return int类型的值
+     */
+     int getInt(String key,int defValue);
 
     /**
      * 获取long类型的值
@@ -99,6 +123,14 @@ public interface BaseStorageStrategy {
      * @return long类型的值
      */
     long getLong(String key );
+
+    /**
+     * 获取long类型的值
+     * @param key key值
+     * @param defValue value默认值
+     * @return long类型的值
+     */
+    long getLong(String key ,long defValue);
 
     /**
      * 获取float类型的值

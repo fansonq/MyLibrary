@@ -75,8 +75,18 @@ public class SharePreferenceStrategy implements BaseStorageStrategy{
     }
 
     @Override
+    public String getString(String key, String defValue) {
+        return mSharedPreferences.getString(key, defValue);
+    }
+
+    @Override
     public boolean getBoolean(String key) {
         return mSharedPreferences.getBoolean(key, false);
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defValue) {
+        return mSharedPreferences.getBoolean(key, defValue);
     }
 
     @Override
@@ -85,8 +95,18 @@ public class SharePreferenceStrategy implements BaseStorageStrategy{
     }
 
     @Override
+    public int getInt(String key, int defValue) {
+        return mSharedPreferences.getInt(key, defValue);
+    }
+
+    @Override
     public long getLong(String key) {
         return mSharedPreferences.getLong(key, 0);
+    }
+
+    @Override
+    public long getLong(String key, long defValue) {
+        return mSharedPreferences.getLong(key, defValue);
     }
 
     @Override

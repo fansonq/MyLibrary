@@ -80,8 +80,18 @@ public class MmkvStrategy implements BaseStorageStrategy{
     }
 
     @Override
+    public String getString(String key, String defValue) {
+        return mMmkv.decodeString(key,defValue);
+    }
+
+    @Override
     public boolean getBoolean(String key) {
         return mMmkv.decodeBool(key,false);
+    }
+
+    @Override
+    public boolean getBoolean(String key , boolean defValue) {
+        return mMmkv.decodeBool(key,defValue);
     }
 
     @Override
@@ -90,8 +100,18 @@ public class MmkvStrategy implements BaseStorageStrategy{
     }
 
     @Override
+    public int getInt(String key, int defValue) {
+        return mMmkv.decodeInt(key,defValue);
+    }
+
+    @Override
     public long getLong(String key) {
         return mMmkv.decodeLong(key,0);
+    }
+
+    @Override
+    public long getLong(String key, long defValue) {
+        return mMmkv.decodeLong(key,defValue);
     }
 
     @Override
