@@ -421,13 +421,13 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
                 getWeakHandler().postDelayed(noDataRunnable, DELAY_TIME);
                 return;
             }
-            mDelayHandler.removeCallbacks(loadingRunnable);
+            getWeakHandler().removeCallbacks(loadingRunnable);
             mAdapter.setFooterView(getNoDataView());
             ViewGroup.LayoutParams layoutParams = getNoDataView().getLayoutParams();
             layoutParams.height = getHeight();
             getNoDataView().setLayoutParams(layoutParams);
         } else if (mAdapter.getHeaderLayoutCount() > 0) {
-            mDelayHandler.removeCallbacks(loadingRunnable);
+            getWeakHandler().removeCallbacks(loadingRunnable);
             mAdapter.setFooterView(getNoDataView());
         }
     }
@@ -505,7 +505,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
                     getWeakHandler().postDelayed(errorRunnable, DELAY_TIME);
                     return;
                 }
-                mDelayHandler.removeCallbacks(loadingRunnable);
+                getWeakHandler().removeCallbacks(loadingRunnable);
                 mAdapter.setFooterView(getErrorView());
                 ViewGroup.LayoutParams layoutParams = getErrorView().getLayoutParams();
                 layoutParams.height = getHeight();
@@ -515,7 +515,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             if (mAdapter.getData().size() > 0) {
                 mAdapter.loadMoreFail();
             } else {
-                mDelayHandler.removeCallbacks(loadingRunnable);
+                getWeakHandler().removeCallbacks(loadingRunnable);
                 mAdapter.setFooterView(getErrorWithHeadView());
             }
         }
