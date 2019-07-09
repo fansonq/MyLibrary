@@ -743,4 +743,14 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             setEmptyView();
         }
     };
+
+    /**
+     * 销毁资源
+     */
+    public void destory(){
+        mIRvRefreshListener = null;
+        mIRvRetryListener = null;
+        mRvLoadMoreListener = null;
+        mRvScrollListener = null;
+    }
 }

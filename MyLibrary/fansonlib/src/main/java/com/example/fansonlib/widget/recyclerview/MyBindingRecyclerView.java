@@ -666,4 +666,14 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
             setEmptyView();
         }
     };
+
+    /**
+     * 销毁资源
+     */
+    public void destory(){
+        mIRvRefreshListener = null;
+        mIRvRetryListener = null;
+        mRvLoadMoreListener = null;
+        mRvScrollListener = null;
+    }
 }
