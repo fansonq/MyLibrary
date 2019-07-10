@@ -102,43 +102,67 @@ public class TextViewDrawable extends AppCompatTextView {
         updateIcons();
     }
 
+    /**
+     * 设置左边的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableLeft(@DrawableRes final int resourceId) {
         setVectorDrawable(INDEX_LEFT, resourceId);
     }
 
+    /**
+     * 设置顶部的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableTop(@DrawableRes final int resourceId) {
         setVectorDrawable(INDEX_TOP, resourceId);
     }
 
+    /**
+     * 设置右边的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableRight(@DrawableRes final int resourceId) {
         setVectorDrawable(INDEX_RIGHT, resourceId);
     }
 
+    /**
+     * 设置底部的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableBottom(@DrawableRes final int resourceId) {
         setVectorDrawable(INDEX_BOTTOM, resourceId);
     }
 
+    /**
+     * 设置左边的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableStart(@DrawableRes final int resourceId) {
         setVectorDrawable(isRtl() ? INDEX_RIGHT : INDEX_LEFT, resourceId);
     }
 
+    /**
+     * 设置右边的图片资源
+     * @param resourceId 图片资源
+     */
     public void setVectorDrawableEnd(@DrawableRes final int resourceId) {
         setVectorDrawable(isRtl() ? INDEX_LEFT : INDEX_RIGHT, resourceId);
     }
 
     /**
-     * Change drawable icon color
+     * 设置图片资源颜色
      *
-     * @param resId Set color resource id
+     * @param resId 图片资源颜色
      */
     public void setIconColorResource(@ColorRes final int resId) {
         setIconColor(ContextCompat.getColor(getContext(), resId));
     }
 
     /**
-     * Change drawable icon color
+     * 设置图片资源颜色
      *
-     * @param color Set color integer
+     * @param color 图片资源颜色
      */
     public void setIconColor(@ColorInt final int color) {
         for (int i = 0; i < drawables.length; i++) {
