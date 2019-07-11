@@ -47,10 +47,10 @@ public class LoadingWindow extends BasePopupWindow {
     @Override
     public void dismiss() {
         super.dismiss();
-        if (mLoadingView != null) {
+       /* if (mLoadingView != null) {
             mLoadingView.hide();
             mLoadingView = null;
-        }
+        }*/
     }
 
 }
