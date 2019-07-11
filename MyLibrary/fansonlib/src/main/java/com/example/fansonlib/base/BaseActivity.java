@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +23,7 @@ import com.example.fansonlib.constant.BaseConFragmentCode;
 import com.example.fansonlib.manager.MyFragmentManager;
 import com.example.fansonlib.utils.NetWorkUtil;
 import com.example.fansonlib.utils.log.MyLogUtils;
-import com.example.fansonlib.view.LoadingDialog;
+import com.example.fansonlib.view.LoadingWindow;
 
 import org.aviran.cookiebar2.CookieBar;
 
@@ -50,7 +51,11 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     /**
      * 加载动画框
      */
-    private LoadingDialog mLoadingDialog;
+    private LoadingWindow mLoadingWindow;
+    /**
+     * 加载框颜色
+     */
+    private int mLoadingColor = Color.parseColor("#EE6633");
     /**
      * Fragment的管理类
      */
@@ -317,23 +322,31 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      * 显示加载框
      */
     public void showLoading() {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog();
+        if (mLoadingWindow == null) {
+            mLoadingWindow = new LoadingWindow(this,mLoadingColor);
         }
-        mLoadingDialog.show(getSupportFragmentManager());
+        mLoadingWindow.showPopupWindow();
+    }
+
+    /**
+     * 设置加载框颜色
+     * @param color 颜色值
+     */
+    public void setLoadingColor(int color){
+        mLoadingColor = color;
     }
 
     /**
      * 隐藏加载框
      */
     public void hideLoading() {
-        if (mLoadingDialog != null) {
+        if (mLoadingWindow != null) {
             try {
-                mLoadingDialog.hideDialog(getSupportFragmentManager());
+                mLoadingWindow.hide();
             } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
-            mLoadingDialog = null;
+            mLoadingWindow = null;
         }
     }
 
