@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,7 +22,7 @@ import com.example.fansonlib.constant.BaseConFragmentCode;
 import com.example.fansonlib.manager.MyFragmentManager;
 import com.example.fansonlib.utils.NetWorkUtil;
 import com.example.fansonlib.utils.log.MyLogUtils;
-import com.example.fansonlib.view.LoadingWindow;
+import com.example.fansonlib.view.LoadingDialog;
 
 import org.aviran.cookiebar2.CookieBar;
 
@@ -51,11 +50,7 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     /**
      * 加载动画框
      */
-    private LoadingWindow mLoadingWindow;
-    /**
-     * 加载框颜色
-     */
-    private int mLoadingColor = Color.parseColor("#EE6633");
+    private LoadingDialog mLoadingDialog;
     /**
      * Fragment的管理类
      */
@@ -198,10 +193,6 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
             mFragmentManager.clearList();
             mFragmentManager = null;
         }
-        if (mLoadingWindow != null){
-            mLoadingWindow.dismiss();
-            mLoadingWindow = null;
-        }
         unregisterNetReceiver();
         releaseDelayHandler();
     }
@@ -326,31 +317,23 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
      * 显示加载框
      */
     public void showLoading() {
-        if (mLoadingWindow == null) {
-            mLoadingWindow = new LoadingWindow(this,mLoadingColor);
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog();
         }
-        mLoadingWindow.showPopupWindow();
-    }
-
-    /**
-     * 设置加载框颜色
-     * @param color 颜色值
-     */
-    public void setLoadingColor(int color){
-        mLoadingColor = color;
+        mLoadingDialog.show(getSupportFragmentManager());
     }
 
     /**
      * 隐藏加载框
      */
     public void hideLoading() {
-        if (mLoadingWindow != null) {
+        if (mLoadingDialog != null) {
             try {
-                mLoadingWindow.hide();
+                mLoadingDialog.hideDialog(getSupportFragmentManager());
             } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
-            mLoadingWindow = null;
+            mLoadingDialog = null;
         }
     }
 

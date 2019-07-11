@@ -125,5 +125,4 @@ dependencies {
     compile 'com.dianping.android.sdk:logan:1.2.1'
     compile 'com.jeremyliao:live-event-bus:1.4.0'
     compile 'org.aviran.cookiebar2:cookiebar2:1.1.2'
-    compile 'com.github.razerdp:BasePopup:2.2.1'
 }
