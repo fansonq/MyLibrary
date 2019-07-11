@@ -39,9 +39,9 @@ public class LoadingWindow extends BasePopupWindow {
      * 移除自己这个对话框
      */
     public void hide( ) {
-        if (this.isShowing()) {
+//        if (this.isShowing()) {
             dismiss();
-        }
+//        }
     }
 
     @Override
