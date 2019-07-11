@@ -198,6 +198,10 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
             mFragmentManager.clearList();
             mFragmentManager = null;
         }
+        if (mLoadingWindow != null){
+            mLoadingWindow.dismiss();
+            mLoadingWindow = null;
+        }
         unregisterNetReceiver();
         releaseDelayHandler();
     }
