@@ -195,25 +195,29 @@ public class MyLogUtils {
      */
     private static void initLogan() {
         String filePath;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) && AppUtils.getAppContext().getExternalFilesDir(null) != null) {
-            filePath = AppUtils.getAppContext().getExternalFilesDir(null).getAbsolutePath();
-        } else {
-            filePath = AppUtils.getAppContext().getFilesDir().getAbsolutePath();
-        }
-        LoganConfig config = new LoganConfig.Builder()
-                .setCachePath(AppUtils.getAppContext().getFilesDir().getAbsolutePath())
-                .setPath(filePath + File.separator + "logan_v1")
-                .setEncryptKey16("0123456789012345".getBytes())
-                .setEncryptIV16("0123456789012345".getBytes())
-                .build();
-        Logan.init(config);
-        Logan.setDebug(true);
-        Logan.setOnLoganProtocolStatus(new OnLoganProtocolStatus() {
-            @Override
-            public void loganProtocolStatus(String cmd, int code) {
-                Log.d(TAG, "clogan > cmd : " + cmd + " | " + "code : " + code);
+        try {
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                filePath = AppUtils.getAppContext().getExternalFilesDir(null).getAbsolutePath();
+            } else {
+                filePath = AppUtils.getAppContext().getFilesDir().getAbsolutePath();
             }
-        });
+            LoganConfig config = new LoganConfig.Builder()
+                    .setCachePath(AppUtils.getAppContext().getFilesDir().getAbsolutePath())
+                    .setPath(filePath + File.separator + "logan_v1")
+                    .setEncryptKey16("0123456789012345".getBytes())
+                    .setEncryptIV16("0123456789012345".getBytes())
+                    .build();
+            Logan.init(config);
+            Logan.setDebug(true);
+            Logan.setOnLoganProtocolStatus(new OnLoganProtocolStatus() {
+                @Override
+                public void loganProtocolStatus(String cmd, int code) {
+                    Log.d(TAG, "clogan > cmd : " + cmd + " | " + "code : " + code);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
