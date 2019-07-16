@@ -45,7 +45,7 @@ public class MyRvScrollListener extends RecyclerView.OnScrollListener {
                 break;
             //屏幕在滚动 且 用户仍在触碰或手指还在屏幕上；
             case RecyclerView.SCROLL_STATE_DRAGGING:
-                ImageLoaderUtils.getInstance().onPauseRequest(mContext);
+                ImageLoaderUtils.getInstance().onResumeRequest(mContext);
                 break;
             //随用户的操作，屏幕上产生的惯性滑动；
             case RecyclerView.SCROLL_STATE_SETTLING:
