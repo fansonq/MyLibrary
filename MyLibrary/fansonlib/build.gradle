@@ -80,16 +80,15 @@ dependencies {
     compile 'com.android.support:design:27.1.1'
     compile 'com.android.support:support-v4:27.1.1'
     compile 'com.android.support:support-media-compat:27.1.1'
-    compile 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-    compile "com.github.bumptech.glide:okhttp3-integration:4.7.1"
 
-    compile 'jp.wasabeef:glide-transformations:3.3.0'
-    // If you want to use the GPU Filters
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    compile 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    compile "com.github.bumptech.glide:okhttp3-integration:4.9.0"
+
+    compile 'jp.wasabeef:glide-transformations:4.0.1'
 
     // Retrofit+Rxjava+Okhttp
-    compile 'com.squareup.okhttp3:okhttp:3.9.1'
+    compile 'com.squareup.okhttp3:okhttp:3.11.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.1.8'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -99,12 +98,12 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
 
     // ViewModel and LiveData
-    compile "android.arch.lifecycle:extensions:1.1.0"
+    compile "android.arch.lifecycle:extensions:1.1.1"
     // alternatively, just ViewModel
-    compile "android.arch.lifecycle:viewmodel:1.1.0"
+    compile "android.arch.lifecycle:viewmodel:1.1.1"
     // alternatively, just LiveData
-    compile "android.arch.lifecycle:livedata:1.1.0"
-    annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+    compile "android.arch.lifecycle:livedata:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
 
     // stetho
     compile 'com.facebook.stetho:stetho:1.5.1'
