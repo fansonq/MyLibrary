@@ -93,7 +93,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.6.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
-    compile  'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
 
     // ViewModel and LiveData
     compile "android.arch.lifecycle:extensions:1.1.1"
