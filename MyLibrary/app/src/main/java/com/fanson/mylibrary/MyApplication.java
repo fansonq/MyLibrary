@@ -1,6 +1,8 @@
 package com.fanson.mylibrary;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.example.fansonlib.base.AppUtils;
 import com.example.fansonlib.http.HttpUtils;
@@ -35,6 +37,12 @@ public class MyApplication extends Application{
         strategy.setApi(new ApiFactoryImpl());
         HttpUtils.init(strategy);
 
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 
     /**
