@@ -101,7 +101,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy d(String object) {
-        Logan.w(object, LOGAN_TYPE_DEBUG);
+        try {
+            Logan.w(object, LOGAN_TYPE_DEBUG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.d(object);
         return mBaseLogStrategy;
     }
@@ -125,7 +129,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy i(String message) {
-        Logan.w(message, LOGAN_TYPE_INFORMATION);
+        try {
+            Logan.w(message, LOGAN_TYPE_INFORMATION);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.i(message);
         return mBaseLogStrategy;
     }
@@ -137,7 +145,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy v(String message) {
-        Logan.w(message, LOGAN_TYPE_VERBOSE);
+        try {
+            Logan.w(message, LOGAN_TYPE_VERBOSE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.v(message);
         return mBaseLogStrategy;
     }
@@ -149,7 +161,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy e(String message) {
-        Logan.w(message, LOGAN_TYPE_ERROR);
+        try {
+            Logan.w(message, LOGAN_TYPE_ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.e(message);
         return mBaseLogStrategy;
     }
@@ -161,7 +177,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy w(String message) {
-        Logan.w(message, LOGAN_TYPE_WARM);
+        try {
+            Logan.w(message, LOGAN_TYPE_WARM);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.w(message);
         return mBaseLogStrategy;
     }
@@ -173,7 +193,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy json(String jsonStr) {
-        Logan.w(jsonStr, LOGAN_TYPE_DEBUG);
+        try {
+            Logan.w(jsonStr, LOGAN_TYPE_DEBUG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.json(jsonStr);
         return mBaseLogStrategy;
     }
@@ -185,7 +209,11 @@ public class MyLogUtils {
      * @return mBaseLogStrategy
      */
     public BaseLogStrategy xml(String xmlStr) {
-        Logan.w(xmlStr, LOGAN_TYPE_DEBUG);
+        try {
+            Logan.w(xmlStr, LOGAN_TYPE_DEBUG);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mBaseLogStrategy.json(xmlStr);
         return mBaseLogStrategy;
     }
