@@ -13,6 +13,7 @@ import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
@@ -38,9 +39,20 @@ public class MyNotificationUtils extends ContextWrapper {
     private NotificationManager mManager;
     private int[] flags;
     private volatile static MyNotificationUtils mNotificationUtils;
+    private boolean ongoing = false;
+    private RemoteViews remoteViews = null;
+    private PendingIntent intent = null;
+    private String ticker = "";
+    private int priority = Notification.PRIORITY_DEFAULT;
+    private boolean onlyAlertOnce = false;
+    private long when = 0;
+    private Uri sound = null;
+    private int defaults = 0;
+    private long[] pattern = null;
 
     /**
      * 获取单例
+     *
      * @param context 上下文
      * @return 实例
      */
@@ -263,29 +275,6 @@ public class MyNotificationUtils extends ContextWrapper {
     }
 
     /**
-     * 生成PendingIntent
-     *
-     * @param className className
-     * @return PendingIntent
-     */
-    public static PendingIntent createPendingIntent(Context context, Class<?> className) {
-        Intent intent = new Intent(context, className);
-        //当点击消息时就会向系统发送intent意图
-        return PendingIntent.getActivity(context, 0, intent, 0);
-    }
-
-    private boolean ongoing = false;
-    private RemoteViews remoteViews = null;
-    private PendingIntent intent = null;
-    private String ticker = "";
-    private int priority = Notification.PRIORITY_DEFAULT;
-    private boolean onlyAlertOnce = false;
-    private long when = 0;
-    private Uri sound = null;
-    private int defaults = 0;
-    private long[] pattern = null;
-
-    /**
      * 让通知左右滑的时候是否可以取消通知
      *
      * @param ongoing 是否可以取消通知
@@ -417,7 +406,7 @@ public class MyNotificationUtils extends ContextWrapper {
     /**
      * 跳转到权限设置界面
      */
-    public  void openNotificationSetting(Context context) {
+    public void openNotificationSetting(Context context) {
         // vivo 点击设置图标>加速白名单>我的app
         //      点击软件管理>软件管理权限>软件>我的app>信任该软件
         Intent appIntent = context.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
@@ -462,7 +451,7 @@ public class MyNotificationUtils extends ContextWrapper {
      * areNotificationsEnabled 只对 API 19 及以上版本有效，低于API 19 会一直返回true
      */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public  boolean isNotificationEnabled(Context context) {
+    public boolean isNotificationEnabled(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             boolean areNotificationsEnabled = notificationManagerCompat.areNotificationsEnabled();
@@ -492,6 +481,33 @@ public class MyNotificationUtils extends ContextWrapper {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * 生成PendingIntent
+     *
+     * @param context     跳转前的Activity
+     * @param targetClass 跳转目标Activity
+     * @return PendingIntent
+     */
+    public PendingIntent createPendingIntent(Context context, Class<?> targetClass) {
+       return createPendingIntent(context, targetClass, null);
+    }
+
+    /**
+     * 生成PendingIntent，传输参数
+     *
+     * @param context     跳转前的Activity
+     * @param targetClass 跳转目标Activity
+     * @param bundle      传输参数Bundle
+     * @return PendingIntent
+     */
+    public PendingIntent createPendingIntent(Context context, Class<?> targetClass, Bundle bundle) {
+        Intent intent = new Intent(context, targetClass);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        return PendingIntent.getActivity(context, 0, intent, 0);
     }
 
 }

@@ -295,7 +295,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             MyNotificationUtils.getInstance(this).openNotificationSetting(MainActivity.this);
         } else {
             MyNotificationUtils.getInstance(this)
-                    .setContentIntent(MyNotificationUtils.createPendingIntent(MainActivity.this,TestViewModelActivity.class))
+                    .setContentIntent(MyNotificationUtils.getInstance(this).createPendingIntent(MainActivity.this,TestViewModelActivity.class))
                     .sendNotification(1, "通知标题", "通知栏内容", R.mipmap.ic_launcher_round);
         }
     }
