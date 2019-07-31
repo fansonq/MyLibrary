@@ -26,7 +26,7 @@ import static android.support.v4.app.NotificationCompat.PRIORITY_DEFAULT;
 import static android.support.v4.app.NotificationCompat.VISIBILITY_SECRET;
 
 /**
- * Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/6/1 14:54
  * Describe：通知工具类
  */
@@ -37,6 +37,23 @@ public class MyNotificationUtils extends ContextWrapper {
     private static final String CHANNEL_NAME = "Default_Channel";
     private NotificationManager mManager;
     private int[] flags;
+    private volatile static MyNotificationUtils mNotificationUtils;
+
+    /**
+     * 获取单例
+     * @param context 上下文
+     * @return 实例
+     */
+    public static MyNotificationUtils getInstance(Context context) {
+        if (mNotificationUtils == null) {
+            synchronized (MyNotificationUtils.class) {
+                if (mNotificationUtils == null) {
+                    mNotificationUtils = new MyNotificationUtils(context);
+                }
+            }
+        }
+        return mNotificationUtils;
+    }
 
     public MyNotificationUtils(Context base) {
         super(base);
@@ -71,7 +88,8 @@ public class MyNotificationUtils extends ContextWrapper {
 
     /**
      * 获取创建一个NotificationManager的对象
-     * @return                          NotificationManager对象
+     *
+     * @return NotificationManager对象
      */
     public NotificationManager getManager() {
         if (mManager == null) {
@@ -83,16 +101,17 @@ public class MyNotificationUtils extends ContextWrapper {
     /**
      * 清空所有的通知
      */
-    public void clearNotification(){
+    public void clearNotification() {
         getManager().cancelAll();
     }
 
     /**
      * 获取Notification
-     * @param title                     title
-     * @param content                   content
+     *
+     * @param title   title
+     * @param content content
      */
-    public Notification getNotification(String title, String content , int icon){
+    public Notification getNotification(String title, String content, int icon) {
         Notification build;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
@@ -103,8 +122,8 @@ public class MyNotificationUtils extends ContextWrapper {
             NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
             build = builder.build();
         }
-        if (flags!=null && flags.length>0){
-            for (int a=0 ; a<flags.length ; a++){
+        if (flags != null && flags.length > 0) {
+            for (int a = 0; a < flags.length; a++) {
                 build.flags |= flags[a];
             }
         }
@@ -114,11 +133,12 @@ public class MyNotificationUtils extends ContextWrapper {
     /**
      * 建议使用这个发送通知
      * 调用该方法可以发送通知
-     * @param notifyId                  notifyId
-     * @param title                     title
-     * @param content                   content
+     *
+     * @param notifyId notifyId
+     * @param title    title
+     * @param content  content
      */
-    public void sendNotification(int notifyId, String title, String content , int icon) {
+    public void sendNotification(int notifyId, String title, String content, int icon) {
         Notification build;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //android 8.0以上需要特殊处理，也就是targetSDKVersion为26以上
@@ -129,8 +149,8 @@ public class MyNotificationUtils extends ContextWrapper {
             NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
             build = builder.build();
         }
-        if (flags!=null && flags.length>0){
-            for (int a=0 ; a<flags.length ; a++){
+        if (flags != null && flags.length > 0) {
+            for (int a = 0; a < flags.length; a++) {
                 build.flags |= flags[a];
             }
         }
@@ -139,15 +159,16 @@ public class MyNotificationUtils extends ContextWrapper {
 
     /**
      * 调用该方法可以发送通知
-     * @param notifyId                  notifyId
-     * @param title                     title
-     * @param content                   content
+     *
+     * @param notifyId notifyId
+     * @param title    title
+     * @param content  content
      */
-    public void sendNotificationCompat(int notifyId, String title, String content , int icon) {
+    public void sendNotificationCompat(int notifyId, String title, String content, int icon) {
         NotificationCompat.Builder builder = getNotificationCompat(title, content, icon);
         Notification build = builder.build();
-        if (flags!=null && flags.length>0){
-            for (int a=0 ; a<flags.length ; a++){
+        if (flags != null && flags.length > 0) {
+            for (int a = 0; a < flags.length; a++) {
                 build.flags |= flags[a];
             }
         }
@@ -170,22 +191,22 @@ public class MyNotificationUtils extends ContextWrapper {
         builder.setPriority(priority);
         builder.setOnlyAlertOnce(onlyAlertOnce);
         builder.setOngoing(ongoing);
-        if (remoteViews!=null){
+        if (remoteViews != null) {
             builder.setContent(remoteViews);
         }
-        if (intent!=null){
+        if (intent != null) {
             builder.setContentIntent(intent);
         }
-        if (ticker!=null && ticker.length()>0){
+        if (ticker != null && ticker.length() > 0) {
             builder.setTicker(ticker);
         }
-        if (when!=0){
+        if (when != 0) {
             builder.setWhen(when);
         }
-        if (sound!=null){
+        if (sound != null) {
             builder.setSound(sound);
         }
-        if (defaults!=0){
+        if (defaults != 0) {
             builder.setDefaults(defaults);
         }
         //点击自动删除通知
@@ -195,7 +216,7 @@ public class MyNotificationUtils extends ContextWrapper {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private Notification.Builder getChannelNotification(String title, String content, int icon){
+    private Notification.Builder getChannelNotification(String title, String content, int icon) {
         Notification.Builder builder = new Notification.Builder(getApplicationContext(), CHANNEL_ID);
         Notification.Builder notificationBuilder = builder
                 //设置标题
@@ -211,37 +232,47 @@ public class MyNotificationUtils extends ContextWrapper {
                 //是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
                 .setOnlyAlertOnce(onlyAlertOnce)
                 .setAutoCancel(true);
-        if (remoteViews!=null){
+        if (remoteViews != null) {
             //设置自定义view通知栏
             notificationBuilder.setContent(remoteViews);
         }
-        if (intent!=null){
+        if (intent != null) {
             notificationBuilder.setContentIntent(intent);
         }
-        if (ticker!=null && ticker.length()>0){
+        if (ticker != null && ticker.length() > 0) {
             //设置状态栏的标题
             notificationBuilder.setTicker(ticker);
         }
-        if (when!=0){
+        if (when != 0) {
             //设置通知时间，默认为系统发出通知的时间，通常不用设置
             notificationBuilder.setWhen(when);
         }
-        if (sound!=null){
+        if (sound != null) {
             //设置sound
             notificationBuilder.setSound(sound);
         }
-        if (defaults!=0){
+        if (defaults != 0) {
             //设置默认的提示音
             notificationBuilder.setDefaults(defaults);
         }
-        if (pattern!=null){
+        if (pattern != null) {
             //自定义震动效果
             notificationBuilder.setVibrate(pattern);
         }
         return notificationBuilder;
     }
 
-
+    /**
+     * 生成PendingIntent
+     *
+     * @param className className
+     * @return PendingIntent
+     */
+    public static PendingIntent createPendingIntent(Context context, Class<?> className) {
+        Intent intent = new Intent(context, className);
+        //当点击消息时就会向系统发送intent意图
+        return PendingIntent.getActivity(context, 0, intent, 0);
+    }
 
     private boolean ongoing = false;
     private RemoteViews remoteViews = null;
@@ -256,40 +287,44 @@ public class MyNotificationUtils extends ContextWrapper {
 
     /**
      * 让通知左右滑的时候是否可以取消通知
-     * @param ongoing                   是否可以取消通知
+     *
+     * @param ongoing 是否可以取消通知
      * @return
      */
-    public MyNotificationUtils setOngoing(boolean ongoing){
+    public MyNotificationUtils setOngoing(boolean ongoing) {
         this.ongoing = ongoing;
         return this;
     }
 
     /**
      * 设置自定义view通知栏布局
-     * @param remoteViews               view
+     *
+     * @param remoteViews view
      * @return
      */
-    public MyNotificationUtils setContent(RemoteViews remoteViews){
+    public MyNotificationUtils setContent(RemoteViews remoteViews) {
         this.remoteViews = remoteViews;
         return this;
     }
 
     /**
      * 设置内容点击
-     * @param intent                    intent
+     *
+     * @param intent intent
      * @return
      */
-    public MyNotificationUtils setContentIntent(PendingIntent intent){
+    public MyNotificationUtils setContentIntent(PendingIntent intent) {
         this.intent = intent;
         return this;
     }
 
     /**
      * 设置状态栏的标题
-     * @param ticker                    状态栏的标题
+     *
+     * @param ticker 状态栏的标题
      * @return
      */
-    public MyNotificationUtils setTicker(String ticker){
+    public MyNotificationUtils setTicker(String ticker) {
         this.ticker = ticker;
         return this;
     }
@@ -301,40 +336,43 @@ public class MyNotificationUtils extends ContextWrapper {
      * Android 8.0以及上，在 NotificationChannel 的构造函数中指定，总共要五个级别；
      * Android 7.1（API 25）及以下的设备，还得调用NotificationCompat 的 setPriority方法来设置
      *
-     * @param priority                  优先级，默认是Notification.PRIORITY_DEFAULT
+     * @param priority 优先级，默认是Notification.PRIORITY_DEFAULT
      * @return
      */
-    public MyNotificationUtils setPriority(int priority){
+    public MyNotificationUtils setPriority(int priority) {
         this.priority = priority;
         return this;
     }
 
     /**
      * 是否提示一次.true - 如果Notification已经存在状态栏即使在调用notify函数也不会更新
-     * @param onlyAlertOnce             是否只提示一次，默认是false
+     *
+     * @param onlyAlertOnce 是否只提示一次，默认是false
      * @return
      */
-    public MyNotificationUtils setOnlyAlertOnce(boolean onlyAlertOnce){
+    public MyNotificationUtils setOnlyAlertOnce(boolean onlyAlertOnce) {
         this.onlyAlertOnce = onlyAlertOnce;
         return this;
     }
 
     /**
      * 设置通知时间，默认为系统发出通知的时间，通常不用设置
-     * @param when                      when
+     *
+     * @param when when
      * @return
      */
-    public MyNotificationUtils setWhen(long when){
+    public MyNotificationUtils setWhen(long when) {
         this.when = when;
         return this;
     }
 
     /**
      * 设置sound
-     * @param sound                     sound
+     *
+     * @param sound sound
      * @return
      */
-    public MyNotificationUtils setSound(Uri sound){
+    public MyNotificationUtils setSound(Uri sound) {
         this.sound = sound;
         return this;
     }
@@ -342,30 +380,33 @@ public class MyNotificationUtils extends ContextWrapper {
 
     /**
      * 设置默认的提示音
-     * @param defaults                  defaults
+     *
+     * @param defaults defaults
      * @return
      */
-    public MyNotificationUtils setDefaults(int defaults){
+    public MyNotificationUtils setDefaults(int defaults) {
         this.defaults = defaults;
         return this;
     }
 
     /**
      * 自定义震动效果
-     * @param pattern                  pattern
+     *
+     * @param pattern pattern
      * @return
      */
-    public MyNotificationUtils setVibrate(long[] pattern){
+    public MyNotificationUtils setVibrate(long[] pattern) {
         this.pattern = pattern;
         return this;
     }
 
     /**
      * 设置flag标签
-     * @param flags                     flags
+     *
+     * @param flags flags
      * @return
      */
-    public MyNotificationUtils setFlags(int... flags){
+    public MyNotificationUtils setFlags(int... flags) {
         this.flags = flags;
         return this;
     }
@@ -376,7 +417,7 @@ public class MyNotificationUtils extends ContextWrapper {
     /**
      * 跳转到权限设置界面
      */
-    public static void openNotificationSetting(Context context) {
+    public  void openNotificationSetting(Context context) {
         // vivo 点击设置图标>加速白名单>我的app
         //      点击软件管理>软件管理权限>软件>我的app>信任该软件
         Intent appIntent = context.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
@@ -419,10 +460,10 @@ public class MyNotificationUtils extends ContextWrapper {
      * 判断该app是否打开了通知
      * 可以通过NotificationManagerCompat 中的 areNotificationsEnabled()来判断是否开启通知权限。NotificationManagerCompat 在 android.support.v4.app包中，是API 22.1.0 中加入的。而 areNotificationsEnabled()则是在 API 24.1.0之后加入的。
      * areNotificationsEnabled 只对 API 19 及以上版本有效，低于API 19 会一直返回true
-     * */
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static boolean isNotificationEnabled(Context context) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+    public  boolean isNotificationEnabled(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
             boolean areNotificationsEnabled = notificationManagerCompat.areNotificationsEnabled();
             return areNotificationsEnabled;

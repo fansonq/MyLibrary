@@ -188,13 +188,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-//                Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
-                if (!MyNotificationUtils.isNotificationEnabled(MainActivity.this)) {
-                    MyNotificationUtils.openNotificationSetting(MainActivity.this);
-                } else {
-                    MyNotificationUtils myNotificationUtils = new MyNotificationUtils(MainActivity.this);
-                    myNotificationUtils.sendNotification(1, "通知标题", "通知栏内容", R.mipmap.ic_launcher_round);
-                }
+                testNotification();
             }
         });
 
@@ -288,6 +282,22 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
             }
         });
 
+    }
+
+    /**
+     * 测试通知工具类
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void testNotification(){
+//        Uri path = Uri.parse("android.resource://" + getPackageName()  + "/" + R.raw.sound_money);
+        //判断有没打开通知权限，如果没有则跳转打开
+        if (!MyNotificationUtils.getInstance(this).isNotificationEnabled(MainActivity.this)) {
+            MyNotificationUtils.getInstance(this).openNotificationSetting(MainActivity.this);
+        } else {
+            MyNotificationUtils.getInstance(this)
+                    .setContentIntent(MyNotificationUtils.createPendingIntent(MainActivity.this,TestViewModelActivity.class))
+                    .sendNotification(1, "通知标题", "通知栏内容", R.mipmap.ic_launcher_round);
+        }
     }
 
     private void testDialogFragment() {
