@@ -124,17 +124,57 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
 
     /**
      * 设置RecyclerView
+     *
+     * @param config 关于MyRecyclerView的配置参数
      */
-    private void setRecyclerView() {
-        if (mAdapter != null) {
-            mRvScrollListener = new MyRvScrollListener(getContext());
-            addOnScrollListener(mRvScrollListener);
-            setHasFixedSize(true);
+    private void setRecyclerView(RvConfig config) {
+        if (mAdapter == null) {
+            return;
+        }
+        if (config == null) {
+            setScrollLoadEnable(false);
             setLayoutManager(new LinearLayoutManager(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
             mAdapter.setPreLoadNumber(2);
-            mAdapter.setOnLoadMoreListener(this, this);
-            setAdapter(mAdapter);
+        } else {
+            loadConfig(config);
+        }
+        setHasFixedSize(true);
+        //为了更好的提高滚动的流畅性，可以加大 RecyclerView 的缓存，用空间换时间
+        setItemViewCacheSize(10);
+        mAdapter.setOnLoadMoreListener(this, this);
+        setAdapter(mAdapter);
+    }
+
+    /**
+     * 加载配置
+     *
+     * @param config 配置
+     */
+    private void loadConfig(RvConfig config) {
+        setScrollLoadEnable(config.getScrollLoadEnable());
+        if (config.getLayoutManager() == null) {
+            setLayoutManager(new LinearLayoutManager(getContext()));
+        } else {
+            setLayoutManager(config.getLayoutManager());
+        }
+        if (config.getLoadMoreView() == null) {
+            mAdapter.setLoadMoreView(new CustomLoadMoreView());
+        } else {
+            mAdapter.setLoadMoreView(config.getLoadMoreView());
+        }
+        mAdapter.setPreLoadNumber(config.getPreLoadNumber());
+    }
+
+    /**
+     * 设置滑动中加载图片
+     *
+     * @param enable true/false
+     */
+    private void setScrollLoadEnable(boolean enable) {
+        if (!enable) {
+            mRvScrollListener = new MyRvScrollListener(getContext());
+            addOnScrollListener(mRvScrollListener);
         }
     }
 
@@ -178,6 +218,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
 
     /**
      * 设置当前为刷新状态
+     *
      * @param isRefresh true/false
      */
     public void setRefresh(boolean isRefresh) {
@@ -207,7 +248,18 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      */
     public void setRvAdapter(A adapter) {
         mAdapter = adapter;
-        setRecyclerView();
+        setRecyclerView(null);
+    }
+
+    /**
+     * 设置适配器
+     *
+     * @param adapter 适配器
+     * @param config  关于MyRecyclerView的配置参数
+     */
+    public void setRvAdapter(A adapter, RvConfig config) {
+        mAdapter = adapter;
+        setRecyclerView(config);
     }
 
     /**
@@ -226,7 +278,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      * @param list 数据集
      */
     public void addList(List<B> list) {
-        setList(0,list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -235,7 +287,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      * @param list 数据集
      */
     public void addMultiList(List<B> list) {
-        setList(0,list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -244,7 +296,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      * @param list 数据集
      */
     public void setList(List<B> list) {
-        setList(0,list, false);
+        setList(0, list, false);
     }
 
     /**
@@ -253,7 +305,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      * @param list 数据集
      */
     public void setMultiList(List<B> list) {
-        setList(0,list, true);
+        setList(0, list, true);
     }
 
     /**
@@ -287,7 +339,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
         if (list.size() > 0) {
             hideNoDataView();
             onRvLoadFinish();
-            setDataToAdapter(mIsRefresh,position, list);
+            setDataToAdapter(mIsRefresh, position, list);
             mAdapter.loadMoreComplete();
             mRequestPageNum++;
             if (list.size() < DEFAULT_PAGE_SIZE) {
@@ -316,10 +368,10 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
      * 装载数据到适配器
      *
      * @param isRefresh 是否下拉刷新
-     * @param position 插入位置
+     * @param position  插入位置
      * @param list      数据集
      */
-    private void setDataToAdapter(boolean isRefresh,int position, List<B> list) {
+    private void setDataToAdapter(boolean isRefresh, int position, List<B> list) {
         if (isRefresh) {
             mAdapter.setNewData(list);
             if (mIRvRefreshListener != null) {
@@ -359,8 +411,8 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
             return;
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
-            if (getHeight() == 0){
-                getWeakHandler().postDelayed(noDataRunnable,50);
+            if (getHeight() == 0) {
+                getWeakHandler().postDelayed(noDataRunnable, 50);
                 return;
             }
             mAdapter.setFooterView(getNoDataView());
@@ -533,7 +585,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
         }
         if (mAdapter.getHeaderLayoutCount() == 0) {
             if (getHeight() == 0) {
-                getWeakHandler().postDelayed(loadingRunnable,50);
+                getWeakHandler().postDelayed(loadingRunnable, 50);
                 return;
             }
             mAdapter.setFooterView(getLoadingView());
@@ -638,10 +690,11 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
 
     /**
      * 获取弱引用的Handler
+     *
      * @return mDelayHandler
      */
-    private WeakHandler getWeakHandler(){
-        if (mDelayHandler == null){
+    private WeakHandler getWeakHandler() {
+        if (mDelayHandler == null) {
             mDelayHandler = new WeakHandler();
         }
         return mDelayHandler;
@@ -670,7 +723,7 @@ public class MyBindingRecyclerView<B, D extends ViewDataBinding, A extends BaseD
     /**
      * 销毁资源
      */
-    public void destory(){
+    public void destory() {
         mIRvRefreshListener = null;
         mIRvRetryListener = null;
         mRvLoadMoreListener = null;

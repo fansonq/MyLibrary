@@ -140,6 +140,8 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             loadConfig(config);
         }
         setHasFixedSize(true);
+        //为了更好的提高滚动的流畅性，可以加大 RecyclerView 的缓存，用空间换时间
+        setItemViewCacheSize(10);
         mAdapter.setOnLoadMoreListener(this, this);
         setAdapter(mAdapter);
     }
