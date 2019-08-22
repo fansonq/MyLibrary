@@ -496,6 +496,8 @@ public class DeviceUtils {
         } catch (IOException ex) {
             ex.printStackTrace();
             result = new StringBuilder("N/A");
+        } catch (ArrayIndexOutOfBoundsException ex){
+            ex.printStackTrace();
         }
         return result.toString().trim();
     }
