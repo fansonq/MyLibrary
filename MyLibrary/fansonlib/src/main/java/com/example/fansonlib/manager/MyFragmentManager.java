@@ -45,12 +45,12 @@ public class MyFragmentManager {
      */
     public synchronized void addToList(Fragment fragment) {
         //如果要装载的fragment已经存在，则删除，重新装载
-//        if (mFragmentList.contains(fragment)){
-//            mFragmentList.remove(fragment);
-//            mFragmentList.add(fragment);
-//        }else {
+        if (mFragmentList.contains(fragment)){
+            mFragmentList.remove(fragment);
             mFragmentList.add(fragment);
-//        }
+        }else {
+            mFragmentList.add(fragment);
+        }
     }
 
     /**
@@ -296,6 +296,7 @@ public class MyFragmentManager {
         }
         transaction.replace(layoutId, fragment, tag).addToBackStack(tag);
         transaction.commitAllowingStateLoss();
+        clearList();
         addToList(fragment);
     }
 
