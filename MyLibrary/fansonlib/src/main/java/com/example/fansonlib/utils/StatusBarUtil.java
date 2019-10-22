@@ -1,11 +1,5 @@
 package com.example.fansonlib.utils;
 
-/**
-* Created by：fanson
-* Created on：2017/9/29 14:25
-* Description：状态栏颜色
-*/
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -17,14 +11,22 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.fansonlib.R;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import io.reactivex.annotations.NonNull;
+
 /**
- * 借鉴GitHub: https://github.com/laobie（自定义了Drawable状态栏）
- * 用来设置状态栏的颜色、获取状态栏高度
+ * /**
+ * Created by：fanson
+ * Created on：2017/9/29 14:25
+ * Description：借鉴GitHub: https://github.com/laobie（自定义了Drawable状态栏）
  */
 public class StatusBarUtil {
 
@@ -515,6 +517,64 @@ public class StatusBarUtil {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    public static void setLightMode(Activity activity) {
+        setMIUIStatusBarDarkIcon(activity, true);
+        setMeizuStatusBarDarkIcon(activity, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public static void setDarkMode(Activity activity) {
+        setMIUIStatusBarDarkIcon(activity, false);
+        setMeizuStatusBarDarkIcon(activity, false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+    }
+
+    /**
+     * 修改 MIUI V6  以上状态栏颜色
+     */
+    private static void setMIUIStatusBarDarkIcon(@NonNull Activity activity, boolean darkIcon) {
+        Class<? extends Window> clazz = activity.getWindow().getClass();
+        try {
+            Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
+            Field field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE");
+            int darkModeFlag = field.getInt(layoutParams);
+            Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
+            extraFlagField.invoke(activity.getWindow(), darkIcon ? darkModeFlag : 0, darkModeFlag);
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+    }
+
+    /**
+     * 修改魅族状态栏字体颜色 Flyme 4.0
+     */
+    private static void setMeizuStatusBarDarkIcon(@NonNull Activity activity, boolean darkIcon) {
+        try {
+            WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
+            Field darkFlag = WindowManager.LayoutParams.class.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
+            Field meizuFlags = WindowManager.LayoutParams.class.getDeclaredField("meizuFlags");
+            darkFlag.setAccessible(true);
+            meizuFlags.setAccessible(true);
+            int bit = darkFlag.getInt(null);
+            int value = meizuFlags.getInt(lp);
+            if (darkIcon) {
+                value |= bit;
+            } else {
+                value &= ~bit;
+            }
+            meizuFlags.setInt(lp, value);
+            activity.getWindow().setAttributes(lp);
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////////////
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -544,41 +604,6 @@ public class StatusBarUtil {
             fakeTranslucentView.setBackgroundColor(Color.argb(statusBarAlpha, 0, 0, 0));
         } else {
             contentView.addView(createTranslucentStatusBarView(activity, statusBarAlpha));
-        }
-    }
-
-
-    /**
-     * 使状态栏半透明
-     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
-     *
-     * @param activity       需要设置的activity
-     * @param drawableId Drawable资源ID
-     */
-    public static void setDrawableStatus(Activity activity, int drawableId) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return;
-        }
-        setTransparent(activity);
-        addDrawableView(activity, drawableId);
-    }
-
-
-    /**
-     * 添加Drawable作为状态栏
-     * @param activity 需要设置的 activity
-     * @param drawableId Drawable资源ID
-     */
-    private static void addDrawableView(Activity activity,int drawableId){
-        ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
-        View fakeTranslucentView = contentView.findViewById(FAKE_TRANSLUCENT_VIEW_ID);
-        if (fakeTranslucentView != null) {
-            if (fakeTranslucentView.getVisibility() == View.GONE) {
-                fakeTranslucentView.setVisibility(View.VISIBLE);
-            }
-            fakeTranslucentView.setBackgroundResource(drawableId);
-        } else {
-            contentView.addView(createTranslucentStatusBarView(activity, 0));
         }
     }
 
@@ -705,4 +730,5 @@ public class StatusBarUtil {
         blue = (int) (blue * a + 0.5);
         return 0xff << 24 | red << 16 | green << 8 | blue;
     }
+
 }
