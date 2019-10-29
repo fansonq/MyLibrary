@@ -18,7 +18,6 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.fansonlib.R;
 import com.example.fansonlib.image.BaseImageLoaderStrategy;
 import com.example.fansonlib.image.ImageLoaderConfig;
 import com.example.fansonlib.image.OnLoadingListener;
@@ -98,11 +97,11 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      * 初始化加载配置
      */
     @SuppressLint("CheckResult")
-    private RequestOptions getOptionsCircle() {
+    private RequestOptions getOptionsCircle(ImageLoaderConfig config) {
         if (mOptionsCircle == null) {
             mOptionsCircle = new RequestOptions();
-            mOptionsCircle.placeholder(R.mipmap.ic_person)
-                    .error(R.mipmap.ic_person)
+            mOptionsCircle.placeholder(config.getPlacePicRes())
+                    .error(config.getErrorPicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
                     .format(DecodeFormat.PREFER_RGB_565)
@@ -182,7 +181,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
             if (isValidContextForGlide(context) && (isValidImageViewForGlide(view) != null)) {
                 with(context)
                         .load(imgUrl)
-                        .apply(getOptionsCircle())
+                        .apply(getOptionsCircle(mImageLoaderConfig))
                         .apply(bitmapTransform(new CropCircleTransformation()))
     //                .transition(DrawableTransitionOptions.withCrossFade())
     //                .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
