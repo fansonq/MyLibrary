@@ -248,16 +248,37 @@ public abstract class BaseDialogFragment extends DialogFragment {
         try {
             mFragmentManager = manager;
             FragmentTransaction ft = manager.beginTransaction();
-            if (this.isAdded()) {
-                ft.remove(this).commit();
+            manager.executePendingTransactions();
+
+            if (this.isAdded() ) {
+                ft.show(this);
+            } else {
+                ft.add(this, TAG);
+                ft.commitAllowingStateLoss();
             }
-            ft.add(this, String.valueOf(System.currentTimeMillis()));
-            ft.commitAllowingStateLoss();
         } catch (IllegalStateException e) {
             e.printStackTrace();
             Log.e(TAG, "Show DialogFragment IllegalStateException");
         }
         return this;
+    }
+
+    /**
+     * 重写show方法，防止连续add
+     * @param manager FragmentManager
+     * @param tag 标识
+     */
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        super.show(manager, tag);
+        try {
+            //在每个add事务前增加一个remove事务，防止连续的add
+            manager.beginTransaction().remove(this).commit();
+            super.show(manager, tag);
+        } catch (Exception e) {
+            //同一实例使用不同的tag会异常,这里捕获一下
+            e.printStackTrace();
+        }
     }
 
     @Override
