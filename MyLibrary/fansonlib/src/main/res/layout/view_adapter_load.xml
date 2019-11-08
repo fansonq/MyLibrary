@@ -58,8 +58,6 @@
             android:gravity="center"
             android:textSize="14sp"
             android:text="@string/data_load_complete"
-            app:cit_drawableLeft="@mipmap/ic_no_data"
-            app:cit_iconColor="@color/gray_dark1"
             app:cit_iconHeight="26dp"
             app:cit_iconWidth="26dp"
             />
