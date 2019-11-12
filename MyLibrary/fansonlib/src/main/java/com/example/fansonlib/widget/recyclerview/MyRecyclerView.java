@@ -337,7 +337,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
             return;
         }
         if (mRequestPageNum == 1 && list.size() == 0) {
-            mAdapter.setNewData(list);
+            mAdapter.setNewData(null);
             showNoDataView();
             mLoadOver = true;
             if (mIRvRefreshListener != null) {
