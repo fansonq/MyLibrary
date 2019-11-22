@@ -324,6 +324,18 @@ public abstract class BaseActivity<D extends ViewDataBinding> extends AppCompatA
     }
 
     /**
+     * 显示加载框
+     * @param color 加载圈的颜色
+     */
+    public void showLoading(int color) {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog();
+            mLoadingDialog.setColor(color);
+        }
+        mLoadingDialog.show(getSupportFragmentManager());
+    }
+
+    /**
      * 隐藏加载框
      */
     public void hideLoading() {

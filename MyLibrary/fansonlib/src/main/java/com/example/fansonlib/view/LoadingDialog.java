@@ -19,7 +19,12 @@ public class LoadingDialog extends BaseDialogFragment implements DialogInterface
     private static final String TAG = LoadingDialog.class.getSimpleName();
     private AVLoadingIndicatorView mLoadingView;
 
-    public LoadingDialog(){
+    /**
+     * 颜色id
+     */
+    private int mColor;
+
+    public LoadingDialog( ){
         this.setWidth(120);
         this.setHeight(120);
         this.setOutCancel(false);
@@ -30,11 +35,19 @@ public class LoadingDialog extends BaseDialogFragment implements DialogInterface
         return R.layout.dialog_loading;
     }
 
+    /**
+     * 设置LoadingView圈的颜色
+     * @param color 颜色id
+     */
+    public void setColor(int color){
+        mColor = color;
+    }
+
     @Override
     public void convertView(ViewHolder holder, BaseDialogFragment baseDialogFragment) {
         mLoadingView = holder.getView(R.id.loadingView);
+        mLoadingView.setIndicatorColor(mColor);
         mLoadingView.show();
-
         this.getDialog().setOnKeyListener(this);
     }
 
