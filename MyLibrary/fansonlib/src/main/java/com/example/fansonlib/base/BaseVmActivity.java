@@ -30,8 +30,11 @@ public abstract class BaseVmActivity<VM extends BaseViewModel, D extends ViewDat
     @Override
     protected void initView(Bundle savedInstanceState) {
         mViewModel = createViewModel();
-        getLifecycle().addObserver(mViewModel);
-        registerLoadState(mViewModel);
+        //这个判断是为了兼容旧版本的createViewModel方法没有使用addViewModel方法
+        if (mViewModelList == null || !mViewModelList.contains(mViewModel)) {
+            getLifecycle().addObserver(mViewModel);
+            registerLoadState(mViewModel);
+        }
         dataSuccessObserver();
     }
 

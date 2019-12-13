@@ -36,8 +36,11 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     @Override
     protected View initView(View rootView, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = createViewModel();
-        getLifecycle().addObserver(mViewModel);
-        registerLoadState(mViewModel);
+        //这个判断是为了兼容旧版本的createViewModel方法没有使用addViewModel方法
+        if (mViewModelList == null || !mViewModelList.contains(mViewModel)) {
+            getLifecycle().addObserver(mViewModel);
+            registerLoadState(mViewModel);
+        }
         dataSuccessObserver();
         return rootView;
     }
@@ -80,6 +83,12 @@ public abstract class BaseVmFragment<VM extends BaseViewModel, D extends ViewDat
     protected <M extends BaseViewModel> BaseViewModel addViewModel(Class<M> vmClass) {
         if (mViewModelList == null) {
             mViewModelList = new ArrayList<>();
+        }
+        //判断已经添加过的ViewModel，若存在则返回
+        for (int i = 0; i < mViewModelList.size(); i++) {
+            if (mViewModelList.get(i).getClass().equals(vmClass)) {
+                return mViewModelList.get(i);
+            }
         }
         BaseViewModel vm = ViewModelProviders.of(this).get(vmClass);
         mViewModelList.add(vm);

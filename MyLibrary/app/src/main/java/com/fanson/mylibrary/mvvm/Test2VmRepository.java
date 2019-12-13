@@ -31,13 +31,17 @@ public class Test2VmRepository extends BaseRepository {
             @Override
             public void onSuccess(TestVmBean bean) {
                 Log.d(TAG, "onSuccess = "+bean.getMessage());
-                mCallback.onTest2Success(bean);
+                if (mCallback!=null){
+                    mCallback.onTest2Success(bean);
+                }
 //                mCallback.failure("哈哈哈，出错啦");
             }
 
             @Override
             public void onFailure(String errorMsg) {
-                mCallback.onTest2Failure(errorMsg);
+                if (mCallback!=null){
+                    mCallback.onTest2Failure(errorMsg);
+                }
             }
         });
     }
