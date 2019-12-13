@@ -133,7 +133,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
         }
         if (config == null) {
             setScrollLoadEnable(true);
-            setLayoutManager(new LinearLayoutManager(getContext()));
+            setLayoutManager(new LinearLayoutManagerWrapper(getContext()));
             mAdapter.setLoadMoreView(new CustomLoadMoreView());
             mAdapter.setPreLoadNumber(2);
         } else {
@@ -154,7 +154,7 @@ public class MyRecyclerView<B, A extends BaseQuickAdapter<B, BaseViewHolder>> ex
     private void loadConfig(RvConfig config) {
         setScrollLoadEnable(config.getScrollLoadEnable());
         if (config.getLayoutManager() == null) {
-            setLayoutManager(new LinearLayoutManager(getContext()));
+            setLayoutManager(new LinearLayoutManagerWrapper(getContext()));
         } else {
             setLayoutManager(config.getLayoutManager());
         }
