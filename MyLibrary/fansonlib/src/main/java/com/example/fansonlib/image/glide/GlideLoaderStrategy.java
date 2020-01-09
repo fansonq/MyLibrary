@@ -57,7 +57,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private ImageLoaderConfig mTempLoaderConfig;
 
 
-    private RequestOptions mOptions1;
+    private RequestOptions mOptionsNormal;
     private RequestOptions mOptionsCircle;
 
     /**
@@ -89,9 +89,9 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     @SuppressLint("CheckResult")
     private RequestOptions getOptions1(ImageLoaderConfig config) {
-        if (mOptions1 == null) {
-            mOptions1 = new RequestOptions();
-            mOptions1.error(config.getErrorPicRes())
+        if (mOptionsNormal == null) {
+            mOptionsNormal = new RequestOptions();
+            mOptionsNormal.error(config.getErrorPicRes())
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
@@ -99,7 +99,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.ALL);
         }
-        return mOptions1;
+        return mOptionsNormal;
     }
 
     /**
@@ -127,9 +127,9 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     @SuppressLint("CheckResult")
     private RequestOptions getGifOptions(ImageLoaderConfig config) {
-        if (mOptions1 == null) {
-            mOptions1 = new RequestOptions();
-            mOptions1.error(config.getErrorPicRes())
+        if (mOptionsNormal == null) {
+            mOptionsNormal = new RequestOptions();
+            mOptionsNormal.error(config.getErrorPicRes())
                     .placeholder(config.getPlacePicRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
@@ -137,7 +137,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                     //缓存策略
                     .diskCacheStrategy(DiskCacheStrategy.NONE);
         }
-        return mOptions1;
+        return mOptionsNormal;
     }
 
     @Override
@@ -147,6 +147,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
 
     @Override
     public void setTempLoaderConfig(ImageLoaderConfig config) {
+        mOptionsCircle = null;
+        mOptionsCircle = null;
         mTempLoaderConfig = mImageLoaderConfig;
         mImageLoaderConfig = config;
     }
@@ -156,6 +158,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     @Override
     public void resetLoaderConfig(){
+        mOptionsCircle = null;
+        mOptionsCircle = null;
         mImageLoaderConfig = mTempLoaderConfig;
     }
 
