@@ -37,6 +37,7 @@ import com.example.fansonlib.widget.dialogfragment.base.ICancelListener;
 import com.example.fansonlib.widget.dialogfragment.base.IConfirmListener;
 import com.example.fansonlib.widget.loading.MyLoadingView;
 import com.fanson.mylibrary.adapter.RecyclerViewActivity;
+import com.fanson.mylibrary.bean.TestBean;
 import com.fanson.mylibrary.constant.RxBusTag;
 import com.fanson.mylibrary.databinding.ActivityMainBinding;
 import com.fanson.mylibrary.mvp.ContractTest;
@@ -72,11 +73,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
     /**
      * 接收Rx事件
      *
-     * @param content 内容
+     * @param bean 内容
      */
     @Subscribe(eventTag = RxBusTag.TEST, threadMode = EventThread.NEW_THREAD)
-    public void receiverRxMessage(Integer content) {
-        mBtnRxBus.setText(content + " 线程：" + (getMainLooper() == Looper.myLooper()));
+    public void receiverRxMessage(TestBean bean) {
+        mBtnRxBus.setText(bean.getData() + " 线程：" + (getMainLooper() == Looper.myLooper()));
     }
 
     @Override
@@ -84,6 +85,15 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
 
         AppUtils.init(getApplicationContext());
         MyRxbus2.getInstance().register(this);
+
+        ImageLoaderUtils.init();
+        ImageLoaderConfig imageConfig = new ImageLoaderConfig.Builder()
+                .errorPicRes(R.mipmap.default_image)
+                .placePicRes(R.mipmap.default_image)
+                .setMaxDiskCache(1024 * 1024 * 500)
+                .setMaxMemoryCache((int) (Runtime.getRuntime().maxMemory()/8))
+                .build();
+        ImageLoaderUtils.getInstance().setImageLoaderConfig(imageConfig);
 
         MyLogUtils.init(null);
 
@@ -203,7 +213,9 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
         mBtnRxBus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyRxbus2.getInstance().send(RxBusTag.TEST, 100);
+                TestBean bean = new TestBean();
+                bean.setData("test bean");
+                MyRxbus2.getInstance().send(RxBusTag.TEST, bean);
             }
         });
 
@@ -281,7 +293,6 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 testImageLoader();
             }
         });
-
     }
 
     /**
@@ -315,6 +326,7 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
                 MyToastUtils.getInstance().showShort("onConfirm");
             }
         }).setOutCancel(true).show(getSupportFragmentManager());
+
     }
 
     /**
@@ -337,11 +349,11 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
 
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        String picUrl = "http://guolin.tech/book.png";
-        ImageLoaderUtils.init();
+        String picUrl = "https:\\/\\/zximg.xunsd.cn\\/uploads\\/images\\/avatar\\/2020\\/01\\/35f96662f7b9de2fc3f2c3c956f53d1b.png?width=1520&height=1520";
+
         ImageLoaderUtils.getInstance()
-                .setImageLoaderConfig(new ImageLoaderConfig.Builder().placePicRes(R.mipmap.default_image).build())
-                .loadImage(this, iv_pic, picUrl);
+                .loadCircleImage(this, iv_pic, picUrl);
+//        ImageLoaderUtils.getInstance().resetLoaderConfig();
 
 //        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
 //        ImageLoaderUtils.loadImageWithListener(this, iv_pic, picUrl, new OnUniversalListener() {

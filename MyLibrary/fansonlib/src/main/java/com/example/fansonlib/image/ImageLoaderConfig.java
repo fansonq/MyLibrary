@@ -1,7 +1,7 @@
 package com.example.fansonlib.image;
 
 /**
- * @author  Created by：fanson
+ * @author Created by：fanson
  * Created on：2017/4/14 17:31
  * Describe：加载图片框架的一些参数的配置；
  * 用到了Builder模式，一步一步的创建一个复杂对象的创建者模式，
@@ -76,8 +76,8 @@ public class ImageLoaderConfig {
          */
         private int mErrorPicRes;
         private String mImgUrl;
-        private int maxDiskCache;
-        private int maxMemoryCache;
+        private int maxDiskCache = 1024 * 1024 * 500;
+        private int maxMemoryCache = (int) (Runtime.getRuntime().maxMemory() / 8);
 
         public Builder() {
         }
@@ -92,7 +92,7 @@ public class ImageLoaderConfig {
             return this;
         }
 
-        public Builder imageUrl(String url){
+        public Builder imageUrl(String url) {
             this.mImgUrl = url;
             return this;
         }

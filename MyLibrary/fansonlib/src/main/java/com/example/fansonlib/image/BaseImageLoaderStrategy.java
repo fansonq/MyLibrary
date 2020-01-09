@@ -13,10 +13,21 @@ import android.widget.ImageView;
 public interface BaseImageLoaderStrategy<L1 extends OnLoadingListener,L2 extends OnProgressListener> {
 
     /**
-     * 设置图片加载的配置参数
+     * 设置图片加载的配置参数（全局）
      * @param config 配置参数
      */
     void setLoaderConfig(ImageLoaderConfig config);
+
+    /**
+     * 设置图片加载的配置参数（临时）
+     * @param config 配置参数
+     */
+    void setTempLoaderConfig(ImageLoaderConfig config);
+
+    /**
+     * 恢复原始的图片加载配置
+     */
+    void resetLoaderConfig();
 
     /**
      * 默认方式加载图片

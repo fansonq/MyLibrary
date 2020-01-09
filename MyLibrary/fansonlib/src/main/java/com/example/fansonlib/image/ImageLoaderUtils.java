@@ -62,7 +62,7 @@ public class ImageLoaderUtils {
     }
 
     /**
-     * 设置框架的配置
+     * 设置框架的配置（全局）
      *
      * @param config 配置
      * @return BaseImageLoaderStrategy
@@ -70,6 +70,24 @@ public class ImageLoaderUtils {
     public BaseImageLoaderStrategy setImageLoaderConfig(ImageLoaderConfig config) {
         sImageLoaderStrategy.setLoaderConfig(config);
         return sImageLoaderStrategy;
+    }
+
+    /**
+     * 设置框架的配置（临时）
+     *
+     * @param config 配置
+     * @return BaseImageLoaderStrategy
+     */
+    public  BaseImageLoaderStrategy setTempLoaderConfig(ImageLoaderConfig config){
+        sImageLoaderStrategy.setTempLoaderConfig(config);
+        return sImageLoaderStrategy;
+    }
+
+    /**
+     * 恢复原始的图片加载配置
+     */
+    public void resetLoaderConfig(){
+        sImageLoaderStrategy.resetLoaderConfig();
     }
 
     /**

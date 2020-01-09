@@ -46,7 +46,16 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     private static int MAX_DISK_CACHE = 1024 * 1024 * 200;
     private static int MAX_MEMORY_CACHE = 1024 * 1024 * 20;
 
+    /**
+     * 原始全局图片加载配置
+     */
     private ImageLoaderConfig mImageLoaderConfig;
+
+    /**
+     * 临时使用图片加载配置时，暂存原始配置的作用，调用resetLoaderConfig()可恢复原始全局配置
+     */
+    private ImageLoaderConfig mTempLoaderConfig;
+
 
     private RequestOptions mOptions1;
     private RequestOptions mOptionsCircle;
@@ -134,6 +143,20 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     @Override
     public void setLoaderConfig(ImageLoaderConfig config) {
         mImageLoaderConfig = config;
+    }
+
+    @Override
+    public void setTempLoaderConfig(ImageLoaderConfig config) {
+        mTempLoaderConfig = mImageLoaderConfig;
+        mImageLoaderConfig = config;
+    }
+
+    /**
+     * 恢复原始全局的图片配置
+     */
+    @Override
+    public void resetLoaderConfig(){
+        mImageLoaderConfig = mTempLoaderConfig;
     }
 
     @Override
@@ -307,5 +330,6 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         }
         return null;
     }
+
 
 }
