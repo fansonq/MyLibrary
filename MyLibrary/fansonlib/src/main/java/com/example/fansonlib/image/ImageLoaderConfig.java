@@ -117,8 +117,9 @@ public class ImageLoaderConfig {
             return this;
         }
 
-        public void setCircleErrorPicRes(int mCircleErrorPicRes) {
+        public Builder circleErrorPicRes(int mCircleErrorPicRes) {
             this.mCircleErrorPicRes = mCircleErrorPicRes;
+            return this;
         }
 
         public ImageLoaderConfig build() {
