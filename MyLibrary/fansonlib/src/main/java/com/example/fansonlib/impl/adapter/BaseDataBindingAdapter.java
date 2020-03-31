@@ -51,7 +51,8 @@ public abstract  class BaseDataBindingAdapter <T, D extends ViewDataBinding, V e
     }
 
 
-    private void bindViewClickListener(final BaseViewHolder baseViewHolder) {
+    @Override
+    protected void bindViewClickListener(final BaseViewHolder baseViewHolder) {
         if (baseViewHolder == null) {
             return;
         }

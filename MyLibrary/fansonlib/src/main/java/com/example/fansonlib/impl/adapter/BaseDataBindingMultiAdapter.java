@@ -47,7 +47,8 @@ public abstract class BaseDataBindingMultiAdapter<T extends MultiItemEntity, D e
      * 绑定点击事件
      * @param baseViewHolder BaseViewHolder
      */
-    private void bindViewClickListener(final BaseViewHolder baseViewHolder) {
+    @Override
+    protected void bindViewClickListener(final BaseViewHolder baseViewHolder) {
         if (baseViewHolder == null) {
             return;
         }
