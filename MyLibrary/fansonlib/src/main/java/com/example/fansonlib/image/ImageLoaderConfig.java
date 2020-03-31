@@ -15,9 +15,13 @@ public class ImageLoaderConfig {
      */
     private int mPlacePicRes;
     /**
-     * 错误图
+     * 常规错误图
      */
-    private int mErrorPicRes;
+    private int mDefErrorPicRes;
+    /**
+     * 圆形错误图
+     */
+    private int mCircleErrorRes;
 
     /**
      * 图片的Url
@@ -36,7 +40,8 @@ public class ImageLoaderConfig {
 
     public ImageLoaderConfig(Builder builder) {
         this.mPlacePicRes = builder.mPlacePicRes;
-        this.mErrorPicRes = builder.mErrorPicRes;
+        this.mDefErrorPicRes = builder.mErrorPicRes;
+        this.mCircleErrorRes = builder.mCircleErrorPicRes;
         this.mImgUrl = builder.mImgUrl;
         this.maxDishCache = builder.maxDiskCache;
         this.maxMemoryCache = builder.maxMemoryCache;
@@ -47,7 +52,11 @@ public class ImageLoaderConfig {
     }
 
     public int getErrorPicRes() {
-        return mErrorPicRes;
+        return mDefErrorPicRes;
+    }
+
+    public int getCircleErrorRes() {
+        return mCircleErrorRes;
     }
 
     public int getMaxDishCache() {
@@ -75,6 +84,7 @@ public class ImageLoaderConfig {
          * 错误图
          */
         private int mErrorPicRes;
+        private int mCircleErrorPicRes;
         private String mImgUrl;
         private int maxDiskCache = 1024 * 1024 * 500;
         private int maxMemoryCache = (int) (Runtime.getRuntime().maxMemory() / 8);
@@ -105,6 +115,10 @@ public class ImageLoaderConfig {
         public Builder setMaxMemoryCache(int max) {
             this.maxMemoryCache = max;
             return this;
+        }
+
+        public void setCircleErrorPicRes(int mCircleErrorPicRes) {
+            this.mCircleErrorPicRes = mCircleErrorPicRes;
         }
 
         public ImageLoaderConfig build() {

@@ -110,7 +110,7 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
         if (mOptionsCircle == null) {
             mOptionsCircle = new RequestOptions();
             mOptionsCircle.placeholder(config.getPlacePicRes())
-                    .error(config.getErrorPicRes())
+                    .error(config.getCircleErrorRes())
                     //下载的优先级
                     .priority(Priority.NORMAL)
                     .format(DecodeFormat.PREFER_RGB_565)
@@ -148,7 +148,6 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
     @Override
     public void setTempLoaderConfig(ImageLoaderConfig config) {
         mOptionsCircle = null;
-        mOptionsCircle = null;
         mTempLoaderConfig = mImageLoaderConfig;
         mImageLoaderConfig = config;
     }
@@ -158,7 +157,6 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
      */
     @Override
     public void resetLoaderConfig(){
-        mOptionsCircle = null;
         mOptionsCircle = null;
         mImageLoaderConfig = mTempLoaderConfig;
     }
