@@ -241,9 +241,8 @@ public class GlideLoaderStrategy implements BaseImageLoaderStrategy {
                 with(context)
                         .load(imgUrl)
                         .thumbnail(Constants.THUMB_SIZE)
+                        .apply(RequestOptions.bitmapTransform(new RoundedCornersTransformation(radius, 0)))
                         .apply(getOptions1(mImageLoaderConfig))
-                        .apply(bitmapTransform(new RoundedCornersTransformation(radius, 0, RoundedCornersTransformation.CornerType.ALL)))
-    //                .transition(DrawableTransitionOptions.withCrossFade())
                         .into(view);
             }
         } catch (IllegalArgumentException e) {

@@ -26,6 +26,7 @@ import com.example.fansonlib.image.ImageLoaderUtils;
 import com.example.fansonlib.rxbus.MyRxbus2;
 import com.example.fansonlib.rxbus.annotation.Subscribe;
 import com.example.fansonlib.rxbus.event.EventThread;
+import com.example.fansonlib.utils.DimensUtils;
 import com.example.fansonlib.utils.log.LoganParser;
 import com.example.fansonlib.utils.log.MyLogUtils;
 import com.example.fansonlib.utils.log.SendLogListener;
@@ -349,10 +350,10 @@ public class MainActivity extends BaseMvpActivity<TestPresenter, ActivityMainBin
 
     private void testImageLoader() {
         iv_pic = (ImageView) findViewById(R.id.iv_pic);
-        String picUrl = "https:\\/\\/zximg.xunsd.cn\\/uploads\\/images\\/avatar\\/2020\\/01\\/35f96662f7b9de2fc3f2c3c956f53d1b.png?width=1520&height=1520";
+        String picUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585830711607&di=0ad54de4bed0e4324072ce859a00b9a7&imgtype=0&src=http%3A%2F%2Fa0.att.hudong.com%2F17%2F12%2F01300000433093126093125172516.jpg";
 
         ImageLoaderUtils.getInstance()
-                .loadCircleImage(this, iv_pic, picUrl);
+                .loadCornerImage(this, iv_pic, picUrl, DimensUtils.dipToPx(this,10));
 //        ImageLoaderUtils.getInstance().resetLoaderConfig();
 
 //        ImageLoaderUtils.loadCornerImage(this,iv_pic,picUrl);
